@@ -370,7 +370,7 @@ function Hero() {
       {/* Left */}
       <div>
         <div className="badge fade-up" style={{ marginBottom: 20 }}>
-          <span>🌍</span> Explore The World
+          <span>🌍</span> Explore The Umrah Package
         </div>
 
         <h1 className="serif fade-up-delay1" style={{
@@ -381,15 +381,15 @@ function Hero() {
           marginBottom: 24,
         }}>
           Discover Your<br />
-          <span className="gradient-text">Dream</span>{" "}
-          <em>Destination</em>
+          <span className="gradient-text">Umrah</span>{" "}
+          <em>Package</em>
         </h1>
 
         <p className="fade-up-delay2" style={{
           color: theme.textMuted, fontSize: 16, lineHeight: 1.75,
           maxWidth: 440, marginBottom: 36,
         }}>
-          Plan unforgettable journeys with our expert travel guides. From serene beaches to ancient temples — your perfect trip awaits.
+          Plan unforgettable journeys with our expert Umrah travel guides — your perfect Umrah trip awaits.
         </p>
 
         <div className="fade-up-delay3" style={{ display: "flex", gap: 14, marginBottom: 48, flexWrap: "wrap" }}>
@@ -408,9 +408,9 @@ function Hero() {
         {/* Stats */}
         <div className="fade-up-delay4" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
           {[
-            { num: "50K+", label: "Happy Travelers" },
-            { num: "200+", label: "Destinations" },
-            { num: "15Yr", label: "Experience" },
+            { num: "10K+", label: "Happy Travelers" },
+            { num: "50+", label: "Destinations" },
+            { num: "5Yr", label: "Experience" },
           ].map(s => (
             <div key={s.label}>
               <div style={{ fontSize: 28, fontWeight: 700, color: theme.accent, fontFamily: "'Playfair Display',serif" }}>{s.num}</div>
@@ -424,7 +424,7 @@ function Hero() {
       <div style={{ position: "relative" }} className="fade-up-delay2">
         <div className="hero-image-wrap float-anim" style={{ height: 480 }}>
           <img
-            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=85"
+            src="https://scontent.flhe3-2.fna.fbcdn.net/v/t39.30808-6/648106452_122114880333209329_4710445315082844352_n.png?_nc_cat=102&ccb=1-7&_nc_sid=2a1932&_nc_ohc=jTYChci6zIcQ7kNvwE9yl85&_nc_oc=Adkv4jV6vZpsOWfDhQdPv4fdTrExSj7SYVYaQP1p54PMkdBj7X8yt-HBFfClXc_SoyI&_nc_zt=23&_nc_ht=scontent.flhe3-2.fna&_nc_gid=2nCmH9BrzPt5eW4pCemgnA&_nc_ss=8&oh=00_Afyrm0_NbeWCRM1_XA1B2bZFu9pyTKmuQenH71yHYYdktQ&oe=69B4F9E2"
             alt="hero"
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
