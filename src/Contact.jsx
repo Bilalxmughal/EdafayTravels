@@ -125,28 +125,28 @@ const contactInfo = [
   {
     icon: "📍",
     title: "Our Office",
-    lines: ["123 Travel Street", "Lahore, Pakistan"],
+    lines: ["Colabs 50N, Gurumangat Road Gulberg II", "Lahore, Pakistan"],
     color: "rgba(232,196,106,0.12)",
     borderColor: "rgba(232,196,106,0.2)",
   },
   {
     icon: "📞",
     title: "Call Us",
-    lines: ["+92 300 1234567", "+92 42 1234567"],
+    lines: ["+92 305 2222 744"],
     color: "rgba(76,175,125,0.1)",
     borderColor: "rgba(76,175,125,0.2)",
   },
   {
     icon: "✉️",
     title: "Email Us",
-    lines: ["hello@edafay.com", "support@edafay.com"],
+    lines: ["contact@edafay.com", "edafaytravels@gmail.com"],
     color: "rgba(99,102,241,0.1)",
     borderColor: "rgba(99,102,241,0.2)",
   },
   {
     icon: "🕐",
     title: "Working Hours",
-    lines: ["Mon – Sat: 9AM – 7PM", "Sunday: 10AM – 4PM"],
+    lines: ["Mon – Sat: 10AM – 7PM", "Sunday: 2PM – 7PM"],
     color: "rgba(239,68,68,0.08)",
     borderColor: "rgba(239,68,68,0.15)",
   },
@@ -220,24 +220,24 @@ function ContactForm() {
     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} className="c-grid-2">
         <div>
-          <label className="c-label">Aapka Naam *</label>
+          <label className="c-label">Your name *</label>
           <input className="c-input" placeholder="Bilal Mughal" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required />
         </div>
         <div>
           <label className="c-label">Email Address *</label>
-          <input className="c-input" type="email" placeholder="bilal@gmail.com" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} required />
+          <input className="c-input" type="email" placeholder="abcd@example.com" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} required />
         </div>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} className="c-grid-2">
         <div>
-          <label className="c-label">Phone Number</label>
+          <label className="c-label">Mobile Number</label>
           <input className="c-input" placeholder="+92 300 0000000" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} />
         </div>
         <div>
           <label className="c-label">Subject</label>
           <select className="c-input" value={form.subject} onChange={e => setForm({ ...form, subject: e.target.value })} style={{ appearance: "none", colorScheme: "dark" }}>
             <option value="">Select topic...</option>
-            <option>Tour Booking</option>
+            <option>Umrah Booking</option>
             <option>Custom Package</option>
             <option>Visa Assistance</option>
             <option>Hotel Booking</option>
@@ -247,13 +247,13 @@ function ContactForm() {
       </div>
       <div>
         <label className="c-label">Message *</label>
-        <textarea className="c-input" rows={5} placeholder="Apna sawaal ya request yahan likhein..." value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} required />
+        <textarea className="c-input" rows={5} placeholder="Please type your question and quiry..." value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} required />
       </div>
       <button className="c-btn-primary" type="submit" disabled={loading}>
-        {loading ? "⏳ Bhej rahe hain..." : "✉️ Message Bhejo"}
+        {loading ? "⏳ Sending..." : "✉️ Send Message"}
       </button>
       <p style={{ fontSize: 12, color: t.textMuted, textAlign: "center" }}>
-        🔒 Aapki info bilkul safe hai — kisi ke saath share nahi hogi.
+        🔒 Your information is safe — Edafay will never share your information.
       </p>
     </form>
   );
@@ -300,7 +300,7 @@ export default function Contact() {
             <em>From You</em>
           </h1>
           <p className="contact-fu2" style={{ color: t.textMuted, fontSize: 17, lineHeight: 1.75, maxWidth: 520, margin: "0 auto 48px" }}>
-            Apna dream trip plan karne ke liye humse rabta karein. Hamare experts 24 ghante mein jawab denge.
+            Contact us to plan your dream trip. Our experts will respond within 24 hours.
           </p>
 
           {/* Quick stats */}
@@ -341,7 +341,7 @@ export default function Contact() {
                 <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: 28, fontWeight: 700, marginBottom: 8 }}>
                   Send Us a <span className="c-gradient-text">Message</span>
                 </h2>
-                <p style={{ color: t.textMuted, fontSize: 14, lineHeight: 1.6 }}>Apna sawaal bhejein — hum jald jawab denge.</p>
+                <p style={{ color: t.textMuted, fontSize: 14, lineHeight: 1.6 }}>Send your quiry — we'll answer your quiry as soon as posible.</p>
               </div>
               <ContactForm />
             </div>
@@ -355,16 +355,16 @@ export default function Contact() {
                   <div className="contact-float" style={{ fontSize: 48, marginBottom: 12 }}>📍</div>
                   <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 4 }}>Lahore, Pakistan</div>
                   <div style={{ fontSize: 13, color: t.textMuted }}>123 Travel Street, Gulberg III</div>
-                  <a href="https://maps.google.com" target="_blank" rel="noreferrer" style={{ marginTop: 16, background: t.accent, color: "#0a0a0f", padding: "8px 20px", borderRadius: 50, fontSize: 12, fontWeight: 700, textDecoration: "none", cursor: "pointer" }}>
-                    Google Maps par Dekho →
+                  <a href="https://maps.app.goo.gl/t5ZCqBsSKtFX6XUs7" target="_blank" rel="noreferrer" style={{ marginTop: 16, background: t.accent, color: "#0a0a0f", padding: "8px 20px", borderRadius: 50, fontSize: 12, fontWeight: 700, textDecoration: "none", cursor: "pointer" }}>
+                    Find us on Google Maps →
                   </a>
                 </div>
               </div>
 
               {/* Social */}
               <div style={{ background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 20, padding: 28 }}>
-                <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 6, fontFamily: "'Syne',sans-serif" }}>Hamare Saath Jud'ein</div>
-                <p style={{ fontSize: 13, color: t.textMuted, marginBottom: 20, lineHeight: 1.6 }}>Social media par follow karein — latest deals & destinations ke liye.</p>
+                <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 6, fontFamily: "'Syne',sans-serif" }}>Keep in touch</div>
+                <p style={{ fontSize: 13, color: t.textMuted, marginBottom: 20, lineHeight: 1.6 }}>Follow us on social media — for latest deals & destinations.</p>
                 <div style={{ display: "flex", gap: 10 }}>
                   {[["𝕏","Twitter"],["f","Facebook"],["in","LinkedIn"],["📸","Instagram"],["▶","YouTube"]].map(([icon, label]) => (
                     <div key={label} className="c-social-btn" title={label}>{icon}</div>
@@ -376,10 +376,10 @@ export default function Contact() {
               <div style={{ background: "rgba(37,211,102,0.08)", border: "1px solid rgba(37,211,102,0.2)", borderRadius: 20, padding: 24, display: "flex", gap: 16, alignItems: "center" }}>
                 <div style={{ fontSize: 36, flexShrink: 0 }}>💬</div>
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 4 }}>WhatsApp par Chat Karein</div>
-                  <div style={{ fontSize: 13, color: t.textMuted, marginBottom: 12, lineHeight: 1.5 }}>Fori jawab ke liye WhatsApp par message karein!</div>
-                  <a href="https://wa.me/923001234567" target="_blank" rel="noreferrer" style={{ background: "#25d366", color: "#fff", padding: "9px 22px", borderRadius: 50, fontSize: 13, fontWeight: 700, textDecoration: "none", display: "inline-block" }}>
-                    WhatsApp Kholo
+                  <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 4 }}>Contact us on WhatsApp</div>
+                  <div style={{ fontSize: 13, color: t.textMuted, marginBottom: 12, lineHeight: 1.5 }}>For an immediate response, please send a message on WhatsApp.</div>
+                  <a href="https://wa.me/923454449433" target="_blank" rel="noreferrer" style={{ background: "#25d366", color: "#fff", padding: "9px 22px", borderRadius: 50, fontSize: 13, fontWeight: 700, textDecoration: "none", display: "inline-block" }}>
+                    WhatsApp
                   </a>
                 </div>
               </div>
@@ -394,9 +394,9 @@ export default function Contact() {
           <div style={{ textAlign: "center", marginBottom: 52 }}>
             <div className="c-badge" style={{ marginBottom: 16 }}>❓ FAQ</div>
             <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(28px,3.5vw,46px)", fontWeight: 700, marginBottom: 14 }}>
-              Aksar Pooche Jaane Wale <span className="c-gradient-text">Sawalat</span>
+              Frequently Asked Questions (FAQs) <span className="c-gradient-text">Quiries</span>
             </h2>
-            <p style={{ color: t.textMuted, maxWidth: 460, margin: "0 auto", lineHeight: 1.7 }}>Aapke zahen mein jo sawaal hain — shayad jawab yahan ho!</p>
+            <p style={{ color: t.textMuted, maxWidth: 460, margin: "0 auto", lineHeight: 1.7 }}>The questions on your mind — you might find the answers here!</p>
           </div>
           <div style={{ maxWidth: 760, margin: "0 auto", display: "flex", flexDirection: "column", gap: 12 }}>
             {faqs.map(f => <FaqItem key={f.q} q={f.q} a={f.a} />)}
@@ -411,8 +411,8 @@ export default function Contact() {
               <div style={{ width: 30, height: 30, borderRadius: 8, background: `linear-gradient(135deg,${t.accent},#c8943a)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14 }}>✈</div>
               <span style={{ fontFamily: "'Playfair Display',serif", fontSize: 18, fontWeight: 700 }}>Edafay<span style={{ color: t.accent }}>.</span></span>
             </div>
-            <span style={{ color: t.textMuted, fontSize: 13 }}>© 2025 Edafay Travels. All rights reserved.</span>
-            <a href="#" onClick={() => window.location.hash = ''} style={{ color: t.accent, fontSize: 13, textDecoration: "none", fontWeight: 600 }}>← Home par Wapas</a>
+            <span style={{ color: t.textMuted, fontSize: 13 }}>© 2026 Edafay Travels. All rights reserved.</span>
+            <a href="#" onClick={() => window.location.hash = ''} style={{ color: t.accent, fontSize: 13, textDecoration: "none", fontWeight: 600 }}>← Home</a>
           </div>
         </footer>
       </div>
