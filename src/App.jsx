@@ -1,0 +1,883 @@
+import { useState, useEffect, useRef } from "react";
+
+// ─── Inline Styles & Theme ───────────────────────────────────────────────────
+const theme = {
+  bg: "#0a0a0f",
+  bgCard: "#12121a",
+  bgCard2: "#1a1a28",
+  accent: "#e8c46a",
+  accentLight: "#f5d98b",
+  text: "#f0ede8",
+  textMuted: "#8b8a96",
+  green: "#4caf7d",
+  border: "rgba(255,255,255,0.07)",
+};
+
+const css = `
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap');
+  
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  html { scroll-behavior: smooth; }
+  
+  body {
+    background: ${theme.bg};
+    color: ${theme.text};
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: ${theme.bg}; }
+  ::-webkit-scrollbar-thumb { background: ${theme.accent}; border-radius: 10px; }
+
+  .serif { font-family: 'Playfair Display', serif; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-12px); }
+  }
+  @keyframes shimmer {
+    0%   { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.5; }
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes slideLeft {
+    from { transform: translateX(60px); opacity: 0; }
+    to   { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes scaleIn {
+    from { transform: scale(0.85); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+
+  .fade-up { animation: fadeUp 0.8s ease forwards; }
+  .fade-up-delay1 { animation: fadeUp 0.8s 0.15s ease both; }
+  .fade-up-delay2 { animation: fadeUp 0.8s 0.3s ease both; }
+  .fade-up-delay3 { animation: fadeUp 0.8s 0.45s ease both; }
+  .fade-up-delay4 { animation: fadeUp 0.8s 0.6s ease both; }
+  .float-anim { animation: float 4s ease-in-out infinite; }
+
+  .nav-link {
+    color: rgba(240,237,232,0.75);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  .nav-link:hover { color: ${theme.accent}; }
+
+  .btn-primary {
+    background: ${theme.accent};
+    color: #0a0a0f;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+    letter-spacing: 0.3px;
+  }
+  .btn-primary:hover {
+    background: ${theme.accentLight};
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(232,196,106,0.35);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: ${theme.text};
+    border: 1.5px solid rgba(240,237,232,0.25);
+    padding: 13px 30px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .btn-outline:hover {
+    border-color: ${theme.accent};
+    color: ${theme.accent};
+    transform: translateY(-2px);
+  }
+
+  .card-hover {
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  }
+
+  .dest-card:hover .dest-overlay {
+    opacity: 1 !important;
+  }
+  .dest-card:hover img {
+    transform: scale(1.07);
+  }
+
+  .search-bar {
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+  }
+  .search-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: ${theme.text};
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    width: 100%;
+  }
+  .search-input::placeholder { color: ${theme.textMuted}; }
+
+  .tab-active {
+    color: ${theme.accent} !important;
+    border-bottom: 2px solid ${theme.accent};
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(232,196,106,0.12);
+    border: 1px solid rgba(232,196,106,0.3);
+    color: ${theme.accent};
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 50px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, ${theme.accent}, #f0c080, #e8c46a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent);
+  }
+
+  .review-card {
+    background: ${theme.bgCard};
+    border: 1px solid ${theme.border};
+    border-radius: 20px;
+    padding: 28px;
+    transition: border-color 0.3s;
+  }
+  .review-card:hover { border-color: rgba(232,196,106,0.25); }
+
+  .feature-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    background: rgba(232,196,106,0.1);
+    border: 1px solid rgba(232,196,106,0.2);
+  }
+
+  .hero-image-wrap {
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+  }
+
+  .parallax-badge {
+    position: absolute;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 14px 18px;
+  }
+
+  input[type="date"], select {
+    color-scheme: dark;
+  }
+
+  @media (max-width: 768px) {
+    .hide-mobile { display: none !important; }
+    .hero-grid { grid-template-columns: 1fr !important; }
+    .dest-grid { grid-template-columns: 1fr 1fr !important; }
+    .three-col { grid-template-columns: 1fr !important; }
+    .stats-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+`;
+
+// ─── Data ────────────────────────────────────────────────────────────────────
+const destinations = [
+  { id: 1, name: "Santorini", country: "Greece", img: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80", price: "$1,299", rating: "4.9", reviews: "2.4k", tag: "Hot Deal", days: "7 days" },
+  { id: 2, name: "Kyoto", country: "Japan", img: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&q=80", price: "$1,599", rating: "4.8", reviews: "1.8k", tag: "Popular", days: "10 days" },
+  { id: 3, name: "Bali", country: "Indonesia", img: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80", price: "$899", rating: "4.7", reviews: "3.1k", tag: "Best Value", days: "8 days" },
+  { id: 4, name: "Amalfi Coast", country: "Italy", img: "https://images.unsplash.com/photo-1533606688076-b6683a5f59f1?w=600&q=80", price: "$1,799", rating: "5.0", reviews: "980", tag: "Luxury", days: "6 days" },
+  { id: 5, name: "Machu Picchu", country: "Peru", img: "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=600&q=80", price: "$1,099", rating: "4.9", reviews: "1.5k", tag: "Adventure", days: "9 days" },
+  { id: 6, name: "Maldives", country: "Maldives", img: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80", price: "$2,499", rating: "5.0", reviews: "750", tag: "Luxury", days: "5 days" },
+];
+
+const features = [
+  { icon: "🛡️", title: "Safe & Secure", desc: "100% verified tour packages with full insurance coverage and 24/7 support." },
+  { icon: "💎", title: "Premium Quality", desc: "Hand-picked 5-star hotels, private transfers and exclusive experiences." },
+  { icon: "🗺️", title: "Expert Guides", desc: "Local certified guides who know every hidden gem of the destination." },
+  { icon: "💳", title: "Easy Payment", desc: "Flexible payment plans with zero-cost EMI and multiple currency support." },
+  { icon: "✈️", title: "Best Price Guarantee", desc: "We match any lower price you find, or refund the difference." },
+  { icon: "🔔", title: "Instant Booking", desc: "Confirm your trip in minutes with instant hotel & flight booking." },
+];
+
+const reviews = [
+  { name: "Salman Naseer", loc: "Lahore, Pakistan", rating: 5, text: "Absolutely magical experience! The Santorini trip was perfectly organized. Every tiny detail was taken care of, and the guide was phenomenal.", img: "https://i.pravatar.cc/60?img=47", tour: "Santorini Getaway" },
+  { name: "Faizan Mughal", loc: "Islamabad, Pakistan", rating: 5, text: "Tourm made our Bali honeymoon unforgettable. The private villa, sunset dinners — everything was beyond our expectations!", img: "https://i.pravatar.cc/60?img=12", tour: "Bali Honeymoon" },
+  { name: "Bilal Mughal", loc: "Islamabad, Pakistan", rating: 5, text: "The Kyoto cultural tour was deeply moving. Our guide Hiroshi shared stories that no guidebook ever could. 10/10 would recommend!", img: "https://i.pravatar.cc/60?img=33", tour: "Economy Umrah Package" },
+];
+
+const popularTours = [
+  { name: "European Highlights", duration: "14 Days", img: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=500&q=80", price: "$2,899", rating: 4.9 },
+  { name: "South East Asia", duration: "18 Days", img: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=500&q=80", price: "$1,799", rating: 4.8 },
+  { name: "African Safari", duration: "10 Days", img: "https://images.unsplash.com/photo-1521747116042-5a810fda9664?w=500&q=80", price: "$3,299", rating: 5.0 },
+];
+
+// ─── Component: Navbar ────────────────────────────────────────────────────────
+function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  useEffect(() => {
+    const h = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", h);
+    return () => window.removeEventListener("scroll", h);
+  }, []);
+
+  return (
+    <nav style={{
+      position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+      padding: "0 5%",
+      background: scrolled ? "rgba(10,10,15,0.92)" : "transparent",
+      backdropFilter: scrolled ? "blur(20px)" : "none",
+      borderBottom: scrolled ? `1px solid ${theme.border}` : "none",
+      transition: "all 0.3s",
+      display: "flex", alignItems: "center", justifyContent: "space-between",
+      height: "72px",
+    }}>
+      {/* Logo */}
+      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <div style={{
+          width: 36, height: 36, borderRadius: "10px",
+          background: `linear-gradient(135deg, ${theme.accent}, #c8943a)`,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: 18,
+        }}>✈</div>
+        <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px" }}>
+          Tour<span style={{ color: theme.accent }}>m</span>
+        </span>
+      </div>
+
+      {/* Links */}
+      <div className="hide-mobile" style={{ display: "flex", gap: 36, alignItems: "center" }}>
+        {["Home", "Destinations", "Tours", "About", "Contact"].map(l => (
+          <a key={l} className="nav-link">{l}</a>
+        ))}
+      </div>
+
+      {/* Actions */}
+      <div className="hide-mobile" style={{ display: "flex", gap: 12, alignItems: "center" }}>
+        <button className="btn-outline" style={{ padding: "9px 22px", fontSize: 13 }}>Sign In</button>
+        <button className="btn-primary" style={{ padding: "10px 22px", fontSize: 13 }}>Book Now</button>
+      </div>
+
+      {/* Mobile hamburger */}
+      <button
+        onClick={() => setMenuOpen(!menuOpen)}
+        style={{ display: "none", background: "none", border: "none", color: theme.text, fontSize: 22, cursor: "pointer" }}
+        className="hide-desktop"
+      >☰</button>
+    </nav>
+  );
+}
+
+// ─── Component: Hero ─────────────────────────────────────────────────────────
+function Hero() {
+  const [activeTab, setActiveTab] = useState("Tours");
+  const tabs = ["Tours", "Hotels", "Flights", "Activities"];
+
+  return (
+    <section style={{
+      minHeight: "100vh",
+      background: `radial-gradient(ellipse at 70% 30%, rgba(232,196,106,0.07) 0%, transparent 60%),
+                   radial-gradient(ellipse at 20% 80%, rgba(76,175,125,0.05) 0%, transparent 50%),
+                   ${theme.bg}`,
+      padding: "120px 5% 80px",
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 60,
+      alignItems: "center",
+    }} className="hero-grid">
+
+      {/* Left */}
+      <div>
+        <div className="badge fade-up" style={{ marginBottom: 20 }}>
+          <span>🌍</span> Explore The World
+        </div>
+
+        <h1 className="serif fade-up-delay1" style={{
+          fontSize: "clamp(42px, 5vw, 68px)",
+          fontWeight: 700,
+          lineHeight: 1.1,
+          letterSpacing: "-1px",
+          marginBottom: 24,
+        }}>
+          Discover Your<br />
+          <span className="gradient-text">Dream</span>{" "}
+          <em>Destination</em>
+        </h1>
+
+        <p className="fade-up-delay2" style={{
+          color: theme.textMuted, fontSize: 16, lineHeight: 1.75,
+          maxWidth: 440, marginBottom: 36,
+        }}>
+          Plan unforgettable journeys with our expert travel guides. From serene beaches to ancient temples — your perfect trip awaits.
+        </p>
+
+        <div className="fade-up-delay3" style={{ display: "flex", gap: 14, marginBottom: 48, flexWrap: "wrap" }}>
+          <button className="btn-primary">Explore Packages</button>
+          <button className="btn-outline" style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{
+              width: 32, height: 32, borderRadius: "50%",
+              background: `rgba(232,196,106,0.15)`,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: 12,
+            }}>▶</span>
+            Watch Video
+          </button>
+        </div>
+
+        {/* Stats */}
+        <div className="fade-up-delay4" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
+          {[
+            { num: "50K+", label: "Happy Travelers" },
+            { num: "200+", label: "Destinations" },
+            { num: "15Yr", label: "Experience" },
+          ].map(s => (
+            <div key={s.label}>
+              <div style={{ fontSize: 28, fontWeight: 700, color: theme.accent, fontFamily: "'Playfair Display',serif" }}>{s.num}</div>
+              <div style={{ fontSize: 13, color: theme.textMuted, marginTop: 4 }}>{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Right — hero image collage */}
+      <div style={{ position: "relative" }} className="fade-up-delay2">
+        <div className="hero-image-wrap float-anim" style={{ height: 480 }}>
+          <img
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=85"
+            alt="hero"
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(to top, rgba(10,10,15,0.5) 0%, transparent 50%)",
+          }} />
+        </div>
+
+        {/* Floating badge 1 */}
+        <div className="parallax-badge" style={{ bottom: 28, left: -32, animation: "scaleIn 0.6s 0.8s both" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <div style={{ fontSize: 28 }}>🏔️</div>
+            <div>
+              <div style={{ fontSize: 13, fontWeight: 600 }}>Next Adventure</div>
+              <div style={{ fontSize: 11, color: theme.textMuted }}>Machu Picchu, Peru</div>
+            </div>
+            <div style={{
+              marginLeft: 8, background: theme.green, color: "#fff",
+              fontSize: 10, fontWeight: 700, padding: "3px 8px", borderRadius: 20
+            }}>OPEN</div>
+          </div>
+        </div>
+
+        {/* Floating badge 2 */}
+        <div className="parallax-badge" style={{ top: 28, right: -24, animation: "slideLeft 0.6s 0.6s both" }}>
+          <div style={{ fontSize: 11, color: theme.textMuted, marginBottom: 4 }}>Rating</div>
+          <div style={{ display: "flex", gap: 2, fontSize: 14, color: theme.accent }}>{"★★★★★"}</div>
+          <div style={{ fontSize: 13, fontWeight: 600, marginTop: 2 }}>4.98 / 5.0</div>
+        </div>
+      </div>
+
+      {/* Search bar — full width below */}
+      <div style={{ gridColumn: "1 / -1" }}>
+        {/* Tabs */}
+        <div style={{ display: "flex", gap: 28, marginBottom: 16 }}>
+          {tabs.map(t => (
+            <button
+              key={t}
+              onClick={() => setActiveTab(t)}
+              className={activeTab === t ? "tab-active" : ""}
+              style={{
+                background: "none", border: "none",
+                color: activeTab === t ? theme.accent : theme.textMuted,
+                fontSize: 14, fontWeight: 500, cursor: "pointer",
+                paddingBottom: 8,
+                borderBottom: activeTab === t ? `2px solid ${theme.accent}` : "2px solid transparent",
+                fontFamily: "'DM Sans', sans-serif",
+                transition: "color 0.2s",
+              }}
+            >{t}</button>
+          ))}
+        </div>
+
+        <div className="search-bar" style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr auto",
+          gap: 0,
+          padding: "8px 8px 8px 24px",
+          alignItems: "center",
+        }}>
+          <div style={{ padding: "12px 20px 12px 0", borderRight: `1px solid ${theme.border}` }}>
+            <div style={{ fontSize: 11, color: theme.textMuted, marginBottom: 4, textTransform: "uppercase", letterSpacing: "0.5px" }}>Destination</div>
+            <input className="search-input" placeholder="Where do you want to go?" />
+          </div>
+          <div style={{ padding: "12px 20px", borderRight: `1px solid ${theme.border}` }}>
+            <div style={{ fontSize: 11, color: theme.textMuted, marginBottom: 4, textTransform: "uppercase", letterSpacing: "0.5px" }}>Check In</div>
+            <input className="search-input" type="date" />
+          </div>
+          <div style={{ padding: "12px 20px", borderRight: `1px solid ${theme.border}` }}>
+            <div style={{ fontSize: 11, color: theme.textMuted, marginBottom: 4, textTransform: "uppercase", letterSpacing: "0.5px" }}>Travelers</div>
+            <select className="search-input" style={{ appearance: "none" }}>
+              <option>1 Person</option>
+              <option>2 Persons</option>
+              <option>3-5 Persons</option>
+              <option>6+ Group</option>
+            </select>
+          </div>
+          <button className="btn-primary" style={{ margin: 4, padding: "16px 32px", borderRadius: 12, whiteSpace: "nowrap" }}>
+            🔍 Search
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Component: Destinations ─────────────────────────────────────────────────
+function Destinations() {
+  const [filter, setFilter] = useState("All");
+  const categories = ["All", "Beach", "Mountain", "Cultural", "Adventure", "Luxury"];
+
+  return (
+    <section style={{ padding: "100px 5%", background: theme.bg }} id="destinations">
+      <div style={{ textAlign: "center", marginBottom: 52 }}>
+        <div className="badge" style={{ marginBottom: 16 }}>🗺️ Top Picks</div>
+        <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16 }}>
+          Popular <span className="gradient-text">Destinations</span>
+        </h2>
+        <p style={{ color: theme.textMuted, maxWidth: 500, margin: "0 auto", lineHeight: 1.7 }}>
+          Curated selections of the world's most breathtaking places, ready for your next adventure
+        </p>
+      </div>
+
+      {/* Filter tabs */}
+      <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginBottom: 48 }}>
+        {categories.map(c => (
+          <button
+            key={c}
+            onClick={() => setFilter(c)}
+            style={{
+              padding: "8px 20px", borderRadius: 50, fontSize: 13, fontWeight: 500,
+              cursor: "pointer", fontFamily: "'DM Sans',sans-serif",
+              background: filter === c ? theme.accent : "rgba(255,255,255,0.05)",
+              color: filter === c ? "#0a0a0f" : theme.textMuted,
+              border: filter === c ? "none" : `1px solid ${theme.border}`,
+              transition: "all 0.2s",
+            }}
+          >{c}</button>
+        ))}
+      </div>
+
+      {/* Grid */}
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        gap: 24,
+      }} className="dest-grid">
+        {destinations.map((d, i) => (
+          <div key={d.id} className="dest-card card-hover" style={{
+            borderRadius: 20, overflow: "hidden",
+            background: theme.bgCard,
+            border: `1px solid ${theme.border}`,
+            cursor: "pointer",
+            animation: `fadeUp 0.6s ${i * 0.1}s both`,
+          }}>
+            <div style={{ position: "relative", height: 220, overflow: "hidden" }}>
+              <img
+                src={d.img}
+                alt={d.name}
+                style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }}
+              />
+              <div className="dest-overlay" style={{
+                position: "absolute", inset: 0,
+                background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 55%)",
+                opacity: 0, transition: "opacity 0.3s",
+              }} />
+              <span style={{
+                position: "absolute", top: 14, right: 14,
+                background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)",
+                color: theme.accent, fontSize: 11, fontWeight: 700,
+                padding: "4px 12px", borderRadius: 20,
+                border: `1px solid rgba(232,196,106,0.3)`,
+              }}>{d.tag}</span>
+            </div>
+            <div style={{ padding: "20px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start", marginBottom: 8 }}>
+                <div>
+                  <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 3 }}>{d.name}</h3>
+                  <span style={{ fontSize: 13, color: theme.textMuted }}>📍 {d.country}</span>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <div style={{ fontSize: 20, fontWeight: 700, color: theme.accent }}>{d.price}</div>
+                  <div style={{ fontSize: 11, color: theme.textMuted }}>per person</div>
+                </div>
+              </div>
+              <div style={{ display: "flex", gap: 16, marginTop: 14, paddingTop: 14, borderTop: `1px solid ${theme.border}` }}>
+                <span style={{ fontSize: 12, color: theme.textMuted }}>⏱ {d.days}</span>
+                <span style={{ fontSize: 12, color: theme.accent }}>★ {d.rating}</span>
+                <span style={{ fontSize: 12, color: theme.textMuted }}>({d.reviews} reviews)</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ textAlign: "center", marginTop: 48 }}>
+        <button className="btn-outline">View All Destinations →</button>
+      </div>
+    </section>
+  );
+}
+
+// ─── Component: Features ─────────────────────────────────────────────────────
+function Features() {
+  return (
+    <section style={{
+      padding: "100px 5%",
+      background: `radial-gradient(ellipse at 30% 50%, rgba(232,196,106,0.05) 0%, transparent 60%), ${theme.bgCard}`,
+    }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }} className="hero-grid">
+        {/* Left */}
+        <div>
+          <div className="badge" style={{ marginBottom: 20 }}>✨ Why Tourm</div>
+          <h2 className="serif" style={{ fontSize: "clamp(30px,3.5vw,48px)", fontWeight: 700, marginBottom: 20, lineHeight: 1.2 }}>
+            Travel Smarter,<br />
+            <span className="gradient-text">Live Better</span>
+          </h2>
+          <p style={{ color: theme.textMuted, lineHeight: 1.75, marginBottom: 36 }}>
+            We believe travel changes lives. That's why we obsess over every detail — so you can focus on what matters: the moments that take your breath away.
+          </p>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            {features.slice(0, 4).map(f => (
+              <div key={f.title} style={{ display: "flex", gap: 16, alignItems: "start" }}>
+                <div className="feature-icon">{f.icon}</div>
+                <div>
+                  <div style={{ fontWeight: 600, marginBottom: 4 }}>{f.title}</div>
+                  <div style={{ fontSize: 13, color: theme.textMuted, lineHeight: 1.6 }}>{f.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right — image grid */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          {[
+            "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&q=80",
+            "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&q=80",
+            "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400&q=80",
+            "https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?w=400&q=80",
+          ].map((img, i) => (
+            <div key={i} style={{
+              borderRadius: 16, overflow: "hidden", height: 180,
+              marginTop: i % 2 === 1 ? 24 : 0,
+            }}>
+              <img src={img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.4s" }}
+                onMouseEnter={e => e.target.style.transform = "scale(1.05)"}
+                onMouseLeave={e => e.target.style.transform = "scale(1)"}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Component: Popular Tours ─────────────────────────────────────────────────
+function PopularTours() {
+  return (
+    <section style={{ padding: "100px 5%", background: theme.bg }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48 }}>
+        <div>
+          <div className="badge" style={{ marginBottom: 16 }}>🧳 Tours</div>
+          <h2 className="serif" style={{ fontSize: "clamp(28px,3.5vw,46px)", fontWeight: 700 }}>
+            Most <span className="gradient-text">Popular</span> Tours
+          </h2>
+        </div>
+        <button className="btn-outline" style={{ flexShrink: 0 }}>See All Tours</button>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }} className="three-col">
+        {popularTours.map((t, i) => (
+          <div key={t.name} className="card-hover" style={{
+            background: theme.bgCard,
+            border: `1px solid ${theme.border}`,
+            borderRadius: 20, overflow: "hidden",
+            animation: `fadeUp 0.6s ${i * 0.15}s both`,
+          }}>
+            <div style={{ position: "relative", height: 260 }}>
+              <img src={t.img} alt={t.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <div style={{
+                position: "absolute", inset: 0,
+                background: "linear-gradient(to top, rgba(10,10,15,0.8) 0%, transparent 50%)",
+              }} />
+              <div style={{ position: "absolute", bottom: 20, left: 20, right: 20 }}>
+                <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 6 }}>{t.name}</h3>
+                <div style={{ display: "flex", gap: 12 }}>
+                  <span style={{ fontSize: 12, color: "rgba(255,255,255,0.7)" }}>⏱ {t.duration}</span>
+                  <span style={{ fontSize: 12, color: theme.accent }}>★ {t.rating}</span>
+                </div>
+              </div>
+            </div>
+            <div style={{ padding: "20px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div>
+                <div style={{ fontSize: 12, color: theme.textMuted, marginBottom: 4 }}>Starting from</div>
+                <div style={{ fontSize: 22, fontWeight: 700, color: theme.accent }}>{t.price}</div>
+              </div>
+              <button className="btn-primary" style={{ padding: "10px 20px", fontSize: 13 }}>Book Now</button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ─── Component: Reviews ──────────────────────────────────────────────────────
+function Reviews() {
+  return (
+    <section style={{ padding: "100px 5%", background: theme.bgCard }}>
+      <div style={{ textAlign: "center", marginBottom: 52 }}>
+        <div className="badge" style={{ marginBottom: 16 }}>💬 Testimonials</div>
+        <h2 className="serif" style={{ fontSize: "clamp(30px,3.5vw,48px)", fontWeight: 700, marginBottom: 16 }}>
+          What Our <span className="gradient-text">Travelers</span> Say
+        </h2>
+        <p style={{ color: theme.textMuted, maxWidth: 460, margin: "0 auto", lineHeight: 1.7 }}>
+          Real stories from real adventures. Join 50,000+ happy travelers who've explored the world with Tourm.
+        </p>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }} className="three-col">
+        {reviews.map((r, i) => (
+          <div key={r.name} className="review-card" style={{ animation: `fadeUp 0.6s ${i * 0.15}s both` }}>
+            <div style={{ display: "flex", gap: 4, marginBottom: 16 }}>
+              {Array(r.rating).fill(0).map((_, j) => (
+                <span key={j} style={{ color: theme.accent, fontSize: 16 }}>★</span>
+              ))}
+            </div>
+            <p style={{ color: "rgba(240,237,232,0.8)", lineHeight: 1.7, fontSize: 14, marginBottom: 20, fontStyle: "italic" }}>
+              "{r.text}"
+            </p>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+                <img src={r.img} alt={r.name} style={{ width: 44, height: 44, borderRadius: "50%", objectFit: "cover", border: `2px solid ${theme.accent}` }} />
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: 14 }}>{r.name}</div>
+                  <div style={{ fontSize: 12, color: theme.textMuted }}>{r.loc}</div>
+                </div>
+              </div>
+              <div style={{
+                fontSize: 11, color: theme.accent,
+                background: "rgba(232,196,106,0.1)", padding: "4px 10px",
+                borderRadius: 20, border: `1px solid rgba(232,196,106,0.2)`,
+              }}>{r.tour}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ─── Component: CTA ──────────────────────────────────────────────────────────
+function CTA() {
+  return (
+    <section style={{
+      padding: "100px 5%",
+      background: `linear-gradient(135deg, rgba(232,196,106,0.12) 0%, rgba(76,175,125,0.08) 100%), ${theme.bg}`,
+      textAlign: "center",
+    }}>
+      <div style={{ maxWidth: 640, margin: "0 auto" }}>
+        <div className="badge" style={{ marginBottom: 24, display: "inline-flex" }}>🚀 Start Today</div>
+        <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,58px)", fontWeight: 700, marginBottom: 20, lineHeight: 1.15 }}>
+          Ready for Your<br />
+          Next <span className="gradient-text">Adventure?</span>
+        </h2>
+        <p style={{ color: theme.textMuted, lineHeight: 1.75, marginBottom: 40, fontSize: 16 }}>
+          Join thousands of explorers who've discovered the world with Tourm. Subscribe and get exclusive deals, tips & early access.
+        </p>
+        <div style={{
+          display: "flex", gap: 12, maxWidth: 480, margin: "0 auto",
+          background: "rgba(255,255,255,0.05)",
+          border: `1px solid ${theme.border}`,
+          borderRadius: 50, padding: "6px 6px 6px 24px",
+        }}>
+          <input
+            className="search-input"
+            placeholder="Enter your email address"
+            style={{ flex: 1 }}
+          />
+          <button className="btn-primary" style={{ borderRadius: 50, padding: "12px 28px", flexShrink: 0 }}>
+            Get Started
+          </button>
+        </div>
+        <p style={{ color: theme.textMuted, fontSize: 12, marginTop: 14 }}>
+          ✓ No spam, ever. Unsubscribe any time.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+// ─── Component: Footer ───────────────────────────────────────────────────────
+function Footer() {
+  const cols = [
+    { title: "Company", links: ["About Us", "Our Team", "Careers", "Press", "Blog"] },
+    { title: "Services", links: ["Tour Packages", "Hotel Booking", "Flight Tickets", "Travel Insurance", "Visa Assistance"] },
+    { title: "Support", links: ["Help Center", "Contact Us", "Privacy Policy", "Terms of Service", "Refund Policy"] },
+  ];
+
+  return (
+    <footer style={{
+      padding: "80px 5% 40px",
+      background: "#07070d",
+      borderTop: `1px solid ${theme.border}`,
+    }}>
+      <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 60 }}>
+        {/* Brand */}
+        <div>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
+            <div style={{
+              width: 36, height: 36, borderRadius: "10px",
+              background: `linear-gradient(135deg, ${theme.accent}, #c8943a)`,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: 18,
+            }}>✈</div>
+            <span className="serif" style={{ fontSize: 22, fontWeight: 700 }}>
+              Tour<span style={{ color: theme.accent }}>m</span>
+            </span>
+          </div>
+          <p style={{ color: theme.textMuted, lineHeight: 1.75, fontSize: 14, maxWidth: 280, marginBottom: 24 }}>
+            Your trusted travel partner since 2010. Making dreams come true, one journey at a time.
+          </p>
+          <div style={{ display: "flex", gap: 10 }}>
+            {["𝕏", "f", "in", "📸"].map(s => (
+              <div key={s} style={{
+                width: 38, height: 38, borderRadius: 10,
+                background: "rgba(255,255,255,0.05)",
+                border: `1px solid ${theme.border}`,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: 14, cursor: "pointer",
+                transition: "all 0.2s",
+              }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = theme.accent; e.currentTarget.style.color = theme.accent; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = theme.border; e.currentTarget.style.color = theme.text; }}
+              >{s}</div>
+            ))}
+          </div>
+        </div>
+
+        {cols.map(col => (
+          <div key={col.title}>
+            <div style={{ fontWeight: 600, marginBottom: 20, letterSpacing: "0.5px" }}>{col.title}</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {col.links.map(l => (
+                <a key={l} className="nav-link" style={{ fontSize: 13 }}>{l}</a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="section-divider" style={{ marginBottom: 28 }} />
+
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
+        <span style={{ color: theme.textMuted, fontSize: 13 }}>
+          © 2025 Tourm. All rights reserved. Made with ❤️ for explorers.
+        </span>
+        <div style={{ display: "flex", gap: 6 }}>
+          {["🇺🇸 EN", "$ USD"].map(t => (
+            <div key={t} style={{
+              background: "rgba(255,255,255,0.05)", border: `1px solid ${theme.border}`,
+              borderRadius: 8, padding: "5px 12px", fontSize: 12, color: theme.textMuted,
+              cursor: "pointer",
+            }}>{t}</div>
+          ))}
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+// ─── App ─────────────────────────────────────────────────────────────────────
+export default function App() {
+  return (
+    <>
+      <style>{css}</style>
+      <Navbar />
+      <Hero />
+      <div className="section-divider" />
+      <Destinations />
+      <div className="section-divider" />
+      <Features />
+      <div className="section-divider" />
+      <PopularTours />
+      <div className="section-divider" />
+      <Reviews />
+      <CTA />
+      <Footer />
+    </>
+  );
+}
