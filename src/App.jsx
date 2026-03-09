@@ -317,7 +317,10 @@ function Navbar() {
       {/* Links */}
       <div className="hide-mobile" style={{ display: "flex", gap: 36, alignItems: "center" }}>
         {["Home", "Destinations", "Tours", "About", "Contact"].map(l => (
-          <a key={l} className="nav-link">{l}</a>
+          <a key={l} className="nav-link"
+  onClick={() => l === "Contact" && (window.location.hash = "#/contact")}
+  style={{ color: l === "Contact" ? "#e8c46a" : undefined }}
+>{l}</a>
         ))}
       </div>
 
