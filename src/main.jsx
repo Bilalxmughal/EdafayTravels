@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import Dashboard from './Dashboard.jsx'
+import Contact from './Contact.jsx'
 
 function Root() {
   const [page, setPage] = useState(window.location.hash)
@@ -13,7 +14,8 @@ function Root() {
     return () => window.removeEventListener('hashchange', handler)
   }, [])
 
-  if (page === '#/admin') return <Dashboard />
+  if (page === '#/admin')   return <Dashboard />
+  if (page === '#/contact') return <Contact />
   return <App />
 }
 
