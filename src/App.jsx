@@ -318,6 +318,18 @@ function Navbar() {
       <div className="hide-mobile" style={{ display: "flex", gap: 12, alignItems: "center" }}>
         <button className="btn-outline" style={{ padding: "9px 22px", fontSize: 13 }}>Sign In</button>
         <button className="btn-primary" style={{ padding: "10px 22px", fontSize: 13 }}>Book Now</button>
+        <button onClick={() => window.location.hash = '#/admin'} style={{
+  background: "rgba(232,196,106,0.1)",
+  border: "1px solid rgba(232,196,106,0.25)",
+  color: "#e8c46a",
+  padding: "8px 16px",
+  borderRadius: 50,
+  fontSize: 12,
+  fontWeight: 700,
+  cursor: "pointer",
+}}>
+  ⚙ Admin
+</button>
       </div>
 
       {/* Mobile hamburger */}

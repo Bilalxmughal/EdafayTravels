@@ -343,6 +343,9 @@ export default function Dashboard() {
     { id: "images", icon: "🖼️", label: "Image Manager" },
     { id: "stats", icon: "📊", label: "Overview" },
     { id: "export", icon: "📤", label: "Export Code" },
+    <button onClick={() => window.location.hash = ''}>
+  ← Website
+</button>
   ];
 
   if (loading) return (
