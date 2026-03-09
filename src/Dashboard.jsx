@@ -5,14 +5,14 @@ const STORAGE_KEY = "tourm-images-v1";
 
 async function loadImages() {
   try {
-    const res = await window.storage.get(STORAGE_KEY);
-    return res ? JSON.parse(res.value) : null;
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
   } catch { return null; }
 }
 
 async function saveImages(data) {
   try {
-    await window.storage.set(STORAGE_KEY, JSON.stringify(data));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   } catch (e) { console.error("Save failed", e); }
 }
 

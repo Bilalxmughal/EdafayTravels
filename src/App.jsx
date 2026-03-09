@@ -1,5 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 
+function loadImagesSync() {
+  try {
+    const raw = localStorage.getItem("tourm-images-v1");
+    return raw ? { ...DEFAULT_IMAGES, ...JSON.parse(raw) } : DEFAULT_IMAGES;
+  } catch { return DEFAULT_IMAGES; }
+}
+
 // ─── Inline Styles & Theme ───────────────────────────────────────────────────
 const theme = {
   bg: "#0a0a0f",
