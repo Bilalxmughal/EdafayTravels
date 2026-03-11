@@ -4,6 +4,8 @@ import './index.css'
 import App from './App.jsx'
 import Dashboard from './Dashboard.jsx'
 import Contact from './Contact.jsx'
+import About from './About.jsx'
+import Destinations from './Destinations.jsx'
 
 function Root() {
   const [page, setPage] = useState(window.location.hash)
@@ -14,8 +16,11 @@ function Root() {
     return () => window.removeEventListener('hashchange', handler)
   }, [])
 
-  if (page === '#/admin')   return <Dashboard />
-  if (page === '#/contact') return <Contact />
+  if (page === '#/admin')        return <Dashboard />
+  if (page === '#/contact')      return <Contact />
+  if (page === '#/about')        return <About />
+  if (page === '#/destinations') return <Destinations />
+
   return <App />
 }
 

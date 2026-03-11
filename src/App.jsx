@@ -6,11 +6,11 @@ import Footer from './Footer.jsx'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const destinations = [
-  { id: 1, name: "Santorini", country: "Greece", img: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80", price: "$1,299", rating: "4.9", reviews: "2.4k", tag: "Hot Deal", days: "7 days" },
-  { id: 2, name: "Kyoto", country: "Japan", img: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&q=80", price: "$1,599", rating: "4.8", reviews: "1.8k", tag: "Popular", days: "10 days" },
-  { id: 3, name: "Bali", country: "Indonesia", img: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80", price: "$899", rating: "4.7", reviews: "3.1k", tag: "Best Value", days: "8 days" },
-  { id: 4, name: "Amalfi Coast", country: "Italy", img: "https://images.unsplash.com/photo-1533606688076-b6683a5f59f1?w=600&q=80", price: "$1,799", rating: "5.0", reviews: "980", tag: "Luxury", days: "6 days" },
-  { id: 5, name: "Machu Picchu", country: "Peru", img: "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=600&q=80", price: "$1,099", rating: "4.9", reviews: "1.5k", tag: "Adventure", days: "9 days" },
+  { id: 1, name: "Dubai", country: "UAE", img: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80", price: "$1,299", rating: "4.9", reviews: "2.4k", tag: "Hot Deal", days: "7 days" },
+  { id: 2, name: "Riyadh", country: "Saudia", img: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&q=80", price: "$1,599", rating: "4.8", reviews: "1.8k", tag: "Popular", days: "10 days" },
+  { id: 3, name: "Baku", country: "Azerbaijan", img: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80", price: "$899", rating: "4.7", reviews: "3.1k", tag: "Best Value", days: "8 days" },
+  { id: 4, name: "Istanbul", country: "Turkey", img: "https://images.unsplash.com/photo-1533606688076-b6683a5f59f1?w=600&q=80", price: "$1,799", rating: "5.0", reviews: "980", tag: "Luxury", days: "6 days" },
+  { id: 5, name: "Doha", country: "Qatar", img: "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=600&q=80", price: "$1,099", rating: "4.9", reviews: "1.5k", tag: "Adventure", days: "9 days" },
   { id: 6, name: "Maldives", country: "Maldives", img: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80", price: "$2,499", rating: "5.0", reviews: "750", tag: "Luxury", days: "5 days" },
 ];
 
@@ -24,15 +24,15 @@ const features = [
 ];
 
 const reviews = [
-  { name: "Salman Naseer", loc: "Lahore, Pakistan", rating: 5, text: "Absolutely magical experience! The Santorini trip was perfectly organized. Every tiny detail was taken care of, and the guide was phenomenal.", img: "https://i.pravatar.cc/60?img=47", tour: "Santorini Getaway" },
-  { name: "Faizan Mughal", loc: "Islamabad, Pakistan", rating: 5, text: "Tourm made our Bali honeymoon unforgettable. The private villa, sunset dinners — everything was beyond our expectations!", img: "https://i.pravatar.cc/60?img=12", tour: "Bali Honeymoon" },
+  { name: "Salman Naseer", loc: "Lahore, Pakistan", rating: 5, text: "Absolutely magical experience! The Santorini trip was perfectly organized. Every tiny detail was taken care of, and the guide was phenomenal.", img: "https://i.pravatar.cc/60?img=47", tour: "Dubai Tour" },
+  { name: "Faizan Mughal", loc: "Islamabad, Pakistan", rating: 5, text: "Tourm made our Bali honeymoon unforgettable. The private villa, sunset dinners — everything was beyond our expectations!", img: "https://i.pravatar.cc/60?img=12", tour: "Turkey Tour" },
   { name: "Bilal Mughal", loc: "Islamabad, Pakistan", rating: 5, text: "The Kyoto cultural tour was deeply moving. Our guide Hiroshi shared stories that no guidebook ever could. 10/10 would recommend!", img: "https://i.pravatar.cc/60?img=33", tour: "Economy Umrah Package" },
 ];
 
 const popularTours = [
-  { name: "European Highlights", duration: "14 Days", img: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=500&q=80", price: "$2,899", rating: 4.9 },
-  { name: "South East Asia", duration: "18 Days", img: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=500&q=80", price: "$1,799", rating: 4.8 },
-  { name: "African Safari", duration: "10 Days", img: "https://images.unsplash.com/photo-1521747116042-5a810fda9664?w=500&q=80", price: "$3,299", rating: 5.0 },
+  { name: "Azerbaijan", duration: "14 Days", img: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=500&q=80", price: "Rs. 500,000", rating: 4.9 },
+  { name: "Turkey", duration: "18 Days", img: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=500&q=80", price: "Rs. 600,000", rating: 4.8 },
+  { name: "Maldives", duration: "10 Days", img: "https://images.unsplash.com/photo-1521747116042-5a810fda9664?w=500&q=80", price: "Rs. 400,000", rating: 5.0 },
 ];
 
 // ─── Component: Hero ─────────────────────────────────────────────────────────
@@ -172,7 +172,13 @@ function Destinations() {
         ))}
       </div>
       <div style={{ textAlign: "center", marginTop: 48 }}>
-        <button className="btn-outline" style={{ color: theme.text }}>View All Destinations →</button>
+        <button
+          className="btn-outline"
+          style={{ color: theme.text }}
+          onClick={() => window.location.hash = '#/destinations'}
+        >
+          View All Destinations →
+        </button>
       </div>
     </section>
   );

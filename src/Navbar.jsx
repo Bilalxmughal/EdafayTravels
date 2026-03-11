@@ -1,10 +1,10 @@
-// ─── Navbar.jsx — Shared Navbar for all pages ────────────────────────────────
+// ─── Navbar.jsx — Shared Navbar (Responsive Fixed) ───────────────────────────
 import { useState, useEffect } from "react";
 import theme from './theme.js';
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled,  setScrolled]  = useState(false);
+  const [menuOpen,  setMenuOpen]  = useState(false);
 
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 50);
@@ -12,120 +12,184 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", h);
   }, []);
 
+  // Body scroll lock when mobile menu open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
   const links = [
-    { label: "Home",         hash: ""          },
-    { label: "Destinations", hash: ""          },
-    { label: "Tours",        hash: ""          },
-    { label: "About",        hash: ""          },
-    { label: "Contact",      hash: "#/contact" },
+    { label: "Home",         hash: ""               },
+    { label: "Destinations", hash: "#/destinations" },
+    { label: "Tours",        hash: ""               },
+    { label: "About",        hash: "#/about"        },
+    { label: "Contact",      hash: "#/contact"      },
   ];
 
+  const navStyle = {
+    position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+    padding: "0 5%",
+    background: scrolled ? theme.navBg : theme.navBgTransp,
+    backdropFilter: scrolled ? "blur(20px)" : "none",
+    borderBottom: scrolled ? `1px solid ${theme.border}` : "none",
+    transition: "all 0.3s",
+    display: "flex", alignItems: "center", justifyContent: "space-between",
+    height: "72px",
+  };
+
   return (
-    <nav style={{
-      position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-      padding: "0 5%",
-      background: scrolled ? theme.navBg : theme.navBgTransp,
-      backdropFilter: scrolled ? "blur(20px)" : "none",
-      borderBottom: scrolled ? `1px solid ${theme.border}` : "none",
-      transition: "all 0.3s",
-      display: "flex", alignItems: "center", justifyContent: "space-between",
-      height: "72px",
-    }}>
+    <>
+      <style>{`
+        .nb-desktop { display: flex; }
+        .nb-mobile-btn { display: none; }
+        @media (max-width: 768px) {
+          .nb-desktop { display: none !important; }
+          .nb-mobile-btn { display: flex !important; }
+        }
+        .nb-link {
+          color: ${theme.navText};
+          text-decoration: none;
+          font-size: 14px;
+          font-weight: 500;
+          letter-spacing: 0.3px;
+          cursor: pointer;
+          transition: color 0.2s;
+          padding-bottom: 2px;
+        }
+        .nb-link:hover { color: ${theme.accent}; }
+        .nb-btn-outline {
+          background: transparent;
+          color: ${theme.text};
+          border: 1.5px solid ${theme.border};
+          padding: 9px 22px;
+          border-radius: 50px;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 13px; font-weight: 500;
+          cursor: pointer; transition: all 0.2s;
+        }
+        .nb-btn-outline:hover { border-color: ${theme.accent}; color: ${theme.accent}; }
+        .nb-btn-primary {
+          background: ${theme.accent};
+          color: #0a0a0f; border: none;
+          padding: 10px 22px; border-radius: 50px;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 13px; font-weight: 600;
+          cursor: pointer; transition: all 0.2s;
+        }
+        .nb-btn-primary:hover { background: ${theme.accentLight}; transform: translateY(-1px); }
+        .nb-btn-admin {
+          background: rgba(232,196,106,0.1);
+          border: 1px solid rgba(232,196,106,0.25);
+          color: ${theme.accent};
+          padding: 9px 18px; border-radius: 50px;
+          font-size: 12px; font-weight: 700;
+          cursor: pointer; transition: all 0.2s;
+          font-family: 'DM Sans', sans-serif;
+        }
+        .nb-btn-admin:hover { background: rgba(232,196,106,0.2); }
+        .nb-hamburger {
+          background: none; border: none;
+          color: ${theme.text};
+          font-size: 26px; cursor: pointer;
+          padding: 4px 8px;
+          width: 44px; height: 44px;
+          display: flex; align-items: center; justify-content: center;
+          border-radius: 8px;
+          transition: background 0.2s;
+        }
+        .nb-hamburger:hover { background: rgba(0,0,0,0.05); }
+        .nb-mobile-menu {
+          position: fixed;
+          top: 72px; left: 0; right: 0; bottom: 0;
+          background: ${theme.navBg};
+          backdrop-filter: blur(24px);
+          border-top: 1px solid ${theme.border};
+          padding: 24px 5% 40px;
+          display: flex; flex-direction: column; gap: 0;
+          overflow-y: auto;
+          animation: nbSlideDown 0.25s ease;
+          z-index: 99;
+        }
+        @keyframes nbSlideDown {
+          from { opacity: 0; transform: translateY(-8px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .nb-mobile-link {
+          display: block;
+          padding: 15px 0;
+          border-bottom: 1px solid ${theme.border};
+          color: ${theme.text};
+          font-size: 16px; font-weight: 500;
+          text-decoration: none; cursor: pointer;
+          transition: color 0.2s;
+          font-family: 'DM Sans', sans-serif;
+        }
+        .nb-mobile-link:hover { color: ${theme.accent}; }
+        .nb-mobile-actions {
+          display: flex; gap: 10px;
+          margin-top: 24px; flex-wrap: wrap;
+        }
+      `}</style>
 
-      {/* ── Logo ── */}
-      <div onClick={() => window.location.hash = ''} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}>
-        <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg, ${theme.accent}, #c8943a)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>✈</div>
-        <span style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px", color: theme.text }}>
-          Edafay<span style={{ color: theme.accent }}>.</span>
-        </span>
-      </div>
+      <nav style={navStyle}>
 
-      {/* ── Desktop Links ── */}
-      <div style={{ display: "flex", gap: 36, alignItems: "center" }} className="hide-mobile">
-        {links.map(({ label, hash }) => (
-          <a
-            key={label}
-            onClick={() => window.location.hash = hash}
-            style={{
-              color: theme.navText,
-              textDecoration: "none", fontSize: 14, fontWeight: 500,
-              letterSpacing: "0.3px", cursor: "pointer",
-              transition: "color 0.2s",
-              paddingBottom: 2,
-            }}
-            onMouseEnter={e => e.currentTarget.style.color = theme.accent}
-            onMouseLeave={e => e.currentTarget.style.color = theme.navText}
-          >{label}</a>
-        ))}
-      </div>
+        {/* ── Logo ── */}
+        <div onClick={() => { window.location.hash = ''; setMenuOpen(false); }}
+          style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", flexShrink: 0 }}>
+          <div style={{
+            width: 36, height: 36, borderRadius: 10,
+            background: `linear-gradient(135deg, ${theme.accent}, #c8943a)`,
+            display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18,
+          }}>✈</div>
+          <span style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px", color: theme.text }}>
+            Edafay<span style={{ color: theme.accent }}>.</span>
+          </span>
+        </div>
 
-      {/* ── Desktop Actions ── */}
-      <div style={{ display: "flex", gap: 10, alignItems: "center" }} className="hide-mobile">
-        <button style={{
-          background: "transparent", color: theme.text,
-          border: `1.5px solid ${theme.border}`,
-          padding: "9px 22px", borderRadius: 50,
-          fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 500, cursor: "pointer",
-          transition: "all 0.2s",
-        }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = theme.accent; e.currentTarget.style.color = theme.accent; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = theme.border; e.currentTarget.style.color = theme.text; }}
-        >Sign In</button>
+        {/* ── Desktop Links ── */}
+        <div className="nb-desktop" style={{ gap: 32, alignItems: "center" }}>
+          {links.map(({ label, hash }) => (
+            <a key={label} className="nb-link" onClick={() => window.location.hash = hash}>{label}</a>
+          ))}
+        </div>
 
-        <button style={{
-          background: theme.accent, color: "#0a0a0f", border: "none",
-          padding: "10px 22px", borderRadius: 50,
-          fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 600, cursor: "pointer",
-          transition: "all 0.2s",
-        }}
-          onMouseEnter={e => e.currentTarget.style.background = theme.accentLight}
-          onMouseLeave={e => e.currentTarget.style.background = theme.accent}
-        >Book Now</button>
+        {/* ── Desktop Actions ── */}
+        <div className="nb-desktop" style={{ gap: 10, alignItems: "center" }}>
+          <button className="nb-btn-outline">Sign In</button>
+          <button className="nb-btn-primary">Book Now</button>
+          <button className="nb-btn-admin" onClick={() => window.location.hash = '#/admin'}>⚙ Admin</button>
+        </div>
 
-        <button onClick={() => window.location.hash = '#/admin'} style={{
-          background: "rgba(232,196,106,0.1)",
-          border: "1px solid rgba(232,196,106,0.25)",
-          color: theme.accent,
-          padding: "9px 18px", borderRadius: 50,
-          fontSize: 12, fontWeight: 700, cursor: "pointer",
-          transition: "all 0.2s", fontFamily: "'DM Sans',sans-serif",
-        }}
-          onMouseEnter={e => e.currentTarget.style.background = "rgba(232,196,106,0.2)"}
-          onMouseLeave={e => e.currentTarget.style.background = "rgba(232,196,106,0.1)"}
-        >⚙ Admin</button>
-      </div>
-
-      {/* ── Mobile Hamburger ── */}
-      <button onClick={() => setMenuOpen(!menuOpen)} style={{
-        background: "none", border: "none", color: theme.text,
-        fontSize: 24, cursor: "pointer", padding: "4px 8px", display: "none",
-      }} className="show-mobile">{menuOpen ? "✕" : "☰"}</button>
+        {/* ── Mobile Hamburger ── */}
+        <button
+          className="nb-mobile-btn nb-hamburger"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Menu"
+        >
+          {menuOpen ? "✕" : "☰"}
+        </button>
+      </nav>
 
       {/* ── Mobile Menu ── */}
       {menuOpen && (
-        <div style={{
-          position: "absolute", top: "72px", left: 0, right: 0,
-          background: theme.navBg, backdropFilter: "blur(20px)",
-          borderBottom: `1px solid ${theme.border}`,
-          padding: "20px 5%", display: "flex", flexDirection: "column", gap: 16,
-        }}>
+        <div className="nb-mobile-menu">
           {links.map(({ label, hash }) => (
-            <a key={label} onClick={() => { window.location.hash = hash; setMenuOpen(false); }}
-              style={{ color: theme.navText, fontSize: 15, fontWeight: 500, cursor: "pointer", padding: "4px 0" }}
-              onMouseEnter={e => e.currentTarget.style.color = theme.accent}
-              onMouseLeave={e => e.currentTarget.style.color = theme.navText}
-            >{label}</a>
+            <a key={label} className="nb-mobile-link"
+              onClick={() => { window.location.hash = hash; setMenuOpen(false); }}>
+              {label}
+            </a>
           ))}
-          <div style={{ display: "flex", gap: 10, marginTop: 8 }}>
-            <button style={{ flex: 1, background: "transparent", color: theme.text, border: `1.5px solid ${theme.border}`, padding: "10px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontSize: 13, cursor: "pointer" }}>Sign In</button>
-            <button style={{ flex: 1, background: theme.accent, color: "#0a0a0f", border: "none", padding: "10px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>Book Now</button>
+          <div className="nb-mobile-actions">
+            <button className="nb-btn-outline" style={{ flex: 1 }}>Sign In</button>
+            <button className="nb-btn-primary" style={{ flex: 1 }}>Book Now</button>
           </div>
-          <button onClick={() => { window.location.hash = '#/admin'; setMenuOpen(false); }}
-            style={{ background: "rgba(232,196,106,0.1)", border: "1px solid rgba(232,196,106,0.25)", color: theme.accent, padding: "10px", borderRadius: 50, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>
+          <button className="nb-btn-admin"
+            style={{ marginTop: 10, width: "100%", textAlign: "center" }}
+            onClick={() => { window.location.hash = '#/admin'; setMenuOpen(false); }}>
             ⚙ Admin Dashboard
           </button>
         </div>
       )}
-    </nav>
+    </>
   );
 }
