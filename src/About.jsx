@@ -26,7 +26,7 @@ const team = [
     name: "Hassan Ali",
     role: "Lead Tour Manager",
     img: "https://i.pravatar.cc/300?img=33",
-    desc: "With experience in over 40 countries, Hassan Ali brings deep insights and expertise about every destination.,
+    desc: "With experience in over 40 countries, Hassan Ali brings deep insights and expertise about every destination.",
     linkedin: "https://linkedin.com",
     instagram: "https://instagram.com",
   },
