@@ -215,3 +215,23 @@ export default function Contact() {
     </div>
   );
 }
+
+// ─── Contact ─────────────────────────────────────────────────────────────────────
+export default function contact() {
+  return (
+    <>
+      <Navbar />
+      <Hero />
+      <div className="section-divider" />
+      <Destinations />
+      <div className="section-divider" />
+      <Features />
+      <div className="section-divider" />
+      <PopularTours />
+      <div className="section-divider" />
+      <Reviews />
+      <CTA />
+      <Footer />
+    </>
+  );
+}
