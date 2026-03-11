@@ -9,15 +9,15 @@ function loadImagesSync() {
 
 // ─── Inline Styles & Theme ───────────────────────────────────────────────────
 const theme = {
-  bg: "#0a0a0f",
-  bgCard: "#12121a",
-  bgCard2: "#1a1a28",
-  accent: "#e8c46a",
-  accentLight: "#f5d98b",
-  text: "#f0ede8",
-  textMuted: "#8b8a96",
-  green: "#4caf7d",
-  border: "rgba(255,255,255,0.07)",
+  bg: "#ffffff",
+  bgCard: "#f5f5f7",
+  bgCard2: "#eaeaf0",
+  accent: "#e8c46a",      // same rakho
+  accentLight: "#f5d98b", // same rakho
+  text: "#1a1a2e",        // ← dark text
+  textMuted: "#6b6880",   // ← muted dark
+  green: "#4caf7d",       // same
+  border: "rgba(0,0,0,0.08)", // ← dark border
 };
 
 const css = `
@@ -814,7 +814,7 @@ function Footer() {
   return (
     <footer style={{
       padding: "80px 5% 40px",
-      background: "#07070d",
+      background: "#f0f0f5",
       borderTop: `1px solid ${theme.border}`,
     }}>
       <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 60 }}>
@@ -867,7 +867,7 @@ function Footer() {
 
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
         <span style={{ color: theme.textMuted, fontSize: 13 }}>
-          © 2025 Tourm. All rights reserved. Made with ❤️ for explorers.
+          © 2026 Edafay. All rights reserved. Made with ❤️ for explorers.
         </span>
         <div style={{ display: "flex", gap: 6 }}>
           {["🇺🇸 EN", "$ USD"].map(t => (

@@ -305,7 +305,7 @@ export default function Contact() {
 
           {/* Quick stats */}
           <div className="contact-fu3" style={{ display: "flex", justifyContent: "center", gap: 48, flexWrap: "wrap" }}>
-            {[["⚡", "24hr", "Response Time"], ["🌍", "200+", "Destinations"], ["⭐", "4.9", "Rating"]].map(([icon, num, label]) => (
+            {[["⚡", "24hr", "Response Time"], ["🌍", "100+", "Destinations"], ["⭐", "4.9", "Rating"]].map(([icon, num, label]) => (
               <div key={label} style={{ textAlign: "center" }}>
                 <div style={{ fontSize: 22, marginBottom: 4 }}>{icon}</div>
                 <div style={{ fontSize: 26, fontWeight: 800, color: t.accent, fontFamily: "'Syne',sans-serif" }}>{num}</div>
@@ -394,7 +394,7 @@ export default function Contact() {
           <div style={{ textAlign: "center", marginBottom: 52 }}>
             <div className="c-badge" style={{ marginBottom: 16 }}>❓ FAQ</div>
             <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(28px,3.5vw,46px)", fontWeight: 700, marginBottom: 14 }}>
-              Frequently Asked Questions (FAQs) <span className="c-gradient-text">Quiries</span>
+              Frequently Asked (FAQs) <span className="c-gradient-text">Quiries</span>
             </h2>
             <p style={{ color: t.textMuted, maxWidth: 460, margin: "0 auto", lineHeight: 1.7 }}>The questions on your mind — you might find the answers here!</p>
           </div>
