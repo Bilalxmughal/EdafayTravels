@@ -48,7 +48,7 @@ export default function Destinations() {
   }, [filter, search, sortBy]);
 
   return (
-    <div style={{ background: theme.bg, minHeight: "100vh", color: theme.text, fontFamily: "'DM Sans',sans-serif" }}>
+    <div className="dt-page" style={{ background: theme.bg, minHeight: "100vh", color: theme.text, fontFamily: "'DM Sans',sans-serif" }}>
       <Navbar />
 
       {/* ── Hero ── */}

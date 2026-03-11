@@ -102,7 +102,8 @@ function FaqItem({ q, a }) {
 // ─── Contact Page ─────────────────────────────────────────────────────────────
 export default function Contact() {
   return (
-    <div style={{ background: theme.bg, minHeight: "100vh", color: theme.text, fontFamily: "'DM Sans',sans-serif" }}>
+    // ✅ LINE 98 — "c-page-wrap" class add ki — black strip fix
+    <div className="c-page-wrap" style={{ background: theme.bg, minHeight: "100vh", color: theme.text, fontFamily: "'DM Sans',sans-serif" }}>
       <Navbar />
 
       {/* ── Hero ── */}
