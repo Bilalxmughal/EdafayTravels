@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import theme from './theme.js'
 import './App.css'
 
@@ -36,7 +36,6 @@ const popularTours = [
 // ─── Component: Navbar ────────────────────────────────────────────────────────
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", h);
@@ -47,60 +46,34 @@ function Navbar() {
     <nav style={{
       position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
       padding: "0 5%",
-      background: scrolled ? "rgba(10,10,15,0.92)" : "transparent",
+      background: scrolled ? theme.navBg : theme.navBgTransp,
       backdropFilter: scrolled ? "blur(20px)" : "none",
       borderBottom: scrolled ? `1px solid ${theme.border}` : "none",
       transition: "all 0.3s",
       display: "flex", alignItems: "center", justifyContent: "space-between",
       height: "72px",
     }}>
-      {/* Logo */}
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-        <div style={{
-          width: 36, height: 36, borderRadius: "10px",
-          background: `linear-gradient(135deg, ${theme.accent}, #c8943a)`,
-          display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: 18,
-        }}>✈</div>
-        <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px" }}>
+        <div style={{ width: 36, height: 36, borderRadius: "10px", background: `linear-gradient(135deg, ${theme.accent}, #c8943a)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>✈</div>
+        <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px", color: theme.text }}>
           Tour<span style={{ color: theme.accent }}>m</span>
         </span>
       </div>
 
-      {/* Links */}
       <div className="hide-mobile" style={{ display: "flex", gap: 36, alignItems: "center" }}>
         {["Home", "Destinations", "Tours", "About", "Contact"].map(l => (
           <a key={l} className="nav-link"
-  onClick={() => l === "Contact" && (window.location.hash = "#/contact")}
-  style={{ color: l === "Contact" ? "#e8c46a" : undefined }}
->{l}</a>
+            onClick={() => l === "Contact" && (window.location.hash = "#/contact")}
+            style={{ color: l === "Contact" ? theme.accent : theme.navText }}
+          >{l}</a>
         ))}
       </div>
 
-      {/* Actions */}
       <div className="hide-mobile" style={{ display: "flex", gap: 12, alignItems: "center" }}>
-        <button className="btn-outline" style={{ padding: "9px 22px", fontSize: 13 }}>Sign In</button>
+        <button className="btn-outline" style={{ padding: "9px 22px", fontSize: 13, color: theme.text }}>Sign In</button>
         <button className="btn-primary" style={{ padding: "10px 22px", fontSize: 13 }}>Book Now</button>
-        <button onClick={() => window.location.hash = '#/admin'} style={{
-  background: "rgba(232,196,106,0.1)",
-  border: "1px solid rgba(232,196,106,0.25)",
-  color: "#e8c46a",
-  padding: "8px 16px",
-  borderRadius: 50,
-  fontSize: 12,
-  fontWeight: 700,
-  cursor: "pointer",
-}}>
-  ⚙ Admin
-</button>
+        <button onClick={() => window.location.hash = '#/admin'} style={{ background: "rgba(232,196,106,0.1)", border: "1px solid rgba(232,196,106,0.25)", color: theme.accent, padding: "8px 16px", borderRadius: 50, fontSize: 12, fontWeight: 700, cursor: "pointer" }}>⚙ Admin</button>
       </div>
-
-      {/* Mobile hamburger */}
-      <button
-        onClick={() => setMenuOpen(!menuOpen)}
-        style={{ display: "none", background: "none", border: "none", color: theme.text, fontSize: 22, cursor: "pointer" }}
-        className="hide-desktop"
-      >☰</button>
     </nav>
   );
 }
@@ -113,61 +86,28 @@ function Hero() {
   return (
     <section style={{
       minHeight: "100vh",
-      background: `radial-gradient(ellipse at 70% 30%, rgba(232,196,106,0.07) 0%, transparent 60%),
-                   radial-gradient(ellipse at 20% 80%, rgba(76,175,125,0.05) 0%, transparent 50%),
-                   ${theme.bg}`,
+      background: `radial-gradient(ellipse at 70% 30%, rgba(232,196,106,0.07) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(76,175,125,0.05) 0%, transparent 50%), ${theme.bg}`,
       padding: "120px 5% 80px",
-      display: "grid",
-      gridTemplateColumns: "1fr 1fr",
-      gap: 60,
-      alignItems: "center",
+      display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center",
     }} className="hero-grid">
 
-      {/* Left */}
       <div>
-        <div className="badge fade-up" style={{ marginBottom: 20 }}>
-          <span>🌍</span> Explore The Umrah Package
-        </div>
-
-        <h1 className="serif fade-up-delay1" style={{
-          fontSize: "clamp(42px, 5vw, 68px)",
-          fontWeight: 700,
-          lineHeight: 1.1,
-          letterSpacing: "-1px",
-          marginBottom: 24,
-        }}>
-          Discover Your<br />
-          <span className="gradient-text">Umrah</span>{" "}
-          <em>Package</em>
+        <div className="badge fade-up" style={{ marginBottom: 20 }}><span>🌍</span> Explore The Umrah Package</div>
+        <h1 className="serif fade-up-delay1" style={{ fontSize: "clamp(42px, 5vw, 68px)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-1px", marginBottom: 24, color: theme.text }}>
+          Discover Your<br /><span className="gradient-text">Umrah</span>{" "}<em>Package</em>
         </h1>
-
-        <p className="fade-up-delay2" style={{
-          color: theme.textMuted, fontSize: 16, lineHeight: 1.75,
-          maxWidth: 440, marginBottom: 36,
-        }}>
+        <p className="fade-up-delay2" style={{ color: theme.textMuted, fontSize: 16, lineHeight: 1.75, maxWidth: 440, marginBottom: 36 }}>
           Plan unforgettable journeys with our expert Umrah travel guides — your perfect Umrah trip awaits.
         </p>
-
         <div className="fade-up-delay3" style={{ display: "flex", gap: 14, marginBottom: 48, flexWrap: "wrap" }}>
           <button className="btn-primary">Explore Packages</button>
-          <button className="btn-outline" style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{
-              width: 32, height: 32, borderRadius: "50%",
-              background: `rgba(232,196,106,0.15)`,
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: 12,
-            }}>▶</span>
+          <button className="btn-outline" style={{ display: "flex", alignItems: "center", gap: 8, color: theme.text }}>
+            <span style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(232,196,106,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12 }}>▶</span>
             Watch Video
           </button>
         </div>
-
-        {/* Stats */}
         <div className="fade-up-delay4" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
-          {[
-            { num: "10K+", label: "Happy Travelers" },
-            { num: "50+", label: "Destinations" },
-            { num: "5Yr", label: "Experience" },
-          ].map(s => (
+          {[{ num: "10K+", label: "Happy Travelers" }, { num: "50+", label: "Destinations" }, { num: "5Yr", label: "Experience" }].map(s => (
             <div key={s.label}>
               <div style={{ fontSize: 28, fontWeight: 700, color: theme.accent, fontFamily: "'Playfair Display',serif" }}>{s.num}</div>
               <div style={{ fontSize: 13, color: theme.textMuted, marginTop: 4 }}>{s.label}</div>
@@ -176,92 +116,54 @@ function Hero() {
         </div>
       </div>
 
-      {/* Right — hero image collage */}
       <div style={{ position: "relative" }} className="fade-up-delay2">
         <div className="hero-image-wrap float-anim" style={{ height: 480 }}>
-          <img
-            src="https://scontent.flhe3-2.fna.fbcdn.net/v/t39.30808-6/648106452_122114880333209329_4710445315082844352_n.png?_nc_cat=102&ccb=1-7&_nc_sid=2a1932&_nc_ohc=jTYChci6zIcQ7kNvwE9yl85&_nc_oc=Adkv4jV6vZpsOWfDhQdPv4fdTrExSj7SYVYaQP1p54PMkdBj7X8yt-HBFfClXc_SoyI&_nc_zt=23&_nc_ht=scontent.flhe3-2.fna&_nc_gid=2nCmH9BrzPt5eW4pCemgnA&_nc_ss=8&oh=00_Afyrm0_NbeWCRM1_XA1B2bZFu9pyTKmuQenH71yHYYdktQ&oe=69B4F9E2"
-            alt="hero"
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          />
-          <div style={{
-            position: "absolute", inset: 0,
-            background: "linear-gradient(to top, rgba(10,10,15,0.5) 0%, transparent 50%)",
-          }} />
+          <img src="https://scontent.flhe3-2.fna.fbcdn.net/v/t39.30808-6/648106452_122114880333209329_4710445315082844352_n.png?_nc_cat=102&ccb=1-7&_nc_sid=2a1932&_nc_ohc=jTYChci6zIcQ7kNvwE9yl85&_nc_oc=Adkv4jV6vZpsOWfDhQdPv4fdTrExSj7SYVYaQP1p54PMkdBj7X8yt-HBFfClXc_SoyI&_nc_zt=23&_nc_ht=scontent.flhe3-2.fna&_nc_gid=2nCmH9BrzPt5eW4pCemgnA&_nc_ss=8&oh=00_Afyrm0_NbeWCRM1_XA1B2bZFu9pyTKmuQenH71yHYYdktQ&oe=69B4F9E2"
+            alt="hero" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(10,10,15,0.3) 0%, transparent 50%)" }} />
         </div>
-
-        {/* Floating badge 1 */}
         <div className="parallax-badge" style={{ bottom: 28, left: -32, animation: "scaleIn 0.6s 0.8s both" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <div style={{ fontSize: 28 }}>🏔️</div>
             <div>
-              <div style={{ fontSize: 13, fontWeight: 600 }}>Next Adventure</div>
+              <div style={{ fontSize: 13, fontWeight: 600, color: theme.text }}>Next Adventure</div>
               <div style={{ fontSize: 11, color: theme.textMuted }}>Machu Picchu, Peru</div>
             </div>
-            <div style={{
-              marginLeft: 8, background: theme.green, color: "#fff",
-              fontSize: 10, fontWeight: 700, padding: "3px 8px", borderRadius: 20
-            }}>OPEN</div>
+            <div style={{ marginLeft: 8, background: theme.green, color: "#fff", fontSize: 10, fontWeight: 700, padding: "3px 8px", borderRadius: 20 }}>OPEN</div>
           </div>
         </div>
-
-        {/* Floating badge 2 */}
         <div className="parallax-badge" style={{ top: 28, right: -24, animation: "slideLeft 0.6s 0.6s both" }}>
           <div style={{ fontSize: 11, color: theme.textMuted, marginBottom: 4 }}>Rating</div>
           <div style={{ display: "flex", gap: 2, fontSize: 14, color: theme.accent }}>{"★★★★★"}</div>
-          <div style={{ fontSize: 13, fontWeight: 600, marginTop: 2 }}>4.98 / 5.0</div>
+          <div style={{ fontSize: 13, fontWeight: 600, marginTop: 2, color: theme.text }}>4.98 / 5.0</div>
         </div>
       </div>
 
-      {/* Search bar — full width below */}
       <div style={{ gridColumn: "1 / -1" }}>
-        {/* Tabs */}
         <div style={{ display: "flex", gap: 28, marginBottom: 16 }}>
-          {tabs.map(t => (
-            <button
-              key={t}
-              onClick={() => setActiveTab(t)}
-              className={activeTab === t ? "tab-active" : ""}
-              style={{
-                background: "none", border: "none",
-                color: activeTab === t ? theme.accent : theme.textMuted,
-                fontSize: 14, fontWeight: 500, cursor: "pointer",
-                paddingBottom: 8,
-                borderBottom: activeTab === t ? `2px solid ${theme.accent}` : "2px solid transparent",
-                fontFamily: "'DM Sans', sans-serif",
-                transition: "color 0.2s",
-              }}
-            >{t}</button>
+          {tabs.map(tab => (
+            <button key={tab} onClick={() => setActiveTab(tab)}
+              className={activeTab === tab ? "tab-active" : ""}
+              style={{ background: "none", border: "none", color: activeTab === tab ? theme.accent : theme.textMuted, fontSize: 14, fontWeight: 500, cursor: "pointer", paddingBottom: 8, borderBottom: activeTab === tab ? `2px solid ${theme.accent}` : "2px solid transparent", fontFamily: "'DM Sans', sans-serif", transition: "color 0.2s" }}
+            >{tab}</button>
           ))}
         </div>
-
-        <div className="search-bar" style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr auto",
-          gap: 0,
-          padding: "8px 8px 8px 24px",
-          alignItems: "center",
-        }}>
+        <div className="search-bar" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr auto", gap: 0, padding: "8px 8px 8px 24px", alignItems: "center" }}>
           <div style={{ padding: "12px 20px 12px 0", borderRight: `1px solid ${theme.border}` }}>
             <div style={{ fontSize: 11, color: theme.textMuted, marginBottom: 4, textTransform: "uppercase", letterSpacing: "0.5px" }}>Destination</div>
-            <input className="search-input" placeholder="Where do you want to go?" />
+            <input className="search-input" placeholder="Where do you want to go?" style={{ color: theme.text }} />
           </div>
           <div style={{ padding: "12px 20px", borderRight: `1px solid ${theme.border}` }}>
             <div style={{ fontSize: 11, color: theme.textMuted, marginBottom: 4, textTransform: "uppercase", letterSpacing: "0.5px" }}>Check In</div>
-            <input className="search-input" type="date" />
+            <input className="search-input" type="date" style={{ color: theme.text, colorScheme: "light" }} />
           </div>
           <div style={{ padding: "12px 20px", borderRight: `1px solid ${theme.border}` }}>
             <div style={{ fontSize: 11, color: theme.textMuted, marginBottom: 4, textTransform: "uppercase", letterSpacing: "0.5px" }}>Travelers</div>
-            <select className="search-input" style={{ appearance: "none" }}>
-              <option>1 Person</option>
-              <option>2 Persons</option>
-              <option>3-5 Persons</option>
-              <option>6+ Group</option>
+            <select className="search-input" style={{ appearance: "none", color: theme.text }}>
+              <option>1 Person</option><option>2 Persons</option><option>3-5 Persons</option><option>6+ Group</option>
             </select>
           </div>
-          <button className="btn-primary" style={{ margin: 4, padding: "16px 32px", borderRadius: 12, whiteSpace: "nowrap" }}>
-            🔍 Search
-          </button>
+          <button className="btn-primary" style={{ margin: 4, padding: "16px 32px", borderRadius: 12, whiteSpace: "nowrap" }}>🔍 Search</button>
         </div>
       </div>
     </section>
@@ -272,74 +174,30 @@ function Hero() {
 function Destinations() {
   const [filter, setFilter] = useState("All");
   const categories = ["All", "Beach", "Mountain", "Cultural", "Adventure", "Luxury"];
-
   return (
     <section style={{ padding: "100px 5%", background: theme.bg }} id="destinations">
       <div style={{ textAlign: "center", marginBottom: 52 }}>
         <div className="badge" style={{ marginBottom: 16 }}>🗺️ Top Picks</div>
-        <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16 }}>
-          Popular <span className="gradient-text">Destinations</span>
-        </h2>
-        <p style={{ color: theme.textMuted, maxWidth: 500, margin: "0 auto", lineHeight: 1.7 }}>
-          Curated selections of the world's most breathtaking places, ready for your next adventure
-        </p>
+        <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>Popular <span className="gradient-text">Destinations</span></h2>
+        <p style={{ color: theme.textMuted, maxWidth: 500, margin: "0 auto", lineHeight: 1.7 }}>Curated selections of the world's most breathtaking places, ready for your next adventure</p>
       </div>
-
-      {/* Filter tabs */}
       <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginBottom: 48 }}>
         {categories.map(c => (
-          <button
-            key={c}
-            onClick={() => setFilter(c)}
-            style={{
-              padding: "8px 20px", borderRadius: 50, fontSize: 13, fontWeight: 500,
-              cursor: "pointer", fontFamily: "'DM Sans',sans-serif",
-              background: filter === c ? theme.accent : "rgba(255,255,255,0.05)",
-              color: filter === c ? "#0a0a0f" : theme.textMuted,
-              border: filter === c ? "none" : `1px solid ${theme.border}`,
-              transition: "all 0.2s",
-            }}
-          >{c}</button>
+          <button key={c} onClick={() => setFilter(c)} style={{ padding: "8px 20px", borderRadius: 50, fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'DM Sans',sans-serif", background: filter === c ? theme.accent : "rgba(0,0,0,0.04)", color: filter === c ? "#0a0a0f" : theme.textMuted, border: filter === c ? "none" : `1px solid ${theme.border}`, transition: "all 0.2s" }}>{c}</button>
         ))}
       </div>
-
-      {/* Grid */}
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        gap: 24,
-      }} className="dest-grid">
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }} className="dest-grid">
         {destinations.map((d, i) => (
-          <div key={d.id} className="dest-card card-hover" style={{
-            borderRadius: 20, overflow: "hidden",
-            background: theme.bgCard,
-            border: `1px solid ${theme.border}`,
-            cursor: "pointer",
-            animation: `fadeUp 0.6s ${i * 0.1}s both`,
-          }}>
+          <div key={d.id} className="dest-card card-hover" style={{ borderRadius: 20, overflow: "hidden", background: theme.bgCard, border: `1px solid ${theme.border}`, cursor: "pointer", animation: `fadeUp 0.6s ${i * 0.1}s both` }}>
             <div style={{ position: "relative", height: 220, overflow: "hidden" }}>
-              <img
-                src={d.img}
-                alt={d.name}
-                style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }}
-              />
-              <div className="dest-overlay" style={{
-                position: "absolute", inset: 0,
-                background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 55%)",
-                opacity: 0, transition: "opacity 0.3s",
-              }} />
-              <span style={{
-                position: "absolute", top: 14, right: 14,
-                background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)",
-                color: theme.accent, fontSize: 11, fontWeight: 700,
-                padding: "4px 12px", borderRadius: 20,
-                border: `1px solid rgba(232,196,106,0.3)`,
-              }}>{d.tag}</span>
+              <img src={d.img} alt={d.name} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }} />
+              <div className="dest-overlay" style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 55%)", opacity: 0, transition: "opacity 0.3s" }} />
+              <span style={{ position: "absolute", top: 14, right: 14, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)", color: theme.accent, fontSize: 11, fontWeight: 700, padding: "4px 12px", borderRadius: 20, border: "1px solid rgba(232,196,106,0.3)" }}>{d.tag}</span>
             </div>
             <div style={{ padding: "20px" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start", marginBottom: 8 }}>
                 <div>
-                  <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 3 }}>{d.name}</h3>
+                  <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 3, color: theme.text }}>{d.name}</h3>
                   <span style={{ fontSize: 13, color: theme.textMuted }}>📍 {d.country}</span>
                 </div>
                 <div style={{ textAlign: "right" }}>
@@ -356,9 +214,8 @@ function Destinations() {
           </div>
         ))}
       </div>
-
       <div style={{ textAlign: "center", marginTop: 48 }}>
-        <button className="btn-outline">View All Destinations →</button>
+        <button className="btn-outline" style={{ color: theme.text }}>View All Destinations →</button>
       </div>
     </section>
   );
@@ -367,51 +224,32 @@ function Destinations() {
 // ─── Component: Features ─────────────────────────────────────────────────────
 function Features() {
   return (
-    <section style={{
-      padding: "100px 5%",
-      background: `radial-gradient(ellipse at 30% 50%, rgba(232,196,106,0.05) 0%, transparent 60%), ${theme.bgCard}`,
-    }}>
+    <section style={{ padding: "100px 5%", background: `radial-gradient(ellipse at 30% 50%, rgba(232,196,106,0.05) 0%, transparent 60%), ${theme.bgCard}` }}>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }} className="hero-grid">
-        {/* Left */}
         <div>
           <div className="badge" style={{ marginBottom: 20 }}>✨ Why Tourm</div>
-          <h2 className="serif" style={{ fontSize: "clamp(30px,3.5vw,48px)", fontWeight: 700, marginBottom: 20, lineHeight: 1.2 }}>
-            Travel Smarter,<br />
-            <span className="gradient-text">Live Better</span>
+          <h2 className="serif" style={{ fontSize: "clamp(30px,3.5vw,48px)", fontWeight: 700, marginBottom: 20, lineHeight: 1.2, color: theme.text }}>
+            Travel Smarter,<br /><span className="gradient-text">Live Better</span>
           </h2>
-          <p style={{ color: theme.textMuted, lineHeight: 1.75, marginBottom: 36 }}>
-            We believe travel changes lives. That's why we obsess over every detail — so you can focus on what matters: the moments that take your breath away.
-          </p>
-
+          <p style={{ color: theme.textMuted, lineHeight: 1.75, marginBottom: 36 }}>We believe travel changes lives. That's why we obsess over every detail — so you can focus on what matters: the moments that take your breath away.</p>
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {features.slice(0, 4).map(f => (
               <div key={f.title} style={{ display: "flex", gap: 16, alignItems: "start" }}>
                 <div className="feature-icon">{f.icon}</div>
                 <div>
-                  <div style={{ fontWeight: 600, marginBottom: 4 }}>{f.title}</div>
+                  <div style={{ fontWeight: 600, marginBottom: 4, color: theme.text }}>{f.title}</div>
                   <div style={{ fontSize: 13, color: theme.textMuted, lineHeight: 1.6 }}>{f.desc}</div>
                 </div>
               </div>
             ))}
           </div>
         </div>
-
-        {/* Right — image grid */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-          {[
-            "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&q=80",
-            "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&q=80",
-            "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400&q=80",
-            "https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?w=400&q=80",
-          ].map((img, i) => (
-            <div key={i} style={{
-              borderRadius: 16, overflow: "hidden", height: 180,
-              marginTop: i % 2 === 1 ? 24 : 0,
-            }}>
+          {["https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&q=80","https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&q=80","https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400&q=80","https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?w=400&q=80"].map((img, i) => (
+            <div key={i} style={{ borderRadius: 16, overflow: "hidden", height: 180, marginTop: i % 2 === 1 ? 24 : 0 }}>
               <img src={img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.4s" }}
                 onMouseEnter={e => e.target.style.transform = "scale(1.05)"}
-                onMouseLeave={e => e.target.style.transform = "scale(1)"}
-              />
+                onMouseLeave={e => e.target.style.transform = "scale(1)"} />
             </div>
           ))}
         </div>
@@ -427,39 +265,28 @@ function PopularTours() {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48 }}>
         <div>
           <div className="badge" style={{ marginBottom: 16 }}>🧳 Tours</div>
-          <h2 className="serif" style={{ fontSize: "clamp(28px,3.5vw,46px)", fontWeight: 700 }}>
-            Most <span className="gradient-text">Popular</span> Tours
-          </h2>
+          <h2 className="serif" style={{ fontSize: "clamp(28px,3.5vw,46px)", fontWeight: 700, color: theme.text }}>Most <span className="gradient-text">Popular</span> Tours</h2>
         </div>
-        <button className="btn-outline" style={{ flexShrink: 0 }}>See All Tours</button>
+        <button className="btn-outline" style={{ flexShrink: 0, color: theme.text }}>See All Tours</button>
       </div>
-
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }} className="three-col">
-        {popularTours.map((t, i) => (
-          <div key={t.name} className="card-hover" style={{
-            background: theme.bgCard,
-            border: `1px solid ${theme.border}`,
-            borderRadius: 20, overflow: "hidden",
-            animation: `fadeUp 0.6s ${i * 0.15}s both`,
-          }}>
+        {popularTours.map((tour, i) => (
+          <div key={tour.name} className="card-hover" style={{ background: theme.bgCard, border: `1px solid ${theme.border}`, borderRadius: 20, overflow: "hidden", animation: `fadeUp 0.6s ${i * 0.15}s both` }}>
             <div style={{ position: "relative", height: 260 }}>
-              <img src={t.img} alt={t.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-              <div style={{
-                position: "absolute", inset: 0,
-                background: "linear-gradient(to top, rgba(10,10,15,0.8) 0%, transparent 50%)",
-              }} />
+              <img src={tour.img} alt={tour.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(10,10,15,0.8) 0%, transparent 50%)" }} />
               <div style={{ position: "absolute", bottom: 20, left: 20, right: 20 }}>
-                <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 6 }}>{t.name}</h3>
+                <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 6, color: "#fff" }}>{tour.name}</h3>
                 <div style={{ display: "flex", gap: 12 }}>
-                  <span style={{ fontSize: 12, color: "rgba(255,255,255,0.7)" }}>⏱ {t.duration}</span>
-                  <span style={{ fontSize: 12, color: theme.accent }}>★ {t.rating}</span>
+                  <span style={{ fontSize: 12, color: "rgba(255,255,255,0.7)" }}>⏱ {tour.duration}</span>
+                  <span style={{ fontSize: 12, color: theme.accent }}>★ {tour.rating}</span>
                 </div>
               </div>
             </div>
             <div style={{ padding: "20px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div>
                 <div style={{ fontSize: 12, color: theme.textMuted, marginBottom: 4 }}>Starting from</div>
-                <div style={{ fontSize: 22, fontWeight: 700, color: theme.accent }}>{t.price}</div>
+                <div style={{ fontSize: 22, fontWeight: 700, color: theme.accent }}>{tour.price}</div>
               </div>
               <button className="btn-primary" style={{ padding: "10px 20px", fontSize: 13 }}>Book Now</button>
             </div>
@@ -476,38 +303,25 @@ function Reviews() {
     <section style={{ padding: "100px 5%", background: theme.bgCard }}>
       <div style={{ textAlign: "center", marginBottom: 52 }}>
         <div className="badge" style={{ marginBottom: 16 }}>💬 Testimonials</div>
-        <h2 className="serif" style={{ fontSize: "clamp(30px,3.5vw,48px)", fontWeight: 700, marginBottom: 16 }}>
-          What Our <span className="gradient-text">Travelers</span> Say
-        </h2>
-        <p style={{ color: theme.textMuted, maxWidth: 460, margin: "0 auto", lineHeight: 1.7 }}>
-          Real stories from real adventures. Join 50,000+ happy travelers who've explored the world with Tourm.
-        </p>
+        <h2 className="serif" style={{ fontSize: "clamp(30px,3.5vw,48px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>What Our <span className="gradient-text">Travelers</span> Say</h2>
+        <p style={{ color: theme.textMuted, maxWidth: 460, margin: "0 auto", lineHeight: 1.7 }}>Real stories from real adventures. Join 50,000+ happy travelers who've explored the world with Tourm.</p>
       </div>
-
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }} className="three-col">
         {reviews.map((r, i) => (
-          <div key={r.name} className="review-card" style={{ animation: `fadeUp 0.6s ${i * 0.15}s both` }}>
+          <div key={r.name} className="review-card" style={{ background: theme.bg, border: `1px solid ${theme.border}`, animation: `fadeUp 0.6s ${i * 0.15}s both` }}>
             <div style={{ display: "flex", gap: 4, marginBottom: 16 }}>
-              {Array(r.rating).fill(0).map((_, j) => (
-                <span key={j} style={{ color: theme.accent, fontSize: 16 }}>★</span>
-              ))}
+              {Array(r.rating).fill(0).map((_, j) => <span key={j} style={{ color: theme.accent, fontSize: 16 }}>★</span>)}
             </div>
-            <p style={{ color: "rgba(240,237,232,0.8)", lineHeight: 1.7, fontSize: 14, marginBottom: 20, fontStyle: "italic" }}>
-              "{r.text}"
-            </p>
+            <p style={{ color: theme.textMuted, lineHeight: 1.7, fontSize: 14, marginBottom: 20, fontStyle: "italic" }}>"{r.text}"</p>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
                 <img src={r.img} alt={r.name} style={{ width: 44, height: 44, borderRadius: "50%", objectFit: "cover", border: `2px solid ${theme.accent}` }} />
                 <div>
-                  <div style={{ fontWeight: 600, fontSize: 14 }}>{r.name}</div>
+                  <div style={{ fontWeight: 600, fontSize: 14, color: theme.text }}>{r.name}</div>
                   <div style={{ fontSize: 12, color: theme.textMuted }}>{r.loc}</div>
                 </div>
               </div>
-              <div style={{
-                fontSize: 11, color: theme.accent,
-                background: "rgba(232,196,106,0.1)", padding: "4px 10px",
-                borderRadius: 20, border: `1px solid rgba(232,196,106,0.2)`,
-              }}>{r.tour}</div>
+              <div style={{ fontSize: 11, color: theme.accent, background: "rgba(232,196,106,0.1)", padding: "4px 10px", borderRadius: 20, border: "1px solid rgba(232,196,106,0.2)" }}>{r.tour}</div>
             </div>
           </div>
         ))}
@@ -519,38 +333,16 @@ function Reviews() {
 // ─── Component: CTA ──────────────────────────────────────────────────────────
 function CTA() {
   return (
-    <section style={{
-      padding: "100px 5%",
-      background: `linear-gradient(135deg, rgba(232,196,106,0.12) 0%, rgba(76,175,125,0.08) 100%), ${theme.bg}`,
-      textAlign: "center",
-    }}>
+    <section style={{ padding: "100px 5%", background: `linear-gradient(135deg, rgba(232,196,106,0.08) 0%, rgba(76,175,125,0.05) 100%), ${theme.bg}`, textAlign: "center" }}>
       <div style={{ maxWidth: 640, margin: "0 auto" }}>
         <div className="badge" style={{ marginBottom: 24, display: "inline-flex" }}>🚀 Start Today</div>
-        <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,58px)", fontWeight: 700, marginBottom: 20, lineHeight: 1.15 }}>
-          Ready for Your<br />
-          Next <span className="gradient-text">Adventure?</span>
-        </h2>
-        <p style={{ color: theme.textMuted, lineHeight: 1.75, marginBottom: 40, fontSize: 16 }}>
-          Join thousands of explorers who've discovered the world with Tourm. Subscribe and get exclusive deals, tips & early access.
-        </p>
-        <div style={{
-          display: "flex", gap: 12, maxWidth: 480, margin: "0 auto",
-          background: "rgba(255,255,255,0.05)",
-          border: `1px solid ${theme.border}`,
-          borderRadius: 50, padding: "6px 6px 6px 24px",
-        }}>
-          <input
-            className="search-input"
-            placeholder="Enter your email address"
-            style={{ flex: 1 }}
-          />
-          <button className="btn-primary" style={{ borderRadius: 50, padding: "12px 28px", flexShrink: 0 }}>
-            Get Started
-          </button>
+        <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,58px)", fontWeight: 700, marginBottom: 20, lineHeight: 1.15, color: theme.text }}>Ready for Your<br />Next <span className="gradient-text">Adventure?</span></h2>
+        <p style={{ color: theme.textMuted, lineHeight: 1.75, marginBottom: 40, fontSize: 16 }}>Join thousands of explorers who've discovered the world with Tourm. Subscribe and get exclusive deals, tips & early access.</p>
+        <div style={{ display: "flex", gap: 12, maxWidth: 480, margin: "0 auto", background: "rgba(0,0,0,0.04)", border: `1px solid ${theme.border}`, borderRadius: 50, padding: "6px 6px 6px 24px" }}>
+          <input className="search-input" placeholder="Enter your email address" style={{ flex: 1, color: theme.text }} />
+          <button className="btn-primary" style={{ borderRadius: 50, padding: "12px 28px", flexShrink: 0 }}>Get Started</button>
         </div>
-        <p style={{ color: theme.textMuted, fontSize: 12, marginTop: 14 }}>
-          ✓ No spam, ever. Unsubscribe any time.
-        </p>
+        <p style={{ color: theme.textMuted, fontSize: 12, marginTop: 14 }}>✓ No spam, ever. Unsubscribe any time.</p>
       </div>
     </section>
   );
@@ -563,72 +355,39 @@ function Footer() {
     { title: "Services", links: ["Tour Packages", "Hotel Booking", "Flight Tickets", "Travel Insurance", "Visa Assistance"] },
     { title: "Support", links: ["Help Center", "Contact Us", "Privacy Policy", "Terms of Service", "Refund Policy"] },
   ];
-
   return (
-    <footer style={{
-      padding: "80px 5% 40px",
-      background: "#f0f0f5",
-      borderTop: `1px solid ${theme.border}`,
-    }}>
+    <footer style={{ padding: "80px 5% 40px", background: theme.bgFooter, borderTop: `1px solid ${theme.border}` }}>
       <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 60 }}>
-        {/* Brand */}
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
-            <div style={{
-              width: 36, height: 36, borderRadius: "10px",
-              background: `linear-gradient(135deg, ${theme.accent}, #c8943a)`,
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: 18,
-            }}>✈</div>
-            <span className="serif" style={{ fontSize: 22, fontWeight: 700 }}>
-              Tour<span style={{ color: theme.accent }}>m</span>
-            </span>
+            <div style={{ width: 36, height: 36, borderRadius: "10px", background: `linear-gradient(135deg, ${theme.accent}, #c8943a)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>✈</div>
+            <span className="serif" style={{ fontSize: 22, fontWeight: 700, color: theme.text }}>Tour<span style={{ color: theme.accent }}>m</span></span>
           </div>
-          <p style={{ color: theme.textMuted, lineHeight: 1.75, fontSize: 14, maxWidth: 280, marginBottom: 24 }}>
-            Your trusted travel partner since 2010. Making dreams come true, one journey at a time.
-          </p>
+          <p style={{ color: theme.textMuted, lineHeight: 1.75, fontSize: 14, maxWidth: 280, marginBottom: 24 }}>Your trusted travel partner since 2010. Making dreams come true, one journey at a time.</p>
           <div style={{ display: "flex", gap: 10 }}>
             {["𝕏", "f", "in", "📸"].map(s => (
-              <div key={s} style={{
-                width: 38, height: 38, borderRadius: 10,
-                background: "rgba(255,255,255,0.05)",
-                border: `1px solid ${theme.border}`,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 14, cursor: "pointer",
-                transition: "all 0.2s",
-              }}
+              <div key={s} style={{ width: 38, height: 38, borderRadius: 10, background: "rgba(0,0,0,0.05)", border: `1px solid ${theme.border}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, cursor: "pointer", transition: "all 0.2s" }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = theme.accent; e.currentTarget.style.color = theme.accent; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = theme.border; e.currentTarget.style.color = theme.text; }}
               >{s}</div>
             ))}
           </div>
         </div>
-
         {cols.map(col => (
           <div key={col.title}>
-            <div style={{ fontWeight: 600, marginBottom: 20, letterSpacing: "0.5px" }}>{col.title}</div>
+            <div style={{ fontWeight: 600, marginBottom: 20, letterSpacing: "0.5px", color: theme.text }}>{col.title}</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              {col.links.map(l => (
-                <a key={l} className="nav-link" style={{ fontSize: 13 }}>{l}</a>
-              ))}
+              {col.links.map(l => <a key={l} className="nav-link" style={{ fontSize: 13, color: theme.textMuted }}>{l}</a>)}
             </div>
           </div>
         ))}
       </div>
-
       <div className="section-divider" style={{ marginBottom: 28 }} />
-
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-        <span style={{ color: theme.textMuted, fontSize: 13 }}>
-          © 2026 Edafay. All rights reserved. Made with ❤️ for explorers.
-        </span>
+        <span style={{ color: theme.textMuted, fontSize: 13 }}>© 2026 Edafay. All rights reserved. Made with ❤️ for explorers.</span>
         <div style={{ display: "flex", gap: 6 }}>
-          {["🇺🇸 EN", "$ USD"].map(t => (
-            <div key={t} style={{
-              background: "rgba(255,255,255,0.05)", border: `1px solid ${theme.border}`,
-              borderRadius: 8, padding: "5px 12px", fontSize: 12, color: theme.textMuted,
-              cursor: "pointer",
-            }}>{t}</div>
+          {["🇺🇸 EN", "$ USD"].map(label => (
+            <div key={label} style={{ background: "rgba(0,0,0,0.04)", border: `1px solid ${theme.border}`, borderRadius: 8, padding: "5px 12px", fontSize: 12, color: theme.textMuted, cursor: "pointer" }}>{label}</div>
           ))}
         </div>
       </div>
@@ -638,5 +397,20 @@ function Footer() {
 
 // ─── App ─────────────────────────────────────────────────────────────────────
 export default function App() {
-
+  return (
+    <>
+      <Navbar />
+      <Hero />
+      <div className="section-divider" />
+      <Destinations />
+      <div className="section-divider" />
+      <Features />
+      <div className="section-divider" />
+      <PopularTours />
+      <div className="section-divider" />
+      <Reviews />
+      <CTA />
+      <Footer />
+    </>
+  );
 }
