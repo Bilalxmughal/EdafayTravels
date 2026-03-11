@@ -12,30 +12,18 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", h);
   }, []);
 
-  // Body scroll lock when mobile menu open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
   const links = [
-    { label: "Home",         hash: ""               },
-    { label: "Destinations", hash: "#/destinations" },
-    { label: "Tours",        hash: ""               },
-    { label: "About",        hash: "#/about"        },
-    { label: "Contact",      hash: "#/contact"      },
+    { label: "Home",           hash: ""                },
+    { label: "Umrah Package",  hash: "#/umrah"         },
+    { label: "Tours",          hash: ""                },
+    { label: "About",          hash: "#/about"         },
+    { label: "Contact",        hash: "#/contact"       },
   ];
-
-  const navStyle = {
-    position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-    padding: "0 5%",
-    background: scrolled ? theme.navBg : theme.navBgTransp,
-    backdropFilter: scrolled ? "blur(20px)" : "none",
-    borderBottom: scrolled ? `1px solid ${theme.border}` : "none",
-    transition: "all 0.3s",
-    display: "flex", alignItems: "center", justifyContent: "space-between",
-    height: "72px",
-  };
 
   return (
     <>
@@ -49,28 +37,22 @@ export default function Navbar() {
         .nb-link {
           color: ${theme.navText};
           text-decoration: none;
-          font-size: 14px;
-          font-weight: 500;
-          letter-spacing: 0.3px;
-          cursor: pointer;
-          transition: color 0.2s;
-          padding-bottom: 2px;
+          font-size: 14px; font-weight: 500;
+          letter-spacing: 0.3px; cursor: pointer;
+          transition: color 0.2s; padding-bottom: 2px;
         }
         .nb-link:hover { color: ${theme.accent}; }
         .nb-btn-outline {
-          background: transparent;
-          color: ${theme.text};
+          background: transparent; color: ${theme.text};
           border: 1.5px solid ${theme.border};
-          padding: 9px 22px;
-          border-radius: 50px;
+          padding: 9px 22px; border-radius: 50px;
           font-family: 'DM Sans', sans-serif;
           font-size: 13px; font-weight: 500;
           cursor: pointer; transition: all 0.2s;
         }
         .nb-btn-outline:hover { border-color: ${theme.accent}; color: ${theme.accent}; }
         .nb-btn-primary {
-          background: ${theme.accent};
-          color: #0a0a0f; border: none;
+          background: ${theme.accent}; color: #0a0a0f; border: none;
           padding: 10px 22px; border-radius: 50px;
           font-family: 'DM Sans', sans-serif;
           font-size: 13px; font-weight: 600;
@@ -88,52 +70,49 @@ export default function Navbar() {
         }
         .nb-btn-admin:hover { background: rgba(232,196,106,0.2); }
         .nb-hamburger {
-          background: none; border: none;
-          color: ${theme.text};
-          font-size: 26px; cursor: pointer;
-          padding: 4px 8px;
+          background: none; border: none; color: ${theme.text};
+          font-size: 26px; cursor: pointer; padding: 4px 8px;
           width: 44px; height: 44px;
           display: flex; align-items: center; justify-content: center;
-          border-radius: 8px;
-          transition: background 0.2s;
+          border-radius: 8px; transition: background 0.2s;
         }
         .nb-hamburger:hover { background: rgba(0,0,0,0.05); }
         .nb-mobile-menu {
-          position: fixed;
-          top: 72px; left: 0; right: 0; bottom: 0;
-          background: ${theme.navBg};
-          backdrop-filter: blur(24px);
+          position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
+          background: ${theme.navBg}; backdrop-filter: blur(24px);
           border-top: 1px solid ${theme.border};
           padding: 24px 5% 40px;
           display: flex; flex-direction: column; gap: 0;
           overflow-y: auto;
-          animation: nbSlideDown 0.25s ease;
-          z-index: 99;
+          animation: nbSlideDown 0.25s ease; z-index: 99;
         }
         @keyframes nbSlideDown {
           from { opacity: 0; transform: translateY(-8px); }
           to   { opacity: 1; transform: translateY(0); }
         }
         .nb-mobile-link {
-          display: block;
-          padding: 15px 0;
+          display: block; padding: 15px 0;
           border-bottom: 1px solid ${theme.border};
-          color: ${theme.text};
-          font-size: 16px; font-weight: 500;
-          text-decoration: none; cursor: pointer;
-          transition: color 0.2s;
+          color: ${theme.text}; font-size: 16px; font-weight: 500;
+          text-decoration: none; cursor: pointer; transition: color 0.2s;
           font-family: 'DM Sans', sans-serif;
         }
         .nb-mobile-link:hover { color: ${theme.accent}; }
-        .nb-mobile-actions {
-          display: flex; gap: 10px;
-          margin-top: 24px; flex-wrap: wrap;
-        }
+        .nb-mobile-actions { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
       `}</style>
 
-      <nav style={navStyle}>
+      <nav style={{
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+        padding: "0 5%",
+        background: scrolled ? theme.navBg : theme.navBgTransp,
+        backdropFilter: scrolled ? "blur(20px)" : "none",
+        borderBottom: scrolled ? `1px solid ${theme.border}` : "none",
+        transition: "all 0.3s",
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        height: "72px",
+      }}>
 
-        {/* ── Logo ── */}
+        {/* Logo */}
         <div onClick={() => { window.location.hash = ''; setMenuOpen(false); }}
           style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", flexShrink: 0 }}>
           <div style={{
@@ -146,31 +125,27 @@ export default function Navbar() {
           </span>
         </div>
 
-        {/* ── Desktop Links ── */}
+        {/* Desktop Links */}
         <div className="nb-desktop" style={{ gap: 32, alignItems: "center" }}>
           {links.map(({ label, hash }) => (
             <a key={label} className="nb-link" onClick={() => window.location.hash = hash}>{label}</a>
           ))}
         </div>
 
-        {/* ── Desktop Actions ── */}
+        {/* Desktop Actions */}
         <div className="nb-desktop" style={{ gap: 10, alignItems: "center" }}>
           <button className="nb-btn-outline">Sign In</button>
           <button className="nb-btn-primary">Book Now</button>
           <button className="nb-btn-admin" onClick={() => window.location.hash = '#/admin'}>⚙ Admin</button>
         </div>
 
-        {/* ── Mobile Hamburger ── */}
-        <button
-          className="nb-mobile-btn nb-hamburger"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menu"
-        >
+        {/* Mobile Hamburger */}
+        <button className="nb-mobile-btn nb-hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
           {menuOpen ? "✕" : "☰"}
         </button>
       </nav>
 
-      {/* ── Mobile Menu ── */}
+      {/* Mobile Menu */}
       {menuOpen && (
         <div className="nb-mobile-menu">
           {links.map(({ label, hash }) => (

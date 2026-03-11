@@ -120,7 +120,7 @@ function Hero() {
               <option>1 Person</option><option>2 Persons</option><option>3-5 Persons</option><option>6+ Group</option>
             </select>
           </div>
-          <button className="btn-primary" style={{ margin: 4, padding: "16px 32px", borderRadius: 12, whiteSpace: "nowrap" }}>🔍 Search</button>
+          <button className="btn-primary" style={{ margin: 4, padding: "16px 32px", borderRadius: 12, whiteSpace: "nowrap" }}>Search</button>
         </div>
       </div>
     </section>

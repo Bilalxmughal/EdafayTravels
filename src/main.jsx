@@ -5,7 +5,7 @@ import App from './App.jsx'
 import Dashboard from './Dashboard.jsx'
 import Contact from './Contact.jsx'
 import About from './About.jsx'
-import Destinations from './Destinations.jsx'
+import UmrahPackages from './UmrahPackages.jsx'
 
 function Root() {
   const [page, setPage] = useState(window.location.hash)
@@ -16,10 +16,10 @@ function Root() {
     return () => window.removeEventListener('hashchange', handler)
   }, [])
 
-  if (page === '#/admin')        return <Dashboard />
-  if (page === '#/contact')      return <Contact />
-  if (page === '#/about')        return <About />
-  if (page === '#/destinations') return <Destinations />
+  if (page === '#/admin')   return <Dashboard />
+  if (page === '#/contact') return <Contact />
+  if (page === '#/about')   return <About />
+  if (page === '#/umrah')   return <UmrahPackages />
 
   return <App />
 }
