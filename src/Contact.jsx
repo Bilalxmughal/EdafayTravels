@@ -19,7 +19,6 @@ const faqs = [
   { q: "Do you arrange visa assistance?", a: "Yes! We provide complete visa assistance for all destinations we cover, including document preparation and submission guidance." },
 ];
 
-
 // ─── Component: ContactForm ───────────────────────────────────────────────────
 function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
@@ -113,7 +112,7 @@ export default function Contact() {
         textAlign: "center",
       }}>
         <div className="c-badge c-fu" style={{ marginBottom: 20 }}>📬 Get In Touch</div>
-        <h1 className="c-fu1" style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(38px,5vw,72px)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-1px", marginBottom: 20 }}>
+        <h1 className="c-fu1" style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(38px,5vw,72px)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-1px", marginBottom: 20, color: theme.text }}>
           We'd Love To <span className="c-gradient-text">Hear</span><br /><em>From You</em>
         </h1>
         <p className="c-fu2" style={{ color: theme.textMuted, fontSize: 17, lineHeight: 1.75, maxWidth: 520, margin: "0 auto 48px" }}>
@@ -167,7 +166,8 @@ export default function Contact() {
                 <div className="c-float" style={{ fontSize: 48, marginBottom: 12 }}>📍</div>
                 <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 4, color: theme.text }}>Lahore, Pakistan</div>
                 <div style={{ fontSize: 13, color: theme.textMuted }}>Colabs 50N, Gurumangat Road Gulberg II</div>
-                <a href="https://maps.app.goo.gl/t5ZCqBsSKtFX6XUs7" target="_blank" rel="noreferrer" style={{ marginTop: 16, background: theme.accent, color: "#0a0a0f", padding: "8px 20px", borderRadius: 50, fontSize: 12, fontWeight: 700, textDecoration: "none" }}>
+                <a href="https://maps.app.goo.gl/t5ZCqBsSKtFX6XUs7" target="_blank" rel="noreferrer"
+                  style={{ marginTop: 16, background: theme.accent, color: "#0a0a0f", padding: "8px 20px", borderRadius: 50, fontSize: 12, fontWeight: 700, textDecoration: "none" }}>
                   Find us on Google Maps →
                 </a>
               </div>
@@ -190,7 +190,8 @@ export default function Contact() {
               <div>
                 <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 4, color: theme.text }}>Contact us on WhatsApp</div>
                 <div style={{ fontSize: 13, color: theme.textMuted, marginBottom: 12, lineHeight: 1.5 }}>For an immediate response, please send a message on WhatsApp.</div>
-                <a href="https://wa.me/923454449433" target="_blank" rel="noreferrer" style={{ background: "#25d366", color: "#fff", padding: "9px 22px", borderRadius: 50, fontSize: 13, fontWeight: 700, textDecoration: "none", display: "inline-block" }}>WhatsApp</a>
+                <a href="https://wa.me/923454449433" target="_blank" rel="noreferrer"
+                  style={{ background: "#25d366", color: "#fff", padding: "9px 22px", borderRadius: 50, fontSize: 13, fontWeight: 700, textDecoration: "none", display: "inline-block" }}>WhatsApp</a>
               </div>
             </div>
           </div>
@@ -212,26 +213,9 @@ export default function Contact() {
           {faqs.map(f => <FaqItem key={f.q} q={f.q} a={f.a} />)}
         </div>
       </section>
-    </div>
-  );
-}
 
-// ─── Contact ─────────────────────────────────────────────────────────────────────
-export default function contact() {
-  return (
-    <>
-      <Navbar />
-      <Hero />
-      <div className="section-divider" />
-      <Destinations />
-      <div className="section-divider" />
-      <Features />
-      <div className="section-divider" />
-      <PopularTours />
-      <div className="section-divider" />
-      <Reviews />
-      <CTA />
+      {/* ── Footer ── */}
       <Footer />
-    </>
+    </div>
   );
 }

@@ -49,7 +49,7 @@ function Hero() {
     }} className="hero-grid">
 
       <div>
-        <div className="badge fade-up" style={{ marginBottom: 20 }}><span>🌍</span> Explore The Umrah Package</div>
+        <div className="badge fade-up" style={{ marginBottom: 20 }}><span></span> Explore The Umrah Package</div>
         <h1 className="serif fade-up-delay1" style={{ fontSize: "clamp(42px, 5vw, 68px)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-1px", marginBottom: 24, color: theme.text }}>
           Discover Your<br /><span className="gradient-text">Umrah</span>{" "}<em>Package</em>
         </h1>
@@ -134,7 +134,7 @@ function Destinations() {
   return (
     <section style={{ padding: "100px 5%", background: theme.bg }} id="destinations">
       <div style={{ textAlign: "center", marginBottom: 52 }}>
-        <div className="badge" style={{ marginBottom: 16 }}>🗺️ Top Picks</div>
+        <div className="badge" style={{ marginBottom: 16 }}>Top Picks</div>
         <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>Popular <span className="gradient-text">Destinations</span></h2>
         <p style={{ color: theme.textMuted, maxWidth: 500, margin: "0 auto", lineHeight: 1.7 }}>Curated selections of the world's most breathtaking places, ready for your next adventure</p>
       </div>
@@ -292,7 +292,7 @@ function CTA() {
   return (
     <section style={{ padding: "100px 5%", background: `linear-gradient(135deg, rgba(232,196,106,0.08) 0%, rgba(76,175,125,0.05) 100%), ${theme.bg}`, textAlign: "center" }}>
       <div style={{ maxWidth: 640, margin: "0 auto" }}>
-        <div className="badge" style={{ marginBottom: 24, display: "inline-flex" }}>🚀 Start Today</div>
+        <div className="badge" style={{ marginBottom: 24, display: "inline-flex" }}>Start Today</div>
         <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,58px)", fontWeight: 700, marginBottom: 20, lineHeight: 1.15, color: theme.text }}>Ready for Your<br />Next <span className="gradient-text">Adventure?</span></h2>
         <p style={{ color: theme.textMuted, lineHeight: 1.75, marginBottom: 40, fontSize: 16 }}>Join thousands of explorers who've discovered the world with Tourm. Subscribe and get exclusive deals, tips & early access.</p>
         <div style={{ display: "flex", gap: 12, maxWidth: 480, margin: "0 auto", background: "rgba(0,0,0,0.04)", border: `1px solid ${theme.border}`, borderRadius: 50, padding: "6px 6px 6px 24px" }}>

@@ -12,7 +12,13 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", h);
   }, []);
 
-  const currentPage = window.location.hash;
+  const links = [
+    { label: "Home",         hash: ""          },
+    { label: "Destinations", hash: ""          },
+    { label: "Tours",        hash: ""          },
+    { label: "About",        hash: ""          },
+    { label: "Contact",      hash: "#/contact" },
+  ];
 
   return (
     <nav style={{
@@ -27,15 +33,8 @@ export default function Navbar() {
     }}>
 
       {/* ── Logo ── */}
-      <div
-        onClick={() => window.location.hash = ''}
-        style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}
-      >
-        <div style={{
-          width: 36, height: 36, borderRadius: 10,
-          background: `linear-gradient(135deg, ${theme.accent}, #c8943a)`,
-          display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18,
-        }}>✈</div>
+      <div onClick={() => window.location.hash = ''} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}>
+        <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg, ${theme.accent}, #c8943a)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>✈</div>
         <span style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px", color: theme.text }}>
           Edafay<span style={{ color: theme.accent }}>.</span>
         </span>
@@ -43,43 +42,32 @@ export default function Navbar() {
 
       {/* ── Desktop Links ── */}
       <div style={{ display: "flex", gap: 36, alignItems: "center" }} className="hide-mobile">
-        {[
-          { label: "Home",         hash: ""          },
-          { label: "Destinations", hash: ""          },
-          { label: "Tours",        hash: ""          },
-          { label: "About",        hash: ""          },
-          { label: "Contact",      hash: "#/contact" },
-        ].map(({ label, hash }) => {
-          const isActive = hash ? currentPage === hash : currentPage === "";
-          return (
-            <a
-              key={label}
-              onClick={() => window.location.hash = hash}
-              style={{
-                color: isActive ? theme.accent : theme.navText,
-                textDecoration: "none", fontSize: 14, fontWeight: 500,
-                letterSpacing: "0.3px", cursor: "pointer",
-                transition: "color 0.2s",
-                borderBottom: isActive ? `2px solid ${theme.accent}` : "2px solid transparent",
-                paddingBottom: 2,
-              }}
-              onMouseEnter={e => e.currentTarget.style.color = theme.accent}
-              onMouseLeave={e => e.currentTarget.style.color = isActive ? theme.accent : theme.navText}
-            >{label}</a>
-          );
-        })}
+        {links.map(({ label, hash }) => (
+          <a
+            key={label}
+            onClick={() => window.location.hash = hash}
+            style={{
+              color: theme.navText,
+              textDecoration: "none", fontSize: 14, fontWeight: 500,
+              letterSpacing: "0.3px", cursor: "pointer",
+              transition: "color 0.2s",
+              paddingBottom: 2,
+            }}
+            onMouseEnter={e => e.currentTarget.style.color = theme.accent}
+            onMouseLeave={e => e.currentTarget.style.color = theme.navText}
+          >{label}</a>
+        ))}
       </div>
 
       {/* ── Desktop Actions ── */}
       <div style={{ display: "flex", gap: 10, alignItems: "center" }} className="hide-mobile">
-        <button
-          style={{
-            background: "transparent", color: theme.text,
-            border: `1.5px solid ${theme.border}`,
-            padding: "9px 22px", borderRadius: 50,
-            fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 500, cursor: "pointer",
-            transition: "all 0.2s",
-          }}
+        <button style={{
+          background: "transparent", color: theme.text,
+          border: `1.5px solid ${theme.border}`,
+          padding: "9px 22px", borderRadius: 50,
+          fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 500, cursor: "pointer",
+          transition: "all 0.2s",
+        }}
           onMouseEnter={e => { e.currentTarget.style.borderColor = theme.accent; e.currentTarget.style.color = theme.accent; }}
           onMouseLeave={e => { e.currentTarget.style.borderColor = theme.border; e.currentTarget.style.color = theme.text; }}
         >Sign In</button>
@@ -94,31 +82,24 @@ export default function Navbar() {
           onMouseLeave={e => e.currentTarget.style.background = theme.accent}
         >Book Now</button>
 
-        <button
-          onClick={() => window.location.hash = '#/admin'}
-          style={{
-            background: "rgba(232,196,106,0.1)",
-            border: "1px solid rgba(232,196,106,0.25)",
-            color: theme.accent,
-            padding: "9px 18px", borderRadius: 50,
-            fontSize: 12, fontWeight: 700, cursor: "pointer",
-            transition: "all 0.2s",
-            fontFamily: "'DM Sans',sans-serif",
-          }}
+        <button onClick={() => window.location.hash = '#/admin'} style={{
+          background: "rgba(232,196,106,0.1)",
+          border: "1px solid rgba(232,196,106,0.25)",
+          color: theme.accent,
+          padding: "9px 18px", borderRadius: 50,
+          fontSize: 12, fontWeight: 700, cursor: "pointer",
+          transition: "all 0.2s", fontFamily: "'DM Sans',sans-serif",
+        }}
           onMouseEnter={e => e.currentTarget.style.background = "rgba(232,196,106,0.2)"}
           onMouseLeave={e => e.currentTarget.style.background = "rgba(232,196,106,0.1)"}
         >⚙ Admin</button>
       </div>
 
       {/* ── Mobile Hamburger ── */}
-      <button
-        onClick={() => setMenuOpen(!menuOpen)}
-        style={{
-          background: "none", border: "none", color: theme.text,
-          fontSize: 24, cursor: "pointer", padding: "4px 8px",
-        }}
-        className="show-mobile"
-      >{menuOpen ? "✕" : "☰"}</button>
+      <button onClick={() => setMenuOpen(!menuOpen)} style={{
+        background: "none", border: "none", color: theme.text,
+        fontSize: 24, cursor: "pointer", padding: "4px 8px", display: "none",
+      }} className="show-mobile">{menuOpen ? "✕" : "☰"}</button>
 
       {/* ── Mobile Menu ── */}
       {menuOpen && (
@@ -128,15 +109,11 @@ export default function Navbar() {
           borderBottom: `1px solid ${theme.border}`,
           padding: "20px 5%", display: "flex", flexDirection: "column", gap: 16,
         }}>
-          {[
-            { label: "Home",         hash: ""          },
-            { label: "Destinations", hash: ""          },
-            { label: "Tours",        hash: ""          },
-            { label: "About",        hash: ""          },
-            { label: "Contact",      hash: "#/contact" },
-          ].map(({ label, hash }) => (
+          {links.map(({ label, hash }) => (
             <a key={label} onClick={() => { window.location.hash = hash; setMenuOpen(false); }}
               style={{ color: theme.navText, fontSize: 15, fontWeight: 500, cursor: "pointer", padding: "4px 0" }}
+              onMouseEnter={e => e.currentTarget.style.color = theme.accent}
+              onMouseLeave={e => e.currentTarget.style.color = theme.navText}
             >{label}</a>
           ))}
           <div style={{ display: "flex", gap: 10, marginTop: 8 }}>
