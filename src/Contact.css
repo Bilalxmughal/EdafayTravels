@@ -1,0 +1,176 @@
+/* ═══════════════════════════════════════════════════════════════
+   Contact.css  —  Contact Page (Contact.jsx) ke liye CSS
+   ═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap');
+
+/* ── Animations ──────────────────────────────────────────────── */
+@keyframes fadeUp  { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn  { from{opacity:0} to{opacity:1} }
+@keyframes float   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+/* ── Animation Classes ───────────────────────────────────────── */
+.c-fu  { animation: fadeUp 0.7s ease both; }
+.c-fu1 { animation: fadeUp 0.7s 0.1s ease both; }
+.c-fu2 { animation: fadeUp 0.7s 0.2s ease both; }
+.c-fu3 { animation: fadeUp 0.7s 0.3s ease both; }
+.c-fu4 { animation: fadeUp 0.7s 0.4s ease both; }
+.c-float { animation: float 3s ease-in-out infinite; }
+
+/* ── Navbar ──────────────────────────────────────────────────── */
+.c-nav-link {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+  cursor: pointer;
+  color: rgba(26,26,46,0.75);
+}
+.c-nav-link:hover { color: #e8c46a; }
+
+/* ── Form Inputs ─────────────────────────────────────────────── */
+.c-input {
+  background: rgba(255,255,255,0.8);
+  border: 1.5px solid rgba(0,0,0,0.1);
+  border-radius: 12px;
+  color: #1a1a2e;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  padding: 14px 18px;
+  width: 100%;
+  outline: none;
+  transition: all 0.25s;
+  resize: none;
+}
+.c-input:focus {
+  border-color: #e8c46a;
+  background: rgba(232,196,106,0.04);
+  box-shadow: 0 0 0 3px rgba(232,196,106,0.12);
+}
+.c-input::placeholder { color: rgba(26,26,46,0.3); }
+
+/* ── Submit Button ───────────────────────────────────────────── */
+.c-btn-primary {
+  background: #e8c46a;
+  color: #0a0a0f;
+  border: none;
+  padding: 15px 36px;
+  border-radius: 50px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  width: 100%;
+  letter-spacing: 0.3px;
+}
+.c-btn-primary:hover {
+  background: #f5d98b;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(232,196,106,0.35);
+}
+.c-btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* ── Info Cards ──────────────────────────────────────────────── */
+.c-info-card {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 18px;
+  padding: 24px;
+  transition: all 0.3s;
+  cursor: default;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.c-info-card:hover {
+  border-color: rgba(232,196,106,0.4);
+  background: rgba(232,196,106,0.03);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+
+/* ── Social Buttons ──────────────────────────────────────────── */
+.c-social-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.c-social-btn:hover {
+  border-color: #e8c46a;
+  background: rgba(232,196,106,0.1);
+  transform: translateY(-3px);
+}
+
+/* ── Badge ───────────────────────────────────────────────────── */
+.c-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(232,196,106,0.12);
+  border: 1px solid rgba(232,196,106,0.3);
+  color: #e8c46a;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 50px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── Gradient Text ───────────────────────────────────────────── */
+.c-gradient-text {
+  background: linear-gradient(135deg, #e8c46a, #f0c080, #e8c46a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Divider ─────────────────────────────────────────────────── */
+.c-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(0,0,0,0.08), transparent);
+}
+
+/* ── Success Box ─────────────────────────────────────────────── */
+.c-success-box {
+  background: rgba(76,175,125,0.08);
+  border: 1px solid rgba(76,175,125,0.25);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  animation: fadeUp 0.5s ease both;
+}
+
+/* ── Label ───────────────────────────────────────────────────── */
+.c-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(26,26,46,0.5);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* ── FAQ Item ────────────────────────────────────────────────── */
+.c-faq-item {
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media(max-width: 768px) {
+  .c-hide-mobile { display: none !important; }
+  .c-grid-2      { grid-template-columns: 1fr !important; }
+  .c-grid-3      { grid-template-columns: 1fr !important; }
+}

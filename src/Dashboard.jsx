@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import './Dashboard.css'
 
 /* ─── PERSISTENT STORAGE HELPERS ─────────────────────────────────────── */
 const STORAGE_KEY = "tourm-images-v1";
