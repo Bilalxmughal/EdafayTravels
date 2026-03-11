@@ -112,7 +112,7 @@ export default function Contact() {
         background: `radial-gradient(ellipse at 60% 0%, rgba(232,196,106,0.08) 0%, transparent 55%), radial-gradient(ellipse at 10% 80%, rgba(76,175,125,0.05) 0%, transparent 50%), ${theme.bg}`,
         textAlign: "center",
       }}>
-        <div className="c-badge c-fu" style={{ marginBottom: 20 }}>📬 Get In Touch</div>
+        <div className="c-badge c-fu" style={{ marginBottom: 20 }}>Get In Touch</div>
         <h1 className="c-fu1" style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(38px,5vw,72px)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-1px", marginBottom: 20, color: theme.text }}>
           We'd Love To <span className="c-gradient-text">Hear</span><br /><em>From You</em>
         </h1>
@@ -120,7 +120,7 @@ export default function Contact() {
           Contact us to plan your dream trip. Our experts will respond within 24 hours.
         </p>
         <div className="c-fu3" style={{ display: "flex", justifyContent: "center", gap: 48, flexWrap: "wrap" }}>
-          {[["⚡", "24hr", "Response Time"], ["🌍", "100+", "Destinations"], ["⭐", "4.9", "Rating"]].map(([icon, num, label]) => (
+          {[["24hr", "Response Time"], ["100+", "Destinations"], ["4.9", "Rating"]].map(([icon, num, label]) => (
             <div key={label} style={{ textAlign: "center" }}>
               <div style={{ fontSize: 22, marginBottom: 4 }}>{icon}</div>
               <div style={{ fontSize: 26, fontWeight: 800, color: theme.accent, fontFamily: "'Syne',sans-serif" }}>{num}</div>
@@ -179,7 +179,7 @@ export default function Contact() {
               <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 6, fontFamily: "'Syne',sans-serif", color: theme.text }}>Keep in touch</div>
               <p style={{ fontSize: 13, color: theme.textMuted, marginBottom: 20, lineHeight: 1.6 }}>Follow us on social media — for latest deals & destinations.</p>
               <div style={{ display: "flex", gap: 10 }}>
-                {[["𝕏","Twitter"],["f","Facebook"],["in","LinkedIn"],["📸","Instagram"],["▶","YouTube"]].map(([icon, label]) => (
+                {[["f","Facebook"],["in","LinkedIn"],["📸","Instagram"]].map(([icon, label]) => (
                   <div key={label} className="c-social-btn" title={label}>{icon}</div>
                 ))}
               </div>
@@ -204,7 +204,7 @@ export default function Contact() {
       {/* ── FAQ ── */}
       <section style={{ padding: "80px 5%", background: `radial-gradient(ellipse at 50% 50%, rgba(232,196,106,0.04) 0%, transparent 60%), ${theme.bg}` }}>
         <div style={{ textAlign: "center", marginBottom: 52 }}>
-          <div className="c-badge" style={{ marginBottom: 16 }}>❓ FAQ</div>
+          <div className="c-badge" style={{ marginBottom: 16 }}>FAQ</div>
           <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(28px,3.5vw,46px)", fontWeight: 700, marginBottom: 14, color: theme.text }}>
             Frequently Asked <span className="c-gradient-text">Questions</span>
           </h2>

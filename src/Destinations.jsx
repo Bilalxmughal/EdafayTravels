@@ -57,7 +57,7 @@ export default function Destinations() {
         <div className="dt-hero-inner">
           <div className="dt-badge dt-fu">All Destinations</div>
           <h1 className="dt-fu1 serif" style={{ color: theme.text }}>
-            Pick Your<span className="dt-gradient-text">Dream</span> Destination
+            Pick Your <span className="dt-gradient-text">Dream</span> Destination
           </h1>
           <p className="dt-fu2" style={{ color: theme.textMuted }}>
             From Dubai to the Maldives, from Istanbul to Bali — we offer the perfect destination for every budget and every travel dream.
@@ -118,7 +118,7 @@ export default function Destinations() {
 
         {/* Result Count */}
         <div style={{ marginBottom: 28, color: theme.textMuted, fontSize: 14 }}>
-          <span style={{ color: theme.accent, fontWeight: 700 }}>{filtered.length}</span> destinations mile
+          <span style={{ color: theme.accent, fontWeight: 700 }}>{filtered.length}</span> destinations found
         </div>
 
         {/* Grid */}
