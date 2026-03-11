@@ -8,24 +8,24 @@ import Footer from './Footer.jsx';
 // ─── Full Destinations Data ───────────────────────────────────────────────────
 const allDestinations = [
   // Middle East
-  { id: 1,  name: "Dubai",          country: "UAE",          category: "Luxury",    img: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80",  price: "Rs. 350,000", rating: 4.9, reviews: "2.4k", tag: "Hot Deal",   days: "7 days",  desc: "Burj Khalifa, desert safari aur world-class shopping." },
-  { id: 2,  name: "Riyadh",         country: "Saudia",       category: "Cultural",  img: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&q=80",  price: "Rs. 290,000", rating: 4.8, reviews: "1.8k", tag: "Popular",    days: "10 days", desc: "Saudia Arabia ki taareekhi raajdhani aur modern culture." },
-  { id: 3,  name: "Doha",           country: "Qatar",        category: "Luxury",    img: "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=600&q=80",  price: "Rs. 320,000", rating: 4.9, reviews: "1.5k", tag: "Adventure",  days: "9 days",  desc: "FIFA ka sheher — modern architecture aur Arabian hospitality." },
-  { id: 4,  name: "Mecca & Madina", country: "Saudia",       category: "Umrah",     img: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80",  price: "Rs. 195,000", rating: 5.0, reviews: "5.2k", tag: "Blessed",    days: "15 days", desc: "Umrah ka mukaddastar safar — roohaani sukoon ki manzil." },
+  { id: 1,  name: "Dubai",          country: "UAE",          category: "Luxury",    img: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80",  price: "Rs. 350,000", rating: 4.9, reviews: "2.4k", tag: "Hot Deal",   days: "7 days",  desc: "Experience the Burj Khalifa, thrilling desert safaris, and world-class shopping." },
+  { id: 2,  name: "Riyadh",         country: "Saudia",       category: "Cultural",  img: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&q=80",  price: "Rs. 290,000", rating: 4.8, reviews: "1.8k", tag: "Popular",    days: "10 days", desc: "Explore Saudi Arabia’s historic capital and its vibrant modern culture." },
+  { id: 3,  name: "Doha",           country: "Qatar",        category: "Luxury",    img: "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=600&q=80",  price: "Rs. 320,000", rating: 4.9, reviews: "1.5k", tag: "Adventure",  days: "9 days",  desc: "FIFA’s host city — marvel at modern architecture and experience true Arabian hospitality." },
+  { id: 4,  name: "Mecca & Madina", country: "Saudia",       category: "Umrah",     img: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80",  price: "Rs. 195,000", rating: 5.0, reviews: "5.2k", tag: "Blessed",    days: "15 days", desc: "Embark on the blessed journey of Umrah — a haven of spiritual serenity." },
   // Europe / Turkey
-  { id: 5,  name: "Istanbul",       country: "Turkey",       category: "Cultural",  img: "https://images.unsplash.com/photo-1533606688076-b6683a5f59f1?w=600&q=80",  price: "Rs. 420,000", rating: 5.0, reviews: "980",  tag: "Luxury",     days: "6 days",  desc: "Hagia Sophia, Bosphorus aur Turkish cuisine ka jaadu." },
-  { id: 6,  name: "Antalya",        country: "Turkey",       category: "Beach",     img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",  price: "Rs. 380,000", rating: 4.8, reviews: "1.1k", tag: "Beach",      days: "8 days",  desc: "Turkey ka jannat — crystal clear pani aur sunehri beaches." },
+  { id: 5,  name: "Istanbul",       country: "Turkey",       category: "Cultural",  img: "https://images.unsplash.com/photo-1533606688076-b6683a5f59f1?w=600&q=80",  price: "Rs. 420,000", rating: 5.0, reviews: "980",  tag: "Luxury",     days: "6 days",  desc: "Discover the wonders of Hagia Sophia, the beauty of the Bosphorus, and the flavors of Turkish cuisine." },
+  { id: 6,  name: "Antalya",        country: "Turkey",       category: "Beach",     img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",  price: "Rs. 380,000", rating: 4.8, reviews: "1.1k", tag: "Beach",      days: "8 days",  desc: "Experience Turkey’s paradise — with crystal-clear waters and sun-kissed golden beaches." },
   // Central Asia
-  { id: 7,  name: "Baku",           country: "Azerbaijan",   category: "Adventure", img: "https://images.unsplash.com/photo-1519677584237-752f8853252e?w=600&q=80",  price: "Rs. 260,000", rating: 4.7, reviews: "3.1k", tag: "Best Value", days: "8 days",  desc: "Fire Land — ancient aur modern ka dilchasp sangam." },
-  { id: 8,  name: "Almaty",         country: "Kazakhstan",   category: "Adventure", img: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&q=80",  price: "Rs. 310,000", rating: 4.6, reviews: "640",  tag: "Hidden Gem", days: "9 days",  desc: "Qudrati haseen shamali qudrat ka nadeem sheher." },
+  { id: 7,  name: "Baku",           country: "Azerbaijan",   category: "Adventure", img: "https://images.unsplash.com/photo-1519677584237-752f8853252e?w=600&q=80",  price: "Rs. 260,000", rating: 4.7, reviews: "3.1k", tag: "Best Value", days: "8 days",  desc: "Fire Land — where ancient history meets modern wonders." },
+  { id: 8,  name: "Almaty",         country: "Kazakhstan",   category: "Adventure", img: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&q=80",  price: "Rs. 310,000", rating: 4.6, reviews: "640",  tag: "Hidden Gem", days: "9 days",  desc: "A city embraced by nature — lush, green, and breathtakingly beautiful." },
   // Southeast Asia
-  { id: 9,  name: "Maldives",       country: "Maldives",     category: "Beach",     img: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80",  price: "Rs. 650,000", rating: 5.0, reviews: "750",  tag: "Luxury",     days: "5 days",  desc: "Duniya ki sabse khoobsurat overwater bungalows." },
-  { id: 10, name: "Kuala Lumpur",   country: "Malaysia",     category: "Cultural",  img: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=600&q=80",  price: "Rs. 280,000", rating: 4.7, reviews: "1.9k", tag: "Popular",    days: "7 days",  desc: "Petronas Towers, halal food aur vibrant nightlife." },
-  { id: 11, name: "Bali",           country: "Indonesia",    category: "Beach",     img: "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=600&q=80",  price: "Rs. 340,000", rating: 4.8, reviews: "2.2k", tag: "Romantic",   days: "10 days", desc: "Temples, rice terraces aur surf culture ka anoottha mix." },
-  { id: 12, name: "Bangkok",        country: "Thailand",     category: "Cultural",  img: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=600&q=80",  price: "Rs. 240,000", rating: 4.6, reviews: "2.8k", tag: "Budget",     days: "8 days",  desc: "Street food, temples aur tuk-tuk ka yaadgar tajruba." },
+  { id: 9,  name: "Maldives",       country: "Maldives",     category: "Beach",     img: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80",  price: "Rs. 650,000", rating: 5.0, reviews: "750",  tag: "Luxury",     days: "5 days",  desc: "Experience the world’s most stunning overwater bungalows." },
+  { id: 10, name: "Kuala Lumpur",   country: "Malaysia",     category: "Cultural",  img: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=600&q=80",  price: "Rs. 280,000", rating: 4.7, reviews: "1.9k", tag: "Popular",    days: "7 days",  desc: "Marvel at the Petronas Towers, savor delicious halal cuisine, and enjoy a vibrant nightlife." },
+  { id: 11, name: "Bali",           country: "Indonesia",    category: "Beach",     img: "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=600&q=80",  price: "Rs. 340,000", rating: 4.8, reviews: "2.2k", tag: "Romantic",   days: "10 days", desc: "Discover a one-of-a-kind blend of temples, scenic rice terraces, and vibrant surf culture." },
+  { id: 12, name: "Bangkok",        country: "Thailand",     category: "Cultural",  img: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=600&q=80",  price: "Rs. 240,000", rating: 4.6, reviews: "2.8k", tag: "Budget",     days: "8 days",  desc: "Experience the charm of street food, explore historic temples, and ride the iconic tuk-tuks for an unforgettable adventure." },
 ];
 
-const categories = ["All", "Luxury", "Beach", "Cultural", "Adventure", "Umrah"];
+const categories = ["All", "Umrah", "Luxury", "Beach", "Cultural", "Adventure"];
 
 // ─── Destinations Page ────────────────────────────────────────────────────────
 export default function Destinations() {
@@ -55,12 +55,12 @@ export default function Destinations() {
       <section className="dt-hero">
         <div className="dt-hero-bg" />
         <div className="dt-hero-inner">
-          <div className="dt-badge dt-fu">🌍 Tamam Destinations</div>
+          <div className="dt-badge dt-fu">All Destinations</div>
           <h1 className="dt-fu1 serif" style={{ color: theme.text }}>
-            Apni <span className="dt-gradient-text">Manzil</span> Chunein
+            Pick Your<span className="dt-gradient-text">Dream</span> Destination
           </h1>
           <p className="dt-fu2" style={{ color: theme.textMuted }}>
-            Dubai se Maldives tak, Istanbul se Bali tak — har budget aur har khwahish ke liye perfect destination hamare paas maujood hai.
+            From Dubai to the Maldives, from Istanbul to Bali — we offer the perfect destination for every budget and every travel dream.
           </p>
 
           {/* Search Bar */}
@@ -68,7 +68,7 @@ export default function Destinations() {
             <span className="dt-search-icon">🔍</span>
             <input
               className="dt-search-input"
-              placeholder="Destination ya mulk dhundho..."
+              placeholder="Search Destination or Country..."
               value={search}
               onChange={e => setSearch(e.target.value)}
               style={{ color: theme.text }}
@@ -125,7 +125,7 @@ export default function Destinations() {
         {filtered.length === 0 ? (
           <div style={{ textAlign: "center", padding: "80px 0", color: theme.textMuted }}>
             <div style={{ fontSize: 52, marginBottom: 16 }}>🔍</div>
-            <p style={{ fontSize: 16 }}>Koi destination nahi mila — search change karein.</p>
+            <p style={{ fontSize: 16 }}>No destination found. Please try another search.</p>
           </div>
         ) : (
           <div className="dt-grid">
@@ -206,7 +206,7 @@ export default function Destinations() {
                     padding: "14px 28px", borderRadius: 50,
                     fontFamily: "'DM Sans',sans-serif", fontSize: 15, fontWeight: 700, cursor: "pointer",
                   }}
-                >✈️ Book This Package</button>
+                >Book This Package</button>
                 <button
                   onClick={() => setSelected(null)}
                   style={{
@@ -216,7 +216,7 @@ export default function Destinations() {
                     padding: "13px 28px", borderRadius: 50,
                     fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 500, cursor: "pointer",
                   }}
-                >← Wapas Jao</button>
+                >← Back</button>
               </div>
             </div>
           </div>

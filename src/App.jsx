@@ -190,7 +190,7 @@ function Features() {
     <section style={{ padding: "100px 5%", background: `radial-gradient(ellipse at 30% 50%, rgba(232,196,106,0.05) 0%, transparent 60%), ${theme.bgCard}` }}>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }} className="hero-grid">
         <div>
-          <div className="badge" style={{ marginBottom: 20 }}>✨ Why Tourm</div>
+          <div className="badge" style={{ marginBottom: 20 }}>Why Edafat</div>
           <h2 className="serif" style={{ fontSize: "clamp(30px,3.5vw,48px)", fontWeight: 700, marginBottom: 20, lineHeight: 1.2, color: theme.text }}>
             Travel Smarter,<br /><span className="gradient-text">Live Better</span>
           </h2>
@@ -227,7 +227,7 @@ function PopularTours() {
     <section style={{ padding: "100px 5%", background: theme.bg }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48 }}>
         <div>
-          <div className="badge" style={{ marginBottom: 16 }}>🧳 Tours</div>
+          <div className="badge" style={{ marginBottom: 16 }}>Tours</div>
           <h2 className="serif" style={{ fontSize: "clamp(28px,3.5vw,46px)", fontWeight: 700, color: theme.text }}>Most <span className="gradient-text">Popular</span> Tours</h2>
         </div>
         <button className="btn-outline" style={{ flexShrink: 0, color: theme.text }}>See All Tours</button>
@@ -265,7 +265,7 @@ function Reviews() {
   return (
     <section style={{ padding: "100px 5%", background: theme.bgCard }}>
       <div style={{ textAlign: "center", marginBottom: 52 }}>
-        <div className="badge" style={{ marginBottom: 16 }}>💬 Testimonials</div>
+        <div className="badge" style={{ marginBottom: 16 }}>Testimonials</div>
         <h2 className="serif" style={{ fontSize: "clamp(30px,3.5vw,48px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>What Our <span className="gradient-text">Travelers</span> Say</h2>
         <p style={{ color: theme.textMuted, maxWidth: 460, margin: "0 auto", lineHeight: 1.7 }}>Real stories from real adventures. Join 50,000+ happy travelers who've explored the world with Tourm.</p>
       </div>
