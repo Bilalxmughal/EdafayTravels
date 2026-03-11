@@ -1,6 +1,8 @@
 import { useState } from "react";
 import theme from './theme.js'
 import './Contact.css'
+import Navbar from './Navbar.jsx'
+import Footer from './Footer.jsx'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const contactInfo = [
@@ -17,37 +19,6 @@ const faqs = [
   { q: "Do you arrange visa assistance?", a: "Yes! We provide complete visa assistance for all destinations we cover, including document preparation and submission guidance." },
 ];
 
-// ─── Component: Navbar ────────────────────────────────────────────────────────
-function Navbar() {
-  return (
-    <nav style={{
-      position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-      padding: "0 5%",
-      background: theme.navBg,
-      backdropFilter: "blur(20px)",
-      borderBottom: `1px solid ${theme.border}`,
-      display: "flex", alignItems: "center", justifyContent: "space-between",
-      height: "72px",
-    }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg,${theme.accent},#c8943a)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>✈</div>
-        <span style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px", color: theme.text }}>
-          Edafay<span style={{ color: theme.accent }}>.</span>
-        </span>
-      </div>
-      <div className="c-hide-mobile" style={{ display: "flex", gap: 36 }}>
-        {[["Home", ""], ["Destinations", ""], ["Tours", ""], ["About", ""], ["Contact", "#/contact"]].map(([l, h]) => (
-          <a key={l} href={"#" + h} className="c-nav-link" style={{ color: l === "Contact" ? theme.accent : theme.navText }}>{l}</a>
-        ))}
-      </div>
-      <div className="c-hide-mobile" style={{ display: "flex", gap: 10 }}>
-        <button onClick={() => window.location.hash = '#/admin'} style={{ background: "rgba(232,196,106,0.1)", border: "1px solid rgba(232,196,106,0.25)", color: theme.accent, padding: "8px 16px", borderRadius: 50, fontSize: 12, fontWeight: 700, cursor: "pointer" }}>⚙ Admin</button>
-        <button style={{ background: "transparent", color: theme.text, border: `1.5px solid ${theme.border}`, padding: "9px 22px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 500, cursor: "pointer" }}>Sign In</button>
-        <button style={{ background: theme.accent, color: "#0a0a0f", border: "none", padding: "10px 22px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>Book Now</button>
-      </div>
-    </nav>
-  );
-}
 
 // ─── Component: ContactForm ───────────────────────────────────────────────────
 function ContactForm() {
@@ -241,19 +212,6 @@ export default function Contact() {
           {faqs.map(f => <FaqItem key={f.q} q={f.q} a={f.a} />)}
         </div>
       </section>
-
-      {/* ── Footer ── */}
-      <footer style={{ padding: "40px 5%", background: theme.bgFooter, borderTop: `1px solid ${theme.border}` }}>
-        <div className="c-divider" style={{ marginBottom: 28 }} />
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 30, height: 30, borderRadius: 8, background: `linear-gradient(135deg,${theme.accent},#c8943a)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14 }}>✈</div>
-            <span style={{ fontFamily: "'Playfair Display',serif", fontSize: 18, fontWeight: 700, color: theme.text }}>Edafay<span style={{ color: theme.accent }}>.</span></span>
-          </div>
-          <span style={{ color: theme.textMuted, fontSize: 13 }}>© 2026 Edafay Travels. All rights reserved.</span>
-          <a href="#" onClick={() => window.location.hash = ''} style={{ color: theme.accent, fontSize: 13, textDecoration: "none", fontWeight: 600 }}>← Home</a>
-        </div>
-      </footer>
     </div>
   );
 }

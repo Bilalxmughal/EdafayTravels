@@ -15,7 +15,7 @@ export const theme = {
   textMuted: "#6b6880",     // Muted / secondary text
 
   // ── Accent (Golden) ──────────────────────────────────────────
-  accent:      "#e8c46a",   // Primary accent (golden)
+  accent:      "#ffd727",   // Primary accent (golden)
   accentLight: "#f5d98b",   // Lighter accent on hover
 
   // ── Others ───────────────────────────────────────────────────

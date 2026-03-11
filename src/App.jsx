@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import theme from './theme.js'
 import './App.css'
+import Navbar from './Navbar.jsx'
+import Footer from './Footer.jsx'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const destinations = [
@@ -32,51 +34,6 @@ const popularTours = [
   { name: "South East Asia", duration: "18 Days", img: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=500&q=80", price: "$1,799", rating: 4.8 },
   { name: "African Safari", duration: "10 Days", img: "https://images.unsplash.com/photo-1521747116042-5a810fda9664?w=500&q=80", price: "$3,299", rating: 5.0 },
 ];
-
-// ─── Component: Navbar ────────────────────────────────────────────────────────
-function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const h = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", h);
-    return () => window.removeEventListener("scroll", h);
-  }, []);
-
-  return (
-    <nav style={{
-      position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-      padding: "0 5%",
-      background: scrolled ? theme.navBg : theme.navBgTransp,
-      backdropFilter: scrolled ? "blur(20px)" : "none",
-      borderBottom: scrolled ? `1px solid ${theme.border}` : "none",
-      transition: "all 0.3s",
-      display: "flex", alignItems: "center", justifyContent: "space-between",
-      height: "72px",
-    }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-        <div style={{ width: 36, height: 36, borderRadius: "10px", background: `linear-gradient(135deg, ${theme.accent}, #c8943a)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>✈</div>
-        <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px", color: theme.text }}>
-          Tour<span style={{ color: theme.accent }}>m</span>
-        </span>
-      </div>
-
-      <div className="hide-mobile" style={{ display: "flex", gap: 36, alignItems: "center" }}>
-        {["Home", "Destinations", "Tours", "About", "Contact"].map(l => (
-          <a key={l} className="nav-link"
-            onClick={() => l === "Contact" && (window.location.hash = "#/contact")}
-            style={{ color: l === "Contact" ? theme.accent : theme.navText }}
-          >{l}</a>
-        ))}
-      </div>
-
-      <div className="hide-mobile" style={{ display: "flex", gap: 12, alignItems: "center" }}>
-        <button className="btn-outline" style={{ padding: "9px 22px", fontSize: 13, color: theme.text }}>Sign In</button>
-        <button className="btn-primary" style={{ padding: "10px 22px", fontSize: 13 }}>Book Now</button>
-        <button onClick={() => window.location.hash = '#/admin'} style={{ background: "rgba(232,196,106,0.1)", border: "1px solid rgba(232,196,106,0.25)", color: theme.accent, padding: "8px 16px", borderRadius: 50, fontSize: 12, fontWeight: 700, cursor: "pointer" }}>⚙ Admin</button>
-      </div>
-    </nav>
-  );
-}
 
 // ─── Component: Hero ─────────────────────────────────────────────────────────
 function Hero() {
@@ -348,52 +305,6 @@ function CTA() {
   );
 }
 
-// ─── Component: Footer ───────────────────────────────────────────────────────
-function Footer() {
-  const cols = [
-    { title: "Company", links: ["About Us", "Our Team", "Careers", "Press", "Blog"] },
-    { title: "Services", links: ["Tour Packages", "Hotel Booking", "Flight Tickets", "Travel Insurance", "Visa Assistance"] },
-    { title: "Support", links: ["Help Center", "Contact Us", "Privacy Policy", "Terms of Service", "Refund Policy"] },
-  ];
-  return (
-    <footer style={{ padding: "80px 5% 40px", background: theme.bgFooter, borderTop: `1px solid ${theme.border}` }}>
-      <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 60 }}>
-        <div>
-          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
-            <div style={{ width: 36, height: 36, borderRadius: "10px", background: `linear-gradient(135deg, ${theme.accent}, #c8943a)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>✈</div>
-            <span className="serif" style={{ fontSize: 22, fontWeight: 700, color: theme.text }}>Tour<span style={{ color: theme.accent }}>m</span></span>
-          </div>
-          <p style={{ color: theme.textMuted, lineHeight: 1.75, fontSize: 14, maxWidth: 280, marginBottom: 24 }}>Your trusted travel partner since 2010. Making dreams come true, one journey at a time.</p>
-          <div style={{ display: "flex", gap: 10 }}>
-            {["𝕏", "f", "in", "📸"].map(s => (
-              <div key={s} style={{ width: 38, height: 38, borderRadius: 10, background: "rgba(0,0,0,0.05)", border: `1px solid ${theme.border}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, cursor: "pointer", transition: "all 0.2s" }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = theme.accent; e.currentTarget.style.color = theme.accent; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = theme.border; e.currentTarget.style.color = theme.text; }}
-              >{s}</div>
-            ))}
-          </div>
-        </div>
-        {cols.map(col => (
-          <div key={col.title}>
-            <div style={{ fontWeight: 600, marginBottom: 20, letterSpacing: "0.5px", color: theme.text }}>{col.title}</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              {col.links.map(l => <a key={l} className="nav-link" style={{ fontSize: 13, color: theme.textMuted }}>{l}</a>)}
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="section-divider" style={{ marginBottom: 28 }} />
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-        <span style={{ color: theme.textMuted, fontSize: 13 }}>© 2026 Edafay. All rights reserved. Made with ❤️ for explorers.</span>
-        <div style={{ display: "flex", gap: 6 }}>
-          {["🇺🇸 EN", "$ USD"].map(label => (
-            <div key={label} style={{ background: "rgba(0,0,0,0.04)", border: `1px solid ${theme.border}`, borderRadius: 8, padding: "5px 12px", fontSize: 12, color: theme.textMuted, cursor: "pointer" }}>{label}</div>
-          ))}
-        </div>
-      </div>
-    </footer>
-  );
-}
 
 // ─── App ─────────────────────────────────────────────────────────────────────
 export default function App() {
