@@ -76,7 +76,7 @@ export default function About() {
 
       {/* ── About Info ── */}
       <section className="ab-section">
-        <div className="ab-about-wrap">
+
 
           {/* Left — Story Text */}
           <div className="ab-about-text">
@@ -98,7 +98,7 @@ export default function About() {
           </div>
 
 
-        </div>
+
       </section>
 
       <div className="ab-divider" />
