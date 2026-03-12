@@ -677,12 +677,10 @@ export default function Visas() {
         <section className="vs-hero">
           <div className="vs-hero-bg" />
           <div className="vs-hero-inner">
-            <div className="vs-badge vs-fu">🌍 Visa Services</div>
             <h1 className="vs-fu1" style={{ color: theme.text }}>
-              Apna <span className="vs-gold">Visa</span> Asaani Se<br />Hasil Karein
-            </h1>
+              Get your <span className="vs-gold">Visa</span> Hassle-free<br/></h1>
             <p className="vs-fu2" style={{ color: theme.textMuted }}>
-              Pakistan se 8+ countries ke tourist visas — fast processing, high approval rate. Documents se apply tak — sab kuch Edafay handle karta hai.
+              Apply for tourist visas to 8+ countries from Pakistan with fast processing and a high approval rate. From documentation to application, Edafay takes care of it all.
             </p>
 
             {/* Search Bar */}
@@ -690,7 +688,7 @@ export default function Visas() {
               <span className="vs-search-icon">🔍</span>
               <input
                 className="vs-search-input"
-                placeholder="Country dhundein — Malaysia, Dubai, Turkey..."
+                placeholder="Search country — Malaysia, Dubai, Turkey..."
                 value={search}
                 onChange={e => setSearch(e.target.value)}
               />
