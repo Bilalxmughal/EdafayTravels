@@ -698,16 +698,7 @@ export default function Visas() {
               )}
             </div>
 
-            {/* Stats */}
-            <div className="vs-hero-stats vs-fu3" style={{ marginTop: 40 }}>
-              {[["🌍", "8+", "Countries"], ["⚡", "1-7", "Days Process"], ["✅", "97%+", "Approval"], ["📁", "Easy", "Docs"]].map(([icon, val, lbl]) => (
-                <div key={lbl} className="vs-stat">
-                  <div style={{ fontSize: 22, marginBottom: 4 }}>{icon}</div>
-                  <div style={{ fontSize: 20, fontWeight: 800, color: theme.accent, fontFamily: "'Playfair Display',serif" }}>{val}</div>
-                  <div style={{ fontSize: 11, color: theme.textMuted }}>{lbl}</div>
-                </div>
-              ))}
-            </div>
+
           </div>
         </section>
 
