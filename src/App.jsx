@@ -29,10 +29,13 @@ const reviews = [
   { name: "Bilal Mughal", loc: "Islamabad, Pakistan", rating: 5, text: "Premium package liya — 5 star hotel, private transport aur dedicated guide. Zindagi ka best safar tha. 10/10 recommend karunga!", img: "https://i.pravatar.cc/60?img=33", tour: "Premium Umrah Package" },
 ];
 
-const popularTours = [
-  { name: "Azerbaijan", duration: "14 Days", img: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=500&q=80", price: "Rs. 500,000", rating: 4.9 },
-  { name: "Turkey", duration: "18 Days", img: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=500&q=80", price: "Rs. 600,000", rating: 4.8 },
-  { name: "Maldives", duration: "10 Days", img: "https://images.unsplash.com/photo-1521747116042-5a810fda9664?w=500&q=80", price: "Rs. 400,000", rating: 5.0 },
+const visasList = [
+  { id: 1, country: "Malaysia",     flag: "🇲🇾", img: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=600&q=80", type: "Tourist",          processing: "3-5 Days",  fee: "PKR 8,500",  approvalRate: "99%" },
+  { id: 2, country: "UAE (Dubai)",  flag: "🇦🇪", img: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80", type: "Tourist",          processing: "2-4 Days",  fee: "PKR 22,000", approvalRate: "98%" },
+  { id: 3, country: "Turkey",       flag: "🇹🇷", img: "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?w=600&q=80", type: "e-Visa",           processing: "1-3 Days",  fee: "PKR 12,000", approvalRate: "97%" },
+  { id: 4, country: "Maldives",     flag: "🇲🇻", img: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80", type: "Visa On Arrival",  processing: "On Arrival",fee: "FREE",       approvalRate: "100%" },
+  { id: 5, country: "Azerbaijan",   flag: "🇦🇿", img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80", type: "e-Visa",           processing: "3 Days",    fee: "PKR 9,500",  approvalRate: "98%" },
+  { id: 6, country: "Saudi Arabia", flag: "🇸🇦", img: "https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=600&q=80", type: "Tourist / Umrah",  processing: "7-10 Days", fee: "PKR 28,000", approvalRate: "96%" },
 ];
 
 // ─── Component: Hero ─────────────────────────────────────────────────────────
@@ -131,11 +134,14 @@ function UmrahSection() {
   return (
     <section style={{ padding: "100px 5%", background: theme.bg }} id="umrah">
       <div style={{ textAlign: "center", marginBottom: 52 }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(232,196,106,0.12)", border: "1px solid rgba(232,196,106,0.3)", color: "#e8c46a", fontSize: 12, fontWeight: 600, padding: "6px 16px", borderRadius: 50, letterSpacing: "1px", textTransform: "uppercase", marginBottom: 20 }}>
+          🕌 Mubarak Safar
+        </div>
         <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>
-          Hamara <span className="gradient-text">Packages</span>
+          Hamara <span className="gradient-text">Umrah Package</span>
         </h2>
         <p style={{ color: theme.textMuted, maxWidth: 520, margin: "0 auto", lineHeight: 1.7 }}>
-          From economy to luxury, we offer the perfect Umrah package for every budget. Visa, flights, hotels, and transportation — all included for a smooth and comfortable journey.
+          Economy se Luxury tak — har budget ke liye perfect Umrah package. Visa, flights, hotels aur transport — sab kuch included.
         </p>
       </div>
 
@@ -198,7 +204,7 @@ function UmrahSection() {
       {/* View All Button */}
       <div style={{ textAlign: "center", marginTop: 48 }}>
         <button className="btn-outline" style={{ color: theme.text }} onClick={() => window.location.hash = '#/umrah'}>
-          All Packages →
+          Tamam Packages Dekhein →
         </button>
       </div>
     </section>
@@ -241,39 +247,86 @@ function Features() {
   );
 }
 
-// ─── Component: Popular Tours ─────────────────────────────────────────────────
-function PopularTours() {
+// ─── Component: Visas Section ────────────────────────────────────────────────
+function VisaSection() {
   return (
     <section style={{ padding: "100px 5%", background: theme.bg }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48 }}>
-        <div>
-          <h2 className="serif" style={{ fontSize: "clamp(28px,3.5vw,46px)", fontWeight: 700, color: theme.text }}>Most <span className="gradient-text">Popular</span> Tours</h2>
+      <div style={{ textAlign: "center", marginBottom: 52 }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(232,196,106,0.12)", border: "1px solid rgba(232,196,106,0.3)", color: "#e8c46a", fontSize: 12, fontWeight: 600, padding: "6px 16px", borderRadius: 50, letterSpacing: "1px", textTransform: "uppercase", marginBottom: 20 }}>
+          🌍 Visa Services
         </div>
-        <button className="btn-outline" style={{ flexShrink: 0, color: theme.text }}>See All Tours</button>
+        <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>
+          Apna <span className="gradient-text">Visa</span> Asaani Se Hasil Karein
+        </h2>
+        <p style={{ color: theme.textMuted, maxWidth: 520, margin: "0 auto", lineHeight: 1.7 }}>
+          8+ countries ke tourist visas — fast processing, high approval rate. Documents se apply tak sab kuch Edafay handle karta hai.
+        </p>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }} className="three-col">
-        {popularTours.map((tour, i) => (
-          <div key={tour.name} className="card-hover" style={{ background: theme.bgCard, border: `1px solid ${theme.border}`, borderRadius: 20, overflow: "hidden", animation: `fadeUp 0.6s ${i * 0.15}s both` }}>
-            <div style={{ position: "relative", height: 260 }}>
-              <img src={tour.img} alt={tour.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(10,10,15,0.8) 0%, transparent 50%)" }} />
-              <div style={{ position: "absolute", bottom: 20, left: 20, right: 20 }}>
-                <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 6, color: "#fff" }}>{tour.name}</h3>
-                <div style={{ display: "flex", gap: 12 }}>
-                  <span style={{ fontSize: 12, color: "rgba(255,255,255,0.7)" }}>⏱ {tour.duration}</span>
-                  <span style={{ fontSize: 12, color: theme.accent }}>★ {tour.rating}</span>
-                </div>
+
+      {/* Visa Cards */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }} className="dest-grid">
+        {visasList.map((visa, i) => (
+          <div key={visa.id} className="dest-card card-hover"
+            style={{ borderRadius: 20, overflow: "hidden", background: theme.bgCard, border: `1px solid ${theme.border}`, cursor: "pointer", animation: `fadeUp 0.6s ${i * 0.1}s both` }}
+            onClick={() => window.location.hash = '#/visas'}>
+
+            {/* Image */}
+            <div style={{ position: "relative", height: 180, overflow: "hidden" }}>
+              <img src={visa.img} alt={visa.country} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }} />
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%)" }} />
+
+              {/* Flag */}
+              <span style={{ position: "absolute", top: 12, right: 14, fontSize: 30, filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.3))" }}>{visa.flag}</span>
+
+              {/* Visa type badge */}
+              <span style={{
+                position: "absolute", top: 14, left: 14,
+                background: visa.type === "Visa On Arrival" ? "rgba(34,197,94,0.75)" : visa.type.includes("e-Visa") ? "rgba(59,130,246,0.75)" : "rgba(0,0,0,0.55)",
+                backdropFilter: "blur(6px)", color: "#fff",
+                fontSize: 10, fontWeight: 700, padding: "3px 10px", borderRadius: 20,
+                textTransform: "uppercase", letterSpacing: "0.5px",
+              }}>{visa.type}</span>
+
+              {/* Country name */}
+              <div style={{ position: "absolute", bottom: 12, left: 14 }}>
+                <h3 style={{ fontSize: 18, fontWeight: 700, color: "#fff", margin: 0, fontFamily: "'Playfair Display',serif" }}>{visa.country}</h3>
               </div>
             </div>
-            <div style={{ padding: "20px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <div>
-                <div style={{ fontSize: 12, color: theme.textMuted, marginBottom: 4 }}>Starting from</div>
-                <div style={{ fontSize: 22, fontWeight: 700, color: theme.accent }}>{tour.price}</div>
+
+            {/* Body */}
+            <div style={{ padding: "14px 16px 16px" }}>
+              {/* Processing + Approval */}
+              <div style={{ display: "flex", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
+                <span style={{ fontSize: 11, fontWeight: 600, padding: "4px 10px", borderRadius: 20, background: "rgba(232,196,106,0.1)", color: theme.accent, border: "1px solid rgba(232,196,106,0.25)" }}>
+                  ⏱ {visa.processing}
+                </span>
+                <span style={{ fontSize: 11, fontWeight: 600, padding: "4px 10px", borderRadius: 20, background: "rgba(34,197,94,0.08)", color: "#16a34a", border: "1px solid rgba(34,197,94,0.2)" }}>
+                  ✅ {visa.approvalRate}
+                </span>
               </div>
-              <button className="btn-primary" style={{ padding: "10px 20px", fontSize: 13 }}>Book Now</button>
+
+              {/* Fee + Apply */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: 10, borderTop: `1px solid ${theme.border}` }}>
+                <div>
+                  <div style={{ fontSize: 10, color: theme.textMuted, marginBottom: 2 }}>Starting from</div>
+                  <div style={{ fontSize: 17, fontWeight: 800, color: theme.accent, fontFamily: "'Playfair Display',serif" }}>
+                    {visa.fee === "FREE" ? <span style={{ color: "#16a34a" }}>FREE ✓</span> : visa.fee}
+                  </div>
+                </div>
+                <span style={{ fontSize: 11, color: theme.textMuted, background: theme.bg, border: `1px solid ${theme.border}`, padding: "4px 12px", borderRadius: 20, fontWeight: 600 }}>
+                  Apply →
+                </span>
+              </div>
             </div>
           </div>
         ))}
+      </div>
+
+      {/* View All */}
+      <div style={{ textAlign: "center", marginTop: 48 }}>
+        <button className="btn-outline" style={{ color: theme.text }} onClick={() => window.location.hash = '#/visas'}>
+          Tamam Visas Dekhein →
+        </button>
       </div>
     </section>
   );
@@ -339,7 +392,7 @@ export default function App() {
       <div className="section-divider" />
       <Features />
       <div className="section-divider" />
-      <PopularTours />
+      <VisaSection />
       <div className="section-divider" />
       <Reviews />
       <CTA />
