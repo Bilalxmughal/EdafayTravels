@@ -1,17 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import theme from './theme.js'
 import './App.css'
 import Navbar from './Navbar.jsx'
 import Footer from './Footer.jsx'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
-const destinations = [
-  { id: 1, name: "Dubai", country: "UAE", img: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80", price: "$1,299", rating: "4.9", reviews: "2.4k", tag: "Hot Deal", days: "7 days" },
-  { id: 2, name: "Riyadh", country: "Saudia", img: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&q=80", price: "$1,599", rating: "4.8", reviews: "1.8k", tag: "Popular", days: "10 days" },
-  { id: 3, name: "Baku", country: "Azerbaijan", img: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80", price: "$899", rating: "4.7", reviews: "3.1k", tag: "Best Value", days: "8 days" },
-  { id: 4, name: "Istanbul", country: "Turkey", img: "https://images.unsplash.com/photo-1533606688076-b6683a5f59f1?w=600&q=80", price: "$1,799", rating: "5.0", reviews: "980", tag: "Luxury", days: "6 days" },
-  { id: 5, name: "Doha", country: "Qatar", img: "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=600&q=80", price: "$1,099", rating: "4.9", reviews: "1.5k", tag: "Adventure", days: "9 days" },
-  { id: 6, name: "Maldives", country: "Maldives", img: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80", price: "$2,499", rating: "5.0", reviews: "750", tag: "Luxury", days: "5 days" },
+const umrahPackages = [
+  { id: 1, name: "Economy Umrah Package", category: "Economy", img: "https://images.unsplash.com/photo-1564769610726-59cead6a6f8f?w=600&q=80", price: "PKR 195,000", rating: "4.8", reviews: "1.2k", tag: "Best Value", days: "15 Days" },
+  { id: 2, name: "Standard Umrah Package", category: "Standard", img: "https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=600&q=80", price: "PKR 280,000", rating: "4.9", reviews: "2.4k", tag: "Popular", days: "21 Days" },
+  { id: 3, name: "Premium Umrah Package", category: "Premium", img: "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=600&q=80", price: "PKR 420,000", rating: "5.0", reviews: "980", tag: "Recommended", days: "14 Days" },
+  { id: 4, name: "Luxury Umrah Package", category: "Luxury", img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80", price: "PKR 650,000", rating: "5.0", reviews: "540", tag: "Exclusive", days: "18 Days" },
+  { id: 5, name: "Family Umrah Package", category: "Family", img: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80", price: "PKR 520,000", rating: "4.9", reviews: "760", tag: "Family Special", days: "20 Days" },
+  { id: 6, name: "Group Umrah Package", category: "Economy", img: "https://images.unsplash.com/photo-1516571137133-b5d1a6f14e96?w=600&q=80", price: "PKR 175,000", rating: "4.7", reviews: "1.8k", tag: "Group Deal", days: "12 Days" },
 ];
 
 const features = [
@@ -24,9 +24,9 @@ const features = [
 ];
 
 const reviews = [
-  { name: "Salman Naseer", loc: "Lahore, Pakistan", rating: 5, text: "Absolutely magical experience! The Santorini trip was perfectly organized. Every tiny detail was taken care of, and the guide was phenomenal.", img: "https://i.pravatar.cc/60?img=47", tour: "Dubai Tour" },
-  { name: "Faizan Mughal", loc: "Islamabad, Pakistan", rating: 5, text: "Tourm made our Bali honeymoon unforgettable. The private villa, sunset dinners — everything was beyond our expectations!", img: "https://i.pravatar.cc/60?img=12", tour: "Turkey Tour" },
-  { name: "Bilal Mughal", loc: "Islamabad, Pakistan", rating: 5, text: "The Kyoto cultural tour was deeply moving. Our guide Hiroshi shared stories that no guidebook ever could. 10/10 would recommend!", img: "https://i.pravatar.cc/60?img=33", tour: "Economy Umrah Package" },
+  { name: "Salman Naseer", loc: "Lahore, Pakistan", rating: 5, text: "Absolutely magical experience! The Umrah trip was perfectly organized. Every tiny detail was taken care of, and the guide was phenomenal.", img: "https://i.pravatar.cc/60?img=47", tour: "Economy Umrah Package" },
+  { name: "Faizan Mughal", loc: "Islamabad, Pakistan", rating: 5, text: "Edafay ne hamara Umrah safar aur bhi yadgar bana diya. Hotel Haram ke bilkul qareeb tha — sab kuch umeed se barhkar tha!", img: "https://i.pravatar.cc/60?img=12", tour: "Standard Umrah Package" },
+  { name: "Bilal Mughal", loc: "Islamabad, Pakistan", rating: 5, text: "Premium package liya — 5 star hotel, private transport aur dedicated guide. Zindagi ka best safar tha. 10/10 recommend karunga!", img: "https://i.pravatar.cc/60?img=33", tour: "Premium Umrah Package" },
 ];
 
 const popularTours = [
@@ -56,7 +56,7 @@ function Hero() {
           Plan unforgettable journeys with our expert Umrah travel guides — your perfect Umrah trip awaits.
         </p>
         <div className="fade-up-delay3" style={{ display: "flex", gap: 14, marginBottom: 48, flexWrap: "wrap" }}>
-          <button className="btn-primary">Explore Packages</button>
+          <button className="btn-primary" onClick={() => window.location.hash = '#/umrah'}>Explore Packages</button>
           <button className="btn-outline" style={{ display: "flex", alignItems: "center", gap: 8, color: theme.text }}>
             <span style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(232,196,106,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12 }}>▶</span>
             Watch Video
@@ -80,10 +80,10 @@ function Hero() {
         </div>
         <div className="parallax-badge" style={{ bottom: 28, left: -32, animation: "scaleIn 0.6s 0.8s both" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <div style={{ fontSize: 28 }}>🏔️</div>
+            <div style={{ fontSize: 28 }}>🕌</div>
             <div>
-              <div style={{ fontSize: 13, fontWeight: 600, color: theme.text }}>Next Adventure</div>
-              <div style={{ fontSize: 11, color: theme.textMuted }}>Machu Picchu, Peru</div>
+              <div style={{ fontSize: 13, fontWeight: 600, color: theme.text }}>Next Umrah</div>
+              <div style={{ fontSize: 11, color: theme.textMuted }}>Makkah & Madina</div>
             </div>
             <div style={{ marginLeft: 8, background: theme.green, color: "#fff", fontSize: 10, fontWeight: 700, padding: "3px 8px", borderRadius: 20 }}>OPEN</div>
           </div>
@@ -126,56 +126,82 @@ function Hero() {
   );
 }
 
-// ─── Component: Destinations ─────────────────────────────────────────────────
-function Destinations() {
-  const [filter, setFilter] = useState("All");
-  const categories = ["All", "Beach", "Mountain", "Cultural", "Adventure", "Luxury"];
+// ─── Component: Umrah Packages Section ───────────────────────────────────────
+function UmrahSection() {
   return (
-    <section style={{ padding: "100px 5%", background: theme.bg }} id="destinations">
+    <section style={{ padding: "100px 5%", background: theme.bg }} id="umrah">
       <div style={{ textAlign: "center", marginBottom: 52 }}>
-        <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>Popular <span className="gradient-text">Destinations</span></h2>
-        <p style={{ color: theme.textMuted, maxWidth: 500, margin: "0 auto", lineHeight: 1.7 }}>Curated selections of the world's most breathtaking places, ready for your next adventure</p>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(232,196,106,0.12)", border: "1px solid rgba(232,196,106,0.3)", color: "#e8c46a", fontSize: 12, fontWeight: 600, padding: "6px 16px", borderRadius: 50, letterSpacing: "1px", textTransform: "uppercase", marginBottom: 20 }}>
+          🕌 Mubarak Safar
+        </div>
+        <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>
+          Hamara <span className="gradient-text">Umrah Package</span>
+        </h2>
+        <p style={{ color: theme.textMuted, maxWidth: 520, margin: "0 auto", lineHeight: 1.7 }}>
+          Economy se Luxury tak — har budget ke liye perfect Umrah package. Visa, flights, hotels aur transport — sab kuch included.
+        </p>
       </div>
-      <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginBottom: 48 }}>
-        {categories.map(c => (
-          <button key={c} onClick={() => setFilter(c)} style={{ padding: "8px 20px", borderRadius: 50, fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'DM Sans',sans-serif", background: filter === c ? theme.accent : "rgba(0,0,0,0.04)", color: filter === c ? "#0a0a0f" : theme.textMuted, border: filter === c ? "none" : `1px solid ${theme.border}`, transition: "all 0.2s" }}>{c}</button>
-        ))}
-      </div>
+
+      {/* Package Cards Grid */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }} className="dest-grid">
-        {destinations.map((d, i) => (
-          <div key={d.id} className="dest-card card-hover" style={{ borderRadius: 20, overflow: "hidden", background: theme.bgCard, border: `1px solid ${theme.border}`, cursor: "pointer", animation: `fadeUp 0.6s ${i * 0.1}s both` }}>
-            <div style={{ position: "relative", height: 220, overflow: "hidden" }}>
-              <img src={d.img} alt={d.name} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }} />
-              <div className="dest-overlay" style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 55%)", opacity: 0, transition: "opacity 0.3s" }} />
-              <span style={{ position: "absolute", top: 14, right: 14, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)", color: theme.accent, fontSize: 11, fontWeight: 700, padding: "4px 12px", borderRadius: 20, border: "1px solid rgba(232,196,106,0.3)" }}>{d.tag}</span>
+        {umrahPackages.map((pkg, i) => (
+          <div key={pkg.id} className="dest-card card-hover"
+            style={{ borderRadius: 20, overflow: "hidden", background: theme.bgCard, border: `1px solid ${theme.border}`, cursor: "pointer", animation: `fadeUp 0.6s ${i * 0.1}s both` }}
+            onClick={() => window.location.hash = '#/umrah'}>
+
+            {/* Image */}
+            <div style={{ position: "relative", height: 210, overflow: "hidden" }}>
+              <img src={pkg.img} alt={pkg.name} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }} />
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 55%)" }} />
+
+              {/* Tag */}
+              <span style={{ position: "absolute", top: 14, right: 14, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)", color: theme.accent, fontSize: 11, fontWeight: 700, padding: "4px 12px", borderRadius: 20, border: "1px solid rgba(232,196,106,0.3)" }}>
+                {pkg.tag}
+              </span>
+
+              {/* Category */}
+              <span style={{ position: "absolute", top: 14, left: 14, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)", color: "#fff", fontSize: 10, fontWeight: 700, padding: "3px 10px", borderRadius: 20, textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                {pkg.category}
+              </span>
+
+              {/* Bottom name */}
+              <div style={{ position: "absolute", bottom: 14, left: 16 }}>
+                <h3 style={{ fontSize: 17, fontWeight: 700, color: "#fff", margin: 0, fontFamily: "'Playfair Display',serif" }}>{pkg.name}</h3>
+              </div>
             </div>
-            <div style={{ padding: "20px" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start", marginBottom: 8 }}>
+
+            {/* Body */}
+            <div style={{ padding: "16px 18px 18px" }}>
+              {/* Price & Days */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
                 <div>
-                  <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 3, color: theme.text }}>{d.name}</h3>
-                  <span style={{ fontSize: 13, color: theme.textMuted }}>📍 {d.country}</span>
+                  <div style={{ fontSize: 19, fontWeight: 800, color: theme.accent, fontFamily: "'Playfair Display',serif" }}>{pkg.price}</div>
+                  <div style={{ fontSize: 10, color: theme.textMuted }}>per person</div>
                 </div>
                 <div style={{ textAlign: "right" }}>
-                  <div style={{ fontSize: 20, fontWeight: 700, color: theme.accent }}>{d.price}</div>
-                  <div style={{ fontSize: 11, color: theme.textMuted }}>per person</div>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: theme.text }}>⏱ {pkg.days}</div>
                 </div>
               </div>
-              <div style={{ display: "flex", gap: 16, marginTop: 14, paddingTop: 14, borderTop: `1px solid ${theme.border}` }}>
-                <span style={{ fontSize: 12, color: theme.textMuted }}>⏱ {d.days}</span>
-                <span style={{ fontSize: 12, color: theme.accent }}>★ {d.rating}</span>
-                <span style={{ fontSize: 12, color: theme.textMuted }}>({d.reviews} reviews)</span>
+
+              {/* Rating + Includes hint */}
+              <div style={{ display: "flex", gap: 12, alignItems: "center", paddingTop: 12, borderTop: `1px solid ${theme.border}`, justifyContent: "space-between" }}>
+                <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                  <span style={{ fontSize: 13, color: theme.accent, fontWeight: 700 }}>★ {pkg.rating}</span>
+                  <span style={{ fontSize: 12, color: theme.textMuted }}>({pkg.reviews} reviews)</span>
+                </div>
+                <span style={{ fontSize: 11, color: theme.textMuted, background: theme.bgCard, border: `1px solid ${theme.border}`, padding: "3px 10px", borderRadius: 20 }}>
+                  ✈ Visa Included
+                </span>
               </div>
             </div>
           </div>
         ))}
       </div>
+
+      {/* View All Button */}
       <div style={{ textAlign: "center", marginTop: 48 }}>
-        <button
-          className="btn-outline"
-          style={{ color: theme.text }}
-          onClick={() => window.location.hash = '#/destinations'}
-        >
-          View All Destinations →
+        <button className="btn-outline" style={{ color: theme.text }} onClick={() => window.location.hash = '#/umrah'}>
+          Tamam Packages Dekhein →
         </button>
       </div>
     </section>
@@ -262,7 +288,7 @@ function Reviews() {
     <section style={{ padding: "100px 5%", background: theme.bgCard }}>
       <div style={{ textAlign: "center", marginBottom: 52 }}>
         <h2 className="serif" style={{ fontSize: "clamp(30px,3.5vw,48px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>What Our <span className="gradient-text">Travelers</span> Say</h2>
-        <p style={{ color: theme.textMuted, maxWidth: 460, margin: "0 auto", lineHeight: 1.7 }}>Real stories from real adventures. Join 50,000+ happy travelers who've explored the world with Tourm.</p>
+        <p style={{ color: theme.textMuted, maxWidth: 460, margin: "0 auto", lineHeight: 1.7 }}>Real stories from real adventures. Join 10,000+ happy pilgrims who've completed Umrah with Edafay.</p>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }} className="three-col">
         {reviews.map((r, i) => (
@@ -294,7 +320,7 @@ function CTA() {
     <section style={{ padding: "100px 5%", background: `linear-gradient(135deg, rgba(232,196,106,0.08) 0%, rgba(76,175,125,0.05) 100%), ${theme.bg}`, textAlign: "center" }}>
       <div style={{ maxWidth: 640, margin: "0 auto" }}>
         <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,58px)", fontWeight: 700, marginBottom: 20, lineHeight: 1.15, color: theme.text }}>Ready for Your<br />Next <span className="gradient-text">Adventure?</span></h2>
-        <p style={{ color: theme.textMuted, lineHeight: 1.75, marginBottom: 40, fontSize: 16 }}>Join thousands of explorers who've discovered the world with Tourm. Subscribe and get exclusive deals, tips & early access.</p>
+        <p style={{ color: theme.textMuted, lineHeight: 1.75, marginBottom: 40, fontSize: 16 }}>Join thousands of explorers who've discovered the world with Edafay. Subscribe and get exclusive deals, tips & early access.</p>
         <div style={{ display: "flex", gap: 12, maxWidth: 480, margin: "0 auto", background: "rgba(0,0,0,0.04)", border: `1px solid ${theme.border}`, borderRadius: 50, padding: "6px 6px 6px 24px" }}>
           <input className="search-input" placeholder="Enter your email address" style={{ flex: 1, color: theme.text }} />
           <button className="btn-primary" style={{ borderRadius: 50, padding: "12px 28px", flexShrink: 0 }}>Get Started</button>
@@ -305,7 +331,6 @@ function CTA() {
   );
 }
 
-
 // ─── App ─────────────────────────────────────────────────────────────────────
 export default function App() {
   return (
@@ -313,7 +338,7 @@ export default function App() {
       <Navbar />
       <Hero />
       <div className="section-divider" />
-      <Destinations />
+      <UmrahSection />
       <div className="section-divider" />
       <Features />
       <div className="section-divider" />
