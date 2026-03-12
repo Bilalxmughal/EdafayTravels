@@ -753,7 +753,7 @@ export default function Visas() {
           {/* Bottom note */}
           <div style={{ marginTop: 48, background: "rgba(232,196,106,0.06)", border: "1px dashed rgba(232,196,106,0.35)", borderRadius: 14, padding: "18px 24px", textAlign: "center" }}>
             <p style={{ fontSize: 14, color: theme.textMuted, margin: 0, lineHeight: 1.7 }}>
-              <strong style={{ color: theme.accent }}>📌 Note:</strong> Visa fees aur requirements change ho sakti hain. Final confirmation ke liye hamare team se rabta karein. All fees are subject to embassy changes.
+              <strong style={{ color: theme.accent }}>📌 Note:</strong> Visa fees and requirements may change. Please contact our team for final confirmation. All fees are subject to embassy changes.
             </p>
           </div>
         </section>

@@ -53,7 +53,7 @@ function Hero() {
 
       <div>
         <h1 className="serif fade-up-delay1" style={{ fontSize: "clamp(42px, 5vw, 68px)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-1px", marginBottom: 24, color: theme.text }}>
-          Discover Your<br /><span className="gradient-text">Umrah</span>{" "}<em>Package</em>
+          Discover Your<br /><span className="gradient-text">Umrah</span>{" "}Package
         </h1>
         <p className="fade-up-delay2" style={{ color: theme.textMuted, fontSize: 16, lineHeight: 1.75, maxWidth: 440, marginBottom: 36 }}>
           Plan unforgettable journeys with our expert Umrah travel guides — your perfect Umrah trip awaits.

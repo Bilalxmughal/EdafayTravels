@@ -32,14 +32,6 @@ const team = [
   },
 ];
 
-const aboutInfo = [
-  { icon: "📅", label: "Founded",      value: "2026"             },
-  { icon: "📍", label: "Headquarter",  value: "Lahore, Pakistan" },
-  { icon: "🌍", label: "Destinations", value: "10+ Countries"    },
-  { icon: "👥", label: "Travelers",    value: "10,000+"          },
-  { icon: "⭐", label: "Rating",       value: "4.9 / 5.0"       },
-  { icon: "🏆", label: "Awards",       value: "Top Agency 2025"  },
-];
 
 function LinkedinIcon() {
   return (
