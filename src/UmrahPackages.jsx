@@ -1,9 +1,9 @@
 // ─── UmrahPackages.jsx — Edafay Travel & Tours ──────────────────────────────
 import { useState, useMemo } from "react";
 import theme from './theme.js';
-import './UmrahPackages.css';
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
+import './UmrahPackages.css';
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const packages = [
