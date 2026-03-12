@@ -71,7 +71,6 @@ export default function About() {
       <section className="ab-hero">
         <div className="ab-hero-glow" />
         <div className="ab-hero-inner">
-          <span className="ab-badge ab-fu">Who We're</span>
           <h1 className="ab-fu1" style={{ color: theme.text }}>
             Trusted Travel Partner<br />
             <span className="ab-gold">Pakistan</span>
@@ -88,7 +87,6 @@ export default function About() {
 
           {/* Left — Story Text */}
           <div className="ab-about-text">
-            <span className="ab-badge" style={{ marginBottom: 20 }}>Our Story</span>
             <h2 style={{
               fontFamily: "'Playfair Display',serif",
               fontSize: "clamp(26px,3vw,40px)",
@@ -125,7 +123,6 @@ export default function About() {
       {/* ── Team ── */}
       <section className="ab-section" style={{ background: theme.bgCard }}>
         <div style={{ textAlign: "center", marginBottom: 48 }}>
-          <span className="ab-badge" style={{ marginBottom: 16 }}>Our Team</span>
           <h2 style={{
             fontFamily: "'Playfair Display',serif",
             fontSize: "clamp(26px,3.5vw,44px)",
@@ -213,9 +210,6 @@ export default function About() {
       <section className="ab-cta">
         <div className="ab-cta-glow" />
         <div className="ab-cta-inner">
-          <span className="ab-badge" style={{ marginBottom: 20, display: "inline-flex" }}>
-            Start your trip
-          </span>
           <h2 style={{
             fontFamily: "'Playfair Display',serif",
             fontSize: "clamp(28px,3.5vw,48px)",
