@@ -263,16 +263,16 @@ function BookingForm({ pkg, onClose }) {
     <div style={{ textAlign: "center", padding: "20px 0" }}>
       <div style={{ fontSize: 56, marginBottom: 16 }}>✅</div>
       <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 700, color: theme.text, marginBottom: 10 }}>
-        Booking Request Mila!
+        Booking Request Received!
       </h3>
       <p style={{ color: theme.textMuted, lineHeight: 1.7, marginBottom: 24 }}>
-        Aapka <strong style={{ color: theme.accent }}>{pkg.name}</strong> ka request mil gaya. Hamari team 24 ghante mein aapse rabta karegi.
+        We've <strong style={{ color: theme.accent }}>{pkg.name}</strong> received your request. Our team will get in touch with you within 24 hours.
       </p>
       <button onClick={onClose} style={{
         background: theme.accent, color: "#0a0a0f", border: "none",
         padding: "12px 32px", borderRadius: 50, fontSize: 14, fontWeight: 700, cursor: "pointer",
         fontFamily: "'DM Sans',sans-serif",
-      }}>Theek Hai, Wapas Jao</button>
+      }}>Back </button>
     </div>
   );
 
@@ -326,10 +326,10 @@ function BookingForm({ pkg, onClose }) {
           cursor: (!form.name || !form.phone || !form.city) ? "not-allowed" : "pointer",
           fontFamily: "'DM Sans',sans-serif", transition: "all 0.25s",
         }}>
-        {loading ? "⏳ Bhej rahe hain..." : "✅ Book Package Submit Karein"}
+        {loading ? "Submitting..." : "Package Submit"}
       </button>
       <p style={{ fontSize: 11, color: theme.textMuted, textAlign: "center", margin: 0 }}>
-        🔒 Aapki maloomat safe hai — Edafay kabhi share nahi karega.
+        Your information is safe — Edafay never share your information.
       </p>
     </div>
   );
@@ -431,7 +431,7 @@ function PackageModal({ pkg, onClose }) {
                   <button onClick={onClose} style={{ background: "transparent", color: theme.text, border: `1.5px solid ${theme.border}`, padding: "12px 24px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 500, cursor: "pointer" }}
                     onMouseEnter={e => { e.currentTarget.style.borderColor = theme.accent; e.currentTarget.style.color = theme.accent; }}
                     onMouseLeave={e => { e.currentTarget.style.borderColor = theme.border; e.currentTarget.style.color = theme.text; }}>
-                    ← Wapas Jao
+                    ← Back
                   </button>
                   <button onClick={() => setShowBooking(true)} style={{ background: theme.accent, color: "#0a0a0f", border: "none", padding: "12px 28px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 700, cursor: "pointer" }}
                     onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 10px 28px rgba(232,196,106,0.4)"; }}
@@ -444,7 +444,7 @@ function PackageModal({ pkg, onClose }) {
           ) : (
             <>
               <button onClick={() => setShowBooking(false)} style={{ background: "none", border: "none", color: theme.accent, fontSize: 13, fontWeight: 600, cursor: "pointer", marginBottom: 20, padding: 0, fontFamily: "'DM Sans',sans-serif" }}>
-                ← Package Details Pe Wapas Jao
+                ← BAck to Package Details
               </button>
               <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 700, color: theme.text, marginBottom: 20 }}>
                 📋 Book <span style={{ color: theme.accent }}>{pkg.name}</span>
@@ -540,15 +540,7 @@ export default function UmrahPackages() {
             <p className="um-fu2" style={{ color: theme.textMuted }}>
               From economy to luxury, we offer the perfect Umrah package for every budget — including visa, flights, hotels, and transportation.
             </p>
-            <div className="um-hero-stats um-fu3">
-              {[["🕌", "6+", "Packages"], ["✈️", "Direct", "Flights"], ["🏨", "5★", "Hotels"], ["👥", "10K+", "Pilgrims"]].map(([icon, val, lbl]) => (
-                <div key={lbl} className="um-stat">
-                  <div style={{ fontSize: 22, marginBottom: 4 }}>{icon}</div>
-                  <div style={{ fontSize: 20, fontWeight: 800, color: theme.accent, fontFamily: "'Playfair Display',serif" }}>{val}</div>
-                  <div style={{ fontSize: 11, color: theme.textMuted }}>{lbl}</div>
-                </div>
-              ))}
-            </div>
+
           </div>
         </section>
 
