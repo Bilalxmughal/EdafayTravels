@@ -188,7 +188,6 @@ function Features() {
     <section style={{ padding: "100px 5%", background: `radial-gradient(ellipse at 30% 50%, rgba(232,196,106,0.05) 0%, transparent 60%), ${theme.bgCard}` }}>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }} className="hero-grid">
         <div>
-          <div className="badge" style={{ marginBottom: 20 }}>Why Edafat</div>
           <h2 className="serif" style={{ fontSize: "clamp(30px,3.5vw,48px)", fontWeight: 700, marginBottom: 20, lineHeight: 1.2, color: theme.text }}>
             Travel Smarter,<br /><span className="gradient-text">Live Better</span>
           </h2>
@@ -225,7 +224,6 @@ function PopularTours() {
     <section style={{ padding: "100px 5%", background: theme.bg }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48 }}>
         <div>
-          <div className="badge" style={{ marginBottom: 16 }}>Tours</div>
           <h2 className="serif" style={{ fontSize: "clamp(28px,3.5vw,46px)", fontWeight: 700, color: theme.text }}>Most <span className="gradient-text">Popular</span> Tours</h2>
         </div>
         <button className="btn-outline" style={{ flexShrink: 0, color: theme.text }}>See All Tours</button>
