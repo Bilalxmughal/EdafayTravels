@@ -534,12 +534,11 @@ export default function UmrahPackages() {
         <section className="um-hero">
           <div className="um-hero-bg" />
           <div className="um-hero-inner">
-            <div className="um-badge um-fu">🕌 Mubarak Safar</div>
             <h1 className="um-fu1" style={{ color: theme.text }}>
-              Apna <span className="um-gold">Umrah Package</span><br />Chunein
+              Choose best <span className="um-gold">Umrah Package</span><br />
             </h1>
             <p className="um-fu2" style={{ color: theme.textMuted }}>
-              Economy se Luxury tak — har budget ke liye perfect Umrah package. Visa, flights, hotels aur transport — sab kuch included.
+              From economy to luxury, we offer the perfect Umrah package for every budget — including visa, flights, hotels, and transportation.
             </p>
             <div className="um-hero-stats um-fu3">
               {[["🕌", "6+", "Packages"], ["✈️", "Direct", "Flights"], ["🏨", "5★", "Hotels"], ["👥", "10K+", "Pilgrims"]].map(([icon, val, lbl]) => (
