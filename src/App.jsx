@@ -131,14 +131,11 @@ function UmrahSection() {
   return (
     <section style={{ padding: "100px 5%", background: theme.bg }} id="umrah">
       <div style={{ textAlign: "center", marginBottom: 52 }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(232,196,106,0.12)", border: "1px solid rgba(232,196,106,0.3)", color: "#e8c46a", fontSize: 12, fontWeight: 600, padding: "6px 16px", borderRadius: 50, letterSpacing: "1px", textTransform: "uppercase", marginBottom: 20 }}>
-          🕌 Mubarak Safar
-        </div>
         <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>
-          Hamara <span className="gradient-text">Umrah Package</span>
+          Hamara <span className="gradient-text">Packages</span>
         </h2>
         <p style={{ color: theme.textMuted, maxWidth: 520, margin: "0 auto", lineHeight: 1.7 }}>
-          Economy se Luxury tak — har budget ke liye perfect Umrah package. Visa, flights, hotels aur transport — sab kuch included.
+          From economy to luxury, we offer the perfect Umrah package for every budget. Visa, flights, hotels, and transportation — all included for a smooth and comfortable journey.
         </p>
       </div>
 
@@ -201,7 +198,7 @@ function UmrahSection() {
       {/* View All Button */}
       <div style={{ textAlign: "center", marginTop: 48 }}>
         <button className="btn-outline" style={{ color: theme.text }} onClick={() => window.location.hash = '#/umrah'}>
-          Tamam Packages Dekhein →
+          All Packages →
         </button>
       </div>
     </section>
