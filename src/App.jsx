@@ -49,7 +49,6 @@ function Hero() {
     }} className="hero-grid">
 
       <div>
-        <div className="badge fade-up" style={{ marginBottom: 20 }}><span></span> Explore The Umrah Package</div>
         <h1 className="serif fade-up-delay1" style={{ fontSize: "clamp(42px, 5vw, 68px)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-1px", marginBottom: 24, color: theme.text }}>
           Discover Your<br /><span className="gradient-text">Umrah</span>{" "}<em>Package</em>
         </h1>
