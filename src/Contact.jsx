@@ -119,15 +119,7 @@ export default function Contact() {
         <p className="c-fu2" style={{ color: theme.textMuted, fontSize: 17, lineHeight: 1.75, maxWidth: 520, margin: "0 auto 48px" }}>
           Contact us to plan your dream trip. Our experts will respond within 24 hours.
         </p>
-        <div className="c-fu3" style={{ display: "flex", justifyContent: "center", gap: 48, flexWrap: "wrap" }}>
-          {[["24hr", "Response Time"], ["100+", "Destinations"], ["4.9", "Rating"]].map(([icon, num, label]) => (
-            <div key={label} style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 22, marginBottom: 4 }}>{icon}</div>
-              <div style={{ fontSize: 26, fontWeight: 800, color: theme.accent, fontFamily: "'Syne',sans-serif" }}>{num}</div>
-              <div style={{ fontSize: 12, color: theme.textMuted, marginTop: 2 }}>{label}</div>
-            </div>
-          ))}
-        </div>
+
       </section>
 
       <div className="c-divider" />
