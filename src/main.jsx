@@ -6,6 +6,7 @@ import Dashboard from './Dashboard.jsx'
 import Contact from './Contact.jsx'
 import About from './About.jsx'
 import UmrahPackages from './UmrahPackages.jsx'
+import Visas from './Visas.jsx'
 
 function Root() {
   const [page, setPage] = useState(window.location.hash)
@@ -20,6 +21,7 @@ function Root() {
   if (page === '#/contact') return <Contact />
   if (page === '#/about')   return <About />
   if (page === '#/umrah')   return <UmrahPackages />
+  if (page === '#/visas')   return <Visas />
 
   return <App />
 }
