@@ -33,6 +33,7 @@ const team = [
 ];
 
 
+
 function LinkedinIcon() {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
@@ -96,17 +97,7 @@ export default function About() {
             </p>
           </div>
 
-          {/* Right — Info Cards */}
-          <div className="ab-info-grid">
-            {aboutInfo.map((item) => (
-              <div key={item.label} className="ab-info-card"
-                style={{ background: theme.bgCard, border: `1px solid ${theme.border}` }}>
-                <div className="ab-info-icon">{item.icon}</div>
-                <div className="ab-info-val" style={{ color: theme.accent }}>{item.value}</div>
-                <div className="ab-info-lbl" style={{ color: theme.textMuted }}>{item.label}</div>
-              </div>
-            ))}
-          </div>
+
         </div>
       </section>
 
