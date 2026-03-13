@@ -252,7 +252,7 @@ function VisaSection() {
       <div style={{ textAlign: "center", marginBottom: 52 }}>
 
         <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>
-          Apna <span className="gradient-text">Visa</span> Asaani Se Hasil Karein
+          Get Your <span className="gradient-text">Visa</span> Hassle-Free
         </h2>
         <p style={{ color: theme.textMuted, maxWidth: 520, margin: "0 auto", lineHeight: 1.7 }}>
           We provide tourist visa services for 8+ countries with fast processing and a high approval rate. From documentation to application submission, Edafay handles the entire process for you.

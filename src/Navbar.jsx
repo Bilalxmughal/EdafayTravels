@@ -21,6 +21,7 @@ export default function Navbar() {
     { label: "Home",          hash: ""          },
     { label: "About",         hash: "#/about"   },
     { label: "Umrah Package", hash: "#/umrah"   },
+    { label: "Car Rental",    hash: "#/cars"    },
     { label: "Visas",         hash: "#/visas"   },
     { label: "Contact",       hash: "#/contact" },
   ];
@@ -52,7 +53,7 @@ export default function Navbar() {
         }
         .nb-btn-outline:hover { border-color: ${theme.accent}; color: ${theme.accent}; }
         .nb-btn-primary {
-          background: ${theme.accent}; color: #0a0a0f; border: none;
+          background: ${theme.accent}; color: #ffffff; border: none;
           padding: 10px 22px; border-radius: 50px;
           font-family: 'DM Sans', sans-serif;
           font-size: 13px; font-weight: 600;
@@ -113,13 +114,13 @@ export default function Navbar() {
       }}>
         <div onClick={() => { window.location.hash = ''; setMenuOpen(false); }}
           style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", flexShrink: 0 }}>
-          <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg, ${theme.accent}, #c8943a)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>✈</div>
+          <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg, ${theme.accent}, ${theme.accentLight})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>✈</div>
           <span style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px", color: theme.text }}>
             Edafay<span style={{ color: theme.accent }}>.</span>
           </span>
         </div>
 
-        <div className="nb-desktop" style={{ gap: 32, alignItems: "center" }}>
+        <div className="nb-desktop" style={{ gap: 28, alignItems: "center" }}>
           {links.map(({ label, hash }) => (
             <a key={label} className="nb-link" onClick={() => window.location.hash = hash}>{label}</a>
           ))}
