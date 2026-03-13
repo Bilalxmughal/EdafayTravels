@@ -417,7 +417,7 @@ function VisaBookingForm({ visa, onClose }) {
         >
           <div style={{ fontSize: 32, marginBottom: 8 }}>📂</div>
           <div style={{ fontSize: 14, fontWeight: 600, color: theme.text, marginBottom: 4 }}>
-            Files yahan drag karein ya click karein
+            Drag and drop files here, or click to upload
           </div>
           <div style={{ fontSize: 12, color: theme.textMuted }}>
             PDF, JPG, PNG support • Max 6 files • 5MB each
@@ -454,7 +454,7 @@ function VisaBookingForm({ visa, onClose }) {
 
       {/* Message */}
       <div><label style={labelStyle}>Message <span style={{ textTransform: "none", fontWeight: 400 }}>(Optional)</span></label>
-        <textarea rows={2} placeholder="Koi sawaal ya zaroorat..." value={form.message} onChange={e => setForm({ ...form, message: e.target.value })}
+        <textarea rows={2} placeholder="Have Any Questions or Requests..." value={form.message} onChange={e => setForm({ ...form, message: e.target.value })}
           style={{ ...inputStyle, resize: "none" }}
           onFocus={e => e.target.style.borderColor = theme.accent} onBlur={e => e.target.style.borderColor = "rgba(0,0,0,0.1)"} />
       </div>
@@ -462,10 +462,10 @@ function VisaBookingForm({ visa, onClose }) {
       {/* Submit */}
       <button onClick={handleSubmit} disabled={loading || !form.name || !form.phone || !form.city}
         style={{ background: (!form.name || !form.phone || !form.city) ? "rgba(26,60,110,0.35)" : theme.accent, color: "#ffffff", border: "none", padding: "15px", borderRadius: 50, fontSize: 15, fontWeight: 700, width: "100%", cursor: (!form.name || !form.phone || !form.city) ? "not-allowed" : "pointer", fontFamily: "'DM Sans',sans-serif", transition: "all 0.25s" }}>
-        {loading ? "⏳ Application jama ho rahi hai..." : "📤 Visa Application Submit Karein"}
+        {loading ? "⏳ Application jama ho rahi hai..." : "Submit Visa Application"}
       </button>
       <p style={{ fontSize: 11, color: theme.textMuted, textAlign: "center", margin: 0 }}>
-        🔒 Your information is safe — Edafay never share your Documents with third party.
+        🔒 Your information is safe — Edafay never share your Information with third party.
       </p>
     </div>
   );
