@@ -357,7 +357,7 @@ function PackageModal({ pkg, onClose }) {
 
               {/* Flight Details — with departure schedule */}
               <div className="um-section">
-                <h3 className="um-section-title" style={{ color: theme.text }}>✈️ Flight Details</h3>
+                <h3 className="um-section-title" style={{ color: theme.text }}> Flight Details</h3>
                 <div style={{ background: theme.bgCard, border: `1px solid ${theme.border}`, borderRadius: 14, padding: "18px 20px" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap", marginBottom: 14 }}>
                     <div style={{ fontSize: 42 }}>{pkg.flight.logo}</div>
