@@ -9,6 +9,7 @@ import UmrahPackages from './UmrahPackages.jsx'
 import Visas from './Visas.jsx'
 import CarRental from './Carrental.jsx'
 import Insurance from './Insurance.jsx'
+import BookNow from './BookNow.jsx'
 
 
 function Root() {
@@ -27,6 +28,7 @@ function Root() {
   if (page === '#/visas')   return <Visas />
   if (page === '#/cars')    return <CarRental />
   if (page === '#/insurance') return <Insurance />;
+  if (page === '#/booknow') return <BookNow />;
 
   return <App />
 }

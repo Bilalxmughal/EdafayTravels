@@ -129,7 +129,7 @@ export default function Navbar() {
 
         <div className="nb-desktop" style={{ gap: 10, alignItems: "center" }}>
           <button className="nb-btn-outline">Sign In</button>
-          <button className="nb-btn-primary">Book Now</button>
+          <button className="nb-btn-primary" onClick={() => window.location.hash = '#/booknow'}>Book Now</button>
           <button className="nb-btn-admin" onClick={() => window.location.hash = '#/admin'}>⚙ Admin</button>
         </div>
 
@@ -148,7 +148,7 @@ export default function Navbar() {
           ))}
           <div className="nb-mobile-actions">
             <button className="nb-btn-outline" style={{ flex: 1 }}>Sign In</button>
-            <button className="nb-btn-primary" style={{ flex: 1 }}>Book Now</button>
+            <button className="nb-btn-primary" style={{ flex: 1 }} onClick={() => { window.location.hash = '#/booknow'; setMenuOpen(false); }}>Book Now</button>
           </div>
           <button className="nb-btn-admin"
             style={{ marginTop: 10, width: "100%", textAlign: "center" }}
