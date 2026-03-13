@@ -115,7 +115,7 @@ export default function Navbar() {
       }}>
         <div onClick={() => { window.location.hash = ''; setMenuOpen(false); }}
           style={{ display: "flex", alignItems: "center", cursor: "pointer", flexShrink: 0 }}>
-          <img src="/src/assets/Logo.png" alt="Edafay Travel & Tours" style={{ height: 48, width: "auto", objectFit: "contain" }} />
+          <img src="/assets/logo.png" alt="Edafay Travel & Tours" style={{ height: 48, width: "auto", objectFit: "contain" }} />
         </div>
 
         <div className="nb-desktop" style={{ gap: 28, alignItems: "center" }}>
