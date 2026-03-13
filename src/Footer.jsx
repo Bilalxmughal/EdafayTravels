@@ -5,7 +5,7 @@ import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 const cols = [
   { title: "Company",  links: ["About Us", "Our Team", "Careers", "Blog"] },
   { title: "Services", links: ["Umrah Packages", "Travel Insurance", "Visa Assistance", "Car Rent"] },
-  { title: "Support",  links: ["Help Center", "Contact Us", "Privacy Policy", "Terms of Service"] },
+  { title: "Support",  links: ["Contact Us", "Privacy Policy", "Terms of Service"] },
 ];
 
 const socials = [
