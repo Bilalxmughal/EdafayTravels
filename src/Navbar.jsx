@@ -113,13 +113,16 @@ export default function Navbar() {
         display: "flex", alignItems: "center", justifyContent: "space-between",
         height: "72px",
       }}>
-        <div onClick={() => { window.location.hash = ''; setMenuOpen(false); }}
-          style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", flexShrink: 0 }}>
-          <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg, ${theme.accent}, ${theme.accentLight})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>✈</div>
-          <span style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px", color: theme.text }}>
-            Edafay<span style={{ color: theme.accent }}>.</span>
-          </span>
-        </div>
+        <div 
+  onClick={() => { window.location.hash = ''; setMenuOpen(false); }}
+  style={{ display: "flex", alignItems: "center", cursor: "pointer", flexShrink: 0 }}
+>
+  <img
+    src="/logo.png"
+    alt="Edafay"
+    style={{ height: 40, objectFit: "contain" }}
+  />
+</div>
 
         <div className="nb-desktop" style={{ gap: 28, alignItems: "center" }}>
           {links.map(({ label, hash }) => (
