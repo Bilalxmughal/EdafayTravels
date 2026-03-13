@@ -19,9 +19,9 @@ export default function Navbar() {
 
   const links = [
     { label: "Home",          hash: ""          },
+    { label: "About",         hash: "#/about"   },
     { label: "Umrah Package", hash: "#/umrah"   },
     { label: "Visas",         hash: "#/visas"   },
-    { label: "About",         hash: "#/about"   },
     { label: "Contact",       hash: "#/contact" },
   ];
 
