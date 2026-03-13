@@ -32,14 +32,7 @@ const team = [
   },
 ];
 
-const aboutInfo = [
-  { icon: "📅", label: "Founded",      value: "2026"             },
-  { icon: "📍", label: "Headquarter",  value: "Lahore, Pakistan" },
-  { icon: "🌍", label: "Destinations", value: "50+ Countries"    },
-  { icon: "👥", label: "Travelers",    value: "10,000+"          },
-  { icon: "⭐", label: "Rating",       value: "4.9 / 5.0"       },
-  { icon: "🏆", label: "Awards",       value: "Top Agency 2025"  },
-];
+
 
 function LinkedinIcon() {
   return (
@@ -84,7 +77,7 @@ export default function About() {
 
       {/* ── About Info ── */}
       <section className="ab-section">
-        <div className="ab-about-wrap">
+
 
           {/* Left — Story Text */}
           <div className="ab-about-text">
@@ -117,7 +110,7 @@ export default function About() {
               </div>
             ))}
           </div>
-        </div>
+
       </section>
 
       <div className="ab-divider" />
