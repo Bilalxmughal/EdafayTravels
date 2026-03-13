@@ -135,7 +135,7 @@ function UmrahForm({ onSubmit }) {
         <TextareaInput placeholder="Any special requirements, medical conditions, etc." value={notes} onChange={setNotes} />
       </Field>
       <button onClick={handle} className="btn-primary" style={{ width:"100%", padding:"15px", borderRadius:14, fontSize:15, fontWeight:700, marginTop:4 }}>
-        📩 Submit Booking Request
+        Submit Booking Request
       </button>
     </div>
   );
@@ -188,7 +188,7 @@ function VisaForm({ onSubmit }) {
         <TextareaInput placeholder="Any additional information..." value={notes} onChange={setNotes} />
       </Field>
       <button onClick={handle} className="btn-primary" style={{ width:"100%", padding:"15px", borderRadius:14, fontSize:15, fontWeight:700, marginTop:4 }}>
-        📩 Submit Visa Request
+        Submit Visa Request
       </button>
     </div>
   );
@@ -233,7 +233,7 @@ function InsuranceForm({ onSubmit }) {
       </Field>
       <UserDetails data={user} onChange={setU} />
       <button onClick={handle} className="btn-primary" style={{ width:"100%", padding:"15px", borderRadius:14, fontSize:15, fontWeight:700, marginTop:4 }}>
-        📩 Submit Insurance Request
+        Submit Insurance Request
       </button>
     </div>
   );
@@ -348,7 +348,7 @@ function FlightForm({ onSubmit }) {
       <UserDetails data={user} onChange={setU} />
 
       <button onClick={handle} className="btn-primary" style={{ width:"100%", padding:"15px", borderRadius:14, fontSize:15, fontWeight:700, marginTop:4 }}>
-        📩 Submit Flight Request
+        Submit Flight Request
       </button>
     </div>
   );
@@ -438,7 +438,7 @@ function CarForm({ onSubmit }) {
         <TextareaInput placeholder="Any additional requirements..." value={notes} onChange={setNotes} />
       </Field>
       <button onClick={handle} className="btn-primary" style={{ width:"100%", padding:"15px", borderRadius:14, fontSize:15, fontWeight:700, marginTop:4 }}>
-        📩 Submit Car Rental Request
+        Submit Car Rental Request
       </button>
     </div>
   );
@@ -481,9 +481,7 @@ export default function BookNow() {
         background:`linear-gradient(135deg, rgba(26,60,110,0.97) 0%, rgba(42,82,152,0.97) 100%), url(https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1400&q=80) center/cover`,
         padding:"120px 5% 70px", textAlign:"center", color:"#fff",
       }}>
-        <div style={{ display:"inline-flex", alignItems:"center", gap:8, background:"rgba(255,255,255,0.15)", border:"1px solid rgba(255,255,255,0.3)", fontSize:12, fontWeight:600, padding:"6px 18px", borderRadius:50, letterSpacing:"1px", textTransform:"uppercase", marginBottom:20, backdropFilter:"blur(8px)" }}>
-          📋 Book Now
-        </div>
+
         <h1 className="serif" style={{ fontSize:"clamp(30px,4vw,52px)", fontWeight:700, lineHeight:1.2, marginBottom:14 }}>
           Book Your Next Journey
         </h1>
