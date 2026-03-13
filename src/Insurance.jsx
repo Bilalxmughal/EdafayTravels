@@ -459,17 +459,17 @@ export default function Insurance() {
 
       {/* Hero Banner */}
       <section style={{
-        background:`linear-gradient(135deg, rgba(26,60,110,0.95) 0%, rgba(42,82,152,0.95) 100%), url(https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1400&q=80) center/cover`,
+        background:`linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%), url(https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1400&q=80) center/cover`,
         padding:"130px 5% 80px",
         textAlign:"center",
-        color:"#fff",
+        color:"#000000",
       }}>
         <div style={{ maxWidth:700, margin:"0 auto" }}>
 
           <h1 className="serif" style={{ fontSize:"clamp(32px,4.5vw,58px)", fontWeight:700, lineHeight:1.15, marginBottom:18, letterSpacing:"-0.5px" }}>
             Book Travel Insurance<br />Online with Ease
           </h1>
-          <p style={{ fontSize:17, lineHeight:1.75, color:"rgba(255,255,255,0.85)", maxWidth:520, margin:"0 auto" }}>
+          <p style={{ fontSize:17, lineHeight:1.75, color:"rgba(0, 0, 0, 0.85)", maxWidth:520, margin:"0 auto" }}>
             Secure your travels with our online travel insurance booking
           </p>
         </div>
