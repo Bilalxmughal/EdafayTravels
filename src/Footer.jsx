@@ -14,20 +14,22 @@ const socials = [
   { icon: <FaInstagram />, label: "Instagram", url: "https://instagram.com/edafaytravels" },
 ];
 
-<div style={{ display: "flex", gap: 12 }}>
-  {socials.map((s, i) => (
-    <a
-      key={i}
-      href={s.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{ fontSize: 20, color: "#333" }}
-    >
-      {s.icon}
-    </a>
-  ))}
-</div>
-
+{socials.map((s, i) => (
+  <a
+    key={i}
+    href={s.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      fontSize: 20,
+      marginRight: 12,
+      display: "inline-block",
+      cursor: "pointer"
+    }}
+  >
+    {s.icon}
+  </a>
+))}
 export default function Footer() {
   return (
     <footer style={{
