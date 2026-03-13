@@ -1,7 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   App.css  —  Homepage (App.jsx) ke liye CSS
-   NOTE: Theme colors yahan hardcode mat karo.
-         theme.js se import karke JS mein use karo.
+   App.css  —  Homepage (App.jsx) ke liye CSS — Responsive Fixed
    ═══════════════════════════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -14,7 +12,7 @@ body { font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
 /* ── Scrollbar ───────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #f5f5f7; }
-::-webkit-scrollbar-thumb { background: #e8c46a; border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: #1a3c6e; border-radius: 10px; }
 
 /* ── Typography ──────────────────────────────────────────────── */
 .serif { font-family: 'Playfair Display', serif; }
@@ -65,8 +63,8 @@ body { font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
 
 /* ── Buttons ─────────────────────────────────────────────────── */
 .btn-primary {
-  background: #e8c46a;
-  color: #0a0a0f;
+  background: #1a3c6e;
+  color: #ffffff;
   border: none;
   padding: 14px 32px;
   border-radius: 50px;
@@ -78,9 +76,9 @@ body { font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
   letter-spacing: 0.3px;
 }
 .btn-primary:hover {
-  background: #f5d98b;
+  background: #2a5298;
   transform: translateY(-2px);
-  box-shadow: 0 12px 35px rgba(232,196,106,0.35);
+  box-shadow: 0 12px 35px rgba(26,60,110,0.35);
 }
 
 .btn-outline {
@@ -95,8 +93,8 @@ body { font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
   transition: all 0.25s;
 }
 .btn-outline:hover {
-  border-color: #e8c46a;
-  color: #e8c46a;
+  border-color: #1a3c6e;
+  color: #1a3c6e;
   transform: translateY(-2px);
 }
 
@@ -132,9 +130,9 @@ body { font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(232,196,106,0.12);
-  border: 1px solid rgba(232,196,106,0.3);
-  color: #e8c46a;
+  background: rgba(26,60,110,0.12);
+  border: 1px solid rgba(26,60,110,0.3);
+  color: #1a3c6e;
   font-size: 12px;
   font-weight: 600;
   padding: 6px 14px;
@@ -144,7 +142,7 @@ body { font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #e8c46a, #f0c080, #e8c46a);
+  background: linear-gradient(135deg, #1a3c6e, #2a5298, #1a3c6e);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -162,7 +160,7 @@ body { font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
   padding: 28px;
   transition: border-color 0.3s;
 }
-.review-card:hover { border-color: rgba(232,196,106,0.4) !important; }
+.review-card:hover { border-color: rgba(26,60,110,0.4) !important; }
 
 /* ── Feature Icons ───────────────────────────────────────────── */
 .feature-icon {
@@ -173,8 +171,9 @@ body { font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
   align-items: center;
   justify-content: center;
   font-size: 22px;
-  background: rgba(232,196,106,0.1);
-  border: 1px solid rgba(232,196,106,0.2);
+  background: rgba(26,60,110,0.1);
+  border: 1px solid rgba(26,60,110,0.2);
+  flex-shrink: 0;
 }
 
 /* ── Hero Badges ─────────────────────────────────────────────── */
@@ -188,11 +187,82 @@ body { font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
   box-shadow: 0 8px 32px rgba(0,0,0,0.1);
 }
 
-/* ── Responsive ──────────────────────────────────────────────── */
+/* ── Hero Image ──────────────────────────────────────────────── */
+.hero-image-wrap {
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — Yahan sabse zaroori fixes hain
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Tablet (max 1024px) ─────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .dest-grid  { grid-template-columns: repeat(2, 1fr) !important; }
+  .three-col  { grid-template-columns: repeat(2, 1fr) !important; }
+  .hero-grid  { grid-template-columns: 1fr !important; }
+}
+
+/* ── Mobile (max 768px) ──────────────────────────────────────── */
 @media (max-width: 768px) {
-  .hide-mobile  { display: none !important; }
-  .hero-grid    { grid-template-columns: 1fr !important; }
-  .dest-grid    { grid-template-columns: 1fr 1fr !important; }
-  .three-col    { grid-template-columns: 1fr !important; }
-  .stats-grid   { grid-template-columns: 1fr 1fr !important; }
+  /* Hero */
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    padding: 100px 5% 60px !important;
+    gap: 36px !important;
+  }
+
+  /* Hero image — mobile pe chhupa do */
+  .hero-image-wrap {
+    height: 300px !important;
+  }
+  .parallax-badge { display: none !important; }
+
+  /* Destination grid */
+  .dest-grid  { grid-template-columns: 1fr 1fr !important; gap: 14px !important; }
+
+  /* Features section */
+  .three-col  { grid-template-columns: 1fr !important; }
+
+  /* Stats */
+  .stats-grid { grid-template-columns: 1fr 1fr !important; }
+
+  /* Search bar */
+  .search-bar {
+    grid-template-columns: 1fr !important;
+    border-radius: 16px !important;
+  }
+  .search-bar > div {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(0,0,0,0.08) !important;
+  }
+  .search-bar > div:last-child {
+    border-bottom: none !important;
+  }
+
+  /* Buttons */
+  .btn-primary { padding: 12px 24px; font-size: 13px; }
+  .btn-outline { padding: 11px 22px; font-size: 13px; }
+
+  /* Review cards */
+  .review-card { padding: 20px; }
+
+  /* Sections padding */
+  section { padding-left: 5% !important; padding-right: 5% !important; }
+}
+
+/* ── Small Mobile (max 480px) ────────────────────────────────── */
+@media (max-width: 480px) {
+  .dest-grid  { grid-template-columns: 1fr !important; }
+  .three-col  { grid-template-columns: 1fr !important; }
+  .hero-grid  { padding-top: 90px !important; }
+
+  /* CTA email bar */
+  .cta-email-bar {
+    flex-direction: column !important;
+    border-radius: 16px !important;
+    padding: 16px !important;
+  }
 }

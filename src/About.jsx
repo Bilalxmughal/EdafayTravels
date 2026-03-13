@@ -7,32 +7,39 @@ import Footer from './Footer.jsx';
 // ─── Data ────────────────────────────────────────────────────────────────────
 const team = [
   {
-    name: "Bilal Mughal",
+    name: "Ahmed Raza",
     role: "Founder & CEO",
     img: "https://i.pravatar.cc/300?img=11",
-    desc: "With over 5 years of experience in the travel industry, Ahmed founded Edafay in 2026.",
-    linkedin: "https://linkedin.com/in/Bilalxmughal",
-    instagram: "https://instagram.com/bilalxmughal",
-  },
-  {
-    name: "Adnan Malik",
-    role: "Head of Operations",
-    img: "https://i.pravatar.cc/300?img=47",
-    desc: "Adnan is responsible for making every trip flawless — from operations to customer satisfaction.",
+    desc: "10+ saal ke travel industry experience ke saath, Ahmed ne 2026 mein Edafay ki bunyaad rakhi.",
     linkedin: "https://linkedin.com",
     instagram: "https://instagram.com",
   },
   {
-    name: "Hassan Ali",
+    name: "Sara Fatima",
+    role: "Head of Operations",
+    img: "https://i.pravatar.cc/300?img=47",
+    desc: "Har trip ko flawless banana Sara ki zimmedari hai. Operations se le ke customer satisfaction tak.",
+    linkedin: "https://linkedin.com",
+    instagram: "https://instagram.com",
+  },
+  {
+    name: "Usman Tariq",
     role: "Lead Tour Manager",
     img: "https://i.pravatar.cc/300?img=33",
-    desc: "With experience in over 40 countries, Hassan Ali brings deep insights and expertise about every destination.",
+    desc: "40+ countries explore kar chuke Usman har destination ke baare mein gehri jaankari rakhte hain.",
     linkedin: "https://linkedin.com",
     instagram: "https://instagram.com",
   },
 ];
 
-
+const aboutInfo = [
+  { icon: "📅", label: "Founded",      value: "2026"             },
+  { icon: "📍", label: "Headquarter",  value: "Lahore, Pakistan" },
+  { icon: "🌍", label: "Destinations", value: "50+ Countries"    },
+  { icon: "👥", label: "Travelers",    value: "10,000+"          },
+  { icon: "⭐", label: "Rating",       value: "4.9 / 5.0"       },
+  { icon: "🏆", label: "Awards",       value: "Top Agency 2025"  },
+];
 
 function LinkedinIcon() {
   return (
@@ -64,41 +71,57 @@ export default function About() {
       <section className="ab-hero">
         <div className="ab-hero-glow" />
         <div className="ab-hero-inner">
+          <span className="ab-badge ab-fu">🏢 Hamara Parichay</span>
           <h1 className="ab-fu1" style={{ color: theme.text }}>
-            Trusted Travel Partner<br />
-            <span className="ab-gold">Pakistan</span>
+            Pakistan Ka Bharosa<br />
+            <span className="ab-gold">Travel Partner</span>
           </h1>
           <p className="ab-fu2" style={{ color: theme.textMuted }}>
-            From a small dream in Lahore in 2026, we have grown to become the trusted travel partner for thousands of Pakistani families.
+            2026 mein Lahore se shuru hua ek chhota sa sapna — aaj hazaron Pakistani families
+            ka bharosa manda safar saathi ban chuka hai.
           </p>
         </div>
       </section>
 
       {/* ── About Info ── */}
       <section className="ab-section">
-
+        <div className="ab-about-wrap">
 
           {/* Left — Story Text */}
           <div className="ab-about-text">
+            <span className="ab-badge" style={{ marginBottom: 20 }}>📖 Hamari Kahani</span>
             <h2 style={{
               fontFamily: "'Playfair Display',serif",
               fontSize: "clamp(26px,3vw,40px)",
               fontWeight: 700, lineHeight: 1.25,
               marginBottom: 18, color: theme.text,
             }}>
-              Turning Small Dreams into<br />
-              <span className="ab-gold">Big Adventures</span>
+              Ek Chhote Sapne Se<br />
+              <span className="ab-gold">Badi Manzil Tak</span>
             </h2>
             <p style={{ color: theme.textMuted, lineHeight: 1.85, fontSize: 15, marginBottom: 16 }}>
-              Edafay Travel & Tours was founded in 2026 in Lahore with the mission to provide Pakistani families with safe, affordable, and memorable journeys. Whether it’s Umrah packages or international tours, we don’t just offer tickets — we create memories.
+              Edafay Travel & Tours ki bunyaad 2026 mein Lahore mein rakhi gayi — maqsad tha
+              Pakistani families ko safe, affordable aur yaadgar safar karana. Umrah packages ho
+              ya international tours, hum sirf tickets nahi, yadein banate hain.
             </p>
             <p style={{ color: theme.textMuted, lineHeight: 1.85, fontSize: 15 }}>
-              Every member of our team is passionate about travel. That’s why each of your journeys is personally planned — tailored to your preferences, budget, and needs.
+              Hamari team ka har member travel ka shauqeen hai. Isliye aapka har safar personally
+              plan kiya jaata hai — aapki pasand, budget aur zaroorat ke mutabiq.
             </p>
           </div>
 
-
-
+          {/* Right — Info Cards */}
+          <div className="ab-info-grid">
+            {aboutInfo.map((item) => (
+              <div key={item.label} className="ab-info-card"
+                style={{ background: theme.bgCard, border: `1px solid ${theme.border}` }}>
+                <div className="ab-info-icon">{item.icon}</div>
+                <div className="ab-info-val" style={{ color: theme.accent }}>{item.value}</div>
+                <div className="ab-info-lbl" style={{ color: theme.textMuted }}>{item.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       <div className="ab-divider" />
@@ -106,12 +129,13 @@ export default function About() {
       {/* ── Team ── */}
       <section className="ab-section" style={{ background: theme.bgCard }}>
         <div style={{ textAlign: "center", marginBottom: 48 }}>
+          <span className="ab-badge" style={{ marginBottom: 16 }}>👥 Hamari Team</span>
           <h2 style={{
             fontFamily: "'Playfair Display',serif",
             fontSize: "clamp(26px,3.5vw,44px)",
             fontWeight: 700, color: theme.text,
           }}>
-            Meet the Team <span className="ab-gold">Behind Your Journey</span>
+            Log Jo Aapka <span className="ab-gold">Safar Banate Hain</span>
           </h2>
         </div>
 
@@ -193,33 +217,36 @@ export default function About() {
       <section className="ab-cta">
         <div className="ab-cta-glow" />
         <div className="ab-cta-inner">
+          <span className="ab-badge" style={{ marginBottom: 20, display: "inline-flex" }}>
+            🚀 Shuru Karein
+          </span>
           <h2 style={{
             fontFamily: "'Playfair Display',serif",
             fontSize: "clamp(28px,3.5vw,48px)",
             fontWeight: 700, marginBottom: 16, color: theme.text,
           }}>
-            Your next{" "}
-            <span className="ab-gold">Trip</span>{" "}
-            Waiting for you
+            Aapka Agla Safar{" "}
+            <span className="ab-gold">Hamara Intezaar</span>{" "}
+            Kar Raha Hai
           </h2>
           <p style={{
             color: theme.textMuted, maxWidth: 460,
             margin: "0 auto 36px", lineHeight: 1.75, fontSize: 15,
           }}>
-            Contact Us to Plan Your Personalized Trip.
+            Abhi contact karein aur apna personalized travel package tayaar karwaein.
           </p>
           <div className="ab-cta-btns">
             <button
               onClick={() => window.location.hash = '#/contact'}
               style={{
-                background: theme.accent, color: "#0a0a0f", border: "none",
+                background: theme.accent, color: "#ffffff", border: "none",
                 padding: "14px 32px", borderRadius: 50, cursor: "pointer",
                 fontFamily: "'DM Sans',sans-serif", fontSize: 15, fontWeight: 700,
                 transition: "all 0.25s",
               }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 12px 35px rgba(232,196,106,0.4)"; }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 12px 35px rgba(26,60,110,0.4)"; }}
               onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
-            >📞 Contact us</button>
+            >📞 Abhi Contact Karein</button>
 
             <button
               onClick={() => window.location.hash = '#/destinations'}
@@ -232,7 +259,7 @@ export default function About() {
               }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = theme.accent; e.currentTarget.style.color = theme.accent; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = theme.border; e.currentTarget.style.color = theme.text; }}
-            >🌍 Destinations</button>
+            >🌍 Destinations Dekhein</button>
           </div>
         </div>
       </section>

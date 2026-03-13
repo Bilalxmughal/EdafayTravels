@@ -46,14 +46,14 @@ function Hero() {
   return (
     <section style={{
       minHeight: "100vh",
-      background: `radial-gradient(ellipse at 70% 30%, rgba(232,196,106,0.07) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(76,175,125,0.05) 0%, transparent 50%), ${theme.bg}`,
+      background: `radial-gradient(ellipse at 70% 30%, rgba(26,60,110,0.07) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(76,175,125,0.05) 0%, transparent 50%), ${theme.bg}`,
       padding: "120px 5% 80px",
       display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center",
     }} className="hero-grid">
 
       <div>
         <h1 className="serif fade-up-delay1" style={{ fontSize: "clamp(42px, 5vw, 68px)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-1px", marginBottom: 24, color: theme.text }}>
-          Discover Your<br /><span className="gradient-text">Umrah</span>{" "}Package
+          Discover Your<br /><span className="gradient-text">Umrah</span>{" "}<em>Package</em>
         </h1>
         <p className="fade-up-delay2" style={{ color: theme.textMuted, fontSize: 16, lineHeight: 1.75, maxWidth: 440, marginBottom: 36 }}>
           Plan unforgettable journeys with our expert Umrah travel guides — your perfect Umrah trip awaits.
@@ -61,7 +61,7 @@ function Hero() {
         <div className="fade-up-delay3" style={{ display: "flex", gap: 14, marginBottom: 48, flexWrap: "wrap" }}>
           <button className="btn-primary" onClick={() => window.location.hash = '#/umrah'}>Explore Packages</button>
           <button className="btn-outline" style={{ display: "flex", alignItems: "center", gap: 8, color: theme.text }}>
-            <span style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(232,196,106,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12 }}>▶</span>
+            <span style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(26,60,110,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12 }}>▶</span>
             Watch Video
           </button>
         </div>
@@ -134,11 +134,14 @@ function UmrahSection() {
   return (
     <section style={{ padding: "100px 5%", background: theme.bg }} id="umrah">
       <div style={{ textAlign: "center", marginBottom: 52 }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(26,60,110,0.12)", border: "1px solid rgba(26,60,110,0.3)", color: "#1a3c6e", fontSize: 12, fontWeight: 600, padding: "6px 16px", borderRadius: 50, letterSpacing: "1px", textTransform: "uppercase", marginBottom: 20 }}>
+          🕌 Mubarak Safar
+        </div>
         <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>
-          Popular <span className="gradient-text">Umrah Package</span>
+          Hamara <span className="gradient-text">Umrah Package</span>
         </h2>
         <p style={{ color: theme.textMuted, maxWidth: 520, margin: "0 auto", lineHeight: 1.7 }}>
-          EFrom economy to luxury, we offer the perfect Umrah package for every budget. Visa, flights, hotels, and transportation — all included for a smooth and comfortable journey.
+          Economy se Luxury tak — har budget ke liye perfect Umrah package. Visa, flights, hotels aur transport — sab kuch included.
         </p>
       </div>
 
@@ -155,7 +158,7 @@ function UmrahSection() {
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 55%)" }} />
 
               {/* Tag */}
-              <span style={{ position: "absolute", top: 14, right: 14, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)", color: theme.accent, fontSize: 11, fontWeight: 700, padding: "4px 12px", borderRadius: 20, border: "1px solid rgba(232,196,106,0.3)" }}>
+              <span style={{ position: "absolute", top: 14, right: 14, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)", color: theme.accent, fontSize: 11, fontWeight: 700, padding: "4px 12px", borderRadius: 20, border: "1px solid rgba(26,60,110,0.3)" }}>
                 {pkg.tag}
               </span>
 
@@ -201,7 +204,7 @@ function UmrahSection() {
       {/* View All Button */}
       <div style={{ textAlign: "center", marginTop: 48 }}>
         <button className="btn-outline" style={{ color: theme.text }} onClick={() => window.location.hash = '#/umrah'}>
-          All Packages →
+          Tamam Packages Dekhein →
         </button>
       </div>
     </section>
@@ -211,7 +214,7 @@ function UmrahSection() {
 // ─── Component: Features ─────────────────────────────────────────────────────
 function Features() {
   return (
-    <section style={{ padding: "100px 5%", background: `radial-gradient(ellipse at 30% 50%, rgba(232,196,106,0.05) 0%, transparent 60%), ${theme.bgCard}` }}>
+    <section style={{ padding: "100px 5%", background: `radial-gradient(ellipse at 30% 50%, rgba(26,60,110,0.05) 0%, transparent 60%), ${theme.bgCard}` }}>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }} className="hero-grid">
         <div>
           <h2 className="serif" style={{ fontSize: "clamp(30px,3.5vw,48px)", fontWeight: 700, marginBottom: 20, lineHeight: 1.2, color: theme.text }}>
@@ -249,11 +252,14 @@ function VisaSection() {
   return (
     <section style={{ padding: "100px 5%", background: theme.bg }}>
       <div style={{ textAlign: "center", marginBottom: 52 }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(26,60,110,0.12)", border: "1px solid rgba(26,60,110,0.3)", color: "#1a3c6e", fontSize: 12, fontWeight: 600, padding: "6px 16px", borderRadius: 50, letterSpacing: "1px", textTransform: "uppercase", marginBottom: 20 }}>
+          🌍 Visa Services
+        </div>
         <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>
-          Get your <span className="gradient-text">Visa</span> Hassle-Free
+          Apna <span className="gradient-text">Visa</span> Asaani Se Hasil Karein
         </h2>
         <p style={{ color: theme.textMuted, maxWidth: 520, margin: "0 auto", lineHeight: 1.7 }}>
-          Tourist visas for 8+ countries with fast processing and a high approval rate. From documentation to application, Edafay takes care of everything for you.
+          8+ countries ke tourist visas — fast processing, high approval rate. Documents se apply tak sab kuch Edafay handle karta hai.
         </p>
       </div>
 
@@ -291,7 +297,7 @@ function VisaSection() {
             <div style={{ padding: "14px 16px 16px" }}>
               {/* Processing + Approval */}
               <div style={{ display: "flex", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
-                <span style={{ fontSize: 11, fontWeight: 600, padding: "4px 10px", borderRadius: 20, background: "rgba(232,196,106,0.1)", color: theme.accent, border: "1px solid rgba(232,196,106,0.25)" }}>
+                <span style={{ fontSize: 11, fontWeight: 600, padding: "4px 10px", borderRadius: 20, background: "rgba(26,60,110,0.1)", color: theme.accent, border: "1px solid rgba(26,60,110,0.25)" }}>
                   ⏱ {visa.processing}
                 </span>
                 <span style={{ fontSize: 11, fontWeight: 600, padding: "4px 10px", borderRadius: 20, background: "rgba(34,197,94,0.08)", color: "#16a34a", border: "1px solid rgba(34,197,94,0.2)" }}>
@@ -319,7 +325,7 @@ function VisaSection() {
       {/* View All */}
       <div style={{ textAlign: "center", marginTop: 48 }}>
         <button className="btn-outline" style={{ color: theme.text }} onClick={() => window.location.hash = '#/visas'}>
-          All Visas →
+          Tamam Visas Dekhein →
         </button>
       </div>
     </section>
@@ -349,7 +355,7 @@ function Reviews() {
                   <div style={{ fontSize: 12, color: theme.textMuted }}>{r.loc}</div>
                 </div>
               </div>
-              <div style={{ fontSize: 11, color: theme.accent, background: "rgba(232,196,106,0.1)", padding: "4px 10px", borderRadius: 20, border: "1px solid rgba(232,196,106,0.2)" }}>{r.tour}</div>
+              <div style={{ fontSize: 11, color: theme.accent, background: "rgba(26,60,110,0.1)", padding: "4px 10px", borderRadius: 20, border: "1px solid rgba(26,60,110,0.2)" }}>{r.tour}</div>
             </div>
           </div>
         ))}
@@ -361,7 +367,7 @@ function Reviews() {
 // ─── Component: CTA ──────────────────────────────────────────────────────────
 function CTA() {
   return (
-    <section style={{ padding: "100px 5%", background: `linear-gradient(135deg, rgba(232,196,106,0.08) 0%, rgba(76,175,125,0.05) 100%), ${theme.bg}`, textAlign: "center" }}>
+    <section style={{ padding: "100px 5%", background: `linear-gradient(135deg, rgba(26,60,110,0.08) 0%, rgba(76,175,125,0.05) 100%), ${theme.bg}`, textAlign: "center" }}>
       <div style={{ maxWidth: 640, margin: "0 auto" }}>
         <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,58px)", fontWeight: 700, marginBottom: 20, lineHeight: 1.15, color: theme.text }}>Ready for Your<br />Next <span className="gradient-text">Adventure?</span></h2>
         <p style={{ color: theme.textMuted, lineHeight: 1.75, marginBottom: 40, fontSize: 16 }}>Join thousands of explorers who've discovered the world with Edafay. Subscribe and get exclusive deals, tips & early access.</p>

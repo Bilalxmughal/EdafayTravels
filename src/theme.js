@@ -14,9 +14,10 @@ export const theme = {
   text:      "#1a1a2e",     // Main text color
   textMuted: "#6b6880",     // Muted / secondary text
 
-  // ── Accent (Golden) ──────────────────────────────────────────
-  accent:      "#ffd727",   // Primary accent (golden)
-  accentLight: "#f5d98b",   // Lighter accent on hover
+  // ── Accent (Navy Blue) ────────────────────────────────────────
+  accent:      "#1a3c6e",   // Primary accent (Deep Navy Blue)
+  accentLight: "#2a5298",   // Lighter accent on hover
+  accentText:  "#ffffff",   // Text on accent background
 
   // ── Others ───────────────────────────────────────────────────
   green:  "#4caf7d",              // Success / open badge

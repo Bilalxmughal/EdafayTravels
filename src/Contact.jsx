@@ -6,7 +6,7 @@ import Footer from './Footer.jsx'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const contactInfo = [
-  { icon: "📍", title: "Our Office", lines: ["Colabs 50N, Gurumangat Road Gulberg II", "Lahore, Pakistan"], color: "rgba(232,196,106,0.12)", borderColor: "rgba(232,196,106,0.2)" },
+  { icon: "📍", title: "Our Office", lines: ["Colabs 50N, Gurumangat Road Gulberg II", "Lahore, Pakistan"], color: "rgba(26,60,110,0.12)", borderColor: "rgba(26,60,110,0.2)" },
   { icon: "📞", title: "Call Us", lines: ["+92 305 2222 744"], color: "rgba(76,175,125,0.1)", borderColor: "rgba(76,175,125,0.2)" },
   { icon: "✉️", title: "Email Us", lines: ["contact@edafay.com", "edafaytravels@gmail.com"], color: "rgba(99,102,241,0.1)", borderColor: "rgba(99,102,241,0.2)" },
   { icon: "🕐", title: "Working Hours", lines: ["Mon – Sat: 10AM – 7PM", "Sunday: 2PM – 7PM"], color: "rgba(239,68,68,0.08)", borderColor: "rgba(239,68,68,0.15)" },
@@ -85,8 +85,8 @@ function FaqItem({ q, a }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="c-faq-item" style={{
-      background: open ? "rgba(232,196,106,0.04)" : theme.bgCard,
-      border: `1px solid ${open ? "rgba(232,196,106,0.3)" : theme.border}`,
+      background: open ? "rgba(26,60,110,0.04)" : theme.bgCard,
+      border: `1px solid ${open ? "rgba(26,60,110,0.3)" : theme.border}`,
     }} onClick={() => setOpen(!open)}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "18px 22px" }}>
         <span style={{ fontWeight: 600, fontSize: 15, color: open ? theme.accent : theme.text }}>{q}</span>
@@ -109,17 +109,25 @@ export default function Contact() {
       {/* ── Hero ── */}
       <section style={{
         paddingTop: 140, paddingBottom: 80, paddingLeft: "5%", paddingRight: "5%",
-        background: `radial-gradient(ellipse at 60% 0%, rgba(232,196,106,0.08) 0%, transparent 55%), radial-gradient(ellipse at 10% 80%, rgba(76,175,125,0.05) 0%, transparent 50%), ${theme.bg}`,
+        background: `radial-gradient(ellipse at 60% 0%, rgba(26,60,110,0.08) 0%, transparent 55%), radial-gradient(ellipse at 10% 80%, rgba(76,175,125,0.05) 0%, transparent 50%), ${theme.bg}`,
         textAlign: "center",
       }}>
-
+        <div className="c-badge c-fu" style={{ marginBottom: 20 }}>📬 Get In Touch</div>
         <h1 className="c-fu1" style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(38px,5vw,72px)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-1px", marginBottom: 20, color: theme.text }}>
           We'd Love To <span className="c-gradient-text">Hear</span><br /><em>From You</em>
         </h1>
         <p className="c-fu2" style={{ color: theme.textMuted, fontSize: 17, lineHeight: 1.75, maxWidth: 520, margin: "0 auto 48px" }}>
           Contact us to plan your dream trip. Our experts will respond within 24 hours.
         </p>
-
+        <div className="c-fu3" style={{ display: "flex", justifyContent: "center", gap: 48, flexWrap: "wrap" }}>
+          {[["⚡", "24hr", "Response Time"], ["🌍", "100+", "Destinations"], ["⭐", "4.9", "Rating"]].map(([icon, num, label]) => (
+            <div key={label} style={{ textAlign: "center" }}>
+              <div style={{ fontSize: 22, marginBottom: 4 }}>{icon}</div>
+              <div style={{ fontSize: 26, fontWeight: 800, color: theme.accent, fontFamily: "'Syne',sans-serif" }}>{num}</div>
+              <div style={{ fontSize: 12, color: theme.textMuted, marginTop: 2 }}>{label}</div>
+            </div>
+          ))}
+        </div>
       </section>
 
       <div className="c-divider" />
@@ -155,12 +163,12 @@ export default function Contact() {
           <div style={{ display: "flex", flexDirection: "column", gap: 24 }} className="c-fu3">
             {/* Map */}
             <div style={{ background: theme.bgCard, border: `1px solid ${theme.border}`, borderRadius: 20, overflow: "hidden" }}>
-              <div style={{ height: 220, background: "linear-gradient(135deg, rgba(232,196,106,0.08), rgba(76,175,125,0.05))", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ height: 220, background: "linear-gradient(135deg, rgba(26,60,110,0.08), rgba(76,175,125,0.05))", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
                 <div className="c-float" style={{ fontSize: 48, marginBottom: 12 }}>📍</div>
                 <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 4, color: theme.text }}>Lahore, Pakistan</div>
                 <div style={{ fontSize: 13, color: theme.textMuted }}>Colabs 50N, Gurumangat Road Gulberg II</div>
                 <a href="https://maps.app.goo.gl/t5ZCqBsSKtFX6XUs7" target="_blank" rel="noreferrer"
-                  style={{ marginTop: 16, background: theme.accent, color: "#0a0a0f", padding: "8px 20px", borderRadius: 50, fontSize: 12, fontWeight: 700, textDecoration: "none" }}>
+                  style={{ marginTop: 16, background: theme.accent, color: "#ffffff", padding: "8px 20px", borderRadius: 50, fontSize: 12, fontWeight: 700, textDecoration: "none" }}>
                   Find us on Google Maps →
                 </a>
               </div>
@@ -171,7 +179,7 @@ export default function Contact() {
               <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 6, fontFamily: "'Syne',sans-serif", color: theme.text }}>Keep in touch</div>
               <p style={{ fontSize: 13, color: theme.textMuted, marginBottom: 20, lineHeight: 1.6 }}>Follow us on social media — for latest deals & destinations.</p>
               <div style={{ display: "flex", gap: 10 }}>
-                {[["f","Facebook"],["in","LinkedIn"],["📸","Instagram"]].map(([icon, label]) => (
+                {[["𝕏","Twitter"],["f","Facebook"],["in","LinkedIn"],["📸","Instagram"],["▶","YouTube"]].map(([icon, label]) => (
                   <div key={label} className="c-social-btn" title={label}>{icon}</div>
                 ))}
               </div>
@@ -194,8 +202,9 @@ export default function Contact() {
       <div className="c-divider" />
 
       {/* ── FAQ ── */}
-      <section style={{ padding: "80px 5%", background: `radial-gradient(ellipse at 50% 50%, rgba(232,196,106,0.04) 0%, transparent 60%), ${theme.bg}` }}>
+      <section style={{ padding: "80px 5%", background: `radial-gradient(ellipse at 50% 50%, rgba(26,60,110,0.04) 0%, transparent 60%), ${theme.bg}` }}>
         <div style={{ textAlign: "center", marginBottom: 52 }}>
+          <div className="c-badge" style={{ marginBottom: 16 }}>❓ FAQ</div>
           <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(28px,3.5vw,46px)", fontWeight: 700, marginBottom: 14, color: theme.text }}>
             Frequently Asked <span className="c-gradient-text">Questions</span>
           </h2>

@@ -18,11 +18,11 @@ export default function Navbar() {
   }, [menuOpen]);
 
   const links = [
-    { label: "Home",           hash: ""                },
-    { label: "About",          hash: "#/about"         },
-    { label: "Umrah Package",  hash: "#/umrah"         },
-    { label: "Visas",          hash: "#/visas"           },
-    { label: "Contact",        hash: "#/contact"       },
+    { label: "Home",          hash: ""          },
+    { label: "Umrah Package", hash: "#/umrah"   },
+    { label: "Visas",         hash: "#/visas"   },
+    { label: "About",         hash: "#/about"   },
+    { label: "Contact",       hash: "#/contact" },
   ];
 
   return (
@@ -60,15 +60,15 @@ export default function Navbar() {
         }
         .nb-btn-primary:hover { background: ${theme.accentLight}; transform: translateY(-1px); }
         .nb-btn-admin {
-          background: rgba(232,196,106,0.1);
-          border: 1px solid rgba(232,196,106,0.25);
+          background: rgba(26,60,110,0.1);
+          border: 1px solid rgba(26,60,110,0.25);
           color: ${theme.accent};
           padding: 9px 18px; border-radius: 50px;
           font-size: 12px; font-weight: 700;
           cursor: pointer; transition: all 0.2s;
           font-family: 'DM Sans', sans-serif;
         }
-        .nb-btn-admin:hover { background: rgba(232,196,106,0.2); }
+        .nb-btn-admin:hover { background: rgba(26,60,110,0.2); }
         .nb-hamburger {
           background: none; border: none; color: ${theme.text};
           font-size: 26px; cursor: pointer; padding: 4px 8px;
@@ -111,41 +111,31 @@ export default function Navbar() {
         display: "flex", alignItems: "center", justifyContent: "space-between",
         height: "72px",
       }}>
-
-        {/* Logo */}
         <div onClick={() => { window.location.hash = ''; setMenuOpen(false); }}
           style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", flexShrink: 0 }}>
-          <div style={{
-            width: 36, height: 36, borderRadius: 10,
-            background: `linear-gradient(135deg, ${theme.accent}, #c8943a)`,
-            display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18,
-          }}>✈</div>
+          <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg, ${theme.accent}, #c8943a)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>✈</div>
           <span style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px", color: theme.text }}>
             Edafay<span style={{ color: theme.accent }}>.</span>
           </span>
         </div>
 
-        {/* Desktop Links */}
         <div className="nb-desktop" style={{ gap: 32, alignItems: "center" }}>
           {links.map(({ label, hash }) => (
             <a key={label} className="nb-link" onClick={() => window.location.hash = hash}>{label}</a>
           ))}
         </div>
 
-        {/* Desktop Actions */}
         <div className="nb-desktop" style={{ gap: 10, alignItems: "center" }}>
           <button className="nb-btn-outline">Sign In</button>
           <button className="nb-btn-primary">Book Now</button>
           <button className="nb-btn-admin" onClick={() => window.location.hash = '#/admin'}>⚙ Admin</button>
         </div>
 
-        {/* Mobile Hamburger */}
         <button className="nb-mobile-btn nb-hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
           {menuOpen ? "✕" : "☰"}
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       {menuOpen && (
         <div className="nb-mobile-menu">
           {links.map(({ label, hash }) => (

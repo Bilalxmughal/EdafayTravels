@@ -15,7 +15,7 @@ const CSS = `
 
 .um-page { min-height:100vh; font-family:'DM Sans',sans-serif; overflow-x:hidden; width:100%; }
 .um-hero { position:relative; padding:140px 5% 80px; text-align:center; overflow:hidden; }
-.um-hero-bg { position:absolute; inset:0; background: radial-gradient(ellipse at 60% 0%, rgba(232,196,106,0.10) 0%, transparent 55%), radial-gradient(ellipse at 10% 90%, rgba(76,175,125,0.06) 0%, transparent 50%); pointer-events:none; }
+.um-hero-bg { position:absolute; inset:0; background: radial-gradient(ellipse at 60% 0%, rgba(26,60,110,0.10) 0%, transparent 55%), radial-gradient(ellipse at 10% 90%, rgba(76,175,125,0.06) 0%, transparent 50%); pointer-events:none; }
 .um-hero-inner { position:relative; max-width:720px; margin:0 auto; }
 .um-hero-inner h1 { font-family:'Playfair Display',serif; font-size:clamp(38px,5vw,66px); font-weight:700; line-height:1.12; letter-spacing:-1px; margin-bottom:18px; }
 .um-hero-inner p { font-size:16px; line-height:1.8; max-width:520px; margin:0 auto 40px; }
@@ -35,7 +35,7 @@ const CSS = `
 .um-card-img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
 .um-card:hover .um-card-img { transform:scale(1.07); }
 .um-card-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,transparent 55%); }
-.um-card-tag { position:absolute; top:12px; right:12px; background:rgba(0,0,0,0.55); backdrop-filter:blur(8px); font-size:10px; font-weight:700; padding:3px 10px; border-radius:20px; border:1px solid rgba(232,196,106,0.3); }
+.um-card-tag { position:absolute; top:12px; right:12px; background:rgba(0,0,0,0.55); backdrop-filter:blur(8px); font-size:10px; font-weight:700; padding:3px 10px; border-radius:20px; border:1px solid rgba(26,60,110,0.3); }
 .um-card-cat { position:absolute; bottom:12px; left:12px; background:rgba(0,0,0,0.6); backdrop-filter:blur(6px); color:#fff; font-size:10px; font-weight:700; padding:3px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:0.5px; }
 .um-card-body { padding:16px 18px 18px; }
 .um-card-top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:10px; }
@@ -43,7 +43,7 @@ const CSS = `
 .um-card-price { font-size:16px; font-weight:800; font-family:'Playfair Display',serif; }
 .um-card-meta { display:flex; gap:10px; align-items:center; padding-bottom:12px; }
 .um-card-btn { width:100%; padding:12px; border-radius:50px; border:none; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:700; cursor:pointer; transition:all 0.25s; }
-.um-card-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(232,196,106,0.35); }
+.um-card-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(26,60,110,0.35); }
 
 .um-modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.65); backdrop-filter:blur(8px); z-index:200; display:flex; align-items:center; justify-content:center; padding:20px; animation:umFadeIn 0.3s ease; }
 .um-modal { border-radius:24px; overflow:hidden; width:100%; max-width:600px; max-height:90vh; overflow-y:auto; position:relative; animation:umFadeUp 0.4s ease both; }
@@ -61,7 +61,7 @@ const CSS = `
 /* Hotel thumbnails */
 .um-hotel-thumbs { display:flex; gap:7px; margin-top:10px; flex-wrap:wrap; }
 .um-hotel-thumb { width:62px; height:46px; border-radius:8px; overflow:hidden; cursor:pointer; border:2px solid transparent; transition:all 0.2s; flex-shrink:0; }
-.um-hotel-thumb:hover { border-color:#e8c46a; transform:scale(1.06); }
+.um-hotel-thumb:hover { border-color:#1a3c6e; transform:scale(1.06); }
 .um-hotel-thumb img { width:100%; height:100%; object-fit:cover; }
 
 /* Map button */
@@ -76,7 +76,7 @@ const CSS = `
 .um-lightbox-arrow { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.15); border:none; color:#fff; width:44px; height:44px; border-radius:50%; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
 .um-lightbox-arrow:hover { background:rgba(255,255,255,0.28); }
 
-.um-gold { background:linear-gradient(135deg,#e8c46a,#f0c080,#e8c46a); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.um-gold { background:linear-gradient(135deg,#1a3c6e,#2a5298,#1a3c6e); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 
 @media (max-width:1024px) { .um-grid { grid-template-columns:repeat(2,1fr); } }
 @media (max-width:768px) {
@@ -202,7 +202,7 @@ function Lightbox({ images, startIndex, onClose }) {
       <div style={{ position: "absolute", bottom: 20, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 6 }}>
         {images.map((_, i) => (
           <div key={i} onClick={e => { e.stopPropagation(); setIdx(i); }}
-            style={{ width: 8, height: 8, borderRadius: "50%", background: i === idx ? "#e8c46a" : "rgba(255,255,255,0.4)", cursor: "pointer", transition: "background 0.2s" }} />
+            style={{ width: 8, height: 8, borderRadius: "50%", background: i === idx ? "#1a3c6e" : "rgba(255,255,255,0.4)", cursor: "pointer", transition: "background 0.2s" }} />
         ))}
       </div>
     </div>
@@ -224,7 +224,7 @@ function HotelRow({ hotel }) {
             </a>
           </div>
           {/* Category badge — plain text "X-Star", no ★ symbols */}
-          <div style={{ background: "rgba(232,196,106,0.10)", border: "1px solid rgba(232,196,106,0.25)", borderRadius: 10, padding: "5px 12px", textAlign: "center", flexShrink: 0 }}>
+          <div style={{ background: "rgba(26,60,110,0.10)", border: "1px solid rgba(26,60,110,0.25)", borderRadius: 10, padding: "5px 12px", textAlign: "center", flexShrink: 0 }}>
             <div style={{ fontSize: 10, color: theme.textMuted, marginBottom: 1 }}>Category</div>
             <div style={{ fontSize: 12, fontWeight: 700, color: theme.accent }}>{hotel.stars}-Star</div>
           </div>
@@ -240,7 +240,7 @@ function HotelRow({ hotel }) {
               <img src={img} alt={`${hotel.name} ${i + 1}`} />
             </div>
           ))}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 62, height: 46, borderRadius: 8, background: "rgba(232,196,106,0.07)", border: "1px dashed rgba(232,196,106,0.35)", fontSize: 10, color: theme.textMuted, fontWeight: 600, flexShrink: 0 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 62, height: 46, borderRadius: 8, background: "rgba(26,60,110,0.07)", border: "1px dashed rgba(26,60,110,0.35)", fontSize: 10, color: theme.textMuted, fontWeight: 600, flexShrink: 0 }}>
             🖼 View
           </div>
         </div>
@@ -275,7 +275,7 @@ function BookingForm({ pkg, onClose }) {
       <div style={{ fontSize: 56, marginBottom: 16 }}>✅</div>
       <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 700, color: theme.text, marginBottom: 10 }}>Booking Request Received!</h3>
       <p style={{ color: theme.textMuted, lineHeight: 1.7, marginBottom: 24 }}>We've received your <strong style={{ color: theme.accent }}>{pkg.name}</strong> request. Our team will contact you within 24 hours.</p>
-      <button onClick={onClose} style={{ background: theme.accent, color: "#0a0a0f", border: "none", padding: "12px 32px", borderRadius: 50, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>Back</button>
+      <button onClick={onClose} style={{ background: theme.accent, color: "#ffffff", border: "none", padding: "12px 32px", borderRadius: 50, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>Back</button>
     </div>
   );
 
@@ -284,7 +284,7 @@ function BookingForm({ pkg, onClose }) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-      <div style={{ background: "rgba(232,196,106,0.08)", border: "1px solid rgba(232,196,106,0.25)", borderRadius: 12, padding: "12px 16px", marginBottom: 4 }}>
+      <div style={{ background: "rgba(26,60,110,0.08)", border: "1px solid rgba(26,60,110,0.25)", borderRadius: 12, padding: "12px 16px", marginBottom: 4 }}>
         <div style={{ fontSize: 12, color: theme.textMuted, marginBottom: 2 }}>Selected Package</div>
         <div style={{ fontWeight: 700, color: theme.accent, fontSize: 15 }}>{pkg.name}</div>
         <div style={{ fontSize: 12, color: theme.textMuted, marginTop: 2 }}>{pkg.days} • {pkg.price}</div>
@@ -302,7 +302,7 @@ function BookingForm({ pkg, onClose }) {
           onFocus={e => e.target.style.borderColor = theme.accent} onBlur={e => e.target.style.borderColor = "rgba(0,0,0,0.1)"} />
       </div>
       <button onClick={handleSubmit} disabled={loading || !form.name || !form.phone || !form.city}
-        style={{ background: (!form.name || !form.phone || !form.city) ? "rgba(232,196,106,0.4)" : theme.accent, color: "#0a0a0f", border: "none", padding: "15px", borderRadius: 50, fontSize: 15, fontWeight: 700, width: "100%", cursor: (!form.name || !form.phone || !form.city) ? "not-allowed" : "pointer", fontFamily: "'DM Sans',sans-serif", transition: "all 0.25s" }}>
+        style={{ background: (!form.name || !form.phone || !form.city) ? "rgba(26,60,110,0.4)" : theme.accent, color: "#ffffff", border: "none", padding: "15px", borderRadius: 50, fontSize: 15, fontWeight: 700, width: "100%", cursor: (!form.name || !form.phone || !form.city) ? "not-allowed" : "pointer", fontFamily: "'DM Sans',sans-serif", transition: "all 0.25s" }}>
         {loading ? "Submitting..." : "Package Submit"}
       </button>
       <p style={{ fontSize: 11, color: theme.textMuted, textAlign: "center", margin: 0 }}>Your information is safe — Edafay never share your information.</p>
@@ -323,7 +323,7 @@ function PackageModal({ pkg, onClose }) {
           <div className="um-modal-hero-overlay" />
           <SeatsBadge seats={pkg.seatsLeft} />
           <div className="um-modal-hero-text">
-            <span style={{ background: theme.accent, color: "#0a0a0f", fontSize: 11, fontWeight: 800, padding: "3px 12px", borderRadius: 20, marginBottom: 8, display: "inline-block" }}>{pkg.tag}</span>
+            <span style={{ background: theme.accent, color: "#ffffff", fontSize: 11, fontWeight: 800, padding: "3px 12px", borderRadius: 20, marginBottom: 8, display: "inline-block" }}>{pkg.tag}</span>
             <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: 24, fontWeight: 700, color: "#fff", marginBottom: 4 }}>{pkg.name}</h2>
             <p style={{ color: "rgba(255,255,255,0.75)", fontSize: 13 }}>{pkg.days} • ⭐ {pkg.rating} ({pkg.reviews} reviews)</p>
           </div>
@@ -381,7 +381,7 @@ function PackageModal({ pkg, onClose }) {
               </div>
 
               {/* Note */}
-              <div style={{ background: "rgba(232,196,106,0.06)", border: "1px dashed rgba(232,196,106,0.4)", borderRadius: 12, padding: "14px 18px", marginBottom: 24 }}>
+              <div style={{ background: "rgba(26,60,110,0.06)", border: "1px dashed rgba(26,60,110,0.4)", borderRadius: 12, padding: "14px 18px", marginBottom: 24 }}>
                 <p style={{ fontSize: 13, color: theme.textMuted, margin: 0, lineHeight: 1.7 }}>
                   <strong style={{ color: theme.accent }}>📌 Note:</strong> PKR Announced soon per person — All rates are subject to availability.
                 </p>
@@ -400,8 +400,8 @@ function PackageModal({ pkg, onClose }) {
                     onMouseLeave={e => { e.currentTarget.style.borderColor = theme.border; e.currentTarget.style.color = theme.text; }}>
                     ← Back
                   </button>
-                  <button onClick={() => setShowBooking(true)} style={{ background: theme.accent, color: "#0a0a0f", border: "none", padding: "12px 28px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 700, cursor: "pointer" }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 10px 28px rgba(232,196,106,0.4)"; }}
+                  <button onClick={() => setShowBooking(true)} style={{ background: theme.accent, color: "#ffffff", border: "none", padding: "12px 28px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 700, cursor: "pointer" }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 10px 28px rgba(26,60,110,0.4)"; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}>
                     📋 Book Package
                   </button>
@@ -469,7 +469,7 @@ function PackageCard({ pkg, onClick }) {
           <span style={{ fontSize: 13, fontWeight: 600, color: theme.text }}>{pkg.flight.airline}</span>
           <span style={{ marginLeft: "auto", fontSize: 11, color: "#16a34a", fontWeight: 700, background: "rgba(34,197,94,0.1)", padding: "2px 8px", borderRadius: 12 }}>✈ {pkg.flight.type}</span>
         </div>
-        <button className="um-card-btn" style={{ background: theme.accent, color: "#0a0a0f" }} onClick={e => { e.stopPropagation(); onClick(); }}>
+        <button className="um-card-btn" style={{ background: theme.accent, color: "#ffffff" }} onClick={e => { e.stopPropagation(); onClick(); }}>
           View Details & Book →
         </button>
       </div>
@@ -510,7 +510,7 @@ export default function UmrahPackages() {
             <div className="um-cats">
               {categories.map(c => (
                 <button key={c} onClick={() => setFilter(c)} className="um-cat-btn"
-                  style={{ background: filter === c ? theme.accent : "rgba(0,0,0,0.04)", color: filter === c ? "#0a0a0f" : theme.textMuted, border: filter === c ? "none" : `1px solid ${theme.border}` }}>
+                  style={{ background: filter === c ? theme.accent : "rgba(0,0,0,0.04)", color: filter === c ? "#ffffff" : theme.textMuted, border: filter === c ? "none" : `1px solid ${theme.border}` }}>
                   {c}
                 </button>
               ))}
@@ -533,7 +533,7 @@ export default function UmrahPackages() {
           <div className="um-grid">
             {filtered.map(pkg => <PackageCard key={pkg.id} pkg={pkg} onClick={() => setSelected(pkg)} />)}
           </div>
-          <div style={{ marginTop: 48, background: "rgba(232,196,106,0.06)", border: "1px dashed rgba(232,196,106,0.35)", borderRadius: 14, padding: "18px 24px", textAlign: "center" }}>
+          <div style={{ marginTop: 48, background: "rgba(26,60,110,0.06)", border: "1px dashed rgba(26,60,110,0.35)", borderRadius: 14, padding: "18px 24px", textAlign: "center" }}>
             <p style={{ fontSize: 14, color: theme.textMuted, margin: 0, lineHeight: 1.7 }}>
               <strong style={{ color: theme.accent }}>📌 Note:</strong> PKR Announced soon per person — All rates are subject to availability. Contact us for latest pricing.
             </p>

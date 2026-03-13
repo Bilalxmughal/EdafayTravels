@@ -21,7 +21,7 @@ const CSS = `
 .vs-hero { position:relative; padding:140px 5% 80px; text-align:center; overflow:hidden; }
 .vs-hero-bg {
   position:absolute; inset:0;
-  background: radial-gradient(ellipse at 60% 0%, rgba(232,196,106,0.10) 0%, transparent 55%),
+  background: radial-gradient(ellipse at 60% 0%, rgba(26,60,110,0.10) 0%, transparent 55%),
               radial-gradient(ellipse at 10% 90%, rgba(76,175,125,0.06) 0%, transparent 50%);
   pointer-events:none;
 }
@@ -30,14 +30,14 @@ const CSS = `
 .vs-hero-inner p { font-size:16px; line-height:1.8; max-width:520px; margin:0 auto 40px; }
 .vs-hero-stats { display:flex; justify-content:center; gap:32px; flex-wrap:wrap; }
 .vs-stat { text-align:center; background:rgba(255,255,255,0.7); border:1px solid rgba(0,0,0,0.07); border-radius:16px; padding:16px 24px; backdrop-filter:blur(10px); min-width:90px; transition:all 0.3s; }
-.vs-stat:hover { transform:translateY(-3px); border-color:rgba(232,196,106,0.4); }
+.vs-stat:hover { transform:translateY(-3px); border-color:rgba(26,60,110,0.4); }
 
 .vs-divider { height:1px; background:linear-gradient(to right,transparent,rgba(0,0,0,0.08),transparent); }
 
 .vs-search-wrap { position:relative; max-width:480px; margin:0 auto; }
 .vs-search-icon { position:absolute; left:18px; top:50%; transform:translateY(-50%); font-size:16px; pointer-events:none; }
 .vs-search-input { width:100%; padding:16px 48px; border-radius:50px; border:1.5px solid rgba(0,0,0,0.1); background:rgba(255,255,255,0.9); backdrop-filter:blur(16px); font-family:'DM Sans',sans-serif; font-size:15px; outline:none; box-shadow:0 8px 28px rgba(0,0,0,0.07); transition:all 0.25s; }
-.vs-search-input:focus { border-color:#e8c46a; box-shadow:0 0 0 3px rgba(232,196,106,0.15),0 8px 28px rgba(0,0,0,0.07); }
+.vs-search-input:focus { border-color:#1a3c6e; box-shadow:0 0 0 3px rgba(26,60,110,0.15),0 8px 28px rgba(0,0,0,0.07); }
 
 .vs-filter-bar { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:28px; flex-wrap:wrap; }
 .vs-cats { display:flex; gap:8px; flex-wrap:wrap; }
@@ -64,10 +64,10 @@ const CSS = `
 .vs-fee-table { width:100%; border-collapse:collapse; margin-bottom:14px; }
 .vs-fee-table th { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; padding:6px 8px; text-align:left; }
 .vs-fee-table td { font-size:12px; padding:6px 8px; border-top:1px solid rgba(0,0,0,0.05); }
-.vs-fee-table tr:hover td { background:rgba(232,196,106,0.05); }
+.vs-fee-table tr:hover td { background:rgba(26,60,110,0.05); }
 .vs-processing { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
 .vs-card-btn { width:100%; padding:12px; border-radius:50px; border:none; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:700; cursor:pointer; transition:all 0.25s; }
-.vs-card-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(232,196,106,0.35); }
+.vs-card-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(26,60,110,0.35); }
 
 .vs-modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.65); backdrop-filter:blur(8px); z-index:200; display:flex; align-items:center; justify-content:center; padding:20px; animation:vsFadeIn 0.3s ease; }
 .vs-modal { border-radius:24px; overflow:hidden; width:100%; max-width:620px; max-height:92vh; overflow-y:auto; position:relative; animation:vsFadeUp 0.4s ease both; }
@@ -89,13 +89,13 @@ const CSS = `
 .vs-fee-modal-table td { font-size:13px; padding:12px 14px; }
 .vs-fee-modal-table tr:not(:last-child) td { border-bottom:1px solid rgba(0,0,0,0.06); }
 
-.vs-upload-area { border:2px dashed rgba(232,196,106,0.4); border-radius:14px; padding:20px; text-align:center; cursor:pointer; transition:all 0.25s; background:rgba(232,196,106,0.03); }
-.vs-upload-area:hover { border-color:#e8c46a; background:rgba(232,196,106,0.07); }
+.vs-upload-area { border:2px dashed rgba(26,60,110,0.4); border-radius:14px; padding:20px; text-align:center; cursor:pointer; transition:all 0.25s; background:rgba(26,60,110,0.03); }
+.vs-upload-area:hover { border-color:#1a3c6e; background:rgba(26,60,110,0.07); }
 .vs-upload-list { display:flex; flex-direction:column; gap:8px; margin-top:12px; }
 .vs-upload-item { display:flex; align-items:center; justify-content:space-between; padding:8px 12px; border-radius:10px; font-size:12px; }
 
-.vs-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(232,196,106,0.12); border:1px solid rgba(232,196,106,0.3); color:#e8c46a; font-size:12px; font-weight:600; padding:6px 14px; border-radius:50px; letter-spacing:1px; text-transform:uppercase; margin-bottom:20px; }
-.vs-gold { background:linear-gradient(135deg,#e8c46a,#f0c080,#e8c46a); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.vs-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(26,60,110,0.12); border:1px solid rgba(26,60,110,0.3); color:#1a3c6e; font-size:12px; font-weight:600; padding:6px 14px; border-radius:50px; letter-spacing:1px; text-transform:uppercase; margin-bottom:20px; }
+.vs-gold { background:linear-gradient(135deg,#1a3c6e,#2a5298,#1a3c6e); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 
 @media (max-width:1024px) { .vs-grid { grid-template-columns:repeat(2,1fr); } }
 @media (max-width:768px) {
@@ -347,7 +347,7 @@ function VisaBookingForm({ visa, onClose }) {
       <p style={{ color: theme.textMuted, lineHeight: 1.7, marginBottom: 24, fontSize: 13 }}>
         Hamari team documents verify karke <strong>24 ghante mein</strong> aapse rabta karegi.
       </p>
-      <button onClick={onClose} style={{ background: theme.accent, color: "#0a0a0f", border: "none", padding: "12px 32px", borderRadius: 50, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
+      <button onClick={onClose} style={{ background: theme.accent, color: "#ffffff", border: "none", padding: "12px 32px", borderRadius: 50, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
         Theek Hai, Wapas Jao
       </button>
     </div>
@@ -359,7 +359,7 @@ function VisaBookingForm({ visa, onClose }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
       {/* Selected visa info */}
-      <div style={{ background: "rgba(232,196,106,0.08)", border: "1px solid rgba(232,196,106,0.25)", borderRadius: 12, padding: "12px 16px" }}>
+      <div style={{ background: "rgba(26,60,110,0.08)", border: "1px solid rgba(26,60,110,0.25)", borderRadius: 12, padding: "12px 16px" }}>
         <div style={{ fontSize: 12, color: theme.textMuted, marginBottom: 2 }}>Visa Application For</div>
         <div style={{ fontWeight: 700, color: theme.accent, fontSize: 16 }}>{visa.flag} {visa.country} — {visa.type} Visa</div>
         <div style={{ fontSize: 12, color: theme.textMuted, marginTop: 2 }}>Processing: {visa.processing} • Validity: {visa.validity}</div>
@@ -415,7 +415,7 @@ function VisaBookingForm({ visa, onClose }) {
           onDragLeave={() => setDragOver(false)}
           onDrop={e => { e.preventDefault(); setDragOver(false); handleFiles(e.dataTransfer.files); }}
           onClick={() => document.getElementById('vs-file-input').click()}
-          style={{ borderColor: dragOver ? "#e8c46a" : "rgba(232,196,106,0.4)", background: dragOver ? "rgba(232,196,106,0.1)" : "rgba(232,196,106,0.03)" }}
+          style={{ borderColor: dragOver ? "#1a3c6e" : "rgba(26,60,110,0.4)", background: dragOver ? "rgba(26,60,110,0.1)" : "rgba(26,60,110,0.03)" }}
         >
           <div style={{ fontSize: 32, marginBottom: 8 }}>📂</div>
           <div style={{ fontSize: 14, fontWeight: 600, color: theme.text, marginBottom: 4 }}>
@@ -463,7 +463,7 @@ function VisaBookingForm({ visa, onClose }) {
 
       {/* Submit */}
       <button onClick={handleSubmit} disabled={loading || !form.name || !form.phone || !form.city}
-        style={{ background: (!form.name || !form.phone || !form.city) ? "rgba(232,196,106,0.35)" : theme.accent, color: "#0a0a0f", border: "none", padding: "15px", borderRadius: 50, fontSize: 15, fontWeight: 700, width: "100%", cursor: (!form.name || !form.phone || !form.city) ? "not-allowed" : "pointer", fontFamily: "'DM Sans',sans-serif", transition: "all 0.25s" }}>
+        style={{ background: (!form.name || !form.phone || !form.city) ? "rgba(26,60,110,0.35)" : theme.accent, color: "#ffffff", border: "none", padding: "15px", borderRadius: 50, fontSize: 15, fontWeight: 700, width: "100%", cursor: (!form.name || !form.phone || !form.city) ? "not-allowed" : "pointer", fontFamily: "'DM Sans',sans-serif", transition: "all 0.25s" }}>
         {loading ? "⏳ Application jama ho rahi hai..." : "📤 Visa Application Submit Karein"}
       </button>
       <p style={{ fontSize: 11, color: theme.textMuted, textAlign: "center", margin: 0 }}>
@@ -493,7 +493,7 @@ function VisaModal({ visa, onClose }) {
               {visa.country}
             </h2>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <span style={{ background: theme.accent, color: "#0a0a0f", fontSize: 11, fontWeight: 800, padding: "3px 12px", borderRadius: 20 }}>{visa.type}</span>
+              <span style={{ background: theme.accent, color: "#ffffff", fontSize: 11, fontWeight: 800, padding: "3px 12px", borderRadius: 20 }}>{visa.type}</span>
               <span style={{ background: "rgba(34,197,94,0.85)", color: "#fff", fontSize: 11, fontWeight: 700, padding: "3px 12px", borderRadius: 20 }}>✅ {visa.approvalRate} Approval</span>
             </div>
           </div>
@@ -518,7 +518,7 @@ function VisaModal({ visa, onClose }) {
                 <h3 className="vs-section-title" style={{ color: theme.text }}>💰 Visa Fee</h3>
                 <table className="vs-fee-modal-table" style={{ background: theme.bgCard, border: `1px solid ${theme.border}`, borderRadius: 12, overflow: "hidden", width: "100%", borderCollapse: "collapse" }}>
                   <thead>
-                    <tr style={{ background: "rgba(232,196,106,0.1)" }}>
+                    <tr style={{ background: "rgba(26,60,110,0.1)" }}>
                       <th style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.6px", padding: "10px 16px", textAlign: "left", color: theme.textMuted }}>Category</th>
                       <th style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.6px", padding: "10px 16px", textAlign: "right", color: theme.textMuted }}>Fee</th>
                     </tr>
@@ -549,7 +549,7 @@ function VisaModal({ visa, onClose }) {
               </div>
 
               {/* Important Note */}
-              <div style={{ background: "rgba(232,196,106,0.06)", border: "1px dashed rgba(232,196,106,0.4)", borderRadius: 12, padding: "14px 18px", marginBottom: 24 }}>
+              <div style={{ background: "rgba(26,60,110,0.06)", border: "1px dashed rgba(26,60,110,0.4)", borderRadius: 12, padding: "14px 18px", marginBottom: 24 }}>
                 <p style={{ fontSize: 13, color: theme.textMuted, margin: 0, lineHeight: 1.7 }}>
                   <strong style={{ color: theme.accent }}>💡 Important Note:</strong> {visa.notes}
                 </p>
@@ -562,8 +562,8 @@ function VisaModal({ visa, onClose }) {
                   onMouseLeave={e => { e.currentTarget.style.borderColor = theme.border; e.currentTarget.style.color = theme.text; }}>
                   ← Wapas Jao
                 </button>
-                <button onClick={() => setShowForm(true)} style={{ flex: 2, background: theme.accent, color: "#0a0a0f", border: "none", padding: "13px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 700, cursor: "pointer" }}
-                  onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 10px 28px rgba(232,196,106,0.4)"; }}
+                <button onClick={() => setShowForm(true)} style={{ flex: 2, background: theme.accent, color: "#ffffff", border: "none", padding: "13px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 700, cursor: "pointer" }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 10px 28px rgba(26,60,110,0.4)"; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}>
                   📤 Apply Karein
                 </button>
@@ -603,7 +603,7 @@ function VisaCard({ visa, onClick }) {
       <div className="vs-card-body">
         {/* Meta Pills */}
         <div className="vs-card-meta">
-          <span className="vs-meta-pill" style={{ background: "rgba(232,196,106,0.1)", color: theme.accent, border: "1px solid rgba(232,196,106,0.25)" }}>
+          <span className="vs-meta-pill" style={{ background: "rgba(26,60,110,0.1)", color: theme.accent, border: "1px solid rgba(26,60,110,0.25)" }}>
             ⏱ {visa.processing}
           </span>
           <span className="vs-meta-pill" style={{ background: "rgba(34,197,94,0.08)", color: "#16a34a", border: "1px solid rgba(34,197,94,0.2)" }}>
@@ -619,7 +619,7 @@ function VisaCard({ visa, onClick }) {
         {/* Fee Table */}
         <table className="vs-fee-table" style={{ color: theme.text }}>
           <thead>
-            <tr style={{ background: "rgba(232,196,106,0.06)" }}>
+            <tr style={{ background: "rgba(26,60,110,0.06)" }}>
               <th style={{ color: theme.textMuted }}>Category</th>
               <th style={{ color: theme.textMuted, textAlign: "right" }}>Fee</th>
             </tr>
@@ -640,7 +640,7 @@ function VisaCard({ visa, onClick }) {
           <span style={{ fontSize: 12, color: theme.textMuted }}>{visa.requirements.length} docs</span>
         </div>
 
-        <button className="vs-card-btn" style={{ background: theme.accent, color: "#0a0a0f" }}
+        <button className="vs-card-btn" style={{ background: theme.accent, color: "#ffffff" }}
           onClick={e => { e.stopPropagation(); onClick(); }}>
           Details & Apply →
         </button>
@@ -677,10 +677,12 @@ export default function Visas() {
         <section className="vs-hero">
           <div className="vs-hero-bg" />
           <div className="vs-hero-inner">
+            <div className="vs-badge vs-fu">🌍 Visa Services</div>
             <h1 className="vs-fu1" style={{ color: theme.text }}>
-              Get your <span className="vs-gold">Visa</span> Hassle-free<br/></h1>
+              Apna <span className="vs-gold">Visa</span> Asaani Se<br />Hasil Karein
+            </h1>
             <p className="vs-fu2" style={{ color: theme.textMuted }}>
-              Apply for tourist visas to 8+ countries from Pakistan with fast processing and a high approval rate. From documentation to application, Edafay takes care of it all.
+              Pakistan se 8+ countries ke tourist visas — fast processing, high approval rate. Documents se apply tak — sab kuch Edafay handle karta hai.
             </p>
 
             {/* Search Bar */}
@@ -688,7 +690,7 @@ export default function Visas() {
               <span className="vs-search-icon">🔍</span>
               <input
                 className="vs-search-input"
-                placeholder="Search country — Malaysia, Dubai, Turkey..."
+                placeholder="Country dhundein — Malaysia, Dubai, Turkey..."
                 value={search}
                 onChange={e => setSearch(e.target.value)}
               />
@@ -698,7 +700,16 @@ export default function Visas() {
               )}
             </div>
 
-
+            {/* Stats */}
+            <div className="vs-hero-stats vs-fu3" style={{ marginTop: 40 }}>
+              {[["🌍", "8+", "Countries"], ["⚡", "1-7", "Days Process"], ["✅", "97%+", "Approval"], ["📁", "Easy", "Docs"]].map(([icon, val, lbl]) => (
+                <div key={lbl} className="vs-stat">
+                  <div style={{ fontSize: 22, marginBottom: 4 }}>{icon}</div>
+                  <div style={{ fontSize: 20, fontWeight: 800, color: theme.accent, fontFamily: "'Playfair Display',serif" }}>{val}</div>
+                  <div style={{ fontSize: 11, color: theme.textMuted }}>{lbl}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -710,7 +721,7 @@ export default function Visas() {
             <div className="vs-cats">
               {categories.map(c => (
                 <button key={c} onClick={() => setFilter(c)} className="vs-cat-btn"
-                  style={{ background: filter === c ? theme.accent : "rgba(0,0,0,0.04)", color: filter === c ? "#0a0a0f" : theme.textMuted, border: filter === c ? "none" : `1px solid ${theme.border}` }}>
+                  style={{ background: filter === c ? theme.accent : "rgba(0,0,0,0.04)", color: filter === c ? "#ffffff" : theme.textMuted, border: filter === c ? "none" : `1px solid ${theme.border}` }}>
                   {c}
                 </button>
               ))}
@@ -738,7 +749,7 @@ export default function Visas() {
               <div style={{ fontSize: 56, marginBottom: 16 }}>🔍</div>
               <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, color: theme.text, marginBottom: 8 }}>Koi nateeja nahi mila</h3>
               <p style={{ color: theme.textMuted }}>Alag country ya filter try karein</p>
-              <button onClick={() => { setSearch(""); setFilter("All"); }} style={{ marginTop: 16, background: theme.accent, color: "#0a0a0f", border: "none", padding: "10px 24px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontWeight: 700, cursor: "pointer" }}>
+              <button onClick={() => { setSearch(""); setFilter("All"); }} style={{ marginTop: 16, background: theme.accent, color: "#ffffff", border: "none", padding: "10px 24px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontWeight: 700, cursor: "pointer" }}>
                 Reset Karein
               </button>
             </div>
@@ -751,9 +762,9 @@ export default function Visas() {
           )}
 
           {/* Bottom note */}
-          <div style={{ marginTop: 48, background: "rgba(232,196,106,0.06)", border: "1px dashed rgba(232,196,106,0.35)", borderRadius: 14, padding: "18px 24px", textAlign: "center" }}>
+          <div style={{ marginTop: 48, background: "rgba(26,60,110,0.06)", border: "1px dashed rgba(26,60,110,0.35)", borderRadius: 14, padding: "18px 24px", textAlign: "center" }}>
             <p style={{ fontSize: 14, color: theme.textMuted, margin: 0, lineHeight: 1.7 }}>
-              <strong style={{ color: theme.accent }}>📌 Note:</strong> Visa fees and requirements may change. Please contact our team for final confirmation. All fees are subject to embassy changes.
+              <strong style={{ color: theme.accent }}>📌 Note:</strong> Visa fees aur requirements change ho sakti hain. Final confirmation ke liye hamare team se rabta karein. All fees are subject to embassy changes.
             </p>
           </div>
         </section>

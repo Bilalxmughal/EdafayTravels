@@ -30,7 +30,7 @@
   transition: color 0.2s; cursor: pointer;
   color: rgba(26,26,46,0.75);
 }
-.c-nav-link:hover { color: #e8c46a; }
+.c-nav-link:hover { color: #1a3c6e; }
 
 /* ── Form Inputs ─────────────────────────────────────────────── */
 .c-input {
@@ -44,15 +44,15 @@
   transition: all 0.25s; resize: none;
 }
 .c-input:focus {
-  border-color: #e8c46a;
-  background: rgba(232,196,106,0.04);
-  box-shadow: 0 0 0 3px rgba(232,196,106,0.12);
+  border-color: #1a3c6e;
+  background: rgba(26,60,110,0.04);
+  box-shadow: 0 0 0 3px rgba(26,60,110,0.12);
 }
 .c-input::placeholder { color: rgba(26,26,46,0.3); }
 
 /* ── Submit Button ───────────────────────────────────────────── */
 .c-btn-primary {
-  background: #e8c46a; color: #0a0a0f;
+  background: #1a3c6e; color: #ffffff;
   border: none; padding: 15px 36px;
   border-radius: 50px;
   font-family: 'DM Sans', sans-serif;
@@ -61,8 +61,8 @@
   width: 100%; letter-spacing: 0.3px;
 }
 .c-btn-primary:hover {
-  background: #f5d98b; transform: translateY(-2px);
-  box-shadow: 0 12px 35px rgba(232,196,106,0.35);
+  background: #2a5298; transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(26,60,110,0.35);
 }
 .c-btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
@@ -75,8 +75,8 @@
   box-shadow: 0 2px 12px rgba(0,0,0,0.04);
 }
 .c-info-card:hover {
-  border-color: rgba(232,196,106,0.4);
-  background: rgba(232,196,106,0.03);
+  border-color: rgba(26,60,110,0.4);
+  background: rgba(26,60,110,0.03);
   transform: translateY(-4px);
   box-shadow: 0 12px 40px rgba(0,0,0,0.08);
 }
@@ -92,24 +92,24 @@
   transition: all 0.2s; text-decoration: none;
 }
 .c-social-btn:hover {
-  border-color: #e8c46a;
-  background: rgba(232,196,106,0.1);
+  border-color: #1a3c6e;
+  background: rgba(26,60,110,0.1);
   transform: translateY(-3px);
 }
 
 /* ── Badge ───────────────────────────────────────────────────── */
 .c-badge {
   display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(232,196,106,0.12);
-  border: 1px solid rgba(232,196,106,0.3);
-  color: #e8c46a; font-size: 12px; font-weight: 600;
+  background: rgba(26,60,110,0.12);
+  border: 1px solid rgba(26,60,110,0.3);
+  color: #1a3c6e; font-size: 12px; font-weight: 600;
   padding: 6px 14px; border-radius: 50px;
   letter-spacing: 1px; text-transform: uppercase;
 }
 
 /* ── Gradient Text ───────────────────────────────────────────── */
 .c-gradient-text {
-  background: linear-gradient(135deg, #e8c46a, #f0c080, #e8c46a);
+  background: linear-gradient(135deg, #1a3c6e, #2a5298, #1a3c6e);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
