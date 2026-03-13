@@ -478,14 +478,14 @@ export default function BookNow() {
 
       {/* Page Hero */}
       <section style={{
-        background:`linear-gradient(135deg, rgba(255, 255, 255, 0.97) 0%, rgba(42,82,152,0.97) 100%), url(https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1400&q=80) center/cover`,
+        background:`linear-gradient(135deg, rgba(255, 255, 255, 0.97) 0%, rgba(0, 0, 0, 0.97) 100%), url(https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1400&q=80) center/cover`,
         padding:"120px 5% 70px", textAlign:"center", color:"#fff",
       }}>
 
         <h1 className="serif" style={{ fontSize:"clamp(30px,4vw,52px)", fontWeight:700, lineHeight:1.2, marginBottom:14 }}>
           Book Your Next Journey
         </h1>
-        <p style={{ fontSize:16, color:"rgba(255,255,255,0.85)", maxWidth:480, margin:"0 auto" }}>
+        <p style={{ fontSize:16, color:"rgba(58, 58, 58, 0.85)", maxWidth:480, margin:"0 auto" }}>
           Select a service below and fill in your details — our team will get back to you shortly.
         </p>
       </section>
