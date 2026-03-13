@@ -139,7 +139,7 @@ function BookingForm({ car, onClose }) {
   }, [days, car]);
 
   const fetchLocation = () => {
-    if (!navigator.geolocation) { alert("Geolocation support nahi hai."); return; }
+    if (!navigator.geolocation) { alert("Your browser does not support geolocation."); return; }
     setLocLoading(true);
     navigator.geolocation.getCurrentPosition(
       async (pos) => {
@@ -172,7 +172,7 @@ function BookingForm({ car, onClose }) {
         <div style={{ fontSize:12, color:theme.textMuted }}>Estimated Total ({days} days)</div>
         <div style={{ fontSize:22, fontWeight:800, color:theme.accent, fontFamily:"'Playfair Display',serif" }}>{totalCost}</div>
       </div>}
-      <p style={{ color:theme.textMuted, fontSize:13, marginBottom:24 }}>Hamari team <strong>24 ghante</strong> mein aapse rabta karegi.</p>
+      <p style={{ color:theme.textMuted, fontSize:13, marginBottom:24 }}>Our team will contact you within <strong>24 ghante</strong></p>
       <button onClick={onClose} style={{ background:theme.accent, color:"#fff", border:"none", padding:"12px 32px", borderRadius:50, fontSize:14, fontWeight:700, cursor:"pointer", fontFamily:"'DM Sans',sans-serif" }}>Theek Hai</button>
     </div>
   );
@@ -217,11 +217,11 @@ function BookingForm({ car, onClose }) {
             {locLoading ? <span className="cr-spin">⌛</span> : "📍"} {locLoading ? "..." : "Fetch"}
           </button>
         </div>
-        <div style={{ fontSize:11, color:theme.textMuted, marginTop:4 }}>Ya "Fetch" se current location auto-fill karein</div>
+        <div style={{ fontSize:11, color:theme.textMuted, marginTop:4 }}>Click ‘Fetch’ to automatically fill your location</div>
       </div>
 
       <div>
-        <label className="cr-label">Drop-Off Area / City *</label>
+        <label className="cr-label">Drop-Off City / Area *</label>
         <input className="cr-input" placeholder="e.g. Gulberg III, Lahore  ·  Saddar, Karachi" value={form.dropArea} onChange={e=>setForm({...form,dropArea:e.target.value})} {...inp} />
       </div>
 
@@ -240,7 +240,7 @@ function BookingForm({ car, onClose }) {
         <div style={{ background:"rgba(26,60,110,0.06)", border:"1px solid rgba(26,60,110,0.2)", borderRadius:12, padding:"12px 16px", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
           <div>
             <div style={{ fontSize:11, color:theme.textMuted }}>Rental Duration</div>
-            <div style={{ fontWeight:700, color:theme.text, fontSize:15 }}>{days} Din</div>
+            <div style={{ fontWeight:700, color:theme.text, fontSize:15 }}>{days} Day</div>
           </div>
           <div style={{ textAlign:"right" }}>
             <div style={{ fontSize:11, color:theme.textMuted }}>Estimated Total</div>
@@ -255,10 +255,7 @@ function BookingForm({ car, onClose }) {
         <div className="cr-toggle-box" style={{ background:form.withDriver?theme.accent:"transparent", border:"2px solid "+(form.withDriver?theme.accent:"rgba(0,0,0,0.2)") }}>
           {form.withDriver && <span style={{ color:"#fff", fontSize:12 }}>✓</span>}
         </div>
-        <div>
-          <div style={{ fontSize:13, fontWeight:700, color:form.withDriver?theme.accent:theme.text }}>🧑‍✈️ Driver Chahiye</div>
-          <div style={{ fontSize:11, color:theme.textMuted }}>Professional driver included (extra charges may apply)</div>
-        </div>
+
       </div>
 
       <div>
@@ -267,9 +264,9 @@ function BookingForm({ car, onClose }) {
       </div>
 
       <button className="cr-submit-btn" onClick={()=>{if(!ok)return;setLoading(true);setTimeout(()=>{setLoading(false);setSubmitted(true)},1600)}} disabled={loading||!ok}>
-        {loading ? "⏳ Booking Submit Ho Rahi Hai..." : "🚗 Rental Booking Confirm Karein"}
+        {loading ? "⏳ Booking Submitting..." : "Booking Confirm"}
       </button>
-      <p style={{ fontSize:11, color:theme.textMuted, textAlign:"center", margin:0 }}>🔒 Aapki info safe hai — Edafay kabhi share nahi karta</p>
+      <p style={{ fontSize:11, color:theme.textMuted, textAlign:"center", margin:0 }}>🔒 Your information is save — Edafay never share your information</p>
     </div>
   );
 }
@@ -307,14 +304,14 @@ function CarModal({ car, onClose }) {
                   <span style={{ fontSize:22 }}>{car.available?"✅":"❌"}</span>
                   <div>
                     <div style={{ fontWeight:700, color:car.available?"#16a34a":"#ef4444", fontSize:14 }}>{car.available?"Available for Booking":"Currently Unavailable"}</div>
-                    <div style={{ fontSize:12, color:theme.textMuted }}>{car.available?"Abhi book karein — confirm ho jayega":"Contact karein next availability ke liye"}</div>
+                    <div style={{ fontSize:12, color:theme.textMuted }}>{car.available?"Book Now — Our Agent Will Confirm Your Reservation":"Contact us for next availability"}</div>
                   </div>
                 </div>
               </div>
               <div className="cr-section">
                 <h3 className="cr-section-title" style={{ color:theme.text }}>✅ Rental Includes</h3>
                 <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8 }}>
-                  {["AC","Insurance","24/7 Support","City Coverage","Driver (Optional)","Fuel (Separate)"].map(item=>(
+                  {["AC","24/7 Support","City Coverage","Driver (Mandatory)","Fuel (Separate)", "Toll (Separate)"].map(item=>(
                     <div key={item} style={{ display:"flex", alignItems:"center", gap:8, background:theme.bgCard, border:`1px solid ${theme.border}`, borderRadius:10, padding:"10px 12px" }}>
                       <span style={{ fontSize:16, color:theme.accent }}>✓</span>
                       <span style={{ fontSize:12, fontWeight:600, color:theme.text }}>{item}</span>
@@ -324,7 +321,7 @@ function CarModal({ car, onClose }) {
               </div>
               <div style={{ background:"rgba(26,60,110,0.05)", border:"1px dashed rgba(26,60,110,0.3)", borderRadius:12, padding:"14px 18px", marginBottom:24 }}>
                 <p style={{ fontSize:13, color:theme.textMuted, margin:0, lineHeight:1.7 }}>
-                  <strong style={{ color:theme.accent }}>📌 Note:</strong> Price per day hai. Fuel charges alag honge. Driver ke saath additional charges apply honge. 7+ days booking pe special discount milta hai.
+                  <strong style={{ color:theme.accent }}>📌 Note:</strong> Price is per day for 10 hours. Fuel and toll charges are separate. Additional driver charges may apply. Special discounts available for bookings of 7 days or more.
                 </p>
               </div>
               <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", paddingTop:16, borderTop:`1px solid ${theme.border}`, gap:12, flexWrap:"wrap" }}>
@@ -341,7 +338,7 @@ function CarModal({ car, onClose }) {
                     style={{ background:car.available?theme.accent:"rgba(0,0,0,0.1)", color:car.available?"#fff":theme.textMuted, border:"none", padding:"12px 26px", borderRadius:50, fontFamily:"'DM Sans',sans-serif", fontSize:14, fontWeight:700, cursor:car.available?"pointer":"not-allowed" }}
                     onMouseEnter={e=>{if(car.available){e.currentTarget.style.transform="translateY(-2px)";e.currentTarget.style.boxShadow="0 10px 28px rgba(26,60,110,0.4)";}}}
                     onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.boxShadow="";}}>
-                    {car.available?"🚗 Book Now":"Unavailable"}
+                    {car.available?"Book Now":"Unavailable"}
                   </button>
                 </div>
               </div>
@@ -349,10 +346,10 @@ function CarModal({ car, onClose }) {
           ) : (
             <>
               <button onClick={()=>setShowForm(false)} style={{ background:"none", border:"none", color:theme.accent, fontSize:13, fontWeight:600, cursor:"pointer", marginBottom:20, padding:0, fontFamily:"'DM Sans',sans-serif" }}>
-                ← Car Details Pe Wapas Jao
+                ← Back To Car Details
               </button>
               <h3 style={{ fontFamily:"'Playfair Display',serif", fontSize:20, fontWeight:700, color:theme.text, marginBottom:20 }}>
-                🚗 Book <span style={{ color:theme.accent }}>{car.name}</span>
+                Book Now <span style={{ color:theme.accent }}>{car.name}</span>
               </h3>
               <BookingForm car={car} onClose={onClose} />
             </>
@@ -432,26 +429,14 @@ export default function CarRental() {
         <section className="cr-hero">
           <div className="cr-hero-bg" />
           <div className="cr-hero-inner">
-            <div style={{ display:"inline-flex", alignItems:"center", gap:6, background:"rgba(26,60,110,0.10)", border:"1px solid rgba(26,60,110,0.25)", color:theme.accent, fontSize:11, fontWeight:700, padding:"6px 14px", borderRadius:50, letterSpacing:"1px", textTransform:"uppercase", marginBottom:20 }}>
-              🚗 Car Rental Service
-            </div>
+
             <h1 className="cr-fu1" style={{ color:theme.text }}>
-              Apni Marzi Ki <span className="cr-gold">Car Rent</span> Karein
+              Rent the <span className="cr-gold">Car</span> of Your Choice
             </h1>
             <p className="cr-fu2" style={{ color:theme.textMuted }}>
-              Hatchback se Coaster tak — Pakistan ki top cars available hain. Aapka budget, aapki pasand. Driver ke saath ya khud drive karein.
+              From hatchbacks to coaches — 4 to 28 seats. Toyota, Honda, Suzuki, and more. With driver — it’s your choice!
             </p>
-            <div className="cr-fu3" style={{ display:"flex", justifyContent:"center", gap:16, flexWrap:"wrap" }}>
-              {[["🚗","19+","Cars Available"],["🏢","10","Brands"],["📍","All Cities","Pakistan Wide"],["⭐","4.9","Rating"]].map(([icon,val,lbl])=>(
-                <div key={lbl} style={{ background:"rgba(255,255,255,0.75)", border:"1px solid rgba(0,0,0,0.07)", borderRadius:14, padding:"14px 18px", backdropFilter:"blur(10px)", textAlign:"center", minWidth:90, transition:"all 0.3s" }}
-                  onMouseEnter={e=>{e.currentTarget.style.borderColor="rgba(26,60,110,0.35)";e.currentTarget.style.transform="translateY(-3px)";}}
-                  onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(0,0,0,0.07)";e.currentTarget.style.transform="";}}>
-                  <div style={{ fontSize:20, marginBottom:4 }}>{icon}</div>
-                  <div style={{ fontWeight:800, fontSize:16, color:theme.accent, fontFamily:"'Playfair Display',serif" }}>{val}</div>
-                  <div style={{ fontSize:11, color:theme.textMuted, marginTop:2 }}>{lbl}</div>
-                </div>
-              ))}
-            </div>
+
           </div>
         </section>
 
@@ -518,7 +503,7 @@ export default function CarRental() {
             <div style={{ textAlign:"center", padding:"80px 20px" }}>
               <div style={{ fontSize:56, marginBottom:16 }}>🚗</div>
               <h3 style={{ fontFamily:"'Playfair Display',serif", fontSize:22, color:theme.text, marginBottom:8 }}>Koi car nahi mili</h3>
-              <p style={{ color:theme.textMuted, marginBottom:16 }}>Alag filter try karein</p>
+              <p style={{ color:theme.textMuted, marginBottom:16 }}>Try another filter</p>
               <button onClick={resetFilters} style={{ background:theme.accent, color:"#fff", border:"none", padding:"10px 24px", borderRadius:50, fontFamily:"'DM Sans',sans-serif", fontWeight:700, cursor:"pointer" }}>Reset Karein</button>
             </div>
           ) : (
@@ -529,7 +514,7 @@ export default function CarRental() {
 
           <div style={{ marginTop:48, background:"rgba(26,60,110,0.05)", border:"1px dashed rgba(26,60,110,0.3)", borderRadius:14, padding:"18px 24px", textAlign:"center" }}>
             <p style={{ fontSize:14, color:theme.textMuted, margin:0, lineHeight:1.7 }}>
-              <strong style={{ color:theme.accent }}>📌 Note:</strong> Prices per day hain. Fuel, toll, aur driver charges alag honge. 7+ days pe special discount milta hai — humse rabta karein.
+              <strong style={{ color:theme.accent }}>📌 Note:</strong> Prices are per day 10 Hours. Fuel, toll, and driver charges are extra. Special discounts available for bookings of 7 days or more — contact us for details.
             </p>
           </div>
         </section>

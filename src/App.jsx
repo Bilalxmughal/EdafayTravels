@@ -50,7 +50,7 @@ const carRentalHighlights = [
 // ─── Component: Hero ─────────────────────────────────────────────────────────
 function Hero() {
   const [activeTab, setActiveTab] = useState("Tours");
-  const tabs = ["Tours", "Hotels", "Flights", "Activities"];
+  const tabs = ["Flights", "Insurance"];
 
   return (
     <section style={{
@@ -75,7 +75,7 @@ function Hero() {
           </button>
         </div>
         <div className="fade-up-delay4" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
-          {[{ num: "10K+", label: "Happy Travelers" }, { num: "50+", label: "Destinations" }, { num: "5Yr", label: "Experience" }].map(s => (
+          {[{ num: "10K+", label: "Happy Travelers" }, { num: "20+", label: "Destinations" }, { num: "5Yr", label: "Experience" }].map(s => (
             <div key={s.label}>
               <div style={{ fontSize: 28, fontWeight: 700, color: theme.accent, fontFamily: "'Playfair Display',serif" }}>{s.num}</div>
               <div style={{ fontSize: 13, color: theme.textMuted, marginTop: 4 }}>{s.label}</div>
@@ -143,9 +143,7 @@ function UmrahSection() {
   return (
     <section style={{ padding: "100px 5%", background: theme.bg }} id="umrah">
       <div style={{ textAlign: "center", marginBottom: 52 }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(26,60,110,0.10)", border: "1px solid rgba(26,60,110,0.25)", color: theme.accent, fontSize: 12, fontWeight: 600, padding: "6px 16px", borderRadius: 50, letterSpacing: "1px", textTransform: "uppercase", marginBottom: 20 }}>
-          🕌 Mubarak Safar
-        </div>
+
         <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>
           Umrah <span className="gradient-text">Package</span>
         </h2>
@@ -192,7 +190,7 @@ function UmrahSection() {
 
       <div style={{ textAlign: "center", marginTop: 48 }}>
         <button className="btn-outline" style={{ color: theme.text }} onClick={() => window.location.hash = '#/umrah'}>
-          Tamam Packages Dekhein →
+          All Packages →
         </button>
       </div>
     </section>
@@ -204,14 +202,12 @@ function CarRentalSection() {
   return (
     <section style={{ padding: "100px 5%", background: theme.bgCard }} id="cars">
       <div style={{ textAlign: "center", marginBottom: 52 }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(26,60,110,0.10)", border: "1px solid rgba(26,60,110,0.25)", color: theme.accent, fontSize: 12, fontWeight: 600, padding: "6px 16px", borderRadius: 50, letterSpacing: "1px", textTransform: "uppercase", marginBottom: 20 }}>
-          🚗 Car Rental Service
-        </div>
+
         <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>
-          Apni <span className="gradient-text">Marzi Ki Car</span> Book Karein
+          Book the <span className="gradient-text">Car You Love</span>
         </h2>
         <p style={{ color: theme.textMuted, maxWidth: 520, margin: "0 auto", lineHeight: 1.7 }}>
-          Hatchback se Coaster tak — 4 se 28 seater tak. Toyota, Honda, Suzuki aur aur bhi. With driver ya self drive — aapki marzi!
+          From hatchbacks to coaches — 4 to 28 seats. Toyota, Honda, Suzuki, and more. With driver — it’s your choice!
         </p>
       </div>
 
@@ -256,7 +252,7 @@ function CarRentalSection() {
 
       <div style={{ textAlign: "center", marginTop: 48 }}>
         <button className="btn-outline" style={{ color: theme.text }} onClick={() => window.location.hash = '#/cars'}>
-          Tamam Cars Dekhein →
+          All Cars →
         </button>
       </div>
     </section>
@@ -304,9 +300,7 @@ function VisaSection() {
   return (
     <section style={{ padding: "100px 5%", background: theme.bg }}>
       <div style={{ textAlign: "center", marginBottom: 52 }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(26,60,110,0.10)", border: "1px solid rgba(26,60,110,0.25)", color: theme.accent, fontSize: 12, fontWeight: 600, padding: "6px 16px", borderRadius: 50, letterSpacing: "1px", textTransform: "uppercase", marginBottom: 20 }}>
-          🛂 Visa Services
-        </div>
+
         <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>
           Get Your <span className="gradient-text">Visa</span> Hassle-Free
         </h2>
@@ -350,7 +344,7 @@ function VisaSection() {
 
       <div style={{ textAlign: "center", marginTop: 48 }}>
         <button className="btn-outline" style={{ color: theme.text }} onClick={() => window.location.hash = '#/visas'}>
-          Tamam Visas Dekhein →
+          All Visas →
         </button>
       </div>
     </section>
