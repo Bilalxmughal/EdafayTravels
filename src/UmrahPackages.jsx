@@ -312,7 +312,7 @@ function BookingForm({ pkg, onClose }) {
 
 function PackageModal({ pkg, onClose }) {
   const [showBooking, setShowBooking] = useState(false);
-  const icons = { "Visa": "🪪", "Travel Insurance": "🛡️", "Air Tickets": "✈️", "Hotel Accommodation": "🏨", "Transport": "🚌" };
+  const icons = { "Visa": "", "Travel Insurance": "", "Air Tickets": "", "Hotel Accommodation": "", "Transport": "" };
 
   return (
     <div className="um-modal-overlay" onClick={onClose}>
@@ -336,7 +336,7 @@ function PackageModal({ pkg, onClose }) {
 
               {/* 🏨 Hotel Details */}
               <div className="um-section">
-                <h3 className="um-section-title" style={{ color: theme.text }}>🏨 Hotel Details</h3>
+                <h3 className="um-section-title" style={{ color: theme.text }}>Hotel Details</h3>
                 <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                   {pkg.hotels.map((hotel, i) => <HotelRow key={i} hotel={hotel} />)}
                 </div>
@@ -344,7 +344,7 @@ function PackageModal({ pkg, onClose }) {
 
               {/* ✅ Price Includes */}
               <div className="um-section">
-                <h3 className="um-section-title" style={{ color: theme.text }}>✅ Price Includes</h3>
+                <h3 className="um-section-title" style={{ color: theme.text }}>Price Includes</h3>
                 <div className="um-includes-grid">
                   {pkg.includes.map((item, i) => (
                     <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, background: theme.bgCard, border: `1px solid ${theme.border}`, borderRadius: 12, padding: "12px 14px" }}>
@@ -355,7 +355,7 @@ function PackageModal({ pkg, onClose }) {
                 </div>
               </div>
 
-              {/* ✈️ Flight Details — with departure schedule */}
+              {/* Flight Details — with departure schedule */}
               <div className="um-section">
                 <h3 className="um-section-title" style={{ color: theme.text }}>✈️ Flight Details</h3>
                 <div style={{ background: theme.bgCard, border: `1px solid ${theme.border}`, borderRadius: 14, padding: "18px 20px" }}>
