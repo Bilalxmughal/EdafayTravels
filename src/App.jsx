@@ -460,9 +460,9 @@ function Hero() {
         </p>
         <div className="fade-up-delay3" style={{ display:"flex", gap:14, marginBottom:48, flexWrap:"wrap" }}>
           <button className="btn-primary" onClick={() => window.location.hash = "#/umrah"}>Explore Packages</button>
-          <button className="btn-outline" style={{ display:"flex", alignItems:"center", gap:8, color:theme.text }}>
-            <span style={{ width:32, height:32, borderRadius:"50%", background:"rgba(26,60,110,0.15)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:12 }}>▶</span>
-            Watch Video
+          <button className="btn-outline" onClick={() => window.location.hash = "#/cars"} style={{ display:"flex", alignItems:"center", gap:8, color:theme.text }}>
+            <span style={{ width:32, height:32, borderRadius:"50%", background:"rgba(26,60,110,0.15)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:14 }}>🚗</span>
+            Car Rental
           </button>
         </div>
         <div className="fade-up-delay4" style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:20 }}>
