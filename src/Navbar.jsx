@@ -114,8 +114,11 @@ export default function Navbar() {
         height: "72px",
       }}>
         <div onClick={() => { window.location.hash = ''; setMenuOpen(false); }}
-          style={{ display: "flex", alignItems: "center", cursor: "pointer", flexShrink: 0 }}>
-          <img src="/src/assets/logo.png" alt="Edafay Travel & Tours" style={{ height: 48, width: "auto", objectFit: "contain" }} />
+          style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", flexShrink: 0 }}>
+          <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg, ${theme.accent}, ${theme.accentLight})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>✈</div>
+          <span style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px", color: theme.text }}>
+            Edafay - Travel & Tours<span style={{ color: theme.accent }}>.</span>
+          </span>
         </div>
 
         <div className="nb-desktop" style={{ gap: 28, alignItems: "center" }}>
