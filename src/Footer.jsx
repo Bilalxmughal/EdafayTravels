@@ -1,10 +1,10 @@
-// ─── Footer.jsx — Shared Footer for all pages ────────────────────────────────
+// ─── Footer.jsx ────────────────────────────────
 import theme from './theme.js';
 import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
 const cols = [
   { title: "Company",  links: ["About Us", "Our Team", "Careers", "Blog"] },
-  { title: "Services", links: ["Umrah Packages", "Travel Insurance", "Visa Assistance", "Car Rent",] },
+  { title: "Services", links: ["Umrah Packages", "Travel Insurance", "Visa Assistance", "Car Rent"] },
   { title: "Support",  links: ["Help Center", "Contact Us", "Privacy Policy", "Terms of Service"] },
 ];
 
@@ -14,8 +14,21 @@ const socials = [
   { icon: <FaInstagram />, label: "Instagram", url: "https://instagram.com/edafaytravels" },
 ];
 
-
-
+// Map link text to hash URLs
+const linkToHash = {
+  "About Us": "#/about",
+  "Our Team": "#/team",
+  "Careers": "#/careers",
+  "Blog": "#/blog",
+  "Umrah Packages": "#/umrah",
+  "Travel Insurance": "#/insurance",
+  "Visa Assistance": "#/visas",
+  "Car Rent": "#/cars",
+  "Help Center": "#/help",
+  "Contact Us": "#/contact",
+  "Privacy Policy": "#/privacy",
+  "Terms of Service": "#/terms",
+};
 
 export default function Footer() {
   return (
@@ -57,41 +70,41 @@ export default function Footer() {
 
           {/* Social Icons */}
           <div style={{ display: "flex", gap: 10 }}>
-  {socials.map(({ icon, label, url }) => (
-    <a
-      key={label}
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      title={label}
-      style={{
-        width: 38,
-        height: 38,
-        borderRadius: 10,
-        background: "rgba(0,0,0,0.04)",
-        border: `1px solid ${theme.border}`,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontSize: 14,
-        cursor: "pointer",
-        transition: "all 0.2s",
-        color: theme.textMuted,
-        textDecoration: "none"
-      }}
-      onMouseEnter={e => {
-        e.currentTarget.style.borderColor = theme.accent;
-        e.currentTarget.style.color = theme.accent;
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.borderColor = theme.border;
-        e.currentTarget.style.color = theme.textMuted;
-      }}
-    >
-      {icon}
-    </a>
-  ))}
-</div>
+            {socials.map(({ icon, label, url }) => (
+              <a
+                key={label}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={label}
+                style={{
+                  width: 38,
+                  height: 38,
+                  borderRadius: 10,
+                  background: "rgba(0,0,0,0.04)",
+                  border: `1px solid ${theme.border}`,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 14,
+                  cursor: "pointer",
+                  transition: "all 0.2s",
+                  color: theme.textMuted,
+                  textDecoration: "none"
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.borderColor = theme.accent;
+                  e.currentTarget.style.color = theme.accent;
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = theme.border;
+                  e.currentTarget.style.color = theme.textMuted;
+                }}
+              >
+                {icon}
+              </a>
+            ))}
+          </div>
         </div>
 
         {/* Link Columns */}
@@ -104,10 +117,13 @@ export default function Footer() {
               {col.links.map(l => (
                 <a
                   key={l}
+                  href={linkToHash[l] || "#"}
                   style={{ fontSize: 13, color: theme.textMuted, textDecoration: "none", cursor: "pointer", transition: "color 0.2s" }}
                   onMouseEnter={e => e.currentTarget.style.color = theme.accent}
                   onMouseLeave={e => e.currentTarget.style.color = theme.textMuted}
-                >{l}</a>
+                >
+                  {l}
+                </a>
               ))}
             </div>
           </div>
