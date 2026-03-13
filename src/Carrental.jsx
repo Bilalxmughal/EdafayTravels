@@ -249,14 +249,7 @@ function BookingForm({ car, onClose }) {
         </div>
       )}
 
-      <div className="cr-toggle-row"
-        onClick={()=>setForm({...form,withDriver:!form.withDriver})}
-        style={{ borderColor:form.withDriver?"rgba(26,60,110,0.4)":"rgba(0,0,0,0.08)", background:form.withDriver?"rgba(26,60,110,0.04)":"transparent" }}>
-        <div className="cr-toggle-box" style={{ background:form.withDriver?theme.accent:"transparent", border:"2px solid "+(form.withDriver?theme.accent:"rgba(0,0,0,0.2)") }}>
-          {form.withDriver && <span style={{ color:"#fff", fontSize:12 }}>✓</span>}
-        </div>
 
-      </div>
 
       <div>
         <label className="cr-label">Special Requirements <span style={{ textTransform:"none", fontWeight:400 }}>(Optional)</span></label>
