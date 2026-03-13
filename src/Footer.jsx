@@ -20,7 +20,7 @@ const socials = [
     href={s.url}
     target="_blank"
     rel="noopener noreferrer"
-    style={{ fontSize:20, marginRight:10 }}
+    style={{ fontSize: 20, marginRight: 10, cursor: "pointer" }}
   >
     {s.icon}
   </a>
