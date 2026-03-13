@@ -118,7 +118,7 @@ export default function Navbar() {
   style={{ display: "flex", alignItems: "center", cursor: "pointer", flexShrink: 0 }}
 >
   <img
-    src="/logo.png"
+    src="/Logo.png"
     alt="Edafay"
     style={{ height: 40, objectFit: "contain" }}
   />
