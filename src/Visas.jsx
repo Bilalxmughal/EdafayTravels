@@ -677,7 +677,7 @@ export default function Visas() {
           <div className="vs-hero-inner">
 
             <h1 className="vs-fu1" style={{ color: theme.text }}>
-              Get your <span className="vs-gold">Visa</span> Hassle-free<br />
+              Get your <span className="vs-gold">Visa</span> Hassle-free
             </h1>
             <p className="vs-fu2" style={{ color: theme.textMuted }}>
               Tourist visa services from Pakistan for 8+ countries with fast processing and a high approval rate. From documentation to application submission, Edafay handles the entire process for you.
@@ -753,7 +753,7 @@ export default function Visas() {
           {/* Bottom note */}
           <div style={{ marginTop: 48, background: "rgba(26,60,110,0.06)", border: "1px dashed rgba(26,60,110,0.35)", borderRadius: 14, padding: "18px 24px", textAlign: "center" }}>
             <p style={{ fontSize: 14, color: theme.textMuted, margin: 0, lineHeight: 1.7 }}>
-              <strong style={{ color: theme.accent }}>📌 Note:</strong> Visa fees aur requirements change ho sakti hain. Final confirmation ke liye hamare team se rabta karein. All fees are subject to embassy changes.
+              <strong style={{ color: theme.accent }}>📌 Note:</strong> All visa fees and requirements may change, contact our team for final confirmation. Fees are subject to embassy regulations.
             </p>
           </div>
         </section>
