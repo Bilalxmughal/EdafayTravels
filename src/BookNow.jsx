@@ -102,12 +102,12 @@ function UmrahForm({ onSubmit }) {
   const setU = (k,v) => setUser(p => ({ ...p, [k]:v }));
 
   const packages = [
-    "Economy Umrah Package – PKR 175,000",
-    "Standard Umrah Package – PKR 280,000",
-    "Premium Umrah Package – PKR 420,000",
-    "Luxury Umrah Package – PKR 650,000",
-    "Family Umrah Package – PKR 520,000",
-    "Group Umrah Package – PKR 195,000",
+    "Economy Umrah Package",
+    "Standard Umrah Package",
+    "Premium Umrah Package",
+    "Luxury Umrah Package",
+    "Family Umrah Package",
+    "Group Umrah Package",
   ];
 
   const handle = () => {
