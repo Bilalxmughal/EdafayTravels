@@ -134,14 +134,12 @@ function UmrahSection() {
   return (
     <section style={{ padding: "100px 5%", background: theme.bg }} id="umrah">
       <div style={{ textAlign: "center", marginBottom: 52 }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(26,60,110,0.12)", border: "1px solid rgba(26,60,110,0.3)", color: "#1a3c6e", fontSize: 12, fontWeight: 600, padding: "6px 16px", borderRadius: 50, letterSpacing: "1px", textTransform: "uppercase", marginBottom: 20 }}>
-          🕌 Mubarak Safar
-        </div>
+
         <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>
-          Hamara <span className="gradient-text">Umrah Package</span>
+          Umrah <span className="gradient-text">Package</span>
         </h2>
         <p style={{ color: theme.textMuted, maxWidth: 520, margin: "0 auto", lineHeight: 1.7 }}>
-          Economy se Luxury tak — har budget ke liye perfect Umrah package. Visa, flights, hotels aur transport — sab kuch included.
+          We offer carefully designed Umrah packages for every budget — from economy to luxury — including visa processing, flights, hotel accommodation, and transportation.
         </p>
       </div>
 
@@ -204,7 +202,7 @@ function UmrahSection() {
       {/* View All Button */}
       <div style={{ textAlign: "center", marginTop: 48 }}>
         <button className="btn-outline" style={{ color: theme.text }} onClick={() => window.location.hash = '#/umrah'}>
-          Tamam Packages Dekhein →
+          All Packages →
         </button>
       </div>
     </section>
@@ -252,14 +250,12 @@ function VisaSection() {
   return (
     <section style={{ padding: "100px 5%", background: theme.bg }}>
       <div style={{ textAlign: "center", marginBottom: 52 }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(26,60,110,0.12)", border: "1px solid rgba(26,60,110,0.3)", color: "#1a3c6e", fontSize: 12, fontWeight: 600, padding: "6px 16px", borderRadius: 50, letterSpacing: "1px", textTransform: "uppercase", marginBottom: 20 }}>
-          🌍 Visa Services
-        </div>
+
         <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>
           Apna <span className="gradient-text">Visa</span> Asaani Se Hasil Karein
         </h2>
         <p style={{ color: theme.textMuted, maxWidth: 520, margin: "0 auto", lineHeight: 1.7 }}>
-          8+ countries ke tourist visas — fast processing, high approval rate. Documents se apply tak sab kuch Edafay handle karta hai.
+          We provide tourist visa services for 8+ countries with fast processing and a high approval rate. From documentation to application submission, Edafay handles the entire process for you.
         </p>
       </div>
 
@@ -325,7 +321,7 @@ function VisaSection() {
       {/* View All */}
       <div style={{ textAlign: "center", marginTop: 48 }}>
         <button className="btn-outline" style={{ color: theme.text }} onClick={() => window.location.hash = '#/visas'}>
-          Tamam Visas Dekhein →
+          All Visas →
         </button>
       </div>
     </section>
@@ -369,7 +365,7 @@ function CTA() {
   return (
     <section style={{ padding: "100px 5%", background: `linear-gradient(135deg, rgba(26,60,110,0.08) 0%, rgba(76,175,125,0.05) 100%), ${theme.bg}`, textAlign: "center" }}>
       <div style={{ maxWidth: 640, margin: "0 auto" }}>
-        <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,58px)", fontWeight: 700, marginBottom: 20, lineHeight: 1.15, color: theme.text }}>Ready for Your<br />Next <span className="gradient-text">Adventure?</span></h2>
+        <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,58px)", fontWeight: 700, marginBottom: 20, lineHeight: 1.15, color: theme.text }}>Ready for Your<br />Next <span className="gradient-text">Trip?</span></h2>
         <p style={{ color: theme.textMuted, lineHeight: 1.75, marginBottom: 40, fontSize: 16 }}>Join thousands of explorers who've discovered the world with Edafay. Subscribe and get exclusive deals, tips & early access.</p>
         <div style={{ display: "flex", gap: 12, maxWidth: 480, margin: "0 auto", background: "rgba(0,0,0,0.04)", border: `1px solid ${theme.border}`, borderRadius: 50, padding: "6px 6px 6px 24px" }}>
           <input className="search-input" placeholder="Enter your email address" style={{ flex: 1, color: theme.text }} />

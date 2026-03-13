@@ -339,16 +339,16 @@ function VisaBookingForm({ visa, onClose }) {
     <div style={{ textAlign: "center", padding: "24px 0" }}>
       <div style={{ fontSize: 60, marginBottom: 16 }}>✅</div>
       <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 700, color: theme.text, marginBottom: 10 }}>
-        Application Jama Ho Gayi!
+        Your Application Has Been Submitted!
       </h3>
       <p style={{ color: theme.textMuted, lineHeight: 1.7, marginBottom: 8 }}>
-        Aapki <strong style={{ color: theme.accent }}>{visa.country} Visa</strong> application mil gayi.
+        We're Received your<strong style={{ color: theme.accent }}>{visa.country} Visa</strong> application.
       </p>
       <p style={{ color: theme.textMuted, lineHeight: 1.7, marginBottom: 24, fontSize: 13 }}>
-        Hamari team documents verify karke <strong>24 ghante mein</strong> aapse rabta karegi.
+        Our team will review your documents and get in touch with you within <strong>24 hours</strong>.
       </p>
       <button onClick={onClose} style={{ background: theme.accent, color: "#ffffff", border: "none", padding: "12px 32px", borderRadius: 50, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
-        Theek Hai, Wapas Jao
+        Back
       </button>
     </div>
   );
@@ -467,7 +467,7 @@ function VisaBookingForm({ visa, onClose }) {
         {loading ? "⏳ Application jama ho rahi hai..." : "📤 Visa Application Submit Karein"}
       </button>
       <p style={{ fontSize: 11, color: theme.textMuted, textAlign: "center", margin: 0 }}>
-        🔒 Aapke documents safe hain — Edafay kabhi third party ko share nahi karta
+        🔒 Your information is safe — Edafay never share your Documents with third party.
       </p>
     </div>
   );
@@ -515,7 +515,7 @@ function VisaModal({ visa, onClose }) {
 
               {/* Fee Table */}
               <div className="vs-section">
-                <h3 className="vs-section-title" style={{ color: theme.text }}>💰 Visa Fee</h3>
+                <h3 className="vs-section-title" style={{ color: theme.text }}>Visa Fee</h3>
                 <table className="vs-fee-modal-table" style={{ background: theme.bgCard, border: `1px solid ${theme.border}`, borderRadius: 12, overflow: "hidden", width: "100%", borderCollapse: "collapse" }}>
                   <thead>
                     <tr style={{ background: "rgba(26,60,110,0.1)" }}>
@@ -536,7 +536,7 @@ function VisaModal({ visa, onClose }) {
 
               {/* Requirements */}
               <div className="vs-section">
-                <h3 className="vs-section-title" style={{ color: theme.text }}>📋 Requirements</h3>
+                <h3 className="vs-section-title" style={{ color: theme.text }}>Requirements</h3>
                 <div className="vs-req-grid">
                   {visa.requirements.map((req, i) => (
                     <div key={i} className="vs-req-item"
@@ -560,19 +560,19 @@ function VisaModal({ visa, onClose }) {
                 <button onClick={onClose} style={{ flex: 1, background: "transparent", color: theme.text, border: `1.5px solid ${theme.border}`, padding: "13px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 500, cursor: "pointer" }}
                   onMouseEnter={e => { e.currentTarget.style.borderColor = theme.accent; e.currentTarget.style.color = theme.accent; }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor = theme.border; e.currentTarget.style.color = theme.text; }}>
-                  ← Wapas Jao
+                  ← Back
                 </button>
                 <button onClick={() => setShowForm(true)} style={{ flex: 2, background: theme.accent, color: "#ffffff", border: "none", padding: "13px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 700, cursor: "pointer" }}
                   onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 10px 28px rgba(26,60,110,0.4)"; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}>
-                  📤 Apply Karein
+                  Apply
                 </button>
               </div>
             </>
           ) : (
             <>
               <button onClick={() => setShowForm(false)} style={{ background: "none", border: "none", color: theme.accent, fontSize: 13, fontWeight: 600, cursor: "pointer", marginBottom: 20, padding: 0, fontFamily: "'DM Sans',sans-serif" }}>
-                ← Details Pe Wapas Jao
+                ← Back to Details
               </button>
               <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: 20, fontWeight: 700, color: theme.text, marginBottom: 20 }}>
                 {visa.flag} <span style={{ color: theme.accent }}>{visa.country}</span> Visa Application
@@ -677,12 +677,12 @@ export default function Visas() {
         <section className="vs-hero">
           <div className="vs-hero-bg" />
           <div className="vs-hero-inner">
-            <div className="vs-badge vs-fu">🌍 Visa Services</div>
+
             <h1 className="vs-fu1" style={{ color: theme.text }}>
-              Apna <span className="vs-gold">Visa</span> Asaani Se<br />Hasil Karein
+              Get your <span className="vs-gold">Visa</span> Hassle-free<br />
             </h1>
             <p className="vs-fu2" style={{ color: theme.textMuted }}>
-              Pakistan se 8+ countries ke tourist visas — fast processing, high approval rate. Documents se apply tak — sab kuch Edafay handle karta hai.
+              Tourist visa services from Pakistan for 8+ countries with fast processing and a high approval rate. From documentation to application submission, Edafay handles the entire process for you.
             </p>
 
             {/* Search Bar */}
@@ -690,7 +690,7 @@ export default function Visas() {
               <span className="vs-search-icon">🔍</span>
               <input
                 className="vs-search-input"
-                placeholder="Country dhundein — Malaysia, Dubai, Turkey..."
+                placeholder="Search Country — Malaysia, Dubai, Turkey..."
                 value={search}
                 onChange={e => setSearch(e.target.value)}
               />
@@ -700,16 +700,7 @@ export default function Visas() {
               )}
             </div>
 
-            {/* Stats */}
-            <div className="vs-hero-stats vs-fu3" style={{ marginTop: 40 }}>
-              {[["🌍", "8+", "Countries"], ["⚡", "1-7", "Days Process"], ["✅", "97%+", "Approval"], ["📁", "Easy", "Docs"]].map(([icon, val, lbl]) => (
-                <div key={lbl} className="vs-stat">
-                  <div style={{ fontSize: 22, marginBottom: 4 }}>{icon}</div>
-                  <div style={{ fontSize: 20, fontWeight: 800, color: theme.accent, fontFamily: "'Playfair Display',serif" }}>{val}</div>
-                  <div style={{ fontSize: 11, color: theme.textMuted }}>{lbl}</div>
-                </div>
-              ))}
-            </div>
+
           </div>
         </section>
 
@@ -748,7 +739,7 @@ export default function Visas() {
             <div style={{ textAlign: "center", padding: "80px 20px" }}>
               <div style={{ fontSize: 56, marginBottom: 16 }}>🔍</div>
               <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, color: theme.text, marginBottom: 8 }}>Koi nateeja nahi mila</h3>
-              <p style={{ color: theme.textMuted }}>Alag country ya filter try karein</p>
+              <p style={{ color: theme.textMuted }}>Try another country or filter</p>
               <button onClick={() => { setSearch(""); setFilter("All"); }} style={{ marginTop: 16, background: theme.accent, color: "#ffffff", border: "none", padding: "10px 24px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontWeight: 700, cursor: "pointer" }}>
                 Reset Karein
               </button>

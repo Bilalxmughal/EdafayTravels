@@ -403,7 +403,7 @@ function PackageModal({ pkg, onClose }) {
                   <button onClick={() => setShowBooking(true)} style={{ background: theme.accent, color: "#ffffff", border: "none", padding: "12px 28px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 700, cursor: "pointer" }}
                     onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 10px 28px rgba(26,60,110,0.4)"; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}>
-                    📋 Book Package
+                    Book Package
                   </button>
                 </div>
               </div>
@@ -414,7 +414,7 @@ function PackageModal({ pkg, onClose }) {
                 ← Back to Package Details
               </button>
               <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 700, color: theme.text, marginBottom: 20 }}>
-                📋 Book <span style={{ color: theme.accent }}>{pkg.name}</span>
+                Book <span style={{ color: theme.accent }}>{pkg.name}</span>
               </h3>
               <BookingForm pkg={pkg} onClose={onClose} />
             </>
