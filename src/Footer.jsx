@@ -14,22 +14,9 @@ const socials = [
   { icon: <FaInstagram />, label: "Instagram", url: "https://instagram.com/edafaytravels" },
 ];
 
-{socials.map((s, i) => (
-  <a
-    key={i}
-    href={s.url}
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{
-      fontSize: 20,
-      marginRight: 12,
-      display: "inline-block",
-      cursor: "pointer"
-    }}
-  >
-    {s.icon}
-  </a>
-))}
+
+
+
 export default function Footer() {
   return (
     <footer style={{
@@ -70,23 +57,41 @@ export default function Footer() {
 
           {/* Social Icons */}
           <div style={{ display: "flex", gap: 10 }}>
-            {socials.map(({ icon, label }) => (
-              <div
-                key={label}
-                title={label}
-                style={{
-                  width: 38, height: 38, borderRadius: 10,
-                  background: "rgba(0,0,0,0.04)",
-                  border: `1px solid ${theme.border}`,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 14, cursor: "pointer", transition: "all 0.2s",
-                  color: theme.textMuted,
-                }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = theme.accent; e.currentTarget.style.color = theme.accent; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = theme.border; e.currentTarget.style.color = theme.textMuted; }}
-              >{icon}</div>
-            ))}
-          </div>
+  {socials.map(({ icon, label, url }) => (
+    <a
+      key={label}
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      title={label}
+      style={{
+        width: 38,
+        height: 38,
+        borderRadius: 10,
+        background: "rgba(0,0,0,0.04)",
+        border: `1px solid ${theme.border}`,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: 14,
+        cursor: "pointer",
+        transition: "all 0.2s",
+        color: theme.textMuted,
+        textDecoration: "none"
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.borderColor = theme.accent;
+        e.currentTarget.style.color = theme.accent;
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.borderColor = theme.border;
+        e.currentTarget.style.color = theme.textMuted;
+      }}
+    >
+      {icon}
+    </a>
+  ))}
+</div>
         </div>
 
         {/* Link Columns */}
