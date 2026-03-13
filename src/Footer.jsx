@@ -1,18 +1,24 @@
 // ─── Footer.jsx — Shared Footer for all pages ────────────────────────────────
 import theme from './theme.js';
+import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
 const cols = [
   { title: "Company",  links: ["About Us", "Our Team", "Careers", "Press", "Blog"] },
-  { title: "Services", links: ["Tour Packages", "Hotel Booking", "Flight Tickets", "Travel Insurance", "Visa Assistance"] },
-  { title: "Support",  links: ["Help Center", "Contact Us", "Privacy Policy", "Terms of Service", "Refund Policy"] },
+  { title: "Services", links: ["Umrah Packages", "Travel Insurance", "Visa Assistance", "Car Rent",] },
+  { title: "Support",  links: ["Help Center", "Contact Us", "Privacy Policy", "Terms of Service"] },
 ];
 
 const socials = [
-  { icon: "𝕏",  label: "Twitter"   },
-  { icon: "f",  label: "Facebook"  },
-  { icon: "in", label: "LinkedIn"  },
-  { icon: "📸", label: "Instagram" },
+  { icon: <FaFacebookF />, label: "Facebook" },
+  { icon: <FaLinkedinIn />, label: "LinkedIn" },
+  { icon: <FaInstagram />, label: "Instagram" },
 ];
+
+{socials.map((s, i) => (
+  <div key={i} style={{ fontSize:20 }}>
+    {s.icon} {s.label}
+  </div>
+))}
 
 export default function Footer() {
   return (
