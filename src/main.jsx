@@ -8,6 +8,7 @@ import About from './About.jsx'
 import UmrahPackages from './UmrahPackages.jsx'
 import Visas from './Visas.jsx'
 import CarRental from './Carrental.jsx'
+import Insurance from './Insurance.jsx'
 
 
 function Root() {
