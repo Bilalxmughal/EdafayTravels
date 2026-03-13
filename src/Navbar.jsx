@@ -113,16 +113,10 @@ export default function Navbar() {
         display: "flex", alignItems: "center", justifyContent: "space-between",
         height: "72px",
       }}>
-        <div 
-  onClick={() => { window.location.hash = ''; setMenuOpen(false); }}
-  style={{ display: "flex", alignItems: "center", cursor: "pointer", flexShrink: 0 }}
->
-  <img
-    src="/Logo.png"
-    alt="Edafay"
-    style={{ height: 40, objectFit: "contain" }}
-  />
-</div>
+        <div onClick={() => { window.location.hash = ''; setMenuOpen(false); }}
+          style={{ display: "flex", alignItems: "center", cursor: "pointer", flexShrink: 0 }}>
+          <img src="/src/assets/Logo.png" alt="Edafay Travel & Tours" style={{ height: 48, width: "auto", objectFit: "contain" }} />
+        </div>
 
         <div className="nb-desktop" style={{ gap: 28, alignItems: "center" }}>
           {links.map(({ label, hash }) => (
