@@ -460,20 +460,10 @@ function Hero() {
         </p>
         <div className="fade-up-delay3" style={{ display:"flex", gap:14, marginBottom:48, flexWrap:"wrap" }}>
           <button className="btn-primary" onClick={() => window.location.hash = "#/umrah"}>Explore Packages</button>
-          <button
-  className="btn-outline"
-  onClick={() => window.location.hash = "#/cars"}
-  style={{
-    padding: "10px 20px",
-    borderRadius: "30px",
-    border: "1px solid rgba(0,0,0,0.15)",
-    background: "transparent",
-    color: theme.text,
-    fontSize: "14px",
-    fontWeight: "500",
-    cursor: "pointer",
-    transition: "all 0.3s ease"
-  }}
+          <button 
+  className="btn-outline" 
+  onClick={() => window.location.hash = "#/cars"} 
+  style={{ color: theme.text }}
 >
   Car Rental
 </button>
