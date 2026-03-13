@@ -73,7 +73,7 @@ function UserDetails({ data, onChange }) {
 function ThankYou({ category, onReset }) {
   return (
     <div style={{ textAlign:"center", padding:"60px 20px" }}>
-      <div style={{ fontSize:72, marginBottom:20 }}>✅</div>
+      <div style={{ fontSize:72, marginBottom:20 }}></div>
       <h2 style={{ fontSize:28, fontWeight:700, color:theme.text, marginBottom:12, fontFamily:"'Playfair Display',serif" }}>
         Booking Received!
       </h2>
