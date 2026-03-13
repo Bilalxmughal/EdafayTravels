@@ -3,21 +3,27 @@ import theme from './theme.js';
 import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
 const cols = [
-  { title: "Company",  links: ["About Us", "Our Team", "Careers", "Press", "Blog"] },
+  { title: "Company",  links: ["About Us", "Our Team", "Careers", "Blog"] },
   { title: "Services", links: ["Umrah Packages", "Travel Insurance", "Visa Assistance", "Car Rent",] },
   { title: "Support",  links: ["Help Center", "Contact Us", "Privacy Policy", "Terms of Service"] },
 ];
 
 const socials = [
-  { icon: <FaFacebookF />, label: "Facebook" },
-  { icon: <FaLinkedinIn />, label: "LinkedIn" },
-  { icon: <FaInstagram />, label: "Instagram" },
+  { icon: <FaFacebookF />, label: "Facebook", url: "https://facebook.com/edafaytravels" },
+  { icon: <FaLinkedinIn />, label: "LinkedIn", url: "https://linkedin.com/company/edafaytravels" },
+  { icon: <FaInstagram />, label: "Instagram", url: "https://instagram.com/edafaytravels" },
 ];
 
 {socials.map((s, i) => (
-  <div key={i} style={{ fontSize:20 }}>
-    {s.icon} {s.label}
-  </div>
+  <a
+    key={i}
+    href={s.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ fontSize:20, marginRight:10 }}
+  >
+    {s.icon}
+  </a>
 ))}
 
 export default function Footer() {
