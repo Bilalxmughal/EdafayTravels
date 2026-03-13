@@ -465,9 +465,7 @@ export default function Insurance() {
         color:"#fff",
       }}>
         <div style={{ maxWidth:700, margin:"0 auto" }}>
-          <div style={{ display:"inline-flex", alignItems:"center", gap:8, background:"rgba(255,255,255,0.15)", border:"1px solid rgba(255,255,255,0.3)", color:"#fff", fontSize:12, fontWeight:600, padding:"6px 18px", borderRadius:50, letterSpacing:"1px", textTransform:"uppercase", marginBottom:24, backdropFilter:"blur(8px)" }}>
-            🛡️ Travel Insurance
-          </div>
+
           <h1 className="serif" style={{ fontSize:"clamp(32px,4.5vw,58px)", fontWeight:700, lineHeight:1.15, marginBottom:18, letterSpacing:"-0.5px" }}>
             Book Travel Insurance<br />Online with Ease
           </h1>

@@ -21,8 +21,9 @@ export default function Navbar() {
     { label: "Home",          hash: ""          },
     { label: "About",         hash: "#/about"   },
     { label: "Umrah Package", hash: "#/umrah"   },
-    { label: "Car Rental",    hash: "#/cars"    },
+    { label: "Insurance",     hash: "#/insurance"},
     { label: "Visas",         hash: "#/visas"   },
+    { label: "Car Rental",    hash: "#/cars"    },
     { label: "Contact",       hash: "#/contact" },
   ];
 

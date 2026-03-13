@@ -423,7 +423,7 @@ function FlightPanel() {
       )}
 
       <button className="btn-primary" style={{ width:"100%", padding:"15px", borderRadius:14, fontSize:15, fontWeight:700 }}>
-        🔍 Search Flights
+        Search Flights
       </button>
     </div>
   );
@@ -527,9 +527,7 @@ function UmrahSection() {
   return (
     <section style={{ padding:"100px 5%", background:theme.bg }} id="umrah">
       <div style={{ textAlign:"center", marginBottom:52 }}>
-        <div style={{ display:"inline-flex", alignItems:"center", gap:6, background:"rgba(26,60,110,0.10)", border:"1px solid rgba(26,60,110,0.25)", color:theme.accent, fontSize:12, fontWeight:600, padding:"6px 16px", borderRadius:50, letterSpacing:"1px", textTransform:"uppercase", marginBottom:20 }}>
-          🕌 Mubarak Safar
-        </div>
+
         <h2 className="serif" style={{ fontSize:"clamp(32px,4vw,52px)", fontWeight:700, marginBottom:16, color:theme.text }}>
           Umrah <span className="gradient-text">Packages</span>
         </h2>
@@ -582,9 +580,7 @@ function CarRentalSection() {
   return (
     <section style={{ padding:"100px 5%", background:theme.bgCard }} id="cars">
       <div style={{ textAlign:"center", marginBottom:52 }}>
-        <div style={{ display:"inline-flex", alignItems:"center", gap:6, background:"rgba(26,60,110,0.10)", border:"1px solid rgba(26,60,110,0.25)", color:theme.accent, fontSize:12, fontWeight:600, padding:"6px 16px", borderRadius:50, letterSpacing:"1px", textTransform:"uppercase", marginBottom:20 }}>
-          🚗 Car Rental Service
-        </div>
+
         <h2 className="serif" style={{ fontSize:"clamp(32px,4vw,52px)", fontWeight:700, marginBottom:16, color:theme.text }}>
           Book the <span className="gradient-text">Car You Love</span>
         </h2>
@@ -670,9 +666,7 @@ function VisaSection() {
   return (
     <section style={{ padding:"100px 5%", background:theme.bg }}>
       <div style={{ textAlign:"center", marginBottom:52 }}>
-        <div style={{ display:"inline-flex", alignItems:"center", gap:6, background:"rgba(26,60,110,0.10)", border:"1px solid rgba(26,60,110,0.25)", color:theme.accent, fontSize:12, fontWeight:600, padding:"6px 16px", borderRadius:50, letterSpacing:"1px", textTransform:"uppercase", marginBottom:20 }}>
-          🛂 Visa Services
-        </div>
+
         <h2 className="serif" style={{ fontSize:"clamp(32px,4vw,52px)", fontWeight:700, marginBottom:16, color:theme.text }}>
           Get Your <span className="gradient-text">Visa</span> Hassle-Free
         </h2>
