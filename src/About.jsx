@@ -77,7 +77,7 @@ export default function About() {
 
       {/* ── About Info ── */}
       <section className="ab-section">
-
+        <div className="ab-about-wrap">
 
           {/* Left — Story Text */}
           <div className="ab-about-text">
@@ -99,18 +99,7 @@ export default function About() {
             </p>
           </div>
 
-          {/* Right — Info Cards */}
-          <div className="ab-info-grid">
-            {aboutInfo.map((item) => (
-              <div key={item.label} className="ab-info-card"
-                style={{ background: theme.bgCard, border: `1px solid ${theme.border}` }}>
-                <div className="ab-info-icon">{item.icon}</div>
-                <div className="ab-info-val" style={{ color: theme.accent }}>{item.value}</div>
-                <div className="ab-info-lbl" style={{ color: theme.textMuted }}>{item.label}</div>
-              </div>
-            ))}
-          </div>
-
+        </div>
       </section>
 
       <div className="ab-divider" />
