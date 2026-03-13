@@ -38,6 +38,15 @@ const visasList = [
   { id: 6, country: "Saudi Arabia", flag: "🇸🇦", img: "https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=600&q=80", type: "Tourist / Umrah",  processing: "7-10 Days", fee: "PKR 28,000", approvalRate: "96%" },
 ];
 
+const carRentalHighlights = [
+  { id: 1, name: "Toyota Corolla",      company: "Toyota", type: "Sedan",       seats: 4,  img: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=600&q=80", price: "PKR 8,000",  tag: "Most Popular" },
+  { id: 2, name: "Toyota Fortuner",     company: "Toyota", type: "SUV",         seats: 6,  img: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600&q=80", price: "PKR 22,000", tag: "Luxury SUV" },
+  { id: 3, name: "Toyota Coaster",      company: "Toyota", type: "Coaster",     seats: 28, img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80", price: "PKR 35,000", tag: "Group Travel" },
+  { id: 4, name: "Honda Civic",         company: "Honda",  type: "Sedan",       seats: 4,  img: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&q=80", price: "PKR 9,500",  tag: "Premium" },
+  { id: 5, name: "KIA Sportage",        company: "KIA",    type: "SUV",         seats: 6,  img: "https://images.unsplash.com/photo-1580711508375-56e8c39e8d7d?w=600&q=80", price: "PKR 16,000", tag: "Modern SUV" },
+  { id: 6, name: "Toyota HiAce Cabin",  company: "Toyota", type: "Grand Cabin", seats: 13, img: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=80", price: "PKR 18,000", tag: "Family Cabin" },
+];
+
 // ─── Component: Hero ─────────────────────────────────────────────────────────
 function Hero() {
   const [activeTab, setActiveTab] = useState("Tours");
@@ -134,7 +143,9 @@ function UmrahSection() {
   return (
     <section style={{ padding: "100px 5%", background: theme.bg }} id="umrah">
       <div style={{ textAlign: "center", marginBottom: 52 }}>
-
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(26,60,110,0.10)", border: "1px solid rgba(26,60,110,0.25)", color: theme.accent, fontSize: 12, fontWeight: 600, padding: "6px 16px", borderRadius: 50, letterSpacing: "1px", textTransform: "uppercase", marginBottom: 20 }}>
+          🕌 Mubarak Safar
+        </div>
         <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>
           Umrah <span className="gradient-text">Package</span>
         </h2>
@@ -143,37 +154,21 @@ function UmrahSection() {
         </p>
       </div>
 
-      {/* Package Cards Grid */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }} className="dest-grid">
         {umrahPackages.map((pkg, i) => (
           <div key={pkg.id} className="dest-card card-hover"
             style={{ borderRadius: 20, overflow: "hidden", background: theme.bgCard, border: `1px solid ${theme.border}`, cursor: "pointer", animation: `fadeUp 0.6s ${i * 0.1}s both` }}
             onClick={() => window.location.hash = '#/umrah'}>
-
-            {/* Image */}
             <div style={{ position: "relative", height: 210, overflow: "hidden" }}>
               <img src={pkg.img} alt={pkg.name} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }} />
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 55%)" }} />
-
-              {/* Tag */}
-              <span style={{ position: "absolute", top: 14, right: 14, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)", color: theme.accent, fontSize: 11, fontWeight: 700, padding: "4px 12px", borderRadius: 20, border: "1px solid rgba(26,60,110,0.3)" }}>
-                {pkg.tag}
-              </span>
-
-              {/* Category */}
-              <span style={{ position: "absolute", top: 14, left: 14, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)", color: "#fff", fontSize: 10, fontWeight: 700, padding: "3px 10px", borderRadius: 20, textTransform: "uppercase", letterSpacing: "0.5px" }}>
-                {pkg.category}
-              </span>
-
-              {/* Bottom name */}
+              <span style={{ position: "absolute", top: 14, right: 14, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)", color: theme.accent, fontSize: 11, fontWeight: 700, padding: "4px 12px", borderRadius: 20, border: "1px solid rgba(26,60,110,0.3)" }}>{pkg.tag}</span>
+              <span style={{ position: "absolute", top: 14, left: 14, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)", color: "#fff", fontSize: 10, fontWeight: 700, padding: "3px 10px", borderRadius: 20, textTransform: "uppercase", letterSpacing: "0.5px" }}>{pkg.category}</span>
               <div style={{ position: "absolute", bottom: 14, left: 16 }}>
                 <h3 style={{ fontSize: 17, fontWeight: 700, color: "#fff", margin: 0, fontFamily: "'Playfair Display',serif" }}>{pkg.name}</h3>
               </div>
             </div>
-
-            {/* Body */}
             <div style={{ padding: "16px 18px 18px" }}>
-              {/* Price & Days */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
                 <div>
                   <div style={{ fontSize: 19, fontWeight: 800, color: theme.accent, fontFamily: "'Playfair Display',serif" }}>{pkg.price}</div>
@@ -183,26 +178,85 @@ function UmrahSection() {
                   <div style={{ fontSize: 13, fontWeight: 600, color: theme.text }}>⏱ {pkg.days}</div>
                 </div>
               </div>
-
-              {/* Rating + Includes hint */}
               <div style={{ display: "flex", gap: 12, alignItems: "center", paddingTop: 12, borderTop: `1px solid ${theme.border}`, justifyContent: "space-between" }}>
                 <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                   <span style={{ fontSize: 13, color: theme.accent, fontWeight: 700 }}>★ {pkg.rating}</span>
                   <span style={{ fontSize: 12, color: theme.textMuted }}>({pkg.reviews} reviews)</span>
                 </div>
-                <span style={{ fontSize: 11, color: theme.textMuted, background: theme.bgCard, border: `1px solid ${theme.border}`, padding: "3px 10px", borderRadius: 20 }}>
-                  ✈ Visa Included
-                </span>
+                <span style={{ fontSize: 11, color: theme.textMuted, background: theme.bgCard, border: `1px solid ${theme.border}`, padding: "3px 10px", borderRadius: 20 }}>✈ Visa Included</span>
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* View All Button */}
       <div style={{ textAlign: "center", marginTop: 48 }}>
         <button className="btn-outline" style={{ color: theme.text }} onClick={() => window.location.hash = '#/umrah'}>
-          All Packages →
+          Tamam Packages Dekhein →
+        </button>
+      </div>
+    </section>
+  );
+}
+
+// ─── Component: Car Rental Section ───────────────────────────────────────────
+function CarRentalSection() {
+  return (
+    <section style={{ padding: "100px 5%", background: theme.bgCard }} id="cars">
+      <div style={{ textAlign: "center", marginBottom: 52 }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(26,60,110,0.10)", border: "1px solid rgba(26,60,110,0.25)", color: theme.accent, fontSize: 12, fontWeight: 600, padding: "6px 16px", borderRadius: 50, letterSpacing: "1px", textTransform: "uppercase", marginBottom: 20 }}>
+          🚗 Car Rental Service
+        </div>
+        <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>
+          Apni <span className="gradient-text">Marzi Ki Car</span> Book Karein
+        </h2>
+        <p style={{ color: theme.textMuted, maxWidth: 520, margin: "0 auto", lineHeight: 1.7 }}>
+          Hatchback se Coaster tak — 4 se 28 seater tak. Toyota, Honda, Suzuki aur aur bhi. With driver ya self drive — aapki marzi!
+        </p>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }} className="dest-grid">
+        {carRentalHighlights.map((car, i) => (
+          <div key={car.id} className="dest-card card-hover"
+            style={{ borderRadius: 20, overflow: "hidden", background: theme.bg, border: `1px solid ${theme.border}`, cursor: "pointer", animation: `fadeUp 0.6s ${i * 0.1}s both` }}
+            onClick={() => window.location.hash = '#/cars'}>
+
+            <div style={{ position: "relative", height: 200, overflow: "hidden" }}>
+              <img src={car.img} alt={car.name} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }} />
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 55%)" }} />
+              <span style={{ position: "absolute", top: 12, right: 12, background: "rgba(26,60,110,0.85)", backdropFilter: "blur(6px)", color: "#fff", fontSize: 10, fontWeight: 700, padding: "3px 10px", borderRadius: 20, textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                {car.type}
+              </span>
+              <span style={{ position: "absolute", top: 12, left: 12, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)", color: "#fff", fontSize: 10, fontWeight: 700, padding: "3px 10px", borderRadius: 20 }}>
+                🪑 {car.seats} Seats
+              </span>
+              <div style={{ position: "absolute", bottom: 14, left: 16 }}>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: "#fff", margin: 0, fontFamily: "'Playfair Display',serif" }}>{car.name}</h3>
+              </div>
+            </div>
+
+            <div style={{ padding: "14px 16px 16px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+                <span style={{ fontSize: 11, color: theme.accent, fontWeight: 700, background: "rgba(26,60,110,0.08)", border: "1px solid rgba(26,60,110,0.15)", padding: "3px 10px", borderRadius: 20 }}>
+                  {car.tag}
+                </span>
+                <div style={{ textAlign: "right" }}>
+                  <div style={{ fontSize: 17, fontWeight: 800, color: theme.accent, fontFamily: "'Playfair Display',serif" }}>{car.price}</div>
+                  <div style={{ fontSize: 10, color: theme.textMuted }}>per day</div>
+                </div>
+              </div>
+              <div style={{ paddingTop: 10, borderTop: `1px solid ${theme.border}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ fontSize: 12, color: theme.textMuted }}>🚗 {car.company} • With Driver Available</span>
+                <span style={{ fontSize: 11, color: "#16a34a", fontWeight: 700, background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.2)", padding: "2px 8px", borderRadius: 12 }}>✅ Available</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ textAlign: "center", marginTop: 48 }}>
+        <button className="btn-outline" style={{ color: theme.text }} onClick={() => window.location.hash = '#/cars'}>
+          Tamam Cars Dekhein →
         </button>
       </div>
     </section>
@@ -250,7 +304,9 @@ function VisaSection() {
   return (
     <section style={{ padding: "100px 5%", background: theme.bg }}>
       <div style={{ textAlign: "center", marginBottom: 52 }}>
-
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(26,60,110,0.10)", border: "1px solid rgba(26,60,110,0.25)", color: theme.accent, fontSize: 12, fontWeight: 600, padding: "6px 16px", borderRadius: 50, letterSpacing: "1px", textTransform: "uppercase", marginBottom: 20 }}>
+          🛂 Visa Services
+        </div>
         <h2 className="serif" style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 700, marginBottom: 16, color: theme.text }}>
           Get Your <span className="gradient-text">Visa</span> Hassle-Free
         </h2>
@@ -259,49 +315,25 @@ function VisaSection() {
         </p>
       </div>
 
-      {/* Visa Cards */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }} className="dest-grid">
         {visasList.map((visa, i) => (
           <div key={visa.id} className="dest-card card-hover"
             style={{ borderRadius: 20, overflow: "hidden", background: theme.bgCard, border: `1px solid ${theme.border}`, cursor: "pointer", animation: `fadeUp 0.6s ${i * 0.1}s both` }}
             onClick={() => window.location.hash = '#/visas'}>
-
-            {/* Image */}
             <div style={{ position: "relative", height: 180, overflow: "hidden" }}>
               <img src={visa.img} alt={visa.country} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }} />
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%)" }} />
-
-              {/* Flag */}
               <span style={{ position: "absolute", top: 12, right: 14, fontSize: 30, filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.3))" }}>{visa.flag}</span>
-
-              {/* Visa type badge */}
-              <span style={{
-                position: "absolute", top: 14, left: 14,
-                background: visa.type === "Visa On Arrival" ? "rgba(34,197,94,0.75)" : visa.type.includes("e-Visa") ? "rgba(59,130,246,0.75)" : "rgba(0,0,0,0.55)",
-                backdropFilter: "blur(6px)", color: "#fff",
-                fontSize: 10, fontWeight: 700, padding: "3px 10px", borderRadius: 20,
-                textTransform: "uppercase", letterSpacing: "0.5px",
-              }}>{visa.type}</span>
-
-              {/* Country name */}
+              <span style={{ position: "absolute", top: 14, left: 14, background: visa.type === "Visa On Arrival" ? "rgba(34,197,94,0.75)" : visa.type.includes("e-Visa") ? "rgba(59,130,246,0.75)" : "rgba(0,0,0,0.55)", backdropFilter: "blur(6px)", color: "#fff", fontSize: 10, fontWeight: 700, padding: "3px 10px", borderRadius: 20, textTransform: "uppercase", letterSpacing: "0.5px" }}>{visa.type}</span>
               <div style={{ position: "absolute", bottom: 12, left: 14 }}>
                 <h3 style={{ fontSize: 18, fontWeight: 700, color: "#fff", margin: 0, fontFamily: "'Playfair Display',serif" }}>{visa.country}</h3>
               </div>
             </div>
-
-            {/* Body */}
             <div style={{ padding: "14px 16px 16px" }}>
-              {/* Processing + Approval */}
               <div style={{ display: "flex", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
-                <span style={{ fontSize: 11, fontWeight: 600, padding: "4px 10px", borderRadius: 20, background: "rgba(26,60,110,0.1)", color: theme.accent, border: "1px solid rgba(26,60,110,0.25)" }}>
-                  ⏱ {visa.processing}
-                </span>
-                <span style={{ fontSize: 11, fontWeight: 600, padding: "4px 10px", borderRadius: 20, background: "rgba(34,197,94,0.08)", color: "#16a34a", border: "1px solid rgba(34,197,94,0.2)" }}>
-                  ✅ {visa.approvalRate}
-                </span>
+                <span style={{ fontSize: 11, fontWeight: 600, padding: "4px 10px", borderRadius: 20, background: "rgba(26,60,110,0.1)", color: theme.accent, border: "1px solid rgba(26,60,110,0.25)" }}>⏱ {visa.processing}</span>
+                <span style={{ fontSize: 11, fontWeight: 600, padding: "4px 10px", borderRadius: 20, background: "rgba(34,197,94,0.08)", color: "#16a34a", border: "1px solid rgba(34,197,94,0.2)" }}>✅ {visa.approvalRate}</span>
               </div>
-
-              {/* Fee + Apply */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: 10, borderTop: `1px solid ${theme.border}` }}>
                 <div>
                   <div style={{ fontSize: 10, color: theme.textMuted, marginBottom: 2 }}>Starting from</div>
@@ -309,19 +341,16 @@ function VisaSection() {
                     {visa.fee === "FREE" ? <span style={{ color: "#16a34a" }}>FREE ✓</span> : visa.fee}
                   </div>
                 </div>
-                <span style={{ fontSize: 11, color: theme.textMuted, background: theme.bg, border: `1px solid ${theme.border}`, padding: "4px 12px", borderRadius: 20, fontWeight: 600 }}>
-                  Apply →
-                </span>
+                <span style={{ fontSize: 11, color: theme.textMuted, background: theme.bg, border: `1px solid ${theme.border}`, padding: "4px 12px", borderRadius: 20, fontWeight: 600 }}>Apply →</span>
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* View All */}
       <div style={{ textAlign: "center", marginTop: 48 }}>
         <button className="btn-outline" style={{ color: theme.text }} onClick={() => window.location.hash = '#/visas'}>
-          All Visas →
+          Tamam Visas Dekhein →
         </button>
       </div>
     </section>
@@ -385,6 +414,8 @@ export default function App() {
       <Hero />
       <div className="section-divider" />
       <UmrahSection />
+      <div className="section-divider" />
+      <CarRentalSection />
       <div className="section-divider" />
       <Features />
       <div className="section-divider" />
