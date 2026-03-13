@@ -478,7 +478,7 @@ export default function BookNow() {
 
       {/* Page Hero */}
       <section style={{
-        background:`linear-gradient(135deg, rgba(26,60,110,0.97) 0%, rgba(42,82,152,0.97) 100%), url(https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1400&q=80) center/cover`,
+        background:`linear-gradient(135deg, rgba(255, 255, 255, 0.97) 0%, rgba(42,82,152,0.97) 100%), url(https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1400&q=80) center/cover`,
         padding:"120px 5% 70px", textAlign:"center", color:"#fff",
       }}>
 
