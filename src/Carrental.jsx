@@ -164,16 +164,16 @@ function BookingForm({ car, onClose }) {
   if (submitted) return (
     <div style={{ textAlign:"center", padding:"24px 0" }}>
       <div style={{ fontSize:60, marginBottom:16 }}>🚗</div>
-      <h3 style={{ fontFamily:"'Playfair Display',serif", fontSize:22, fontWeight:700, color:theme.text, marginBottom:10 }}>Booking Request Mila!</h3>
+      <h3 style={{ fontFamily:"'Playfair Display',serif", fontSize:22, fontWeight:700, color:theme.text, marginBottom:10 }}>Booking Received!</h3>
       <p style={{ color:theme.textMuted, lineHeight:1.7, marginBottom:8 }}>
-        <strong style={{ color:theme.accent }}>{car.name}</strong> ka booking request receive ho gaya.
+        <strong style={{ color:theme.accent }}>{car.name}</strong> We have received your booking request.
       </p>
       {totalCost && <div style={{ background:"rgba(26,60,110,0.07)", border:"1px solid rgba(26,60,110,0.2)", borderRadius:12, padding:"12px 20px", marginBottom:20, display:"inline-block" }}>
         <div style={{ fontSize:12, color:theme.textMuted }}>Estimated Total ({days} days)</div>
         <div style={{ fontSize:22, fontWeight:800, color:theme.accent, fontFamily:"'Playfair Display',serif" }}>{totalCost}</div>
       </div>}
-      <p style={{ color:theme.textMuted, fontSize:13, marginBottom:24 }}>Our team will contact you within <strong>24 ghante</strong></p>
-      <button onClick={onClose} style={{ background:theme.accent, color:"#fff", border:"none", padding:"12px 32px", borderRadius:50, fontSize:14, fontWeight:700, cursor:"pointer", fontFamily:"'DM Sans',sans-serif" }}>Theek Hai</button>
+      <p style={{ color:theme.textMuted, fontSize:13, marginBottom:24 }}>Our team will contact within <strong>24 hours.</strong></p>
+      <button onClick={onClose} style={{ background:theme.accent, color:"#fff", border:"none", padding:"12px 32px", borderRadius:50, fontSize:14, fontWeight:700, cursor:"pointer", fontFamily:"'DM Sans',sans-serif" }}>Close</button>
     </div>
   );
 

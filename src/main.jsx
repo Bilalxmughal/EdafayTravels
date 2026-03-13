@@ -9,6 +9,7 @@ import UmrahPackages from './UmrahPackages.jsx'
 import Visas from './Visas.jsx'
 import CarRental from './Carrental.jsx'
 
+
 function Root() {
   const [page, setPage] = useState(window.location.hash)
 
@@ -24,6 +25,7 @@ function Root() {
   if (page === '#/umrah')   return <UmrahPackages />
   if (page === '#/visas')   return <Visas />
   if (page === '#/cars')    return <CarRental />
+  if (page === '#/insurance') return <Insurance />;
 
   return <App />
 }
