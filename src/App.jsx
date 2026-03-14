@@ -190,7 +190,6 @@ function Hero({ h }) {
         <div className="fade-up-delay3" style={{ display:"flex", gap:14, marginBottom:48, flexWrap:"wrap" }}>
           <button className="btn-primary" onClick={()=>window.location.hash="#/umrah"}>Explore Packages</button>
           <button className="btn-outline" onClick={()=>window.location.hash="#/cars"} style={{ display:"flex", alignItems:"center", gap:8, color:theme.text }}>
-
             Car Rental
           </button>
         </div>
