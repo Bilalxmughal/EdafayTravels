@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { addInquiry } from './inquiryStore.js';
 import theme from './theme.js'
 import Navbar from './Navbar.jsx'
 import Footer from './Footer.jsx'
@@ -186,7 +187,7 @@ const generateCompanies = (duration, country) => {
 };
 
 // ─── QuantitySelector ─────────────────────────────────────────────────────────
-function QuantitySelector({ label, price, onClose }) {
+function QuantitySelector({ label, price, onClose, onProceed }) {
   const [qty, setQty] = useState(1);
   return (
     <div style={{ marginTop:10, padding:"14px 16px", background:"rgba(26,60,110,0.04)", border:`1px solid rgba(26,60,110,0.2)`, borderRadius:12 }}>
@@ -200,7 +201,7 @@ function QuantitySelector({ label, price, onClose }) {
             style={{ width:30, height:30, borderRadius:"50%", border:`1px solid ${theme.accent}`, background:theme.accent, fontSize:18, cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", color:"#fff" }}>+</button>
         </div>
         <div style={{ fontWeight:700, fontSize:14, color:theme.accent }}>PKR {(price * qty).toLocaleString()}</div>
-        <button onClick={onClose}
+        <button onClick={() => { if(onProceed) onProceed(qty); onClose(); }}
           style={{ padding:"8px 18px", background:theme.accent, color:"#fff", border:"none", borderRadius:10, fontWeight:700, fontSize:13, cursor:"pointer" }}>
           Proceed →
         </button>
@@ -272,7 +273,7 @@ function RulesModal({ company, onClose }) {
 }
 
 // ─── InsuranceRow Component ───────────────────────────────────────────────────
-function InsuranceRow({ company }) {
+function InsuranceRow({ company, country, duration, startDate }) {
   const [personSel,  setPersonSel]  = useState(false);
   const [familySel,  setFamilySel]  = useState(false);
   const [rulesOpen,  setRulesOpen]  = useState(false);
@@ -369,6 +370,12 @@ function InsuranceRow({ company }) {
             label="Per Person Quantity"
             price={company.perPersonFinal}
             onClose={() => setPersonSel(false)}
+            onProceed={(qty) => addInquiry("insurance", {
+              planType: "Per Person", company: company.name, country: country?.name || "—",
+              duration: duration?.label || "—", startDate, quantity: qty,
+              totalPrice: "PKR " + (company.perPersonFinal * qty).toLocaleString(),
+              coverage: company.coverage,
+            })}
           />
         )}
         {familySel && (
@@ -376,6 +383,12 @@ function InsuranceRow({ company }) {
             label="Family Plan Quantity"
             price={company.familyFinal}
             onClose={() => setFamilySel(false)}
+            onProceed={(qty) => addInquiry("insurance", {
+              planType: "Family Plan", company: company.name, country: country?.name || "—",
+              duration: duration?.label || "—", startDate, quantity: qty,
+              totalPrice: "PKR " + (company.familyFinal * qty).toLocaleString(),
+              coverage: company.coverage,
+            })}
           />
         )}
       </div>
@@ -459,17 +472,19 @@ export default function Insurance() {
 
       {/* Hero Banner */}
       <section style={{
-        background:`linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%), url(https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1400&q=80) center/cover`,
+        background:`linear-gradient(135deg, rgba(26,60,110,0.95) 0%, rgba(42,82,152,0.95) 100%), url(https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1400&q=80) center/cover`,
         padding:"130px 5% 80px",
         textAlign:"center",
-        color:"#000000",
+        color:"#fff",
       }}>
         <div style={{ maxWidth:700, margin:"0 auto" }}>
-
+          <div style={{ display:"inline-flex", alignItems:"center", gap:8, background:"rgba(255,255,255,0.15)", border:"1px solid rgba(255,255,255,0.3)", color:"#fff", fontSize:12, fontWeight:600, padding:"6px 18px", borderRadius:50, letterSpacing:"1px", textTransform:"uppercase", marginBottom:24, backdropFilter:"blur(8px)" }}>
+            🛡️ Travel Insurance
+          </div>
           <h1 className="serif" style={{ fontSize:"clamp(32px,4.5vw,58px)", fontWeight:700, lineHeight:1.15, marginBottom:18, letterSpacing:"-0.5px" }}>
             Book Travel Insurance<br />Online with Ease
           </h1>
-          <p style={{ fontSize:17, lineHeight:1.75, color:"rgba(0, 0, 0, 0.85)", maxWidth:520, margin:"0 auto" }}>
+          <p style={{ fontSize:17, lineHeight:1.75, color:"rgba(255,255,255,0.85)", maxWidth:520, margin:"0 auto" }}>
             Secure your travels with our online travel insurance booking
           </p>
         </div>
@@ -543,7 +558,7 @@ export default function Insurance() {
 
               {/* Insurance Rows */}
               {results.map(company => (
-                <InsuranceRow key={company.id} company={company} />
+                <InsuranceRow key={company.id} company={company} country={country} duration={duration} startDate={startDate} />
               ))}
             </>
           )}

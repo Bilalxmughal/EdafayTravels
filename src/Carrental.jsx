@@ -3,6 +3,7 @@ import { useState, useMemo } from "react";
 import theme from './theme.js';
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
+import { addInquiry } from './inquiryStore.js';
 
 const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -369,7 +370,7 @@ function BookingForm({ car, onClose }) {
         </div>
       )}
       <div><label className="cr-label">Special Requirements (Optional)</label><textarea className="cr-input" rows={2} placeholder="Child seat, specific route, etc." value={form.message} onChange={e=>setForm({...form,message:e.target.value})} style={{ resize:"none" }} {...inp} /></div>
-      <button className="cr-submit-btn" onClick={()=>{if(!ok)return;setLoading(true);setTimeout(()=>{setLoading(false);setSubmitted(true)},1500)}} disabled={loading||!ok}>
+      <button className="cr-submit-btn" onClick={()=>{if(!ok)return;setLoading(true);setTimeout(()=>{setLoading(false);addInquiry("car",{name:form.name,phone:form.phone,email:form.email,carType:car.type,carName:car.name,company:car.company,city:form.city,pickLoc:form.pickLocation,dropArea:form.dropArea,pickDate:form.pickDate,returnDate:form.returnDate,passengers:car.seaters,notes:form.message});setSubmitted(true)},1500)}} disabled={loading||!ok}>
         {loading ? "⏳ Submitting..." : "Confirm Booking"}
       </button>
       <p style={{ fontSize:11, color:theme.textMuted, textAlign:"center", margin:0 }}>🔒 Your information is secure — Edafay never shares your data</p>

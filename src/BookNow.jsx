@@ -6,14 +6,14 @@ import Footer from './Footer.jsx';
 
 // ─── Reusable Field Components ────────────────────────────────────────────────
 const inputStyle = {
-  width:"100%", padding:"13px 16px", border:`1px solid #e2e4ea`,
+  width:"100%", padding:"12px 16px", border:"1.5px solid rgba(0,0,0,0.09)",
   borderRadius:12, fontSize:14, color:"#1a1a2e", outline:"none",
   fontFamily:"'DM Sans', sans-serif", background:"#fff",
-  boxSizing:"border-box", transition:"border 0.2s",
+  boxSizing:"border-box", transition:"border 0.2s, box-shadow 0.2s",
 };
 const labelStyle = {
-  display:"block", fontSize:12, fontWeight:700, color:"#6b6880",
-  marginBottom:6, textTransform:"uppercase", letterSpacing:"0.6px",
+  display:"block", fontSize:11, fontWeight:700, color:"rgba(26,26,46,0.45)",
+  marginBottom:6, textTransform:"uppercase", letterSpacing:"0.8px",
 };
 function Field({ label, required, children }) {
   return (
@@ -27,8 +27,8 @@ function TextInput({ placeholder, value, onChange, type="text" }) {
   return (
     <input type={type} placeholder={placeholder} value={value} onChange={e => onChange(e.target.value)}
       style={inputStyle}
-      onFocus={e => e.target.style.border=`1px solid ${theme.accent}`}
-      onBlur={e  => e.target.style.border="1px solid #e2e4ea"}
+      onFocus={e => { e.target.style.borderColor=theme.accent; e.target.style.boxShadow=`0 0 0 3px rgba(26,60,110,0.1)`; }}
+      onBlur={e  => { e.target.style.borderColor="rgba(0,0,0,0.09)"; e.target.style.boxShadow="none"; }}
     />
   );
 }
@@ -36,8 +36,8 @@ function SelectInput({ options, value, onChange, placeholder }) {
   return (
     <select value={value} onChange={e => onChange(e.target.value)}
       style={{ ...inputStyle, appearance:"none", cursor:"pointer", color: value ? "#1a1a2e" : "#9ca3af" }}
-      onFocus={e => e.target.style.border=`1px solid ${theme.accent}`}
-      onBlur={e  => e.target.style.border="1px solid #e2e4ea"}>
+      onFocus={e => { e.target.style.borderColor=theme.accent; e.target.style.boxShadow=`0 0 0 3px rgba(26,60,110,0.1)`; }}
+      onBlur={e  => { e.target.style.borderColor="rgba(0,0,0,0.09)"; e.target.style.boxShadow="none"; }}>
       <option value="" disabled>{placeholder}</option>
       {options.map(o => <option key={o} value={o}>{o}</option>)}
     </select>
@@ -47,8 +47,8 @@ function TextareaInput({ placeholder, value, onChange, rows=3 }) {
   return (
     <textarea placeholder={placeholder} value={value} onChange={e => onChange(e.target.value)} rows={rows}
       style={{ ...inputStyle, resize:"vertical", lineHeight:1.6 }}
-      onFocus={e => e.target.style.border=`1px solid ${theme.accent}`}
-      onBlur={e  => e.target.style.border="1px solid #e2e4ea"}
+      onFocus={e => { e.target.style.borderColor=theme.accent; e.target.style.boxShadow=`0 0 0 3px rgba(26,60,110,0.1)`; }}
+      onBlur={e  => { e.target.style.borderColor="rgba(0,0,0,0.09)"; e.target.style.boxShadow="none"; }}
     />
   );
 }
@@ -469,26 +469,26 @@ export default function BookNow() {
       <style>{`
         .book-cat-card {
           display:flex; flex-direction:column; align-items:center; justify-content:center;
-          gap:12px; padding:28px 20px; border-radius:20px; cursor:pointer;
+          gap:10px; padding:24px 16px; border-radius:18px; cursor:pointer;
           border:2px solid transparent; transition:all 0.22s; text-align:center;
           background:#fff; box-shadow:0 2px 12px rgba(0,0,0,0.05);
         }
-        .book-cat-card:hover { transform:translateY(-4px); box-shadow:0 8px 32px rgba(0,0,0,0.12); }
-        .book-cat-card.active { border-color:var(--cat-color); background:var(--cat-bg); }
+        .book-cat-card:hover { transform:translateY(-4px); box-shadow:0 12px 36px rgba(0,0,0,0.10); border-color:rgba(26,60,110,0.2); }
+        .book-cat-card.active { border-color:var(--cat-color); background:var(--cat-bg); box-shadow:0 8px 28px rgba(26,60,110,0.15); }
       `}</style>
 
       {/* Page Hero */}
       <section style={{
-        background:`linear-gradient(135deg, rgba(26,60,110,0.97) 0%, rgba(42,82,152,0.97) 100%), url(https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1400&q=80) center/cover`,
-        padding:"120px 5% 70px", textAlign:"center", color:"#fff",
+        background: `radial-gradient(ellipse at 70% 30%, rgba(26,60,110,0.07) 0%, transparent 60%), ${theme.bg}`,
+        padding:"120px 5% 60px", textAlign:"center",
       }}>
-        <div style={{ display:"inline-flex", alignItems:"center", gap:8, background:"rgba(255,255,255,0.15)", border:"1px solid rgba(255,255,255,0.3)", fontSize:12, fontWeight:600, padding:"6px 18px", borderRadius:50, letterSpacing:"1px", textTransform:"uppercase", marginBottom:20, backdropFilter:"blur(8px)" }}>
+        <div style={{ display:"inline-flex", alignItems:"center", gap:6, background:"rgba(26,60,110,0.08)", border:"1px solid rgba(26,60,110,0.2)", color:theme.accent, fontSize:12, fontWeight:700, padding:"6px 18px", borderRadius:50, letterSpacing:"1px", textTransform:"uppercase", marginBottom:20 }}>
           📋 Book Now
         </div>
-        <h1 className="serif" style={{ fontSize:"clamp(30px,4vw,52px)", fontWeight:700, lineHeight:1.2, marginBottom:14 }}>
-          Book Your Next Journey
+        <h1 className="serif" style={{ fontSize:"clamp(30px,4vw,52px)", fontWeight:700, lineHeight:1.2, marginBottom:14, color:theme.text }}>
+          Book Your Next <span className="gradient-text">Journey</span>
         </h1>
-        <p style={{ fontSize:16, color:"rgba(255,255,255,0.85)", maxWidth:480, margin:"0 auto" }}>
+        <p style={{ fontSize:16, color:theme.textMuted, maxWidth:480, margin:"0 auto" }}>
           Select a service below and fill in your details — our team will get back to you shortly.
         </p>
       </section>
@@ -498,7 +498,7 @@ export default function BookNow() {
         <div style={{ maxWidth:860, margin:"0 auto" }}>
 
           {/* Category Cards */}
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(5,1fr)", gap:16, marginTop:-32, marginBottom:40, position:"relative", zIndex:10 }}
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(5,1fr)", gap:14, marginTop:-36, marginBottom:36, position:"relative", zIndex:10 }}
             className="book-grid">
             <style>{`@media(max-width:768px){ .book-grid{ grid-template-columns:1fr 1fr !important; } }`}</style>
             {CATEGORIES.map(c => (
@@ -514,7 +514,7 @@ export default function BookNow() {
 
           {/* Form Area */}
           {selected && !submitted && (
-            <div style={{ background:"#fff", borderRadius:24, padding:"36px 40px", border:`1px solid ${theme.border}`, boxShadow:"0 4px 24px rgba(0,0,0,0.07)" }}>
+            <div style={{ background:"#fff", borderRadius:20, padding:"32px 36px", border:`1px solid ${theme.border}`, boxShadow:"0 4px 24px rgba(0,0,0,0.07)" }}>
               {/* Form Header */}
               <div style={{ display:"flex", alignItems:"center", gap:14, marginBottom:28, paddingBottom:20, borderBottom:`1px solid ${theme.border}` }}>
                 <div style={{ width:52, height:52, borderRadius:16, background:cat.bg, display:"flex", alignItems:"center", justifyContent:"center", fontSize:26, border:`1px solid ${cat.color}30` }}>
@@ -547,7 +547,7 @@ export default function BookNow() {
           )}
 
           {/* Thank You */}
-          {submitted && <div style={{ background:"#fff", borderRadius:24, border:`1px solid ${theme.border}`, boxShadow:"0 4px 24px rgba(0,0,0,0.07)" }}>
+          {submitted && <div style={{ background:"#fff", borderRadius:20, border:`1px solid ${theme.border}`, boxShadow:"0 4px 24px rgba(0,0,0,0.07)" }}>
             <ThankYou category={cat?.label} onReset={handleReset} />
           </div>}
         </div>

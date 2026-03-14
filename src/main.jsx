@@ -15,8 +15,8 @@ import Auth, { getAuth, clearAuth } from "./Auth.jsx";
 
 
 function Root() {
-  const [page, setPage] = useState(window.location.hash);
-  const [auth, setAuthState] = useState(() => getAuth());
+  const [page,      setPage]      = useState(window.location.hash);
+  const [authUser,  setAuthUser]  = useState(() => getAuth());
  
   useEffect(() => {
     const h = () => setPage(window.location.hash);
@@ -24,13 +24,13 @@ function Root() {
     return () => window.removeEventListener("hashchange", h);
   }, []);
  
-  const handleLogin  = (user) => { setAuth(user); setAuthState(user); };
-  const handleLogout = () => { clearAuth(); setAuthState(null); window.location.hash = ""; };
+  const handleLogin  = (user) => { setAuth(user); setAuthUser(user); };
+  const handleLogout = () => { clearAuth(); setAuthUser(null); window.location.hash = ""; setPage(""); };
  
-  // Admin route — requires auth
+  // ── Admin route ──────────────────────────────────────────────────────────
   if (page === "#/admin") {
-    if (!auth) return <Auth onLogin={handleLogin} />;
-    return <Dashboard auth={auth} onLogout={handleLogout} />;
+    if (!authUser) return <Auth onLogin={handleLogin} />;
+    return <Dashboard auth={authUser} onLogout={handleLogout} />;
   }
  
 

@@ -1,5 +1,6 @@
 // ─── UmrahPackages.jsx — Edafay Travel & Tours ──────────────────────────────
 import { useState, useMemo } from "react";
+import { addInquiry } from './inquiryStore.js';
 import theme from './theme.js';
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
@@ -267,7 +268,15 @@ function BookingForm({ pkg, onClose }) {
   const handleSubmit = () => {
     if (!form.name || !form.phone || !form.city) return;
     setLoading(true);
-    setTimeout(() => { setLoading(false); setSubmitted(true); }, 1500);
+    setTimeout(() => {
+      setLoading(false);
+      addInquiry("umrah", {
+        name: form.name, phone: form.phone, email: form.email,
+        city: form.city, pkg: pkg.name, price: pkg.price,
+        days: pkg.days, category: pkg.category, notes: form.message,
+      });
+      setSubmitted(true);
+    }, 1500);
   };
 
   if (submitted) return (
@@ -312,7 +321,7 @@ function BookingForm({ pkg, onClose }) {
 
 function PackageModal({ pkg, onClose }) {
   const [showBooking, setShowBooking] = useState(false);
-  const icons = { "Visa": "", "Travel Insurance": "", "Air Tickets": "", "Hotel Accommodation": "", "Transport": "" };
+  const icons = { "Visa": "🪪", "Travel Insurance": "🛡️", "Air Tickets": "✈️", "Hotel Accommodation": "🏨", "Transport": "🚌" };
 
   return (
     <div className="um-modal-overlay" onClick={onClose}>
@@ -336,7 +345,7 @@ function PackageModal({ pkg, onClose }) {
 
               {/* 🏨 Hotel Details */}
               <div className="um-section">
-                <h3 className="um-section-title" style={{ color: theme.text }}>Hotel Details</h3>
+                <h3 className="um-section-title" style={{ color: theme.text }}>🏨 Hotel Details</h3>
                 <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                   {pkg.hotels.map((hotel, i) => <HotelRow key={i} hotel={hotel} />)}
                 </div>
@@ -344,7 +353,7 @@ function PackageModal({ pkg, onClose }) {
 
               {/* ✅ Price Includes */}
               <div className="um-section">
-                <h3 className="um-section-title" style={{ color: theme.text }}>Price Includes</h3>
+                <h3 className="um-section-title" style={{ color: theme.text }}>✅ Price Includes</h3>
                 <div className="um-includes-grid">
                   {pkg.includes.map((item, i) => (
                     <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, background: theme.bgCard, border: `1px solid ${theme.border}`, borderRadius: 12, padding: "12px 14px" }}>
@@ -355,9 +364,9 @@ function PackageModal({ pkg, onClose }) {
                 </div>
               </div>
 
-              {/* Flight Details — with departure schedule */}
+              {/* ✈️ Flight Details — with departure schedule */}
               <div className="um-section">
-                <h3 className="um-section-title" style={{ color: theme.text }}> Flight Details</h3>
+                <h3 className="um-section-title" style={{ color: theme.text }}>✈️ Flight Details</h3>
                 <div style={{ background: theme.bgCard, border: `1px solid ${theme.border}`, borderRadius: 14, padding: "18px 20px" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap", marginBottom: 14 }}>
                     <div style={{ fontSize: 42 }}>{pkg.flight.logo}</div>
@@ -403,7 +412,7 @@ function PackageModal({ pkg, onClose }) {
                   <button onClick={() => setShowBooking(true)} style={{ background: theme.accent, color: "#ffffff", border: "none", padding: "12px 28px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 700, cursor: "pointer" }}
                     onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 10px 28px rgba(26,60,110,0.4)"; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}>
-                    Book Package
+                    📋 Book Package
                   </button>
                 </div>
               </div>
@@ -414,7 +423,7 @@ function PackageModal({ pkg, onClose }) {
                 ← Back to Package Details
               </button>
               <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 700, color: theme.text, marginBottom: 20 }}>
-                Book <span style={{ color: theme.accent }}>{pkg.name}</span>
+                📋 Book <span style={{ color: theme.accent }}>{pkg.name}</span>
               </h3>
               <BookingForm pkg={pkg} onClose={onClose} />
             </>
