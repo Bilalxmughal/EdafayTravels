@@ -238,7 +238,7 @@ function JobCard({ job, onApply }) {
             )}
             <button style={{ marginTop:18, padding:"12px 28px", borderRadius:10, background:"#1a3c6e", color:"#fff", border:"none", fontWeight:700, fontSize:14, cursor:"pointer", fontFamily:"'DM Sans',sans-serif" }}
               onClick={() => onApply(job)}>
-              📩 Apply for This Position
+              Apply Now
             </button>
           </div>
         </div>
@@ -270,9 +270,7 @@ export default function Careers() {
 
         {/* Hero */}
         <section style={{ padding:"130px 5% 80px", background:`radial-gradient(ellipse at 70% 30%, rgba(26,60,110,0.08) 0%, transparent 60%), ${theme.bg}`, textAlign:"center" }}>
-          <div style={{ display:"inline-flex", alignItems:"center", gap:6, background:"rgba(26,60,110,0.08)", border:"1px solid rgba(26,60,110,0.2)", color:theme.accent, fontSize:12, fontWeight:700, padding:"6px 18px", borderRadius:50, letterSpacing:"1px", textTransform:"uppercase", marginBottom:20 }}>
-            👥 Join Our Team
-          </div>
+
           <h1 className="serif" style={{ fontSize:"clamp(36px,5vw,64px)", fontWeight:700, lineHeight:1.1, letterSpacing:"-1px", marginBottom:18, color:theme.text }}>
             Build Your Career at <span className="gradient-text">Edafay</span>
           </h1>
@@ -281,21 +279,8 @@ export default function Careers() {
           </p>
           {/* Culture chips */}
           <div style={{ display:"flex", gap:10, justifyContent:"center", flexWrap:"wrap", marginBottom:20 }}>
-            {["🏡 Hybrid Work","🌍 Travel Perks","📈 Growth","❤️ Team Culture","🎯 Competitive Pay"].map(t => (
+            {["Hybrid Work","Travel Perks","Growth","Team Culture","Competitive Pay"].map(t => (
               <span key={t} style={{ fontSize:13, fontWeight:600, padding:"7px 16px", borderRadius:50, background:theme.bgCard, border:`1px solid ${theme.border}`, color:theme.text }}>{t}</span>
-            ))}
-          </div>
-        </section>
-
-        {/* Stats bar */}
-        <section style={{ background:theme.accent, padding:"28px 5%" }}>
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:20, maxWidth:900, margin:"0 auto" }} className="career-grid">
-            {[["🏢","2019","Founded"],["👥","50+","Team Members"],["🌍","20+","Destinations"],["⭐","10K+","Happy Travelers"]].map(([i,n,l]) => (
-              <div key={l} style={{ textAlign:"center" }}>
-                <div style={{ fontSize:24, marginBottom:4 }}>{i}</div>
-                <div style={{ fontSize:22, fontWeight:800, color:"#fff", fontFamily:"'Playfair Display',serif" }}>{n}</div>
-                <div style={{ fontSize:12, color:"rgba(255,255,255,0.65)" }}>{l}</div>
-              </div>
             ))}
           </div>
         </section>
@@ -328,7 +313,7 @@ export default function Careers() {
                 <div style={{ textAlign:"center", padding:"60px 20px", color:theme.textMuted }}>
                   <div style={{ fontSize:48, marginBottom:14 }}>📭</div>
                   <div style={{ fontSize:16, fontWeight:600 }}>No open positions in this department right now.</div>
-                  <div style={{ fontSize:14, marginTop:8 }}>Check back soon or send your resume to <strong>careers@edafay.com</strong></div>
+                  <div style={{ fontSize:14, marginTop:8 }}>Check back soon or send your resume to <strong>contact@edafay.com</strong></div>
                 </div>
               ) : shown.map(job => (
                 <JobCard key={job.id} job={job} onApply={setApplying} />
@@ -341,7 +326,7 @@ export default function Careers() {
               <h3 style={{ fontSize:20, fontWeight:700, color:theme.text, marginBottom:8, fontFamily:"'Playfair Display',serif" }}>Don't See Your Role?</h3>
               <p style={{ color:theme.textMuted, fontSize:14, lineHeight:1.75, marginBottom:18 }}>We are always on the lookout for talented people. Send your resume to <strong style={{ color:theme.accent }}>careers@edafay.com</strong> and we will be in touch.</p>
               <a href="mailto:careers@edafay.com" style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"12px 28px", borderRadius:12, background:theme.accent, color:"#fff", fontWeight:700, fontSize:14, textDecoration:"none", fontFamily:"'DM Sans',sans-serif" }}>
-                📧 Send Your Resume
+                Send Your Resume
               </a>
             </div>
           </div>

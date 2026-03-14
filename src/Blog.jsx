@@ -128,9 +128,7 @@ export default function Blog() {
 
         {/* Hero */}
         <section style={{ padding:"130px 5% 70px", background:`radial-gradient(ellipse at 70% 30%, rgba(26,60,110,0.07) 0%, transparent 60%), ${theme.bg}`, textAlign:"center" }}>
-          <div style={{ display:"inline-flex", alignItems:"center", gap:6, background:"rgba(26,60,110,0.08)", border:"1px solid rgba(26,60,110,0.2)", color:theme.accent, fontSize:12, fontWeight:700, padding:"6px 18px", borderRadius:50, letterSpacing:"1px", textTransform:"uppercase", marginBottom:20 }}>
-            ✍️ Travel Blog
-          </div>
+
           <h1 className="blog-hero-title serif" style={{ fontSize:"clamp(38px,5vw,62px)", fontWeight:700, lineHeight:1.1, letterSpacing:"-1px", marginBottom:16, color:theme.text }}>
             Travel <span className="gradient-text">Insights</span> & Guides
           </h1>
