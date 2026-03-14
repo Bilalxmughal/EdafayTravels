@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import { getContent, saveContent, resetContent, EVENT_NAME, DEFAULTS, getContent as gc } from "./contentStore.js";
 import { getAuth, clearAuth, getUsers, saveUsers, ROLE_LABELS, ROLE_COLORS } from "./Auth.jsx";
 import { getInquiries, updateInquiry, addComment, CATEGORIES, STATUSES, PRIORITIES, INQUIRY_EVENT } from "./inquiryStore.js";
+import { getJobs, saveJobs, addJob, updateJob, deleteJob, getApplications, updateApplication, APP_STATUSES, JOB_EV } from "./jobStore.js";
+import { getBlogPosts, saveBlogPost, deleteBlogPost, BLOG_EV } from "./blogStore.js";
 import theme from "./theme.js";
 
 // ─── Tiny helpers ─────────────────────────────────────────────────────────────
@@ -679,11 +681,311 @@ function SettingsTab({content,setContent,auth,onLogout,onSave}) {
 }
 
 
+
+// ─── JOBS TAB ─────────────────────────────────────────────────────────────────
+function JobsTab({ auth }) {
+  const [view,       setView]       = useState("applications"); // "applications" | "postings"
+  const [jobs,       setJobs]       = useState(() => getJobs());
+  const [apps,       setApps]       = useState(() => getApplications());
+  const [selJob,     setSelJob]     = useState(null);   // filter apps by job
+  const [selApp,     setSelApp]     = useState(null);   // detail view
+  const [addJobMode, setAddJobMode] = useState(false);
+  const [editJob,    setEditJob]    = useState(null);
+  const [confirm,    setConfirm]    = useState(null);
+  const [toast,      setToast]      = useState("");
+
+  useEffect(() => {
+    const h = () => { setJobs(getJobs()); setApps(getApplications()); };
+    window.addEventListener(JOB_EV, h);
+    return () => window.removeEventListener(JOB_EV, h);
+  }, []);
+
+  const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(""), 2500); };
+  const isSA = auth?.role !== "viewer";
+
+  const shownApps = selJob ? apps.filter(a => a.jobId === selJob) : apps;
+
+  const jobFields = [
+    { key:"title",       label:"Job Title"        },
+    { key:"department",  label:"Department"        },
+    { key:"type",        label:"Employment Type",  placeholder:"Full-time / Part-time / Remote" },
+    { key:"location",    label:"Location",         placeholder:"Lahore / Remote" },
+    { key:"salary",      label:"Salary Range",     placeholder:"PKR 50,000–80,000/month" },
+    { key:"description", label:"Job Description"   },
+    { key:"active",      label:"Active (visible to applicants)", type:"toggle" },
+  ];
+
+  const handleSaveJob = (data) => {
+    if (editJob) { updateJob(data.id, data); showToast("✅ Job updated!"); }
+    else { addJob(data); showToast("✅ Job posted!"); }
+    setJobs(getJobs()); setEditJob(null); setAddJobMode(false);
+  };
+
+  const handleDeleteJob = (id) => {
+    deleteJob(id);
+    setJobs(getJobs());
+    setApps(getApplications());
+    setConfirm(null);
+    showToast("🗑️ Job deleted.");
+  };
+
+  const handleUpdateApp = (id, patch) => {
+    updateApplication(id, patch);
+    setApps(getApplications());
+    if (selApp?.id === id) setSelApp({ ...selApp, ...patch });
+    showToast("✅ Application updated!");
+  };
+
+  // Application detail view
+  if (selApp) {
+    const job = jobs.find(j => j.id === selApp.jobId);
+    const [reason, setReason] = useState(selApp.statusReason || "");
+    const [notes,  setNotes]  = useState(selApp.notes || "");
+    const st = selApp.status;
+    return (
+      <div>
+        {toast && <div style={{ position:"fixed",bottom:28,right:28,zIndex:9999,background:"#1a3c6e",color:"#fff",padding:"12px 22px",borderRadius:12,fontSize:13,fontWeight:700 }}>{toast}</div>}
+        <div style={{ display:"flex",gap:12,alignItems:"center",marginBottom:24 }}>
+          <button onClick={() => setSelApp(null)} style={{ padding:"8px 16px",borderRadius:10,border:"1.5px solid #e2e4ea",background:"#fff",fontSize:13,fontWeight:700,cursor:"pointer" }}>← Back</button>
+          <div>
+            <div style={{ fontSize:18,fontWeight:700,color:"#1a1a2e",fontFamily:"'Playfair Display',serif" }}>{selApp.name}</div>
+            <div style={{ fontSize:12,color:"#9ca3af",marginTop:2 }}>Applied for: <strong>{selApp.jobTitle}</strong> · {new Date(selApp.appliedAt).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"})}</div>
+          </div>
+        </div>
+        <div style={{ display:"grid",gridTemplateColumns:"1fr 300px",gap:20,alignItems:"start" }}>
+          <div>
+            <div style={cardCss}>
+              <div style={{ fontSize:14,fontWeight:700,color:"#1a1a2e",marginBottom:14,paddingBottom:10,borderBottom:"1px solid #f0f1f6" }}>📋 Applicant Details</div>
+              <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:10 }}>
+                {[["Name",selApp.name],["Phone",selApp.phone],["Email",selApp.email||"—"],["City",selApp.city||"—"],["Resume",selApp.resumeName||"—"],["Applied",new Date(selApp.appliedAt).toLocaleDateString()]].map(([k,v])=>(
+                  <div key={k} style={{ padding:"10px 14px",background:"#fafbff",borderRadius:10,border:"1px solid #e8eaef" }}>
+                    <div style={{ fontSize:10,color:"#9ca3af",fontWeight:700,textTransform:"uppercase",marginBottom:3 }}>{k}</div>
+                    <div style={{ fontSize:13,fontWeight:600,color:"#1a1a2e" }}>{v}</div>
+                  </div>
+                ))}
+              </div>
+              <div style={{ marginTop:14,padding:"14px",background:"rgba(26,60,110,0.03)",borderRadius:12,border:"1px solid rgba(26,60,110,0.1)" }}>
+                <div style={{ fontSize:11,color:"#9ca3af",fontWeight:700,textTransform:"uppercase",marginBottom:6 }}>Cover Letter</div>
+                <p style={{ fontSize:13,color:"#374151",lineHeight:1.75,margin:0 }}>{selApp.coverLetter}</p>
+              </div>
+            </div>
+            <div style={cardCss}>
+              <div style={{ fontSize:14,fontWeight:700,color:"#1a1a2e",marginBottom:14,paddingBottom:10,borderBottom:"1px solid #f0f1f6" }}>📝 HR Notes</div>
+              <textarea className="inp-career" value={notes} onChange={e=>setNotes(e.target.value)} rows={4} placeholder="Add internal notes about this applicant..."
+                style={{ ...inputCss, resize:"vertical" }} onFocus={e=>e.target.style.borderColor="#1a3c6e"} onBlur={e=>e.target.style.borderColor="rgba(0,0,0,0.09)"}/>
+              <button onClick={()=>handleUpdateApp(selApp.id,{notes})} style={{ ...saveBtnCss,marginTop:10 }}>💾 Save Notes</button>
+            </div>
+          </div>
+          <div style={{ ...cardCss,marginBottom:0 }}>
+            <div style={{ fontSize:14,fontWeight:700,color:"#1a1a2e",marginBottom:14,paddingBottom:10,borderBottom:"1px solid #f0f1f6" }}>🔧 Decision</div>
+            <div style={{ display:"flex",flexDirection:"column",gap:10 }}>
+              {Object.entries(APP_STATUSES).map(([k,s])=>(
+                <button key={k} onClick={()=>handleUpdateApp(selApp.id,{status:k})}
+                  style={{ padding:"11px 14px",borderRadius:10,border:`2px solid ${st===k?s.color:"#e2e4ea"}`,background:st===k?s.bg:"#fff",color:st===k?s.color:"#6b6880",fontWeight:700,fontSize:13,cursor:"pointer",fontFamily:"'DM Sans',sans-serif",textAlign:"left",transition:"all 0.18s" }}>
+                  {st===k?"✓ ":""}{s.label}
+                </button>
+              ))}
+              <div style={{ marginTop:8 }}>
+                <div style={{ fontSize:11,color:"#9ca3af",fontWeight:700,textTransform:"uppercase",marginBottom:6,letterSpacing:"0.6px" }}>Reason (for Rejected)</div>
+                <input style={{ ...inputCss }} value={reason} onChange={e=>setReason(e.target.value)} placeholder="Explain rejection reason..."
+                  onFocus={e=>e.target.style.borderColor="#1a3c6e"} onBlur={e=>e.target.style.borderColor="rgba(0,0,0,0.09)"}/>
+                <button onClick={()=>handleUpdateApp(selApp.id,{statusReason:reason})} style={{ ...saveBtnCss,marginTop:8,width:"100%",justifyContent:"center" }}>Save Reason</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {toast && <div style={{ position:"fixed",bottom:28,right:28,zIndex:9999,background:"#1a3c6e",color:"#fff",padding:"12px 22px",borderRadius:12,fontSize:13,fontWeight:700 }}>{toast}</div>}
+      {confirm && <ConfirmModal msg={confirm.msg} onOk={confirm.onOk} onCancel={()=>setConfirm(null)}/>}
+      {(addJobMode||editJob) && <EditModal item={editJob||{active:true}} fields={jobFields} title={editJob?"Edit Job":"Post New Job"} onSave={handleSaveJob} onClose={()=>{setAddJobMode(false);setEditJob(null);}}/>}
+
+      {/* View toggle */}
+      <div style={{ display:"flex",gap:8,marginBottom:24,flexWrap:"wrap",alignItems:"center" }}>
+        {["applications","postings"].map(v=>(
+          <button key={v} onClick={()=>setView(v)} style={{ padding:"9px 22px",borderRadius:9,border:`1.5px solid ${view===v?"#1a3c6e":"#e2e4ea"}`,background:view===v?"rgba(26,60,110,0.08)":"#fff",color:view===v?"#1a3c6e":"#6b6880",fontSize:13,fontWeight:700,cursor:"pointer",textTransform:"capitalize" }}>
+          {v==="applications"?`📋 Applications (${apps.length})`:`💼 Job Postings (${jobs.length})`}
+          </button>
+        ))}
+        {view==="postings"&&isSA&&<button onClick={()=>setAddJobMode(true)} style={{ ...saveBtnCss,marginLeft:"auto",background:"#16a34a" }}>+ Post Job</button>}
+      </div>
+
+      {/* Applications view */}
+      {view==="applications"&&<div>
+        {/* Stats */}
+        <div style={{ display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:12,marginBottom:20 }} className="stat-grid">
+          {Object.entries(APP_STATUSES).map(([k,s])=>{
+            const cnt=apps.filter(a=>a.status===k).length;
+            return <div key={k} style={{ background:"#fff",borderRadius:12,border:"1px solid #e8eaef",padding:"14px 16px" }}>
+              <div style={{ fontSize:10,color:"#9ca3af",fontWeight:700,textTransform:"uppercase",marginBottom:4 }}>{s.label}</div>
+              <div style={{ fontSize:24,fontWeight:800,color:s.color,fontFamily:"'Playfair Display',serif" }}>{cnt}</div>
+            </div>;
+          })}
+        </div>
+        {/* Filter by job */}
+        <div style={{ display:"flex",gap:8,marginBottom:16,flexWrap:"wrap" }}>
+          <button onClick={()=>setSelJob(null)} style={{ padding:"6px 14px",borderRadius:8,border:`1.5px solid ${!selJob?"#1a3c6e":"#e2e4ea"}`,background:!selJob?"rgba(26,60,110,0.08)":"#fff",color:!selJob?"#1a3c6e":"#6b6880",fontSize:12,fontWeight:700,cursor:"pointer" }}>All Jobs ({apps.length})</button>
+          {jobs.map(j=>{
+            const cnt=apps.filter(a=>a.jobId===j.id).length;
+            return <button key={j.id} onClick={()=>setSelJob(j.id)} style={{ padding:"6px 14px",borderRadius:8,border:`1.5px solid ${selJob===j.id?"#1a3c6e":"#e2e4ea"}`,background:selJob===j.id?"rgba(26,60,110,0.08)":"#fff",color:selJob===j.id?"#1a3c6e":"#6b6880",fontSize:12,fontWeight:700,cursor:"pointer" }}>{j.title.split(" ").slice(0,2).join(" ")} ({cnt})</button>;
+          })}
+        </div>
+        {/* Applications table */}
+        <div style={{ background:"#fff",borderRadius:16,border:"1px solid #e8eaef",overflow:"hidden" }}>
+          <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr 140px 100px 100px 80px",padding:"10px 16px",background:"#f8f9fc",borderBottom:"1px solid #e8eaef",fontSize:10,fontWeight:700,color:"#9ca3af",textTransform:"uppercase",letterSpacing:"0.7px" }}>
+            {["Applicant","Job","Date","Status","Resume","Action"].map(h=><div key={h}>{h}</div>)}
+          </div>
+          {shownApps.length===0&&<div style={{ textAlign:"center",padding:"48px",color:"#9ca3af",fontSize:14 }}>No applications yet.</div>}
+          {shownApps.map((a,i)=>{
+            const s=APP_STATUSES[a.status]||APP_STATUSES.new;
+            return <div key={a.id} style={{ display:"grid",gridTemplateColumns:"1fr 1fr 140px 100px 100px 80px",padding:"12px 16px",borderBottom:i<shownApps.length-1?"1px solid #f5f5f8":"none",alignItems:"center" }}>
+              <div><div style={{ fontWeight:700,fontSize:13,color:"#1a1a2e" }}>{a.name}</div><div style={{ fontSize:11,color:"#9ca3af" }}>{a.phone}</div></div>
+              <div style={{ fontSize:12,color:"#6b6880" }}>{a.jobTitle}</div>
+              <div style={{ fontSize:12,color:"#6b6880" }}>{new Date(a.appliedAt).toLocaleDateString("en-GB",{day:"numeric",month:"short"})}</div>
+              <div><span style={{ display:"inline-flex",padding:"3px 10px",borderRadius:20,fontSize:11,fontWeight:700,background:s.bg,color:s.color,border:`1px solid ${s.color}40` }}>{s.label}</span></div>
+              <div style={{ fontSize:11,color:"#6b6880",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>{a.resumeName||"—"}</div>
+              <div><button onClick={()=>setSelApp(a)} style={{ padding:"6px 12px",borderRadius:8,border:"1.5px solid #1a3c6e",background:"transparent",color:"#1a3c6e",fontSize:11,fontWeight:700,cursor:"pointer" }}>View →</button></div>
+            </div>;
+          })}
+        </div>
+      </div>}
+
+      {/* Job postings view */}
+      {view==="postings"&&<div>
+        {jobs.map((job,i)=>{
+          const appCount=apps.filter(a=>a.jobId===job.id).length;
+          return <div key={job.id} style={{ background:"#fff",borderRadius:16,border:"1px solid #e8eaef",padding:"18px 22px",marginBottom:12,boxShadow:"0 1px 6px rgba(0,0,0,0.04)" }}>
+            <div style={{ display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:12 }}>
+              <div style={{ flex:1 }}>
+                <div style={{ display:"flex",gap:8,marginBottom:8,flexWrap:"wrap",alignItems:"center" }}>
+                  <span style={{ fontWeight:700,fontSize:15,color:"#1a1a2e",fontFamily:"'Playfair Display',serif" }}>{job.title}</span>
+                  <span style={{ fontSize:11,fontWeight:700,padding:"2px 9px",borderRadius:20,background:job.active?"rgba(22,163,74,0.1)":"rgba(239,68,68,0.08)",color:job.active?"#16a34a":"#dc2626",border:`1px solid ${job.active?"rgba(22,163,74,0.25)":"rgba(239,68,68,0.2)"}` }}>{job.active?"Active":"Inactive"}</span>
+                </div>
+                <div style={{ display:"flex",gap:16,flexWrap:"wrap" }}>
+                  <span style={{ fontSize:12,color:"#6b6880" }}>🏢 {job.department}</span>
+                  <span style={{ fontSize:12,color:"#6b6880" }}>📍 {job.location}</span>
+                  <span style={{ fontSize:12,color:"#6b6880" }}>⏰ {job.type}</span>
+                  <span style={{ fontSize:12,color:"#1a3c6e",fontWeight:700 }}>📋 {appCount} application{appCount!==1?"s":""}</span>
+                </div>
+              </div>
+              {isSA&&<div style={{ display:"flex",gap:7,flexShrink:0 }}>
+                <button onClick={()=>setEditJob(job)} style={{ padding:"7px 14px",borderRadius:8,border:"1.5px solid #1a3c6e",background:"transparent",color:"#1a3c6e",fontSize:12,fontWeight:700,cursor:"pointer" }}>✏️ Edit</button>
+                <button onClick={()=>updateJob(job.id,{active:!job.active})||setJobs(getJobs())} style={{ padding:"7px 12px",borderRadius:8,border:`1.5px solid ${job.active?"#ea580c":"#16a34a"}`,background:"transparent",color:job.active?"#ea580c":"#16a34a",fontSize:12,fontWeight:700,cursor:"pointer" }}>{job.active?"Hide":"Show"}</button>
+                <button onClick={()=>setConfirm({msg:`Delete "${job.title}"?`,onOk:()=>handleDeleteJob(job.id)})} style={{ padding:"7px 12px",borderRadius:8,border:"1.5px solid #dc2626",background:"transparent",color:"#dc2626",fontSize:12,fontWeight:700,cursor:"pointer" }}>🗑️</button>
+              </div>}
+            </div>
+          </div>;
+        })}
+      </div>}
+    </div>
+  );
+}
+
+// ─── BLOG TAB ─────────────────────────────────────────────────────────────────
+function BlogTab() {
+  const [posts,    setPosts]    = useState(() => getBlogPosts());
+  const [editing,  setEditing]  = useState(null);
+  const [addMode,  setAddMode]  = useState(false);
+  const [confirm,  setConfirm]  = useState(null);
+  const [toast,    setToast]    = useState("");
+  const [filter,   setFilter]   = useState("all");
+
+  useEffect(() => {
+    const h = () => setPosts(getBlogPosts());
+    window.addEventListener(BLOG_EV, h);
+    return () => window.removeEventListener(BLOG_EV, h);
+  }, []);
+
+  const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(""), 2500); };
+  const newPost = { title:"", excerpt:"", content:"", category:"Umrah", tags:"", coverImage:"", author:"Edafay Team", authorAvatar:"ET", readTime:"5 min read", status:"draft" };
+
+  const handleSave = (data) => {
+    saveBlogPost({ ...data, tags: typeof data.tags === "string" ? data.tags.split(",").map(t=>t.trim()).filter(Boolean) : data.tags });
+    setPosts(getBlogPosts());
+    setEditing(null); setAddMode(false);
+    showToast("✅ Post saved!");
+  };
+
+  const handleDelete = (id) => {
+    deleteBlogPost(id);
+    setPosts(getBlogPosts());
+    setConfirm(null);
+    showToast("🗑️ Post deleted.");
+  };
+
+  const blogFields = [
+    { key:"title",      label:"Post Title"              },
+    { key:"excerpt",    label:"Excerpt / Summary"       },
+    { key:"category",   label:"Category",  type:"select", options:[{v:"Umrah",l:"Umrah"},{v:"Visa",l:"Visa"},{v:"Travel Tips",l:"Travel Tips"},{v:"Insurance",l:"Insurance"},{v:"Car Rental",l:"Car Rental"},{v:"General",l:"General"}] },
+    { key:"tags",       label:"Tags (comma-separated)", placeholder:"Umrah, Guide, 2026" },
+    { key:"author",     label:"Author Name"             },
+    { key:"authorAvatar",label:"Author Initials (2 chars)", placeholder:"ET" },
+    { key:"readTime",   label:"Read Time",              placeholder:"5 min read" },
+    { key:"coverImage", label:"Cover Image URL",        type:"image" },
+    { key:"status",     label:"Status", type:"select",  options:[{v:"draft",l:"Draft"},{v:"published",l:"Published"}] },
+    { key:"content",    label:"Article Content (HTML or plain text)" },
+  ];
+
+  const shown = filter === "all" ? posts : posts.filter(p => p.status === filter);
+
+  return (
+    <div>
+      {toast && <div style={{ position:"fixed",bottom:28,right:28,zIndex:9999,background:"#1a3c6e",color:"#fff",padding:"12px 22px",borderRadius:12,fontSize:13,fontWeight:700 }}>{toast}</div>}
+      {confirm && <ConfirmModal msg={confirm.msg} onOk={confirm.onOk} onCancel={()=>setConfirm(null)}/>}
+      {(addMode||editing) && <EditModal item={editing||newPost} fields={blogFields} title={editing?"Edit Post":"New Blog Post"} onSave={handleSave} onClose={()=>{setEditing(null);setAddMode(false);}}/>}
+
+      {/* Stats + controls */}
+      <div style={{ display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:14,marginBottom:20 }}>
+        {[["📝","Total",posts.length,"#1a3c6e"],["✅","Published",posts.filter(p=>p.status==="published").length,"#16a34a"],["📄","Drafts",posts.filter(p=>p.status==="draft").length,"#ea580c"]].map(([i,l,v,c])=>(
+          <div key={l} style={{ background:"#fff",borderRadius:14,border:"1px solid #e8eaef",padding:"16px 20px" }}>
+            <div style={{ fontSize:22,marginBottom:6 }}>{i}</div>
+            <div style={{ fontSize:11,color:"#9ca3af",fontWeight:700,textTransform:"uppercase",marginBottom:4 }}>{l}</div>
+            <div style={{ fontSize:28,fontWeight:800,color:c,fontFamily:"'Playfair Display',serif" }}>{v}</div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ display:"flex",gap:8,marginBottom:20,flexWrap:"wrap",alignItems:"center" }}>
+        {["all","published","draft"].map(f=>(
+          <button key={f} onClick={()=>setFilter(f)} style={{ padding:"7px 16px",borderRadius:8,border:`1.5px solid ${filter===f?"#1a3c6e":"#e2e4ea"}`,background:filter===f?"rgba(26,60,110,0.08)":"#fff",color:filter===f?"#1a3c6e":"#6b6880",fontSize:12,fontWeight:700,cursor:"pointer",textTransform:"capitalize" }}>{f}</button>
+        ))}
+        <button onClick={()=>setAddMode(true)} style={{ ...saveBtnCss,marginLeft:"auto" }}>+ New Post</button>
+      </div>
+
+      {/* Posts list */}
+      {shown.map((post, i) => (
+        <div key={post.id} style={{ display:"flex",gap:16,background:"#fff",borderRadius:16,border:"1px solid #e8eaef",padding:"16px 18px",marginBottom:10,alignItems:"center",boxShadow:"0 1px 6px rgba(0,0,0,0.04)" }}>
+          {post.coverImage && <img src={post.coverImage} alt="" onError={e=>e.target.style.display="none"} style={{ width:80,height:60,borderRadius:10,objectFit:"cover",flexShrink:0 }}/>}
+          <div style={{ flex:1,minWidth:0 }}>
+            <div style={{ display:"flex",gap:8,marginBottom:5,alignItems:"center",flexWrap:"wrap" }}>
+              <span style={{ fontWeight:700,fontSize:14,color:"#1a1a2e",fontFamily:"'Playfair Display',serif" }}>{post.title}</span>
+              <span style={{ fontSize:11,fontWeight:700,padding:"2px 9px",borderRadius:20,background:post.status==="published"?"rgba(22,163,74,0.1)":"rgba(234,88,12,0.08)",color:post.status==="published"?"#16a34a":"#ea580c",border:`1px solid ${post.status==="published"?"rgba(22,163,74,0.25)":"rgba(234,88,12,0.2)"}` }}>{post.status}</span>
+            </div>
+            <div style={{ fontSize:12,color:"#9ca3af" }}>{post.category} · {post.author} · {post.readTime} · 👁 {post.views?.toLocaleString()||0} views</div>
+          </div>
+          <div style={{ display:"flex",gap:7,flexShrink:0 }}>
+            <button onClick={()=>{const p={...post,tags:post.tags?.join?post.tags.join(", "):post.tags};setEditing(p);}} style={{ padding:"7px 14px",borderRadius:8,border:"1.5px solid #1a3c6e",background:"transparent",color:"#1a3c6e",fontSize:12,fontWeight:700,cursor:"pointer" }}>✏️ Edit</button>
+            <button onClick={()=>{saveBlogPost({...post,status:post.status==="published"?"draft":"published"});setPosts(getBlogPosts());showToast(post.status==="published"?"📄 Set to draft":"✅ Published!");}}
+              style={{ padding:"7px 12px",borderRadius:8,border:`1.5px solid ${post.status==="published"?"#ea580c":"#16a34a"}`,background:"transparent",color:post.status==="published"?"#ea580c":"#16a34a",fontSize:12,fontWeight:700,cursor:"pointer" }}>
+              {post.status==="published"?"Unpublish":"Publish"}
+            </button>
+            <button onClick={()=>setConfirm({msg:`Delete "${post.title}"?`,onOk:()=>handleDelete(post.id)})} style={{ padding:"7px 12px",borderRadius:8,border:"1.5px solid #dc2626",background:"transparent",color:"#dc2626",fontSize:12,fontWeight:700,cursor:"pointer" }}>🗑️</button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ─── MAIN DASHBOARD ───────────────────────────────────────────────────────────
 const NAV=[
   {section:"MAIN",       items:[{k:"overview",i:"📊",l:"Overview"}]},
   {section:"INQUIRIES",  items:[{k:"inq_umrah",i:"🕌",l:"Umrah"},{k:"inq_car",i:"🚗",l:"Car Rental"},{k:"inq_visa",i:"🛂",l:"Visas"},{k:"inq_flight",i:"✈️",l:"Flights"},{k:"inq_insurance",i:"🛡️",l:"Insurance"}]},
-  {section:"WEBSITE",    items:[{k:"content",i:"✏️",l:"Content"},{k:"visibility",i:"👁️",l:"Visibility"}]},
+  {section:"WEBSITE",    items:[{k:"content",i:"✏️",l:"Content"},{k:"visibility",i:"👁️",l:"Visibility"},{k:"blog",i:"✍️",l:"Blog"},{k:"jobs",i:"👔",l:"Careers"}]},
   {section:"ADMIN",      items:[{k:"users",i:"👥",l:"Users"},{k:"settings",i:"🔧",l:"Settings"}]},
 ];
 
@@ -814,6 +1116,8 @@ export default function Dashboard({auth,onLogout}) {
           {tab==="visibility"         && <VisibilityTab {...tabProps}/>}
           {tab==="users"              && <UserTab       auth={auth}/>}
           {tab==="settings"           && <SettingsTab   {...tabProps} onLogout={handleLogout}/>}
+          {tab==="jobs"               && <JobsTab        auth={auth}/>}
+          {tab==="blog"               && <BlogTab />}
         </div>
       </div>
 

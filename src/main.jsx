@@ -11,6 +11,8 @@ import CarRental from './Carrental.jsx'
 import Insurance from './Insurance.jsx'
 import BookNow from './BookNow.jsx'
 import Auth, { getAuth, clearAuth } from "./Auth.jsx";
+import Careers from "./Careers.jsx";
+import Blog from "./Blog.jsx";
 
 
 
@@ -42,6 +44,8 @@ function Root() {
   if (page === '#/cars')    return <CarRental />
   if (page === '#/insurance') return <Insurance />;
   if (page === '#/booknow') return <BookNow />;
+  if (page === "#/careers")   return <Careers />;
+  if (page === "#/blog")      return <Blog />;
 
   return <App />
 }
