@@ -15,17 +15,17 @@ import Auth, { getAuth, clearAuth } from "./Auth.jsx";
 
 
 function Root() {
-  const [page,    setPage]    = useState(window.location.hash);
-  const [auth,    setAuth]    = useState(() => getAuth());
+  const [page, setPage] = useState(window.location.hash);
+  const [auth, setAuthState] = useState(() => getAuth());
  
   useEffect(() => {
-    const handler = () => setPage(window.location.hash);
-    window.addEventListener("hashchange", handler);
-    return () => window.removeEventListener("hashchange", handler);
+    const h = () => setPage(window.location.hash);
+    window.addEventListener("hashchange", h);
+    return () => window.removeEventListener("hashchange", h);
   }, []);
  
-  const handleLogin  = (user) => setAuth(user);
-  const handleLogout = () => { clearAuth(); setAuth(null); window.location.hash = ""; };
+  const handleLogin  = (user) => { setAuth(user); setAuthState(user); };
+  const handleLogout = () => { clearAuth(); setAuthState(null); window.location.hash = ""; };
  
   // Admin route — requires auth
   if (page === "#/admin") {
