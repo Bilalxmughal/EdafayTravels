@@ -356,74 +356,31 @@ function OverviewTab({content,auth}) {
 
       {/* Inquiry stats */}
       <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:14,marginBottom:24}} className="stat-grid">
-        {[{l:"Total Inquiries",v:total,c:"#1a3c6e",i:""},{l:"Open",v:open,c:"#dc2626",i:""},{l:"In Progress",v:inprog,c:"#ea580c",i:""},{l:"Closed",v:closed,c:"#16a34a",i:""}].map(s=>(
-          <div key={s.l} style={{background:"#fff",borderRadius:14,border:"1px solid #e8eaef",padding:"18px 20px",boxShadow:"0 1px 6px rgba(0,0,0,0.04)"}}>
-            <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
-              <div><div style={{fontSize:11,color:"#9ca3af",fontWeight:700,textTransform:"uppercase",letterSpacing:"0.6px",marginBottom:6}}>{s.l}</div>
-              <div style={{fontSize:30,fontWeight:800,color:s.c,fontFamily:"'Playfair Display',serif",lineHeight:1}}>{s.v}</div></div>
-              <div style={{width:40,height:40,borderRadius:12,background:`${s.c}14`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20}}>{s.i}</div>
+        {[
+          {l:"Total Inquiries", v:total, c:"#1a3c6e", pct:null},
+          {l:"Open",            v:open,  c:"#dc2626", pct: total?Math.round(open/total*100):0},
+          {l:"In Progress",     v:inprog,c:"#ea580c", pct: total?Math.round(inprog/total*100):0},
+          {l:"Closed",          v:closed,c:"#16a34a", pct: total?Math.round(closed/total*100):0},
+        ].map(s=>(
+          <div key={s.l} style={{background:"#fff",borderRadius:16,border:"1px solid #e8eaef",padding:"20px 22px",boxShadow:"0 1px 8px rgba(0,0,0,0.05)",position:"relative",overflow:"hidden"}}>
+            <div style={{position:"absolute",top:0,left:0,right:0,height:3,background:s.c,borderRadius:"16px 16px 0 0"}} />
+            <div style={{fontSize:11,color:"#9ca3af",fontWeight:700,textTransform:"uppercase",letterSpacing:"0.8px",marginBottom:10}}>{s.l}</div>
+            <div style={{display:"flex",alignItems:"flex-end",justifyContent:"space-between",gap:8}}>
+              <div style={{fontSize:36,fontWeight:800,color:s.c,fontFamily:"'Playfair Display',serif",lineHeight:1}}>{s.v}</div>
+              {s.pct!==null&&(
+                <div style={{marginBottom:4,textAlign:"right"}}>
+                  <div style={{fontSize:13,fontWeight:700,color:s.c}}>{s.pct}%</div>
+                  <div style={{fontSize:10,color:"#9ca3af",marginTop:1}}>of total</div>
+                </div>
+              )}
             </div>
+            {s.pct!==null&&(
+              <div style={{marginTop:14,height:4,background:"#f0f1f6",borderRadius:99,overflow:"hidden"}}>
+                <div style={{height:"100%",width:`${s.pct}%`,background:s.c,borderRadius:99}} />
+              </div>
+            )}
           </div>
         ))}
-      </div>
-
-      {/* Per-category */}
-      <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:12,marginBottom:24}} className="cat-grid">
-        {catStats.map(c=>(
-          <div key={c.key} style={{background:"#fff",borderRadius:14,border:`1px solid ${c.color}25`,padding:"16px",boxShadow:"0 1px 6px rgba(0,0,0,0.03)"}}>
-            <div style={{fontSize:22,marginBottom:8}}>{c.icon}</div>
-            <div style={{fontSize:12,fontWeight:700,color:"#1a1a2e",marginBottom:4}}>{c.label}</div>
-            <div style={{display:"flex",gap:6,alignItems:"baseline"}}>
-              <span style={{fontSize:24,fontWeight:800,color:c.color,fontFamily:"'Playfair Display',serif"}}>{c.total}</span>
-              <span style={{fontSize:11,color:"#9ca3af"}}>total</span>
-            </div>
-            {c.open>0&&<div style={{fontSize:11,color:"#dc2626",fontWeight:600,marginTop:4}}>🔴 {c.open} open</div>}
-          </div>
-        ))}
-      </div>
-
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20}}>
-        {/* Recent tickets */}
-        <div style={cardCss}>
-          <div style={{fontSize:14,fontWeight:700,color:"#1a1a2e",marginBottom:14,paddingBottom:10,borderBottom:"1px solid #f0f1f6"}}>🕐 Recent Tickets</div>
-          {recent.map(t=>(
-            <div key={t.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"9px 0",borderBottom:"1px solid #f5f5f8"}}>
-              <div>
-                <div style={{display:"flex",gap:8,alignItems:"center"}}><span style={{fontWeight:700,fontSize:12,color:"#1a3c6e"}}>{t.id}</span><CatBadge category={t.category}/></div>
-                <div style={{fontSize:12,color:"#6b6880",marginTop:2}}>{t.form?.name||"—"} · {fmtDateShort(t.createdAt)}</div>
-              </div>
-              <StatusBadge status={t.status}/>
-            </div>
-          ))}
-        </div>
-
-        {/* Team workload */}
-        <div style={cardCss}>
-          <div style={{fontSize:14,fontWeight:700,color:"#1a1a2e",marginBottom:14,paddingBottom:10,borderBottom:"1px solid #f0f1f6"}}>👥 Team Workload</div>
-          {users.filter(u=>u.active).map(u=>{
-            const assigned=tickets.filter(t=>t.assignedTo===u.email);
-            const openCount=assigned.filter(t=>t.status!=="closed").length;
-            return (
-              <div key={u.id} style={{display:"flex",alignItems:"center",gap:12,padding:"9px 0",borderBottom:"1px solid #f5f5f8"}}>
-                <div style={{width:34,height:34,borderRadius:10,background:u.color||"#1a3c6e",color:"#fff",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,fontSize:11,flexShrink:0}}>{initials(u.name)}</div>
-                <div style={{flex:1}}>
-                  <div style={{fontWeight:600,fontSize:13,color:"#1a1a2e"}}>{u.name}</div>
-                  <div style={{fontSize:11,color:"#9ca3af"}}>{ROLE_LABELS[u.role]}</div>
-                </div>
-                <div style={{textAlign:"right"}}>
-                  <div style={{fontSize:16,fontWeight:800,color:"#1a3c6e",fontFamily:"'Playfair Display',serif"}}>{assigned.length}</div>
-                  <div style={{fontSize:10,color:"#9ca3af"}}>assigned</div>
-                </div>
-                {openCount>0&&<span style={{fontSize:11,fontWeight:700,background:"rgba(239,68,68,0.1)",color:"#dc2626",padding:"2px 8px",borderRadius:20,border:"1px solid rgba(239,68,68,0.25)"}}>{openCount} open</span>}
-              </div>
-            );
-          })}
-          <div style={{display:"flex",alignItems:"center",gap:12,padding:"9px 0"}}>
-            <div style={{width:34,height:34,borderRadius:10,background:"#9ca3af",color:"#fff",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,fontSize:11,flexShrink:0}}>?</div>
-            <div style={{flex:1}}><div style={{fontWeight:600,fontSize:13,color:"#6b6880"}}>Unassigned</div></div>
-            <div style={{textAlign:"right"}}><div style={{fontSize:16,fontWeight:800,color:"#9ca3af",fontFamily:"'Playfair Display',serif"}}>{tickets.filter(t=>!t.assignedTo).length}</div><div style={{fontSize:10,color:"#9ca3af"}}>tickets</div></div>
-          </div>
-        </div>
       </div>
     </div>
   );
