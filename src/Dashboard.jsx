@@ -356,7 +356,7 @@ function OverviewTab({content,auth}) {
 
       {/* Inquiry stats */}
       <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:14,marginBottom:24}} className="stat-grid">
-        {[{l:"Total Inquiries",v:total,c:"#1a3c6e",i:"📋"},{l:"Open",v:open,c:"#dc2626",i:"🔴"},{l:"In Progress",v:inprog,c:"#ea580c",i:"🟡"},{l:"Closed",v:closed,c:"#16a34a",i:"✅"}].map(s=>(
+        {[{l:"Total Inquiries",v:total,c:"#1a3c6e",i:""},{l:"Open",v:open,c:"#dc2626",i:""},{l:"In Progress",v:inprog,c:"#ea580c",i:""},{l:"Closed",v:closed,c:"#16a34a",i:""}].map(s=>(
           <div key={s.l} style={{background:"#fff",borderRadius:14,border:"1px solid #e8eaef",padding:"18px 20px",boxShadow:"0 1px 6px rgba(0,0,0,0.04)"}}>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
               <div><div style={{fontSize:11,color:"#9ca3af",fontWeight:700,textTransform:"uppercase",letterSpacing:"0.6px",marginBottom:6}}>{s.l}</div>
