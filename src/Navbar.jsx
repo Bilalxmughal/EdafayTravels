@@ -128,9 +128,9 @@ export default function Navbar() {
         </div>
 
         <div className="nb-desktop" style={{ gap: 10, alignItems: "center" }}>
-          <button className="nb-btn-outline">Sign In</button>
+            <p>+92 305 2222 744</p>
           <button className="nb-btn-primary" onClick={() => window.location.hash = '#/booknow'}>Book Now</button>
-          <button className="nb-btn-admin" onClick={() => window.location.hash = '#/admin'}>⚙ Admin</button>
+          <button className="nb-btn-admin" onClick={() => window.location.hash = '#/admin'}>Admin Access</button>
         </div>
 
         <button className="nb-mobile-btn nb-hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
@@ -147,13 +147,12 @@ export default function Navbar() {
             </a>
           ))}
           <div className="nb-mobile-actions">
-            <button className="nb-btn-outline" style={{ flex: 1 }}>Sign In</button>
             <button className="nb-btn-primary" style={{ flex: 1 }} onClick={() => { window.location.hash = '#/booknow'; setMenuOpen(false); }}>Book Now</button>
           </div>
           <button className="nb-btn-admin"
             style={{ marginTop: 10, width: "100%", textAlign: "center" }}
             onClick={() => { window.location.hash = '#/admin'; setMenuOpen(false); }}>
-            ⚙ Admin Dashboard
+            Admin Access
           </button>
         </div>
       )}
