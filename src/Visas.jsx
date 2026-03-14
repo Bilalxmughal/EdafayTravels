@@ -452,7 +452,7 @@ function VisaBookingForm({ visa, onClose }) {
       {/* Submit */}
       <button onClick={handleSubmit} disabled={loading || !form.name || !form.phone || !form.city}
         style={{ background: (!form.name || !form.phone || !form.city) ? "rgba(26,60,110,0.35)" : theme.accent, color: "#ffffff", border: "none", padding: "15px", borderRadius: 50, fontSize: 15, fontWeight: 700, width: "100%", cursor: (!form.name || !form.phone || !form.city) ? "not-allowed" : "pointer", fontFamily: "'DM Sans',sans-serif", transition: "all 0.25s" }}>
-        {loading ? "⏳ Application jama ho rahi hai..." : "📤 Visa Application Submit Karein"}
+        {loading ? "⏳ Submitting Application..." : "Submit Visa Application"}
       </button>
       <p style={{ fontSize: 11, color: theme.textMuted, textAlign: "center", margin: 0 }}>
         Your documents are safe with us. Edafay never shares your personal information or documents with third parties.
