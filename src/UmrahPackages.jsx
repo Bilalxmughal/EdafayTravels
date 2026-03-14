@@ -281,7 +281,6 @@ function BookingForm({ pkg, onClose }) {
 
   if (submitted) return (
     <div style={{ textAlign: "center", padding: "20px 0" }}>
-      <div style={{ fontSize: 56, marginBottom: 16 }}>✅</div>
       <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 700, color: theme.text, marginBottom: 10 }}>Booking Request Received!</h3>
       <p style={{ color: theme.textMuted, lineHeight: 1.7, marginBottom: 24 }}>We've received your <strong style={{ color: theme.accent }}>{pkg.name}</strong> request. Our team will contact you within 24 hours.</p>
       <button onClick={onClose} style={{ background: theme.accent, color: "#ffffff", border: "none", padding: "12px 32px", borderRadius: 50, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>Back</button>
@@ -307,7 +306,7 @@ function BookingForm({ pkg, onClose }) {
       ))}
       <div>
         <label style={lbl}>Message (Optional)</label>
-        <textarea rows={3} placeholder="Koi khaas zaroorat ya sawal..." value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} style={{ ...inp, resize: "none" }}
+        <textarea rows={3} placeholder="Have a special request or question?..." value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} style={{ ...inp, resize: "none" }}
           onFocus={e => e.target.style.borderColor = theme.accent} onBlur={e => e.target.style.borderColor = "rgba(0,0,0,0.1)"} />
       </div>
       <button onClick={handleSubmit} disabled={loading || !form.name || !form.phone || !form.city}
@@ -343,17 +342,17 @@ function PackageModal({ pkg, onClose }) {
             <>
               <p style={{ color: theme.textMuted, lineHeight: 1.75, fontSize: 14, marginBottom: 24 }}>{pkg.desc}</p>
 
-              {/* 🏨 Hotel Details */}
+              {/* Hotel Details */}
               <div className="um-section">
-                <h3 className="um-section-title" style={{ color: theme.text }}>🏨 Hotel Details</h3>
+                <h3 className="um-section-title" style={{ color: theme.text }}>Hotel Details</h3>
                 <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                   {pkg.hotels.map((hotel, i) => <HotelRow key={i} hotel={hotel} />)}
                 </div>
               </div>
 
-              {/* ✅ Price Includes */}
+              {/* Price Includes */}
               <div className="um-section">
-                <h3 className="um-section-title" style={{ color: theme.text }}>✅ Price Includes</h3>
+                <h3 className="um-section-title" style={{ color: theme.text }}>Price Includes</h3>
                 <div className="um-includes-grid">
                   {pkg.includes.map((item, i) => (
                     <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, background: theme.bgCard, border: `1px solid ${theme.border}`, borderRadius: 12, padding: "12px 14px" }}>
@@ -364,9 +363,9 @@ function PackageModal({ pkg, onClose }) {
                 </div>
               </div>
 
-              {/* ✈️ Flight Details — with departure schedule */}
+              {/* Flight Details — with departure schedule */}
               <div className="um-section">
-                <h3 className="um-section-title" style={{ color: theme.text }}>✈️ Flight Details</h3>
+                <h3 className="um-section-title" style={{ color: theme.text }}>Flight Details</h3>
                 <div style={{ background: theme.bgCard, border: `1px solid ${theme.border}`, borderRadius: 14, padding: "18px 20px" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap", marginBottom: 14 }}>
                     <div style={{ fontSize: 42 }}>{pkg.flight.logo}</div>
@@ -412,7 +411,7 @@ function PackageModal({ pkg, onClose }) {
                   <button onClick={() => setShowBooking(true)} style={{ background: theme.accent, color: "#ffffff", border: "none", padding: "12px 28px", borderRadius: 50, fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 700, cursor: "pointer" }}
                     onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 10px 28px rgba(26,60,110,0.4)"; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}>
-                    📋 Book Package
+                    Book Package
                   </button>
                 </div>
               </div>
@@ -423,7 +422,7 @@ function PackageModal({ pkg, onClose }) {
                 ← Back to Package Details
               </button>
               <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 700, color: theme.text, marginBottom: 20 }}>
-                📋 Book <span style={{ color: theme.accent }}>{pkg.name}</span>
+                Book <span style={{ color: theme.accent }}>{pkg.name}</span>
               </h3>
               <BookingForm pkg={pkg} onClose={onClose} />
             </>
@@ -458,7 +457,7 @@ function PackageCard({ pkg, onClick }) {
           <span style={{ fontSize: 12, color: theme.textMuted }}>({pkg.reviews})</span>
         </div>
         <div style={{ padding: "12px 0 10px" }}>
-          <div style={{ fontSize: 11, color: theme.textMuted, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.6px", marginBottom: 8 }}>🏨 Hotels</div>
+          <div style={{ fontSize: 11, color: theme.textMuted, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.6px", marginBottom: 8 }}>Hotels</div>
           {pkg.hotels.map((hotel, i) => (
             <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
               <div>
