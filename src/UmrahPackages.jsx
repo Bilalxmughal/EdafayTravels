@@ -320,7 +320,7 @@ function BookingForm({ pkg, onClose }) {
 
 function PackageModal({ pkg, onClose }) {
   const [showBooking, setShowBooking] = useState(false);
-  const icons = { "Visa": "🪪", "Travel Insurance": "🛡️", "Air Tickets": "✈️", "Hotel Accommodation": "🏨", "Transport": "🚌" };
+  const icons = { "Visa": "", "Travel Insurance": "", "Air Tickets": "", "Hotel Accommodation": "", "Transport": "" };
 
   return (
     <div className="um-modal-overlay" onClick={onClose}>
