@@ -141,7 +141,7 @@ export default function Auth({ onLogin }) {
           </div>
         </div>
 
-        {/* Bottom demo hint */}
+        {/* Bottom demo hint 
         <div style={{ animation:"authFadeUp 0.6s 0.2s ease both" }}>
           <div style={{ borderTop:"1px solid rgba(255,255,255,0.1)", paddingTop:24 }}>
             <div style={{ fontSize:11, color:"rgba(255,255,255,0.4)", marginBottom:10, textTransform:"uppercase", letterSpacing:"1px" }}>Demo Accounts</div>
@@ -158,7 +158,7 @@ export default function Auth({ onLogin }) {
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* ── RIGHT PANEL ── */}
