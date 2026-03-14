@@ -172,7 +172,7 @@ function FlightPanel() {
         {fieldBox(<><div style={{ fontSize:11,color:theme.textMuted,marginBottom:4,textTransform:"uppercase",letterSpacing:"0.5px",fontWeight:600 }}>Cabin Class</div><select value={cabinClass} onChange={e=>setCabinClass(e.target.value)} style={{ border:"none",background:"transparent",outline:"none",fontSize:14,color:theme.text,fontFamily:"'DM Sans',sans-serif",width:"100%",cursor:"pointer",appearance:"none" }}><option>Economy</option><option>Economy Premium</option><option>Business Class</option><option>First Class</option></select></>)}
         {fieldBox(<TravelersDropdown travelers={travelers} onChange={setTravelers} />)}
       </div>
-      <button className="btn-primary" style={{ width:"100%",padding:"15px",borderRadius:14,fontSize:15,fontWeight:700 }}>🔍 Search Flights</button>
+      <button className="btn-primary" style={{ width:"100%",padding:"15px",borderRadius:14,fontSize:15,fontWeight:700 }}>Submit Request</button>
     </div>
   );
 }
