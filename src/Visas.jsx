@@ -444,7 +444,7 @@ function VisaBookingForm({ visa, onClose }) {
 
       {/* Message */}
       <div><label style={labelStyle}>Message <span style={{ textTransform: "none", fontWeight: 400 }}>(Optional)</span></label>
-        <textarea rows={2} placeholder="Koi sawaal ya zaroorat..." value={form.message} onChange={e => setForm({ ...form, message: e.target.value })}
+        <textarea rows={2} placeholder="Have a special request or question?..." value={form.message} onChange={e => setForm({ ...form, message: e.target.value })}
           style={{ ...inputStyle, resize: "none" }}
           onFocus={e => e.target.style.borderColor = theme.accent} onBlur={e => e.target.style.borderColor = "rgba(0,0,0,0.1)"} />
       </div>

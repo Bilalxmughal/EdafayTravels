@@ -103,12 +103,12 @@ function UmrahForm({ onSubmit }) {
   const setU = (k,v) => setUser(p => ({ ...p, [k]:v }));
 
   const packages = [
-    "Economy Umrah Package – PKR 175,000",
-    "Standard Umrah Package – PKR 280,000",
-    "Premium Umrah Package – PKR 420,000",
-    "Luxury Umrah Package – PKR 650,000",
-    "Family Umrah Package – PKR 520,000",
-    "Group Umrah Package – PKR 195,000",
+    "Economy Umrah Package",
+    "Standard Umrah Package",
+    "Premium Umrah Package",
+    "Luxury Umrah Package",
+    "Family Umrah Package",
+    "Group Umrah Package",
   ];
 
   const handle = () => {
@@ -136,7 +136,7 @@ function UmrahForm({ onSubmit }) {
         <TextareaInput placeholder="Any special requirements, medical conditions, etc." value={notes} onChange={setNotes} />
       </Field>
       <button onClick={handle} className="btn-primary" style={{ width:"100%", padding:"15px", borderRadius:14, fontSize:15, fontWeight:700, marginTop:4 }}>
-        📩 Submit Booking Request
+        Submit Booking Request
       </button>
     </div>
   );
@@ -189,7 +189,7 @@ function VisaForm({ onSubmit }) {
         <TextareaInput placeholder="Any additional information..." value={notes} onChange={setNotes} />
       </Field>
       <button onClick={handle} className="btn-primary" style={{ width:"100%", padding:"15px", borderRadius:14, fontSize:15, fontWeight:700, marginTop:4 }}>
-        📩 Submit Visa Request
+        Submit Visa Request
       </button>
     </div>
   );
@@ -234,7 +234,7 @@ function InsuranceForm({ onSubmit }) {
       </Field>
       <UserDetails data={user} onChange={setU} />
       <button onClick={handle} className="btn-primary" style={{ width:"100%", padding:"15px", borderRadius:14, fontSize:15, fontWeight:700, marginTop:4 }}>
-        📩 Submit Insurance Request
+        Submit Insurance Request
       </button>
     </div>
   );
@@ -349,7 +349,7 @@ function FlightForm({ onSubmit }) {
       <UserDetails data={user} onChange={setU} />
 
       <button onClick={handle} className="btn-primary" style={{ width:"100%", padding:"15px", borderRadius:14, fontSize:15, fontWeight:700, marginTop:4 }}>
-        📩 Submit Flight Request
+        Submit Flight Request
       </button>
     </div>
   );
@@ -439,7 +439,7 @@ function CarForm({ onSubmit }) {
         <TextareaInput placeholder="Any additional requirements..." value={notes} onChange={setNotes} />
       </Field>
       <button onClick={handle} className="btn-primary" style={{ width:"100%", padding:"15px", borderRadius:14, fontSize:15, fontWeight:700, marginTop:4 }}>
-        📩 Submit Car Rental Request
+        Submit Car Rental Request
       </button>
     </div>
   );
@@ -482,9 +482,7 @@ export default function BookNow() {
         background: `radial-gradient(ellipse at 70% 30%, rgba(26,60,110,0.07) 0%, transparent 60%), ${theme.bg}`,
         padding:"120px 5% 60px", textAlign:"center",
       }}>
-        <div style={{ display:"inline-flex", alignItems:"center", gap:6, background:"rgba(26,60,110,0.08)", border:"1px solid rgba(26,60,110,0.2)", color:theme.accent, fontSize:12, fontWeight:700, padding:"6px 18px", borderRadius:50, letterSpacing:"1px", textTransform:"uppercase", marginBottom:20 }}>
-          📋 Book Now
-        </div>
+
         <h1 className="serif" style={{ fontSize:"clamp(30px,4vw,52px)", fontWeight:700, lineHeight:1.2, marginBottom:14, color:theme.text }}>
           Book Your Next <span className="gradient-text">Journey</span>
         </h1>
@@ -541,7 +539,7 @@ export default function BookNow() {
           {/* Empty State */}
           {!selected && (
             <div style={{ textAlign:"center", paddingTop:20, paddingBottom:40 }}>
-              <div style={{ fontSize:52, marginBottom:14 }}>☝️</div>
+
               <p style={{ color:theme.textMuted, fontSize:15 }}>Please select a booking category above to continue.</p>
             </div>
           )}
