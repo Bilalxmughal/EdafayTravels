@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { addInquiry } from './inquiryStore.js';
 import theme from './theme.js';
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
@@ -73,7 +74,7 @@ function UserDetails({ data, onChange }) {
 function ThankYou({ category, onReset }) {
   return (
     <div style={{ textAlign:"center", padding:"60px 20px" }}>
-      <div style={{ fontSize:72, marginBottom:20 }}></div>
+      <div style={{ fontSize:72, marginBottom:20 }}>✅</div>
       <h2 style={{ fontSize:28, fontWeight:700, color:theme.text, marginBottom:12, fontFamily:"'Playfair Display',serif" }}>
         Booking Received!
       </h2>
@@ -102,17 +103,17 @@ function UmrahForm({ onSubmit }) {
   const setU = (k,v) => setUser(p => ({ ...p, [k]:v }));
 
   const packages = [
-    "Economy Umrah Package",
-    "Standard Umrah Package",
-    "Premium Umrah Package",
-    "Luxury Umrah Package",
-    "Family Umrah Package",
-    "Group Umrah Package",
+    "Economy Umrah Package – PKR 175,000",
+    "Standard Umrah Package – PKR 280,000",
+    "Premium Umrah Package – PKR 420,000",
+    "Luxury Umrah Package – PKR 650,000",
+    "Family Umrah Package – PKR 520,000",
+    "Group Umrah Package – PKR 195,000",
   ];
 
   const handle = () => {
     if (!user.name || !user.phone || !pkg) { alert("Please fill all required fields."); return; }
-    onSubmit();
+    onSubmit({ name:user.name, phone:user.phone, email:user.email, pkg, persons, notes });
   };
 
   return (
@@ -135,7 +136,7 @@ function UmrahForm({ onSubmit }) {
         <TextareaInput placeholder="Any special requirements, medical conditions, etc." value={notes} onChange={setNotes} />
       </Field>
       <button onClick={handle} className="btn-primary" style={{ width:"100%", padding:"15px", borderRadius:14, fontSize:15, fontWeight:700, marginTop:4 }}>
-        Submit Booking Request
+        📩 Submit Booking Request
       </button>
     </div>
   );
@@ -156,7 +157,7 @@ function VisaForm({ onSubmit }) {
 
   const handle = () => {
     if (!user.name || !user.phone || !country) { alert("Please fill all required fields."); return; }
-    onSubmit();
+    onSubmit({ name:user.name, phone:user.phone, email:user.email, country, visaType, persons, passport });
   };
 
   return (
@@ -188,7 +189,7 @@ function VisaForm({ onSubmit }) {
         <TextareaInput placeholder="Any additional information..." value={notes} onChange={setNotes} />
       </Field>
       <button onClick={handle} className="btn-primary" style={{ width:"100%", padding:"15px", borderRadius:14, fontSize:15, fontWeight:700, marginTop:4 }}>
-        Submit Visa Request
+        📩 Submit Visa Request
       </button>
     </div>
   );
@@ -209,7 +210,7 @@ function InsuranceForm({ onSubmit }) {
 
   const handle = () => {
     if (!user.name || !user.phone || !country || !duration || !startDate) { alert("Please fill all required fields."); return; }
-    onSubmit();
+    onSubmit({ name:user.name, phone:user.phone, email:user.email, country, duration, startDate, planType });
   };
 
   return (
@@ -233,7 +234,7 @@ function InsuranceForm({ onSubmit }) {
       </Field>
       <UserDetails data={user} onChange={setU} />
       <button onClick={handle} className="btn-primary" style={{ width:"100%", padding:"15px", borderRadius:14, fontSize:15, fontWeight:700, marginTop:4 }}>
-        Submit Insurance Request
+        📩 Submit Insurance Request
       </button>
     </div>
   );
@@ -285,7 +286,7 @@ function FlightForm({ onSubmit }) {
 
   const handle = () => {
     if (!user.name || !user.phone || !from || !to || !depDate) { alert("Please fill all required fields."); return; }
-    onSubmit();
+    onSubmit({ name:user.name, phone:user.phone, email:user.email, tripType, from, to, depDate, retDate, cabinClass, adults, children, infants });
   };
 
   return (
@@ -348,7 +349,7 @@ function FlightForm({ onSubmit }) {
       <UserDetails data={user} onChange={setU} />
 
       <button onClick={handle} className="btn-primary" style={{ width:"100%", padding:"15px", borderRadius:14, fontSize:15, fontWeight:700, marginTop:4 }}>
-        Submit Flight Request
+        📩 Submit Flight Request
       </button>
     </div>
   );
@@ -383,7 +384,7 @@ function CarForm({ onSubmit }) {
 
   const handle = () => {
     if (!user.name || !user.phone || !carType || !city || !pickDate) { alert("Please fill all required fields."); return; }
-    onSubmit();
+    onSubmit({ name:user.name, phone:user.phone, email:user.email, carType, carName, city, pickLoc, dropLoc, pickDate, returnDate, withDriver, passengers, notes });
   };
 
   return (
@@ -438,7 +439,7 @@ function CarForm({ onSubmit }) {
         <TextareaInput placeholder="Any additional requirements..." value={notes} onChange={setNotes} />
       </Field>
       <button onClick={handle} className="btn-primary" style={{ width:"100%", padding:"15px", borderRadius:14, fontSize:15, fontWeight:700, marginTop:4 }}>
-        Submit Car Rental Request
+        📩 Submit Car Rental Request
       </button>
     </div>
   );
@@ -478,14 +479,16 @@ export default function BookNow() {
 
       {/* Page Hero */}
       <section style={{
-        background:`linear-gradient(135deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.97) 100%), url(https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1400&q=80) center/cover`,
-        padding:"120px 5% 70px", textAlign:"center", color:"#000000",
+        background:`linear-gradient(135deg, rgba(26,60,110,0.97) 0%, rgba(42,82,152,0.97) 100%), url(https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1400&q=80) center/cover`,
+        padding:"120px 5% 70px", textAlign:"center", color:"#fff",
       }}>
-
+        <div style={{ display:"inline-flex", alignItems:"center", gap:8, background:"rgba(255,255,255,0.15)", border:"1px solid rgba(255,255,255,0.3)", fontSize:12, fontWeight:600, padding:"6px 18px", borderRadius:50, letterSpacing:"1px", textTransform:"uppercase", marginBottom:20, backdropFilter:"blur(8px)" }}>
+          📋 Book Now
+        </div>
         <h1 className="serif" style={{ fontSize:"clamp(30px,4vw,52px)", fontWeight:700, lineHeight:1.2, marginBottom:14 }}>
           Book Your Next Journey
         </h1>
-        <p style={{ fontSize:16, color:"rgba(0, 0, 0, 0.85)", maxWidth:480, margin:"0 auto" }}>
+        <p style={{ fontSize:16, color:"rgba(255,255,255,0.85)", maxWidth:480, margin:"0 auto" }}>
           Select a service below and fill in your details — our team will get back to you shortly.
         </p>
       </section>
@@ -527,11 +530,11 @@ export default function BookNow() {
                 </div>
               </div>
 
-              {selected==="umrah"     && <UmrahForm     onSubmit={() => setSubmitted(true)} />}
-              {selected==="visa"      && <VisaForm       onSubmit={() => setSubmitted(true)} />}
-              {selected==="insurance" && <InsuranceForm  onSubmit={() => setSubmitted(true)} />}
-              {selected==="flight"    && <FlightForm     onSubmit={() => setSubmitted(true)} />}
-              {selected==="car"       && <CarForm        onSubmit={() => setSubmitted(true)} />}
+              {selected==="umrah"     && <UmrahForm     onSubmit={(form) => { addInquiry("umrah", form); setSubmitted(true); }} />}
+              {selected==="visa"      && <VisaForm       onSubmit={(form) => { addInquiry("visa", form); setSubmitted(true); }} />}
+              {selected==="insurance" && <InsuranceForm  onSubmit={(form) => { addInquiry("insurance", form); setSubmitted(true); }} />}
+              {selected==="flight"    && <FlightForm     onSubmit={(form) => { addInquiry("flight", form); setSubmitted(true); }} />}
+              {selected==="car"       && <CarForm        onSubmit={(form) => { addInquiry("car", form); setSubmitted(true); }} />}
             </div>
           )}
 
