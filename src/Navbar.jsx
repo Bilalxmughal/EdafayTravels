@@ -128,7 +128,7 @@ export default function Navbar() {
         </div>
 
         <div className="nb-desktop" style={{ gap: 10, alignItems: "center" }}>
-            <p style="font-size:10px;">0305-2222-744</p>
+          <p style={{ fontSize: "10px", margin: 0 }}>0305-2222-744</p>
           <button className="nb-btn-primary" onClick={() => window.location.hash = '#/booknow'}>Book Now</button>
           <button className="nb-btn-admin" onClick={() => window.location.hash = '#/admin'}>Admin Access</button>
         </div>
