@@ -119,8 +119,7 @@ export default function Auth({ onLogin }) {
 
         {/* Center content */}
         <div style={{ animation:"authFadeUp 0.6s 0.1s ease both" }}>
-          {/* Floating icon */}
-          <img src="/logod.png" alt="logo" style={{ height:60 }} />
+            
           <p style={{ fontSize:14, color:"rgba(255,255,255,0.6)", lineHeight:1.8, maxWidth:340, marginBottom:36 }}>
             Manage Umrah packages, visas, car rentals, blog posts, careers, and all customer inquiries from one powerful dashboard.
           </p>
