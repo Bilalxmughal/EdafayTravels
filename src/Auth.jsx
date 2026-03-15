@@ -96,7 +96,7 @@ export default function Auth({ onLogin }) {
       <div className="auth-left" style={{
         width:"48%", background:"linear-gradient(145deg, #0a1628 0%, #1a3c6e 55%, #1e4d8c 100%)",
         display:"flex", flexDirection:"column", justifyContent:"space-between",
-        padding:"52px 52px 44px", position:"relative", overflow:"hidden",
+        padding:"30px 52px 44px", position:"relative", overflow:"hidden",
       }}>
         {/* Background decorative circles */}
         <div style={{ position:"absolute", top:-80, left:-80, width:320, height:320, borderRadius:"50%", background:"rgba(255,255,255,0.04)", pointerEvents:"none" }} />
