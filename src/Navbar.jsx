@@ -115,7 +115,7 @@ export default function Navbar() {
       }}>
         <div onClick={() => { window.location.hash = ''; setMenuOpen(false); }}
           style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", flexShrink: 0 }}>
-          <img src="/logo.png" alt="logo" style={{ height:42 }} />
+          <img src="/logo.png" alt="logo" style={{ height:60 }} />
         </div>
 
         <div className="nb-desktop" style={{ gap: 28, alignItems: "center" }}>
