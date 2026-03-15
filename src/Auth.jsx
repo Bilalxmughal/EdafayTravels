@@ -112,14 +112,14 @@ export default function Auth({ onLogin }) {
 
         {/* Logo */}
         <div style={{ animation:"authFadeUp 0.5s ease both" }}>
-          <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:0 }}>
+          <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:10 }}>
             <img src="/logod.png" alt="logo" style={{ height:60 }} />
           </div>
         </div>
 
         {/* Center content */}
         <div style={{ animation:"authFadeUp 0.6s 0.1s ease both" }}>
-            
+
           <p style={{ fontSize:14, color:"rgba(255,255,255,0.6)", lineHeight:1.8, maxWidth:340, marginBottom:36 }}>
             Manage Umrah packages, visas, car rentals, blog posts, careers, and all customer inquiries from one powerful dashboard.
           </p>
