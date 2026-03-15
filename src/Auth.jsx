@@ -114,9 +114,7 @@ export default function Auth({ onLogin }) {
         {/* Center content */}
         <div style={{ animation:"authFadeUp 0.6s 0.1s ease both" }}>
           {/* Floating icon */}
-          <div style={{ width:72, height:72, borderRadius:22, background:"rgba(255,255,255,0.12)", border:"1px solid rgba(255,255,255,0.2)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:34, marginBottom:28, backdropFilter:"blur(10px)", animation:"floatY 4s ease-in-out infinite" }}>
-            ✈️
-          </div>
+          <img src="/logo.png" alt="logo" style={{ height:60 }} />
 
           <h2 style={{ fontFamily:"'Playfair Display',serif", fontSize:"clamp(28px,3vw,40px)", fontWeight:700, color:"#fff", lineHeight:1.2, marginBottom:16, letterSpacing:"-0.5px" }}>
             Your Command<br />Center for<br /><em style={{ color:"#7ab8ff" }}>Edafay Travel</em>
