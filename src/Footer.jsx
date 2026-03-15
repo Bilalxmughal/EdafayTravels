@@ -50,7 +50,7 @@ export default function Footer() {
         {/* Brand */}
         <div>
           <div onClick={()=>window.location.hash=""} style={{ display:"flex", alignItems:"center", gap:10, marginBottom:20, cursor:"pointer" }}>
-            <img src="/src/assets/Logo.png" alt="Edafay" style={{ height:44, width:"auto", objectFit:"contain" }} />
+            <img src="/logo.png" alt="logo" style={{ height:60 }} />
           </div>
           <p style={{ color:theme.textMuted, lineHeight:1.75, fontSize:14, maxWidth:280, marginBottom:24 }}>
             Your trusted travel partner since 2019. Making dreams come true, one journey at a time.
