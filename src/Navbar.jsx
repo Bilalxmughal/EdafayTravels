@@ -1,7 +1,6 @@
 // ─── Navbar.jsx — Shared Navbar (Responsive Fixed) ───────────────────────────
 import { useState, useEffect } from "react";
 import theme from './theme.js';
-import logo from "../assets/logo.png";
 
 export default function Navbar() {
   const [scrolled,  setScrolled]  = useState(false);
@@ -114,26 +113,13 @@ export default function Navbar() {
         display: "flex", alignItems: "center", justifyContent: "space-between",
         height: "72px",
       }}>
-        <div 
-  onClick={() => { window.location.hash = ''; setMenuOpen(false); }}
-  style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", flexShrink: 0 }}
->
-  <img 
-    src={logo} 
-    alt="Edafay Logo"
-    style={{ height: 36, width: "auto", objectFit: "contain" }}
-  />
-
-  <span style={{
-    fontFamily: "'Playfair Display',serif",
-    fontSize: 22,
-    fontWeight: 700,
-    letterSpacing: "-0.5px",
-    color: theme.text
-  }}>
-    Edafay - Travel & Tours<span style={{ color: theme.accent }}>.</span>
-  </span>
-</div>
+        <div onClick={() => { window.location.hash = ''; setMenuOpen(false); }}
+          style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", flexShrink: 0 }}>
+          <img src="/logo.png" alt="logo" style={{ height:36 }} />
+          <span style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 700, letterSpacing: "-0.5px", color: theme.text }}>
+            Edafay - Travel & Tours<span style={{ color: theme.accent }}>.</span>
+          </span>
+        </div>
 
         <div className="nb-desktop" style={{ gap: 28, alignItems: "center" }}>
           {links.map(({ label, hash }) => (
