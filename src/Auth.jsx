@@ -114,10 +114,10 @@ export default function Auth({ onLogin }) {
         {/* Center content */}
         <div style={{ animation:"authFadeUp 0.6s 0.1s ease both" }}>
           {/* Floating icon */}
-          <img src="/logo.png" alt="logo" style={{ height:60 }} />
+          <img src="/logod.png" alt="logo" style={{ height:60 }} />
 
           <h2 style={{ fontFamily:"'Playfair Display',serif", fontSize:"clamp(28px,3vw,40px)", fontWeight:700, color:"#fff", lineHeight:1.2, marginBottom:16, letterSpacing:"-0.5px" }}>
-            Your Command<br />Center for<br /><em style={{ color:"#7ab8ff" }}>Edafay Travel</em>
+            Command<br />Center for<br /> style={{ color:"#7ab8ff" }} Edafay Travel
           </h2>
           <p style={{ fontSize:14, color:"rgba(255,255,255,0.6)", lineHeight:1.8, maxWidth:340, marginBottom:36 }}>
             Manage Umrah packages, visas, car rentals, blog posts, careers, and all customer inquiries from one powerful dashboard.
@@ -230,7 +230,7 @@ export default function Auth({ onLogin }) {
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" style={{ animation:"spin 0.8s linear infinite" }}><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83"/></svg>
                   Signing in...
                 </span>
-              : "Sign In to Dashboard →"
+              : "Sign In →"
             }
           </button>
 
