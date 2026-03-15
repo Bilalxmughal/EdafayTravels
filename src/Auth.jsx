@@ -113,7 +113,7 @@ export default function Auth({ onLogin }) {
         {/* Logo */}
         <div style={{ animation:"authFadeUp 0.5s ease both" }}>
           <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:10 }}>
-            <img src="/logod.png" alt="logo" style={{ height:60 }} />
+            <img src="/logod.png" alt="logo" style={{ height:80 }} />
           </div>
         </div>
 
