@@ -117,7 +117,7 @@ export default function Auth({ onLogin }) {
           <img src="/logod.png" alt="logo" style={{ height:60 }} />
 
           <h2 style={{ fontFamily:"'Playfair Display',serif", fontSize:"clamp(28px,3vw,40px)", fontWeight:700, color:"#fff", lineHeight:1.2, marginBottom:16, letterSpacing:"-0.5px" }}>
-            Command<br />Center for<br /> style={{ color:"#7ab8ff" }} Edafay Travel
+            Command<br />Center for<br /><em style={{ color:"#7ab8ff" }}>Edafay Travel</em>
           </h2>
           <p style={{ fontSize:14, color:"rgba(255,255,255,0.6)", lineHeight:1.8, maxWidth:340, marginBottom:36 }}>
             Manage Umrah packages, visas, car rentals, blog posts, careers, and all customer inquiries from one powerful dashboard.
