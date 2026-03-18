@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { addInquiry } from './inquiryStore.js';
+import { saveBooking } from '../services/bookingService.js';
 import theme from './theme.js';
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
@@ -528,11 +528,11 @@ export default function BookNow() {
                 </div>
               </div>
 
-              {selected==="umrah"     && <UmrahForm     onSubmit={(form) => { addInquiry("umrah", form); setSubmitted(true); }} />}
-              {selected==="visa"      && <VisaForm       onSubmit={(form) => { addInquiry("visa", form); setSubmitted(true); }} />}
-              {selected==="insurance" && <InsuranceForm  onSubmit={(form) => { addInquiry("insurance", form); setSubmitted(true); }} />}
-              {selected==="flight"    && <FlightForm     onSubmit={(form) => { addInquiry("flight", form); setSubmitted(true); }} />}
-              {selected==="car"       && <CarForm        onSubmit={(form) => { addInquiry("car", form); setSubmitted(true); }} />}
+              {selected==="umrah"     && <UmrahForm     onSubmit={async (form) => { await saveBooking("umrah", form); setSubmitted(true); }} />}
+{selected==="visa"      && <VisaForm       onSubmit={async (form) => { await saveBooking("visa", form); setSubmitted(true); }} />}
+{selected==="insurance" && <InsuranceForm  onSubmit={async (form) => { await saveBooking("insurance", form); setSubmitted(true); }} />}
+{selected==="flight"    && <FlightForm     onSubmit={async (form) => { await saveBooking("flight", form); setSubmitted(true); }} />}
+{selected==="car"       && <CarForm        onSubmit={async (form) => { await saveBooking("car", form); setSubmitted(true); }} />}
             </div>
           )}
 
