@@ -1,9 +1,17 @@
 // ─── Auth.jsx — Edafay Admin Login ───────────────────────────────────────────
 import { useState } from "react";
 
-// ─── Auth Store ───────────────────────────────────────────────────────────────
-const AUTH_KEY  = "edafay_auth_v1";
-const USERS_KEY = "edafay_users_v1";
+import {
+  loginWithEmail, updateLastLogin,
+  getAuth, setAuthSession, clearAuth,
+  seedUsers, getUsers, saveUser, deleteUser
+} from "../services/authService.js";
+
+export { getAuth, clearAuth, getUsers };
+export { saveUser as saveUsers };
+export { deleteUser };
+export const ROLE_LABELS = { super_admin:"Super Admin", editor:"Editor", viewer:"Viewer" };
+export const ROLE_COLORS = { super_admin:"#1a3c6e", editor:"#16a34a", viewer:"#7c3aed" };
 
 const DEFAULT_USERS = [
   { id:1, name:"Super Admin",     email:"admin@edafay.com",    password:"admin123",   role:"super_admin", avatar:"SA", color:"#1a3c6e", active:true, createdAt:"2024-01-01", lastLogin:null },
@@ -54,17 +62,27 @@ export default function Auth({ onLogin }) {
   const [loading,    setLoading]    = useState(false);
   const [googleLoad, setGoogleLoad] = useState(false);
 
-  const handleLogin = () => {
-    setError("");
-    if (!email || !password) { setError("Please enter your email and password."); return; }
-    setLoading(true);
-    setTimeout(() => {
-      const user = loginWithEmail(email, password);
-      if (user) { setAuth(user); onLogin(user); }
-      else { setError("Invalid email or password. Please try again."); }
-      setLoading(false);
-    }, 700);
-  };
+  const handleLogin = async () => {
+  setError("");
+  if (!email || !password) { setError("Please enter your email and password."); return; }
+  setLoading(true);
+  try {
+    await seedUsers(); // Default users seed karo agar nahi hain
+    const user = await loginWithEmail(email, password);
+    if (user) {
+      await updateLastLogin(user.id);
+      const loggedIn = { ...user, lastLogin: new Date().toISOString() };
+      setAuthSession(loggedIn);
+      onLogin(loggedIn);
+    } else {
+      setError("Invalid email or password. Please try again.");
+    }
+  } catch (err) {
+    setError("Connection error. Please try again.");
+    console.error(err);
+  }
+  setLoading(false);
+};
 
   const handleGoogle = () => {
     setGoogleLoad(true);
