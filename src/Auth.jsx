@@ -250,7 +250,7 @@ export default function Auth({ onLogin }) {
           <div style={{ marginBottom:16 }}>
             <label style={{ display:"block", fontSize:11, fontWeight:700, color:"#6b6880", marginBottom:6, textTransform:"uppercase", letterSpacing:"0.7px" }}>Email Address</label>
             <input className="auth-inp" value={email} onChange={e=>setEmail(e.target.value)}
-              placeholder="admin@edafay.com" type="email"
+              placeholder="name@edafay.com" type="email"
               onKeyDown={e=>e.key==="Enter"&&handleLogin()} />
           </div>
 
