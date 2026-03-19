@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import "./Dashboard.css";
 import { getContent, saveContent, resetContent, EVENT_NAME, DEFAULTS } from "./contentStore.js";
 import { getAuth, clearAuth, ROLE_LABELS, ROLE_COLORS } from "./Auth.jsx";
-import { getUsers, saveUser, deleteUser } from "../services/authService.js";
+import { getUsers, saveUser, deleteUser } from "./services/authService.js";
 import { getInquiries, updateInquiry, addComment, CATEGORIES, STATUSES, PRIORITIES, INQUIRY_EVENT } from "./inquiryStore.js";
 import { getJobs, addJob, updateJob, deleteJob, getApplications, updateApplication, APP_STATUSES, JOB_EV } from "./jobStore.js";
 import { getBlogPosts, saveBlogPost, deleteBlogPost, BLOG_EV } from "./blogStore.js";

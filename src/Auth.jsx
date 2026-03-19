@@ -5,7 +5,7 @@ import {
   loginWithEmail, updateLastLogin,
   getAuth, setAuthSession, clearAuth,
   seedUsers, getUsers, saveUser, deleteUser
-} from "../services/authService.js";
+} from "./services/authService.js";
 
 export { getAuth, clearAuth, getUsers };
 export { saveUser as saveUsers };
