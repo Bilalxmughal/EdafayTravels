@@ -13,31 +13,6 @@ export { deleteUser };
 export const ROLE_LABELS = { super_admin:"Super Admin", editor:"Editor", viewer:"Viewer" };
 export const ROLE_COLORS = { super_admin:"#1a3c6e", editor:"#16a34a", viewer:"#7c3aed" };
 
-const DEFAULT_USERS = [
-  { id:1, name:"Super Admin",     email:"admin@edafay.com",    password:"admin123",   role:"super_admin", avatar:"SA", color:"#1a3c6e", active:true, createdAt:"2024-01-01", lastLogin:null },
-  { id:2, name:"Content Manager", email:"content@edafay.com",  password:"content123", role:"editor",      avatar:"CM", color:"#16a34a", active:true, createdAt:"2024-02-15", lastLogin:null },
-  { id:3, name:"Viewer Staff",    email:"view@edafay.com",      password:"view123",    role:"viewer",      avatar:"VS", color:"#7c3aed", active:true, createdAt:"2024-03-10", lastLogin:null },
-];
-
-export function getUsers()       { try { return JSON.parse(localStorage.getItem(USERS_KEY)) || DEFAULT_USERS; } catch { return DEFAULT_USERS; } }
-export function saveUsers(users) { localStorage.setItem(USERS_KEY, JSON.stringify(users)); }
-export function getAuth()        { try { return JSON.parse(localStorage.getItem(AUTH_KEY)); } catch { return null; } }
-export function setAuth(user) {
-  const users   = getUsers();
-  const updated = users.map(u => u.id===user.id ? { ...u, lastLogin:new Date().toISOString() } : u);
-  saveUsers(updated);
-  localStorage.setItem(AUTH_KEY, JSON.stringify({ ...user, lastLogin:new Date().toISOString() }));
-}
-export function clearAuth() { localStorage.removeItem(AUTH_KEY); }
-export function loginWithEmail(email, password) {
-  const users = getUsers();
-  return users.find(u => u.email.toLowerCase()===email.toLowerCase() && u.password===password && u.active) || null;
-}
-
-const ROLE_LABELS = { super_admin:"Super Admin", editor:"Editor", viewer:"Viewer" };
-const ROLE_COLORS = { super_admin:"#1a3c6e", editor:"#16a34a", viewer:"#7c3aed" };
-export { ROLE_LABELS, ROLE_COLORS };
-
 // ─── SVG Icons ────────────────────────────────────────────────────────────────
 const EyeOpen = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
