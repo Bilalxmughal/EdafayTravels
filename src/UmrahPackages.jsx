@@ -1,6 +1,6 @@
 // ─── UmrahPackages.jsx — Edafay Travel & Tours ──────────────────────────────
 import { useState, useMemo } from "react";
-import { addInquiry } from './inquiryStore.js';
+import { addInquiry } from './services/inquiryService.js';
 import theme from './theme.js';
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
@@ -265,19 +265,22 @@ function BookingForm({ pkg, onClose }) {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {
-    if (!form.name || !form.phone || !form.city) return;
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      addInquiry("umrah", {
-        name: form.name, phone: form.phone, email: form.email,
-        city: form.city, pkg: pkg.name, price: pkg.price,
-        days: pkg.days, category: pkg.category, notes: form.message,
-      });
-      setSubmitted(true);
-    }, 1500);
-  };
+  const handleSubmit = async () => {
+  if (!form.name || !form.phone || !form.city) return;
+  setLoading(true);
+  try {
+    await addInquiry("umrah", {
+      name: form.name, phone: form.phone, email: form.email,
+      city: form.city, pkg: pkg.name, price: pkg.price,
+      days: pkg.days, category: pkg.category, notes: form.message,
+    });
+    setSubmitted(true);
+  } catch (err) {
+    alert("Something went wrong. Please try again.");
+    console.error(err);
+  }
+  setLoading(false);
+};
 
   if (submitted) return (
     <div style={{ textAlign: "center", padding: "20px 0" }}>
