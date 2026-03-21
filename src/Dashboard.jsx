@@ -181,9 +181,12 @@ function TicketDetail({ticket,auth,onBack,onChange}) {
   const [status,setStatus]=useState(ticket.status);
   const [priority,setPriority]=useState(ticket.priority);
   const [assigned,setAssigned]=useState(ticket.assignedTo||"");
-  const users=getUsers();
-  const save=()=>{ updateInquiry(ticket.id,{status,priority,assignedTo:assigned||null}); onChange(); };
-  const submitComment=()=>{ if(!comment.trim()) return; addComment(ticket.id,auth?.name||"Admin",comment.trim()); setComment(""); onChange(); };
+  const [users,setUsers]=useState([]);
+
+  useEffect(()=>{ getUsers().then(u=>setUsers(u)); },[]);
+
+  const save=async()=>{ await updateInquiry(ticket.id,{status,priority,assignedTo:assigned||null}); onChange(); };
+  const submitComment=async()=>{ if(!comment.trim()) return; await addComment(ticket.id,auth?.name||"Admin",comment.trim()); setComment(""); onChange(); };
   const formRows=Object.entries(ticket.form||{}).filter(([k])=>k!=="notes"&&k!=="message");
   const noteVal=ticket.form?.notes||ticket.form?.message||"";
   return (
@@ -263,11 +266,20 @@ function TicketDetail({ticket,auth,onBack,onChange}) {
 
 // ─── INQUIRY TAB ──────────────────────────────────────────────────────────────
 function InquiryTab({category,auth}) {
-  const [tickets,setTickets]=useState(()=>getInquiries().filter(t=>t.category===category));
+  const [tickets,setTickets]=useState([]);
+  const [users,setUsers]=useState([]);
   const [detail,setDetail]=useState(null);
   const [filter,setFilter]=useState("all");
   const [search,setSearch]=useState("");
-  useEffect(()=>{ const h=()=>setTickets(getInquiries().filter(t=>t.category===category)); window.addEventListener("edafay_inquiries_updated",h); return ()=>window.removeEventListener("edafay_inquiries_updated",h); },[category]);
+
+  useEffect(()=>{
+    getUsers().then(u=>setUsers(u));
+    setTickets(getInquiries().filter(t=>t.category===category));
+    const h=()=>setTickets(getInquiries().filter(t=>t.category===category));
+    window.addEventListener("edafay_inquiries_updated",h);
+    return ()=>window.removeEventListener("edafay_inquiries_updated",h);
+  },[category]);
+
   const refresh=()=>setTickets(getInquiries().filter(t=>t.category===category));
   const shown=tickets.filter(t=>{ if(filter!=="all"&&t.status!==filter) return false; if(search){ const q=search.toLowerCase(); return t.id.toLowerCase().includes(q)||(t.form?.name||"").toLowerCase().includes(q)||(t.form?.phone||"").toLowerCase().includes(q); } return true; });
   const counts={total:tickets.length,open:tickets.filter(t=>t.status==="open").length,in_progress:tickets.filter(t=>t.status==="in_progress").length,closed:tickets.filter(t=>t.status==="closed").length};
@@ -296,7 +308,7 @@ function InquiryTab({category,auth}) {
           {["Ticket ID","Customer","Date","Status","Priority","Assigned",""].map((h,i)=><div key={i}>{h}</div>)}
         </div>
         {shown.length===0&&<div style={{textAlign:"center",padding:"48px",color:"#9ca3af",fontSize:14}}>No tickets found.</div>}
-        {shown.map((t,i)=>{ const users=getUsers(); const assignee=users.find(u=>u.email===t.assignedTo); return (
+        {shown.map((t,i)=>{ const assignee=users.find(u=>u.email===t.assignedTo); return (
           <div key={t.id} style={{display:"grid",gridTemplateColumns:"90px 1fr 120px 110px 100px 110px 80px",padding:"12px 16px",borderBottom:i<shown.length-1?"1px solid #f3f4f8":"none",alignItems:"center",transition:"background 0.15s",cursor:"pointer"}}
             onMouseEnter={e=>e.currentTarget.style.background="#fafbff"} onMouseLeave={e=>e.currentTarget.style.background="transparent"}>
             <div style={{fontWeight:700,fontSize:12,color:"#1a3c6e"}}>{t.id}</div>
@@ -316,9 +328,17 @@ function InquiryTab({category,auth}) {
 
 // ─── OVERVIEW TAB ─────────────────────────────────────────────────────────────
 function OverviewTab({content,auth}) {
-  const [tickets,setTickets]=useState(()=>getInquiries());
-  useEffect(()=>{ const h=()=>setTickets(getInquiries()); window.addEventListener("edafay_inquiries_updated",h); return ()=>window.removeEventListener("edafay_inquiries_updated",h); },[]);
-  const users=getUsers();
+  const [tickets,setTickets]=useState([]);
+  const [users,setUsers]=useState([]);
+
+  useEffect(()=>{
+    getUsers().then(u=>setUsers(u));
+    setTickets(getInquiries());
+    const h=()=>setTickets(getInquiries());
+    window.addEventListener("edafay_inquiries_updated",h);
+    return ()=>window.removeEventListener("edafay_inquiries_updated",h);
+  },[]);
+
   const total=tickets.length, open=tickets.filter(t=>t.status==="open").length, inprog=tickets.filter(t=>t.status==="in_progress").length, closed=tickets.filter(t=>t.status==="closed").length;
   const resolveRate=pct(closed,total);
   const catStats=Object.entries(CATEGORIES).map(([k,v])=>{ const ct=tickets.filter(t=>t.category===k); return {key:k,...v,total:ct.length,open:ct.filter(t=>t.status==="open").length,closed:ct.filter(t=>t.status==="closed").length}; });
