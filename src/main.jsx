@@ -13,7 +13,7 @@ import BookNow from './BookNow.jsx'
 import Careers from './Careers.jsx'
 import Blog from './Blog.jsx'
 import WhatsAppButton from './WhatsAppButton.jsx'
-import Auth, { getAuth, clearAuth, setAuth } from './Auth.jsx'
+import Auth, { getAuth, clearAuth, setAuthSession as setAuth } from './Auth.jsx'
 
 function Root() {
   const [page,     setPage]     = useState(window.location.hash);

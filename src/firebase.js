@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -13,10 +13,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-// Test
-import { collection, getDocs } from "firebase/firestore";
+// Connection test
 getDocs(collection(db, "test")).then(() => {
-  console.log("✅ Firebase Firestore connected!");
+  console.log("✅ Firebase connected!");
 }).catch((err) => {
   console.error("❌ Firebase error:", err.message);
 });

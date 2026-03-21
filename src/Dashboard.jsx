@@ -528,26 +528,52 @@ function VisibilityTab({content,setContent,onSave}) {
 
 // ─── USER TAB ─────────────────────────────────────────────────────────────────
 function UserTab({auth}) {
-  const [users,setUsers]=useState(()=>getUsers());
-  const [editing,setEditing]=useState(null);
-  const [addMode,setAddMode]=useState(false);
-  const [confirm,setConfirm]=useState(null);
-  const [toast,setToast]=useState(false);
-  const persist=(u)=>{saveUsers(u);setUsers(u);setToast(true);setTimeout(()=>setToast(false),2200);};
-  const isSA=auth?.role==="super_admin";
-  const newUser={id:Date.now(),name:"",email:"",password:"",role:"editor",color:"#1a3c6e",active:true,createdAt:new Date().toISOString().split("T")[0],lastLogin:null};
-  const userFields=[{key:"name",label:"Full Name"},{key:"email",label:"Email"},{key:"password",label:"Password",type:"password",placeholder:"Leave blank to keep"},{key:"role",label:"Role",type:"select",options:[{v:"super_admin",l:"Super Admin"},{v:"editor",l:"Editor"},{v:"viewer",l:"Viewer"}]},{key:"active",label:"Account Active",type:"toggle"},{key:"color",label:"Avatar Color",placeholder:"#1a3c6e"}];
-  const handleSave=(data)=>{
-    const existing=users.find(u=>u.id===data.id);
-    if(!data.password&&existing) data={...data,password:existing.password};
-    data={...data,avatar:initials(data.name||"?")};
-    if(addMode){persist([...users,data]);setAddMode(false);} else persist(users.map(u=>u.id===data.id?data:u));
+  const [users, setUsers] = useState([]);
+  const [editing, setEditing] = useState(null);
+  const [addMode, setAddMode] = useState(false);
+  const [confirm, setConfirm] = useState(null);
+  const [toast, setToast] = useState(false);
+  const isSA = auth?.role === "super_admin";
+
+  // Firebase se users load karo
+  useEffect(() => {
+    getUsers().then(u => setUsers(u));
+  }, []);
+
+  const persist = async (updatedUsers) => {
+    for (const u of updatedUsers) {
+      await saveUser(u);
+    }
+    setUsers(updatedUsers);
+    setToast(true);
+    setTimeout(() => setToast(false), 2200);
+  };
+
+  const newUser = {id:String(Date.now()),name:"",email:"",password:"",role:"editor",color:"#1a3c6e",active:true,createdAt:new Date().toISOString().split("T")[0],lastLogin:null};
+  const userFields = [{key:"name",label:"Full Name"},{key:"email",label:"Email"},{key:"password",label:"Password",type:"password",placeholder:"Leave blank to keep"},{key:"role",label:"Role",type:"select",options:[{v:"super_admin",l:"Super Admin"},{v:"editor",l:"Editor"},{v:"viewer",l:"Viewer"}]},{key:"active",label:"Account Active",type:"toggle"},{key:"color",label:"Avatar Color",placeholder:"#1a3c6e"}];
+
+  const handleSave = async (data) => {
+    const existing = users.find(u => u.id === data.id);
+    if (!data.password && existing) data = {...data, password: existing.password};
+    data = {...data, avatar: initials(data.name || "?")};
+    if (addMode) {
+      const newU = {...data, id: String(Date.now())};
+      await saveUser(newU);
+      setUsers([...users, newU]);
+      setAddMode(false);
+    } else {
+      await saveUser(data);
+      setUsers(users.map(u => u.id === data.id ? data : u));
+    }
+    setToast(true);
+    setTimeout(() => setToast(false), 2200);
     setEditing(null);
   };
+
   return (
     <div>
       {toast&&<div style={{position:"fixed",bottom:28,right:28,zIndex:9999,background:"#16a34a",color:"#fff",padding:"12px 22px",borderRadius:12,fontSize:13,fontWeight:700}}>User updated!</div>}
-      {confirm&&<ConfirmModal msg={`Delete "${confirm.name}"?`} onOk={()=>{persist(users.filter(u=>u.id!==confirm.id));setConfirm(null);}} onCancel={()=>setConfirm(null)}/>}
+      {confirm&&<ConfirmModal msg={`Delete "${confirm.name}"?`} onOk={async()=>{await deleteUser(confirm.id);setUsers(users.filter(u=>u.id!==confirm.id));setConfirm(null);}} onCancel={()=>setConfirm(null)}/>}
       {(editing||addMode)&&<EditModal item={editing||newUser} fields={userFields} title={addMode?"Add User":"Edit User"} onSave={handleSave} onClose={()=>{setEditing(null);setAddMode(false);}}/>}
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16,flexWrap:"wrap",gap:10}}>
         <div><div style={{fontSize:14,fontWeight:700,color:"#1a1a2e"}}>Admin Users ({users.length})</div><div style={{fontSize:12,color:"#9ca3af",marginTop:2}}>Manage dashboard access</div></div>
@@ -571,7 +597,7 @@ function UserTab({auth}) {
             </div>
             {isSA&&<div style={{display:"flex",gap:7,flexShrink:0}}>
               <button onClick={()=>setEditing(u)} style={btnOutline()}><Icon d={IC.edit} size={12} stroke="#1a3c6e"/> Edit</button>
-              <button onClick={()=>persist(users.map(x=>x.id===u.id?{...x,active:!x.active}:x))} style={btnOutline(u.active?"#ea580c":"#16a34a")}>{u.active?"Deactivate":"Activate"}</button>
+              <button onClick={async()=>{const updated=users.map(x=>x.id===u.id?{...x,active:!x.active}:x);await persist(updated);}} style={btnOutline(u.active?"#ea580c":"#16a34a")}>{u.active?"Deactivate":"Activate"}</button>
               {u.id!==auth?.id&&<button onClick={()=>setConfirm(u)} style={btnOutline("#dc2626")}><Icon d={IC.trash} size={12} stroke="#dc2626"/></button>}
             </div>}
           </div>
@@ -597,14 +623,17 @@ function SettingsTab({content,setContent,auth,onLogout,onSave}) {
   const [pwForm,setPwForm]=useState({current:"",newPw:"",confirm:""});
   const [pwMsg,setPwMsg]=useState("");
   const [resetConf,setResetConf]=useState(false);
-  const handlePw=()=>{
-    const users=getUsers(),me=users.find(u=>u.id===auth?.id);
-    if(!me||me.password!==pwForm.current){setPwMsg("Incorrect current password.");return;}
-    if(pwForm.newPw.length<6){setPwMsg("Min 6 characters.");return;}
-    if(pwForm.newPw!==pwForm.confirm){setPwMsg("Passwords do not match.");return;}
-    saveUsers(users.map(u=>u.id===auth.id?{...u,password:pwForm.newPw}:u));
-    setPwForm({current:"",newPw:"",confirm:""});setPwMsg("Password changed!");setTimeout(()=>setPwMsg(""),3000);
-  };
+  const handlePw = async () => {
+  const allUsers = await getUsers();
+  const me = allUsers.find(u => u.id === auth?.id);
+  if (!me || me.password !== pwForm.current) { setPwMsg("Incorrect current password."); return; }
+  if (pwForm.newPw.length < 6) { setPwMsg("Min 6 characters."); return; }
+  if (pwForm.newPw !== pwForm.confirm) { setPwMsg("Passwords do not match."); return; }
+  await saveUser({...me, password: pwForm.newPw});
+  setPwForm({current:"", newPw:"", confirm:""});
+  setPwMsg("Password changed!");
+  setTimeout(() => setPwMsg(""), 3000);
+};
   return (
     <div>
       {resetConf&&<ConfirmModal msg="Reset ALL website content to default? Cannot be undone." onOk={()=>{resetContent();setContent(getContent());setResetConf(false);onSave();}} onCancel={()=>setResetConf(false)}/>}
