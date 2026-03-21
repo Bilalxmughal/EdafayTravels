@@ -6,8 +6,7 @@ import {
   seedUsers, getUsers, saveUser, deleteUser, saveUsers
 } from "./services/authService.js";
 
-export { getAuth, clearAuth, getUsers, saveUser, saveUsers, deleteUser };
-export { setAuthSession as setAuth };
+export { getAuth, clearAuth, setAuthSession as setAuth };
 export const ROLE_LABELS = { super_admin:"Super Admin", editor:"Editor", viewer:"Viewer" };
 export const ROLE_COLORS = { super_admin:"#1a3c6e", editor:"#16a34a", viewer:"#7c3aed" };
 
