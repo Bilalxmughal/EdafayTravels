@@ -1,5 +1,5 @@
 import { db } from "../firebase";
-  import {
+import {
   collection, doc, getDocs, setDoc,
   updateDoc, deleteDoc
 } from "firebase/firestore";
@@ -15,11 +15,17 @@ const DEFAULT_USERS = [
 
 // ✅ Seed default users (pehli baar chalega)
 export async function seedUsers() {
-  const snap = await getDocs(collection(db, COL));
-  if (snap.empty) {
-    for (const user of DEFAULT_USERS) {
-      await setDoc(doc(db, COL, user.id), user);
+  try {
+    const snap = await getDocs(collection(db, COL));
+    if (snap.empty) {
+      for (const user of DEFAULT_USERS) {
+        await setDoc(doc(db, COL, user.id), user);
+      }
+      console.log("✅ Default users seeded");
     }
+  } catch (err) {
+    console.error("❌ Seed error:", err);
+    throw err;  // Error propagate karo taake login fail ho (safe)
   }
 }
 
@@ -52,12 +58,31 @@ export async function saveUser(user) {
   await setDoc(doc(db, COL, String(user.id)), user);
 }
 
+// ✅ Multiple users save karo (bulk update ke liye)
+export async function saveUsers(users) {
+  for (const user of users) {
+    await setDoc(doc(db, COL, String(user.id)), user);
+  }
+}
+
 // ✅ User delete karo
 export async function deleteUser(userId) {
   await deleteDoc(doc(db, COL, String(userId)));
 }
 
-// ✅ Session localStorage mein (sirf current browser ke liye theek hai)
-export function getAuth()        { try { return JSON.parse(localStorage.getItem("edafay_auth_v1")); } catch { return null; } }
-export function setAuthSession(user) { localStorage.setItem("edafay_auth_v1", JSON.stringify(user)); }
-export function clearAuth()      { localStorage.removeItem("edafay_auth_v1"); }
+// ✅ Session localStorage mein
+export function getAuth() { 
+  try { 
+    return JSON.parse(localStorage.getItem("edafay_auth_v1")); 
+  } catch { 
+    return null; 
+  } 
+}
+
+export function setAuthSession(user) { 
+  localStorage.setItem("edafay_auth_v1", JSON.stringify(user)); 
+}
+
+export function clearAuth() { 
+  localStorage.removeItem("edafay_auth_v1"); 
+}

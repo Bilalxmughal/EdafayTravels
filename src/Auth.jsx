@@ -1,15 +1,13 @@
 // ─── Auth.jsx — Edafay Admin Login ───────────────────────────────────────────
 import { useState } from "react";
-
 import {
   loginWithEmail, updateLastLogin,
   getAuth, setAuthSession, clearAuth,
-  seedUsers, getUsers, saveUser, deleteUser
+  seedUsers, getUsers, saveUser, deleteUser, saveUsers
 } from "./services/authService.js";
 
-export { getAuth, clearAuth, getUsers };
-export { saveUser as saveUsers };
-export { deleteUser };
+export { getAuth, clearAuth, getUsers, saveUser, saveUsers, deleteUser };
+export { setAuthSession as setAuth };
 export const ROLE_LABELS = { super_admin:"Super Admin", editor:"Editor", viewer:"Viewer" };
 export const ROLE_COLORS = { super_admin:"#1a3c6e", editor:"#16a34a", viewer:"#7c3aed" };
 
@@ -39,10 +37,15 @@ export default function Auth({ onLogin }) {
 
   const handleLogin = async () => {
   setError("");
-  if (!email || !password) { setError("Please enter your email and password."); return; }
+  if (!email || !password) { 
+    setError("Please enter your email and password."); 
+    return; 
+  }
   setLoading(true);
   try {
-    await seedUsers(); // Default users seed karo agar nahi hain
+    // Pehle seed check karo (sirf first time)
+    await seedUsers(); 
+    
     const user = await loginWithEmail(email, password);
     if (user) {
       await updateLastLogin(user.id);
