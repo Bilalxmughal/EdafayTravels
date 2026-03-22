@@ -1002,7 +1002,7 @@ export default function Dashboard({auth,onLogout}) {
 
           {/* Bottom actions */}
           <div style={{padding:"10px 10px 16px",borderTop:"1px solid rgba(255,255,255,0.07)"}}>
-            <button onClick={()=>window.location.href=""} title="View Site"
+            <button onClick={()=>window.location.href="/"} title="View Site"
               style={{width:"100%",padding:"9px 10px",borderRadius:9,background:"rgba(255,255,255,0.07)",border:"1px solid rgba(255,255,255,0.1)",color:"rgba(255,255,255,0.65)",fontSize:12,fontWeight:600,cursor:"pointer",fontFamily:"'DM Sans',sans-serif",marginBottom:6,display:"flex",alignItems:"center",justifyContent:"center",gap:7,transition:"background 0.18s"}}>
               <Icon d={IC.home} size={14} stroke="rgba(255,255,255,0.65)"/><span className="sb-label">View Site</span>
             </button>
