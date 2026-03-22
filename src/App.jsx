@@ -188,8 +188,8 @@ function Hero({ h }) {
         </h1>
         <p className="fade-up-delay2" style={{ color:theme.textMuted, fontSize:16, lineHeight:1.75, maxWidth:440, marginBottom:36 }}>{h.subtext}</p>
         <div className="fade-up-delay3" style={{ display:"flex", gap:14, marginBottom:48, flexWrap:"wrap" }}>
-          <button className="btn-primary" onClick={()=>window.location.hash="#/umrah"}>Explore Packages</button>
-          <button className="btn-outline" onClick={()=>window.location.hash="#/cars"} style={{ display:"flex", alignItems:"center", gap:8, color:theme.text }}>
+          <button className="btn-primary" onClick={()=>window.location.href="/umrah"}>Explore Packages</button>
+          <button className="btn-outline" onClick={()=>window.location.href="/cars"} style={{ display:"flex", alignItems:"center", gap:8, color:theme.text }}>
             Car Rental
           </button>
         </div>
@@ -226,7 +226,7 @@ function Hero({ h }) {
       <div style={{ gridColumn:"1 / -1" }}>
         <div style={{ display:"flex", gap:28, marginBottom:20 }}>
           {["Flights","Insurance"].map(tab => (
-            <button key={tab} onClick={()=>{ if(tab==="Insurance"){ window.location.hash="#/insurance"; } else setActiveTab(tab); }}
+            <button key={tab} onClick={()=>{ if(tab==="Insurance"){ window.location.href="/insurance"; } else setActiveTab(tab); }}
               style={{ background:"none",border:"none",color:activeTab===tab?theme.accent:theme.textMuted,fontSize:15,fontWeight:600,cursor:"pointer",paddingBottom:10,borderBottom:activeTab===tab?`2px solid ${theme.accent}`:"2px solid transparent",fontFamily:"'DM Sans',sans-serif",transition:"color 0.2s",display:"flex",alignItems:"center",gap:6 }}>
               {tab==="Flights"?"✈️":"🛡️"} {tab}
             </button>
@@ -250,7 +250,7 @@ function UmrahSection({ sec, packages }) {
       </div>
       <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:24 }} className="dest-grid">
         {packages.map((pkg,i) => (
-          <div key={pkg.id} className="dest-card card-hover" style={{ borderRadius:20,overflow:"hidden",background:theme.bgCard,border:`1px solid ${theme.border}`,cursor:"pointer",animation:`fadeUp 0.6s ${i*0.1}s both` }} onClick={()=>window.location.hash="#/umrah"}>
+          <div key={pkg.id} className="dest-card card-hover" style={{ borderRadius:20,overflow:"hidden",background:theme.bgCard,border:`1px solid ${theme.border}`,cursor:"pointer",animation:`fadeUp 0.6s ${i*0.1}s both` }} onClick={()=>window.location.href="/umrah"}>
             <div style={{ position:"relative",height:210,overflow:"hidden" }}>
               <img src={pkg.img} alt={pkg.name} style={{ width:"100%",height:"100%",objectFit:"cover",transition:"transform 0.5s" }} />
               <div style={{ position:"absolute",inset:0,background:"linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 55%)" }} />
@@ -271,7 +271,7 @@ function UmrahSection({ sec, packages }) {
           </div>
         ))}
       </div>
-      <div style={{ textAlign:"center",marginTop:48 }}><button className="btn-outline" style={{ color:theme.text }} onClick={()=>window.location.hash="#/umrah"}>All Packages →</button></div>
+      <div style={{ textAlign:"center",marginTop:48 }}><button className="btn-outline" style={{ color:theme.text }} onClick={()=>window.location.href="/umrah"}>All Packages →</button></div>
     </section>
   );
 }
@@ -288,7 +288,7 @@ function CarRentalSection({ sec, cars }) {
       </div>
       <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:24 }} className="dest-grid">
         {cars.map((car,i) => (
-          <div key={car.id} className="dest-card card-hover" style={{ borderRadius:20,overflow:"hidden",background:theme.bg,border:`1px solid ${theme.border}`,cursor:"pointer",animation:`fadeUp 0.6s ${i*0.1}s both` }} onClick={()=>window.location.hash="#/cars"}>
+          <div key={car.id} className="dest-card card-hover" style={{ borderRadius:20,overflow:"hidden",background:theme.bg,border:`1px solid ${theme.border}`,cursor:"pointer",animation:`fadeUp 0.6s ${i*0.1}s both` }} onClick={()=>window.location.href="/cars"}>
             <div style={{ position:"relative",height:200,overflow:"hidden" }}>
               <img src={car.img} alt={car.name} style={{ width:"100%",height:"100%",objectFit:"cover",transition:"transform 0.5s" }} />
               <div style={{ position:"absolute",inset:0,background:"linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 55%)" }} />
@@ -309,7 +309,7 @@ function CarRentalSection({ sec, cars }) {
           </div>
         ))}
       </div>
-      <div style={{ textAlign:"center",marginTop:48 }}><button className="btn-outline" style={{ color:theme.text }} onClick={()=>window.location.hash="#/cars"}>All Cars →</button></div>
+      <div style={{ textAlign:"center",marginTop:48 }}><button className="btn-outline" style={{ color:theme.text }} onClick={()=>window.location.href="/cars"}>All Cars →</button></div>
     </section>
   );
 }
@@ -355,7 +355,7 @@ function VisaSection({ sec, visas }) {
       </div>
       <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:24 }} className="dest-grid">
         {visas.map((visa,i) => (
-          <div key={visa.id} className="dest-card card-hover" style={{ borderRadius:20,overflow:"hidden",background:theme.bgCard,border:`1px solid ${theme.border}`,cursor:"pointer",animation:`fadeUp 0.6s ${i*0.1}s both` }} onClick={()=>window.location.hash="#/visas"}>
+          <div key={visa.id} className="dest-card card-hover" style={{ borderRadius:20,overflow:"hidden",background:theme.bgCard,border:`1px solid ${theme.border}`,cursor:"pointer",animation:`fadeUp 0.6s ${i*0.1}s both` }} onClick={()=>window.location.href="/visas"}>
             <div style={{ position:"relative",height:180,overflow:"hidden" }}>
               <img src={visa.img} alt={visa.country} style={{ width:"100%",height:"100%",objectFit:"cover",transition:"transform 0.5s" }} />
               <div style={{ position:"absolute",inset:0,background:"linear-gradient(to top,rgba(0,0,0,0.65) 0%,transparent 55%)" }} />
@@ -376,7 +376,7 @@ function VisaSection({ sec, visas }) {
           </div>
         ))}
       </div>
-      <div style={{ textAlign:"center",marginTop:48 }}><button className="btn-outline" style={{ color:theme.text }} onClick={()=>window.location.hash="#/visas"}>All Visas →</button></div>
+      <div style={{ textAlign:"center",marginTop:48 }}><button className="btn-outline" style={{ color:theme.text }} onClick={()=>window.location.href="/visas"}>All Visas →</button></div>
     </section>
   );
 }

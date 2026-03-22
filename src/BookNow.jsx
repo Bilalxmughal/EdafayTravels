@@ -88,7 +88,7 @@ function ThankYou({ category, onReset }) {
       </div>
       <div style={{ display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap" }}>
         <button onClick={onReset} className="btn-primary" style={{ padding:"13px 32px" }}>Make Another Booking</button>
-        <button onClick={() => window.location.hash = ""} className="btn-outline" style={{ color:theme.text, padding:"13px 32px" }}>Back to Home</button>
+        <button onClick={() => window.location.href = ""} className="btn-outline" style={{ color:theme.text, padding:"13px 32px" }}>Back to Home</button>
       </div>
     </div>
   );

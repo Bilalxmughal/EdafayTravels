@@ -32,13 +32,13 @@ const socials = [
 export default function Footer() {
   const navigate = (hash) => {
     if (hash.includes("#team")) {
-      window.location.hash = "#/about";
+      window.location.href = "/about";
       setTimeout(() => {
         const el = document.getElementById("team-section");
         if (el) el.scrollIntoView({ behavior:"smooth" });
       }, 300);
     } else {
-      window.location.hash = hash;
+      window.location.href = href;
     }
   };
 
@@ -49,7 +49,7 @@ export default function Footer() {
 
         {/* Brand */}
         <div>
-          <div onClick={()=>window.location.hash=""} style={{ display:"flex", alignItems:"center", gap:10, marginBottom:20, cursor:"pointer" }}>
+          <div onClick={()=>window.location.href=""} style={{ display:"flex", alignItems:"center", gap:10, marginBottom:20, cursor:"pointer" }}>
             <img src="/logo.png" alt="logo" style={{ height:60 }} />
           </div>
           <p style={{ color:theme.textMuted, lineHeight:1.75, fontSize:14, maxWidth:280, marginBottom:24 }}>

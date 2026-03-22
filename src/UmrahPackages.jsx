@@ -1,6 +1,6 @@
 // ─── UmrahPackages.jsx — Edafay Travel & Tours ──────────────────────────────
 import { useState, useMemo } from "react";
-import { addInquiry } from './inquiryService.js';
+import { addInquiry } from './services/inquiryService.js';
 import theme from './theme.js';
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';

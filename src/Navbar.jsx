@@ -1,10 +1,10 @@
-// ─── Navbar.jsx — Shared Navbar (Responsive Fixed) ───────────────────────────
+// ─── Navbar.jsx ───────────────────────────────────────────────────────────────
 import { useState, useEffect } from "react";
 import theme from './theme.js';
 
 export default function Navbar() {
-  const [scrolled,  setScrolled]  = useState(false);
-  const [menuOpen,  setMenuOpen]  = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 50);
@@ -18,14 +18,20 @@ export default function Navbar() {
   }, [menuOpen]);
 
   const links = [
-    { label: "Home",          hash: ""          },
-    { label: "About",         hash: "#/about"   },
-    { label: "Umrah Package", hash: "#/umrah"   },
-    { label: "Insurance",     hash: "#/insurance"},
-    { label: "Visas",         hash: "#/visas"   },
-    { label: "Car Rental",    hash: "#/cars"    },
-    { label: "Contact",       hash: "#/contact" },
+    { label: "Home",          path: "/"          },
+    { label: "About",         path: "/about"     },
+    { label: "Umrah Package", path: "/umrah"     },
+    { label: "Insurance",     path: "/insurance" },
+    { label: "Visas",         path: "/visas"     },
+    { label: "Car Rental",    path: "/cars"      },
+    { label: "Contact",       path: "/contact"   },
   ];
+
+  const go = (path) => {
+    window.history.pushState({}, "", path);
+    window.dispatchEvent(new PopStateEvent("popstate"));
+    setMenuOpen(false);
+  };
 
   return (
     <>
@@ -37,28 +43,18 @@ export default function Navbar() {
           .nb-mobile-btn { display: flex !important; }
         }
         .nb-link {
-          color: ${theme.navText};
-          text-decoration: none;
+          color: ${theme.navText}; text-decoration: none;
           font-size: 14px; font-weight: 500;
           letter-spacing: 0.3px; cursor: pointer;
           transition: color 0.2s; padding-bottom: 2px;
         }
         .nb-link:hover { color: ${theme.accent}; }
-        .nb-btn-outline {
-          background: transparent; color: ${theme.text};
-          border: 1.5px solid ${theme.border};
-          padding: 9px 22px; border-radius: 50px;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 13px; font-weight: 500;
-          cursor: pointer; transition: all 0.2s;
-        }
-        .nb-btn-outline:hover { border-color: ${theme.accent}; color: ${theme.accent}; }
         .nb-btn-primary {
           background: ${theme.accent}; color: #ffffff; border: none;
           padding: 10px 22px; border-radius: 50px;
           font-family: 'DM Sans', sans-serif;
           font-size: 13px; font-weight: 600;
-          cursor: pointer; transition: all 0.2s;
+          cursor: pointer; transition: all 0.2s; text-decoration: none;
         }
         .nb-btn-primary:hover { background: ${theme.accentLight}; transform: translateY(-1px); }
         .nb-btn-admin {
@@ -68,7 +64,7 @@ export default function Navbar() {
           padding: 9px 18px; border-radius: 50px;
           font-size: 12px; font-weight: 700;
           cursor: pointer; transition: all 0.2s;
-          font-family: 'DM Sans', sans-serif;
+          font-family: 'DM Sans', sans-serif; text-decoration: none;
         }
         .nb-btn-admin:hover { background: rgba(26,60,110,0.2); }
         .nb-hamburger {
@@ -113,44 +109,53 @@ export default function Navbar() {
         display: "flex", alignItems: "center", justifyContent: "space-between",
         height: "72px",
       }}>
-        <div onClick={() => { window.location.hash = ''; setMenuOpen(false); }}
-          style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", flexShrink: 0 }}>
-          <img src="/logo.png" alt="logo" style={{ height:60 }} />
-        </div>
 
+        {/* Logo */}
+        <a href="/" style={{ display:"flex", alignItems:"center", gap:10, cursor:"pointer", flexShrink:0, textDecoration:"none" }}>
+          <img src="/logo.png" alt="logo" style={{ height: 60 }} />
+        </a>
+
+        {/* Desktop Links */}
         <div className="nb-desktop" style={{ gap: 28, alignItems: "center" }}>
-          {links.map(({ label, hash }) => (
-            <a key={label} className="nb-link" onClick={() => window.location.hash = hash}>{label}</a>
+          {links.map(({ label, path }) => (
+            <a key={label} href={path} className="nb-link">{label}</a>
           ))}
         </div>
 
+        {/* Desktop Buttons */}
         <div className="nb-desktop" style={{ gap: 10, alignItems: "center" }}>
-          <p style={{ fontSize: "12px", margin: 0 }}> 📞 0305-2222-744</p>
-          <button className="nb-btn-primary" onClick={() => window.location.hash = '#/booknow'}>Book Now</button>
-          <button className="nb-btn-admin" onClick={() => window.location.hash = '#/admin'}>Admin Access</button>
+          <p style={{ fontSize: "12px", margin: 0 }}>📞 0305-2222-744</p>
+          <a href="/booknow" className="nb-btn-primary">Book Now</a>
+          <a href="/admin"   className="nb-btn-admin">Admin Access</a>
         </div>
 
+        {/* Hamburger */}
         <button className="nb-mobile-btn nb-hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
           {menuOpen ? "✕" : "☰"}
         </button>
       </nav>
 
+      {/* Mobile Menu */}
       {menuOpen && (
         <div className="nb-mobile-menu">
-          {links.map(({ label, hash }) => (
-            <a key={label} className="nb-mobile-link"
-              onClick={() => { window.location.hash = hash; setMenuOpen(false); }}>
+          {links.map(({ label, path }) => (
+            <a key={label} href={path} className="nb-mobile-link"
+              onClick={() => setMenuOpen(false)}>
               {label}
             </a>
           ))}
           <div className="nb-mobile-actions">
-            <button className="nb-btn-primary" style={{ flex: 1 }} onClick={() => { window.location.hash = '#/booknow'; setMenuOpen(false); }}>Book Now</button>
+            <a href="/booknow" className="nb-btn-primary"
+              style={{ flex:1, textAlign:"center" }}
+              onClick={() => setMenuOpen(false)}>
+              Book Now
+            </a>
           </div>
-          <button className="nb-btn-admin"
-            style={{ marginTop: 10, width: "100%", textAlign: "center" }}
-            onClick={() => { window.location.hash = '#/admin'; setMenuOpen(false); }}>
+          <a href="/admin" className="nb-btn-admin"
+            style={{ marginTop:10, width:"100%", textAlign:"center", display:"block" }}
+            onClick={() => setMenuOpen(false)}>
             Admin Access
-          </button>
+          </a>
         </div>
       )}
     </>

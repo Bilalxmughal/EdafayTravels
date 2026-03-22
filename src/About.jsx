@@ -213,7 +213,7 @@ export default function About() {
           </p>
           <div className="ab-cta-btns">
             <button
-              onClick={() => window.location.hash = '#/contact'}
+              onClick={() => window.location.href = '/contact'}
               style={{
                 background: theme.accent, color: "#ffffff", border: "none",
                 padding: "14px 32px", borderRadius: 50, cursor: "pointer",
@@ -225,7 +225,7 @@ export default function About() {
             >Contact Us</button>
 
             <button
-              onClick={() => window.location.hash = '#/destinations'}
+              onClick={() => window.location.href = '/destinations'}
               style={{
                 background: "transparent", color: theme.text,
                 border: `1.5px solid ${theme.border}`,

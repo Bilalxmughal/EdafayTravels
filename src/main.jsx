@@ -16,35 +16,40 @@ import WhatsAppButton from './WhatsAppButton.jsx'
 import Auth, { getAuth, clearAuth, setAuthSession as setAuth } from './Auth.jsx'
 
 function Root() {
-  const [page,     setPage]     = useState(window.location.hash);
+  const [page,     setPage]     = useState(window.location.pathname);
   const [authUser, setAuthUser] = useState(() => getAuth());
 
   useEffect(() => {
-    const h = () => setPage(window.location.hash);
-    window.addEventListener("hashchange", h);
-    return () => window.removeEventListener("hashchange", h);
+    const h = () => setPage(window.location.pathname);
+    window.addEventListener("popstate", h);
+    return () => window.removeEventListener("popstate", h);
   }, []);
 
-  const handleLogin  = (user) => { setAuth(user); setAuthUser(user); };
-  const handleLogout = () => { clearAuth(); setAuthUser(null); window.location.hash = ""; setPage(""); };
+  const navigate = (path) => {
+    window.history.pushState({}, "", path);
+    setPage(path);
+  };
 
-  // ── Admin route (no WhatsApp) ─────────────────────────────────────────────
-  if (page === '#/admin') {
+  const handleLogin  = (user) => { setAuth(user); setAuthUser(user); };
+  const handleLogout = () => { clearAuth(); setAuthUser(null); navigate("/"); };
+
+  // ── Admin route
+  if (page === '/admin') {
     if (!authUser) return <Auth onLogin={handleLogin} />;
     return <Dashboard auth={authUser} onLogout={handleLogout} />;
   }
 
-  // ── Public pages (WhatsApp on all) ────────────────────────────────────────
+  // ── Public pages
   const renderPage = () => {
-    if (page === '#/contact')   return <Contact />;
-    if (page === '#/about')     return <About />;
-    if (page === '#/umrah')     return <UmrahPackages />;
-    if (page === '#/visas')     return <Visas />;
-    if (page === '#/cars')      return <CarRental />;
-    if (page === '#/insurance') return <Insurance />;
-    if (page === '#/booknow')   return <BookNow />;
-    if (page === '#/careers')   return <Careers />;
-    if (page === '#/blog')      return <Blog />;
+    if (page === '/contact')   return <Contact />;
+    if (page === '/about')     return <About />;
+    if (page === '/umrah')     return <UmrahPackages />;
+    if (page === '/visas')     return <Visas />;
+    if (page === '/cars')      return <CarRental />;
+    if (page === '/insurance') return <Insurance />;
+    if (page === '/booknow')   return <BookNow />;
+    if (page === '/careers')   return <Careers />;
+    if (page === '/blog')      return <Blog />;
     return <App />;
   };
 
