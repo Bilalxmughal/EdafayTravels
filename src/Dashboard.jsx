@@ -362,9 +362,7 @@ function OverviewTab({content,auth}) {
               <div style={{height:"100%",width:`${resolveRate}%`,background:"#4ade80",borderRadius:99,transition:"width 0.7s ease"}}/>
             </div>
           </div>
-          <button onClick={()=>{window.location.href="";}} style={{...btnOutline(),background:"rgba(255,255,255,0.1)",border:"1px solid rgba(255,255,255,0.2)",color:"#fff",padding:"9px 18px",gap:6}}>
-            <Icon d={IC.home} size={14} stroke="#fff"/> View Site
-          </button>
+          
         </div>
       </div>
 
