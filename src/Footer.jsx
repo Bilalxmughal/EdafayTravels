@@ -4,44 +4,32 @@ import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
 const cols = [
   { title: "Company",  links: [
-    { label:"About Us",       href:"/about"          },
-    { label:"Our Team",       href:"/aboutteam"      },
-    { label:"Careers",        href:"/careers"        },
-    { label:"Blog",           href:"/blog"           },
+    { label:"About Us",        href:"/about"      },
+    { label:"Our Team",        href:"/about"      },
+    { label:"Careers",         href:"/careers"    },
+    { label:"Blog",            href:"/blog"       },
   ]},
   { title: "Services", links: [
-    { label:"Umrah Packages", href:"/umrah"          },
-    { label:"Travel Insurance",href:"/insurance"     },
-    { label:"Visa Assistance",href:"/visas"          },
-    { label:"Car Rental",     href:"/cars"           },
+    { label:"Umrah Packages",  href:"/umrah"      },
+    { label:"Travel Insurance",href:"/insurance"  },
+    { label:"Visa Assistance", href:"/visas"      },
+    { label:"Car Rental",      href:"/cars"       },
   ]},
   { title: "Support",  links: [
-    { label:"Contact Us",     href:"/contact"        },
-    { label:"Book Now",       href:"/booknow"        },
-    { label:"Privacy Policy", href:"/privacy"        },
-    { label:"Terms of Service",href:"/terms"         },
+    { label:"Contact Us",      href:"/contact"    },
+    { label:"Book Now",        href:"/booknow"    },
+    { label:"Privacy Policy",  href:"/privacy"    },
+    { label:"Terms of Service",href:"/terms"      },
   ]},
 ];
 
 const socials = [
-  { icon: <FaFacebookF />, label:"Facebook", url:"https://facebook.com/edafaytravels" },
-  { icon: <FaLinkedinIn />, label:"LinkedIn", url:"https://linkedin.com/company/edafaytravels" },
-  { icon: <FaInstagram />, label:"Instagram", url:"https://instagram.com/edafaytravels" },
+  { icon: <FaFacebookF />,  label:"Facebook",  url:"https://facebook.com/edafaytravels"        },
+  { icon: <FaLinkedinIn />, label:"LinkedIn",  url:"https://linkedin.com/company/edafaytravels" },
+  { icon: <FaInstagram />,  label:"Instagram", url:"https://instagram.com/edafaytravels"        },
 ];
 
 export default function Footer() {
-  const navigate = (hash) => {
-    if (hash.includes("#team")) {
-      window.location.href = "/about";
-      setTimeout(() => {
-        const el = document.getElementById("team-section");
-        if (el) el.scrollIntoView({ behavior:"smooth" });
-      }, 300);
-    } else {
-      window.location.href = href;
-    }
-  };
-
   return (
     <footer style={{ padding:"80px 5% 40px", background:theme.bgFooter, borderTop:`1px solid ${theme.border}` }}>
       <div style={{ display:"grid", gridTemplateColumns:"2fr 1fr 1fr 1fr", gap:48, marginBottom:60 }} className="footer-grid">
@@ -49,9 +37,9 @@ export default function Footer() {
 
         {/* Brand */}
         <div>
-          <div onClick={()=>window.location.href=""} style={{ display:"flex", alignItems:"center", gap:10, marginBottom:20, cursor:"pointer" }}>
+          <a href="/" style={{ display:"flex", alignItems:"center", gap:10, marginBottom:20, cursor:"pointer", textDecoration:"none" }}>
             <img src="/logo.png" alt="logo" style={{ height:60 }} />
-          </div>
+          </a>
           <p style={{ color:theme.textMuted, lineHeight:1.75, fontSize:14, maxWidth:280, marginBottom:24 }}>
             Your trusted travel partner since 2019. Making dreams come true, one journey at a time.
           </p>
@@ -73,12 +61,12 @@ export default function Footer() {
             <div style={{ fontWeight:700, fontSize:14, marginBottom:20, letterSpacing:"0.5px", color:theme.text }}>{col.title}</div>
             <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
               {col.links.map(l => (
-                <span key={l.label} onClick={()=>navigate(l.hash)}
+                <a key={l.label} href={l.href}
                   style={{ fontSize:13, color:theme.textMuted, textDecoration:"none", cursor:"pointer", transition:"color 0.2s" }}
                   onMouseEnter={e=>e.currentTarget.style.color=theme.accent}
                   onMouseLeave={e=>e.currentTarget.style.color=theme.textMuted}>
                   {l.label}
-                </span>
+                </a>
               ))}
             </div>
           </div>
