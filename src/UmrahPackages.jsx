@@ -267,12 +267,22 @@ function BookingForm({ pkg, onClose }) {
 
   const handleSubmit = async () => {
   if (!form.name || !form.phone || !form.city) return;
+  if (form.phone.length !== 10) {
+    alert("Phone number should be 10 digits");
+    return;
+  }
   setLoading(true);
   try {
     await addInquiry("umrah", {
-      name: form.name, phone: form.phone, email: form.email,
-      city: form.city, pkg: pkg.name, price: pkg.price,
-      days: pkg.days, category: pkg.category, notes: form.message,
+      name: form.name,
+      phone: `+92${form.phone}`, // ✅ Full number save hoga
+      email: form.email,
+      city: form.city,
+      pkg: pkg.name,
+      price: pkg.price,
+      days: pkg.days,
+      category: pkg.category,
+      notes: form.message,
     });
     setSubmitted(true);
   } catch (err) {
@@ -300,13 +310,52 @@ function BookingForm({ pkg, onClose }) {
         <div style={{ fontWeight: 700, color: theme.accent, fontSize: 15 }}>{pkg.name}</div>
         <div style={{ fontSize: 12, color: theme.textMuted, marginTop: 2 }}>{pkg.days} • {pkg.price}</div>
       </div>
-      {[["Full Name *","text","e.g. Ahmed Khan","name"],["Phone Number *","text","+92 300 0000000","phone"],["Email","email","example@email.com","email"],["City *","text","e.g. Lahore, Karachi","city"]].map(([label, type, ph, key]) => (
-        <div key={key}>
-          <label style={lbl}>{label}</label>
-          <input type={type} placeholder={ph} value={form[key]} onChange={e => setForm({ ...form, [key]: e.target.value })} style={inp}
-            onFocus={e => e.target.style.borderColor = theme.accent} onBlur={e => e.target.style.borderColor = "rgba(0,0,0,0.1)"} />
-        </div>
-      ))}
+      <div>
+  <label style={lbl}>Full Name *</label>
+  <input type="text" placeholder="e.g. Ahmed Khan" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} style={inp}
+    onFocus={e => e.target.style.borderColor = theme.accent} onBlur={e => e.target.style.borderColor = "rgba(0,0,0,0.1)"} />
+</div>
+
+<div>
+  <label style={lbl}>Phone Number *</label>
+  <div style={{ display:"flex", alignItems:"center", border:"1.5px solid rgba(0,0,0,0.1)", borderRadius:12, overflow:"hidden", background:"rgba(255,255,255,0.9)", transition:"border 0.2s" }}
+    onFocus={e=>e.currentTarget.style.borderColor=theme.accent}
+    onBlur={e=>e.currentTarget.style.borderColor="rgba(0,0,0,0.1)"}>
+    <div style={{ display:"flex", alignItems:"center", gap:6, padding:"0 12px", borderRight:"1.5px solid rgba(0,0,0,0.1)", background:"rgba(0,0,0,0.03)", minHeight:50, flexShrink:0 }}>
+      <span style={{ fontSize:20 }}>🇵🇰</span>
+      <span style={{ fontSize:14, fontWeight:600, color:"#1a1a2e" }}>+92</span>
+    </div>
+    <input
+      type="text"
+      placeholder="3001234567"
+      value={form.phone}
+      maxLength={10}
+      style={{ ...inp, border:"none", borderRadius:0, outline:"none", flex:1 }}
+      onChange={e => {
+        const val = e.target.value.replace(/\D/g, "");
+        if (val.length <= 10) setForm({ ...form, phone: val });
+      }}
+    />
+  </div>
+  {form.phone && form.phone.length !== 10 && (
+    <div style={{ fontSize:11, color:"#ef4444", marginTop:4 }}>⚠️ Please enter valid phoner number (e.g. 3001234567)</div>
+  )}
+  {form.phone && form.phone.length === 10 && (
+    <div style={{ fontSize:11, color:"#16a34a", marginTop:4 }}>✅ +92{form.phone}</div>
+  )}
+</div>
+
+<div>
+  <label style={lbl}>Email</label>
+  <input type="email" placeholder="example@email.com" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} style={inp}
+    onFocus={e => e.target.style.borderColor = theme.accent} onBlur={e => e.target.style.borderColor = "rgba(0,0,0,0.1)"} />
+</div>
+
+<div>
+  <label style={lbl}>City *</label>
+  <input type="text" placeholder="e.g. Lahore, Karachi" value={form.city} onChange={e => setForm({ ...form, city: e.target.value })} style={inp}
+    onFocus={e => e.target.style.borderColor = theme.accent} onBlur={e => e.target.style.borderColor = "rgba(0,0,0,0.1)"} />
+</div>
       <div>
         <label style={lbl}>Message (Optional)</label>
         <textarea rows={3} placeholder="Have a special request or question?..." value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} style={{ ...inp, resize: "none" }}

@@ -61,7 +61,31 @@ function UserDetails({ data, onChange }) {
         <TextInput placeholder="e.g. Ahmed Khan" value={data.name} onChange={v => onChange("name", v)} />
       </Field>
       <Field label="Phone Number" required>
-        <TextInput placeholder="+92 300 0000000" value={data.phone} onChange={v => onChange("phone", v)} type="tel" />
+        <div style={{ display:"flex", alignItems:"center", border:"1.5px solid rgba(0,0,0,0.09)", borderRadius:12, overflow:"hidden", background:"#fff", transition:"border 0.2s" }}>
+          <div style={{ display:"flex", alignItems:"center", gap:6, padding:"0 12px", borderRight:"1.5px solid rgba(0,0,0,0.09)", background:"rgba(0,0,0,0.03)", minHeight:50, flexShrink:0 }}>
+            <span style={{ fontSize:20 }}>🇵🇰</span>
+            <span style={{ fontSize:14, fontWeight:600, color:"#1a1a2e" }}>+92</span>
+          </div>
+          <input
+            type="text"
+            placeholder="3001234567"
+            value={data.phone}
+            maxLength={10}
+            style={{ ...inputStyle, border:"none", borderRadius:0, outline:"none", flex:1 }}
+            onChange={e => {
+              const val = e.target.value.replace(/\D/g, "");
+              if (val.length <= 10) onChange("phone", val);
+            }}
+            onFocus={e => { e.target.style.borderColor=theme.accent; }}
+            onBlur={e  => { e.target.style.borderColor="rgba(0,0,0,0.09)"; }}
+          />
+        </div>
+        {data.phone && data.phone.length !== 10 && (
+          <div style={{ fontSize:11, color:"#ef4444", marginTop:4 }}>⚠️ Please enter valid phone number (e.g. 3001234567)</div>
+        )}
+        {data.phone && data.phone.length === 10 && (
+          <div style={{ fontSize:11, color:"#16a34a", marginTop:4 }}>✅ +92{data.phone}</div>
+        )}
       </Field>
       <Field label="Email Address">
         <TextInput placeholder="example@email.com (optional)" value={data.email} onChange={v => onChange("email", v)} type="email" />
@@ -88,7 +112,7 @@ function ThankYou({ category, onReset }) {
       </div>
       <div style={{ display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap" }}>
         <button onClick={onReset} className="btn-primary" style={{ padding:"13px 32px" }}>Make Another Booking</button>
-        <button onClick={() => window.location.href = ""} className="btn-outline" style={{ color:theme.text, padding:"13px 32px" }}>Back to Home</button>
+        <button onClick={() => window.location.href = "/"} className="btn-outline" style={{ color:theme.text, padding:"13px 32px" }}>Back to Home</button>
       </div>
     </div>
   );
@@ -421,8 +445,8 @@ function CarForm({ onSubmit }) {
         </Field>
       </div>
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14 }}>
-        <Field label="Driver Option" required>
-          <SelectInput options={["With Driver","Self Drive"]} value={withDriver} onChange={setWithDriver} placeholder="Select" />
+        <Field label="Driver Option">
+          <SelectInput options={["With Driver"]} value={withDriver} onChange={setWithDriver} placeholder="Select" />
         </Field>
         <Field label="Number of Passengers" required>
           <div style={{ display:"flex", alignItems:"center", gap:14, paddingTop:4 }}>
@@ -528,11 +552,11 @@ export default function BookNow() {
                 </div>
               </div>
 
-              {selected==="umrah"     && <UmrahForm     onSubmit={(form) => { addInquiry("umrah", form); setSubmitted(true); }} />}
-              {selected==="visa"      && <VisaForm       onSubmit={(form) => { addInquiry("visa", form); setSubmitted(true); }} />}
-              {selected==="insurance" && <InsuranceForm  onSubmit={(form) => { addInquiry("insurance", form); setSubmitted(true); }} />}
-              {selected==="flight"    && <FlightForm     onSubmit={(form) => { addInquiry("flight", form); setSubmitted(true); }} />}
-              {selected==="car"       && <CarForm        onSubmit={(form) => { addInquiry("car", form); setSubmitted(true); }} />}
+              {selected==="umrah"     && <UmrahForm     onSubmit={async (form) => { try { await addInquiry("umrah",     { ...form, phone: `+92${form.phone}` }); setSubmitted(true); } catch { alert("Something went wrong. Please try again."); }}} />}
+{selected==="visa"      && <VisaForm       onSubmit={async (form) => { try { await addInquiry("visa",      { ...form, phone: `+92${form.phone}` }); setSubmitted(true); } catch { alert("Something went wrong. Please try again."); }}} />}
+{selected==="insurance" && <InsuranceForm  onSubmit={async (form) => { try { await addInquiry("insurance", { ...form, phone: `+92${form.phone}` }); setSubmitted(true); } catch { alert("Something went wrong. Please try again."); }}} />}
+{selected==="flight"    && <FlightForm     onSubmit={async (form) => { try { await addInquiry("flight",    { ...form, phone: `+92${form.phone}` }); setSubmitted(true); } catch { alert("Something went wrong. Please try again."); }}} />}
+{selected==="car"       && <CarForm        onSubmit={async (form) => { try { await addInquiry("car",       { ...form, phone: `+92${form.phone}` }); setSubmitted(true); } catch { alert("Something went wrong. Please try again."); }}} />}
             </div>
           )}
 

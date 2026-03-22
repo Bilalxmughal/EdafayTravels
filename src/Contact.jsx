@@ -28,6 +28,10 @@ function ContactForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) return;
+if (form.phone && form.phone.length !== 10) {
+  alert("Phone number should be 10 digits");
+  return;
+}
     setLoading(true);
     setTimeout(() => { setLoading(false); setSubmitted(true); }, 1500);
   };
@@ -35,10 +39,10 @@ function ContactForm() {
   if (submitted) return (
     <div className="c-success-box">
       <div style={{ fontSize: 52, marginBottom: 16 }}>🎉</div>
-      <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: 24, fontWeight: 700, marginBottom: 10, color: theme.text }}>Shukriya!</h3>
-      <p style={{ color: theme.textMuted, fontSize: 15, lineHeight: 1.7, marginBottom: 24 }}>Aapka message mil gaya. Hamari team 24 ghante mein aapse rabta karegi.</p>
+      <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: 24, fontWeight: 700, marginBottom: 10, color: theme.text }}>Thank you!</h3>
+      <p style={{ color: theme.textMuted, fontSize: 15, lineHeight: 1.7, marginBottom: 24 }}>We have received your message. Our team will contact you within 24 hours..</p>
       <button onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", subject: "", message: "" }); }}
-        className="c-btn-primary" style={{ width: "auto", padding: "12px 32px" }}>Dobara Bhejo</button>
+        className="c-btn-primary" style={{ width: "auto", padding: "12px 32px" }}>Send Again</button>
     </div>
   );
 
@@ -56,9 +60,43 @@ function ContactForm() {
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} className="c-grid-2">
         <div>
-          <label className="c-label">Mobile Number</label>
-          <input className="c-input" placeholder="+92 300 0000000" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} />
-        </div>
+  <label className="c-label">Mobile Number</label>
+  <div style={{ display:"flex", alignItems:"center", border:"1.5px solid #e2e4ea", borderRadius:12, overflow:"hidden", background:"#fff", transition:"border 0.2s" }}
+    onFocus={e=>e.currentTarget.style.borderColor="#1a3c6e"}
+    onBlur={e=>e.currentTarget.style.borderColor="#e2e4ea"}>
+    
+    {/* Flag + Code */}
+    <div style={{ display:"flex", alignItems:"center", gap:6, padding:"0 12px", borderRight:"1.5px solid #e2e4ea", background:"#f8f9fc", height:"100%", minHeight:48, flexShrink:0 }}>
+      <span style={{ fontSize:20 }}>🇵🇰</span>
+      <span style={{ fontSize:14, fontWeight:600, color:"#1a1a2e" }}>+92</span>
+    </div>
+
+    {/* Number Input */}
+    <input
+      className="c-input"
+      placeholder="3001234567"
+      value={form.phone}
+      maxLength={10}
+      style={{ border:"none", borderRadius:0, outline:"none", flex:1 }}
+      onChange={e => {
+        const val = e.target.value.replace(/\D/g, ""); // sirf numbers
+        if (val.length <= 10) setForm({ ...form, phone: val });
+      }}
+    />
+  </div>
+
+  {/* Validation message */}
+  {form.phone && form.phone.length !== 10 && (
+    <div style={{ fontSize:11, color:"#ef4444", marginTop:4, paddingLeft:4 }}>
+      ⚠️ Please enter valid number (e.g. 3001234567)
+    </div>
+  )}
+  {form.phone && form.phone.length === 10 && (
+    <div style={{ fontSize:11, color:"#16a34a", marginTop:4, paddingLeft:4 }}>
+      ✅ +92{form.phone}
+    </div>
+  )}
+</div>
         <div>
           <label className="c-label">Subject</label>
           <select className="c-input" value={form.subject} onChange={e => setForm({ ...form, subject: e.target.value })} style={{ appearance: "none" }}>
@@ -73,7 +111,7 @@ function ContactForm() {
         <textarea className="c-input" rows={5} placeholder="Please type your question and inquiry..." value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} required />
       </div>
       <button className="c-btn-primary" type="submit" disabled={loading}>
-        {loading ? "⏳ Sending..." : "✉️ Send Message"}
+        {loading ? "⏳ Sending..." : "Send Message"}
       </button>
       <p style={{ fontSize: 12, color: theme.textMuted, textAlign: "center" }}>🔒 Your information is safe — Edafay will never share your information.</p>
     </form>

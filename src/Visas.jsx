@@ -308,20 +308,33 @@ function VisaBookingForm({ visa, onClose }) {
 
   const removeFile = (idx) => setFiles(prev => prev.filter((_, i) => i !== idx));
 
-  const handleSubmit = () => {
-    if (!form.name || !form.phone || !form.city) return;
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      addInquiry("visa", {
-        name: form.name, phone: form.phone, email: form.email,
-        country: visa.country, visaType: visa.type, city: form.city,
-        processingTime: visa.processing, fee: visa.fee, urgent: form.urgent,
-        notes: form.message, documents: files.length + " file(s) attached",
-      });
-      setSubmitted(true);
-    }, 1500);
-  };
+  const handleSubmit = async () => {
+  if (!form.name || !form.phone || !form.city) return;
+  if (form.phone.length !== 10) {
+    alert("Phone number should be 10 digits");
+    return;
+  }
+  setLoading(true);
+  try {
+    await addInquiry("visa", {
+      name: form.name,
+      phone: `+92${form.phone}`,
+      email: form.email,
+      country: visa.country,
+      visaType: visa.type,
+      city: form.city,
+      processingTime: visa.processing,
+      urgent: form.urgent,
+      notes: form.message,
+      documents: files.length + " file(s) attached",
+    });
+    setSubmitted(true);
+  } catch (err) {
+    alert("Something went wrong. Please try again.");
+    console.error(err);
+  }
+  setLoading(false);
+};
 
   if (submitted) return (
     <div style={{ textAlign: "center", padding: "24px 0" }}>
@@ -374,10 +387,34 @@ function VisaBookingForm({ visa, onClose }) {
           <input placeholder="Ahmed Khan" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} style={inputStyle}
             onFocus={e => e.target.style.borderColor = theme.accent} onBlur={e => e.target.style.borderColor = "rgba(0,0,0,0.1)"} />
         </div>
-        <div><label style={labelStyle}>Phone *</label>
-          <input placeholder="+92 300 0000000" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} style={inputStyle}
-            onFocus={e => e.target.style.borderColor = theme.accent} onBlur={e => e.target.style.borderColor = "rgba(0,0,0,0.1)"} />
-        </div>
+        <div>
+  <label style={labelStyle}>Phone *</label>
+  <div style={{ display:"flex", alignItems:"center", border:"1.5px solid rgba(0,0,0,0.1)", borderRadius:12, overflow:"hidden", background:"#fff", transition:"border 0.2s" }}>
+    <div style={{ display:"flex", alignItems:"center", gap:6, padding:"0 12px", borderRight:"1.5px solid rgba(0,0,0,0.1)", background:"rgba(0,0,0,0.03)", minHeight:50, flexShrink:0 }}>
+      <span style={{ fontSize:20 }}>🇵🇰</span>
+      <span style={{ fontSize:14, fontWeight:600, color:"#1a1a2e" }}>+92</span>
+    </div>
+    <input
+      type="text"
+      placeholder="3001234567"
+      value={form.phone}
+      maxLength={10}
+      style={{ ...inputStyle, border:"none", borderRadius:0, outline:"none", flex:1 }}
+      onChange={e => {
+        const val = e.target.value.replace(/\D/g, "");
+        if (val.length <= 10) setForm({ ...form, phone: val });
+      }}
+      onFocus={e => e.target.style.borderColor = theme.accent}
+      onBlur={e => e.target.style.borderColor = "rgba(0,0,0,0.1)"}
+    />
+  </div>
+  {form.phone && form.phone.length !== 10 && (
+    <div style={{ fontSize:11, color:"#ef4444", marginTop:4 }}>⚠️ Please enter valid phone number (e.g. 3001234567)</div>
+  )}
+  {form.phone && form.phone.length === 10 && (
+    <div style={{ fontSize:11, color:"#16a34a", marginTop:4 }}>✅ +92{form.phone}</div>
+  )}
+</div>
       </div>
 
       {/* Email + City */}

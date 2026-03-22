@@ -343,7 +343,34 @@ function BookingForm({ car, onClose }) {
       </div>
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:11 }}>
         <div><label className="cr-label">Full Name *</label><input className="cr-input" placeholder="Ahmed Khan" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} {...inp} /></div>
-        <div><label className="cr-label">Phone Number *</label><input className="cr-input" placeholder="+92 300 0000000" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} {...inp} /></div>
+        <div>
+  <label className="cr-label">Phone Number *</label>
+  <div style={{ display:"flex", alignItems:"center", border:"1.5px solid rgba(0,0,0,0.09)", borderRadius:10, overflow:"hidden", background:"#fff" }}>
+    <div style={{ display:"flex", alignItems:"center", gap:5, padding:"0 10px", borderRight:"1.5px solid rgba(0,0,0,0.09)", background:"rgba(0,0,0,0.03)", minHeight:46, flexShrink:0 }}>
+      <span style={{ fontSize:18 }}>🇵🇰</span>
+      <span style={{ fontSize:13, fontWeight:600, color:"#1a1a2e" }}>+92</span>
+    </div>
+    <input
+      className="cr-input"
+      placeholder="3001234567"
+      value={form.phone}
+      maxLength={10}
+      style={{ border:"none", borderRadius:0, outline:"none", flex:1 }}
+      onChange={e => {
+        const val = e.target.value.replace(/\D/g, "");
+        if (val.length <= 10) setForm({...form, phone: val});
+      }}
+      onFocus={e=>e.target.style.borderColor=theme.accent}
+      onBlur={e=>e.target.style.borderColor="rgba(0,0,0,0.09)"}
+    />
+  </div>
+  {form.phone && form.phone.length !== 10 && (
+    <div style={{ fontSize:11, color:"#ef4444", marginTop:4 }}>⚠️ Please enter valid phone number (e.g. 3001234567)</div>
+  )}
+  {form.phone && form.phone.length === 10 && (
+    <div style={{ fontSize:11, color:"#16a34a", marginTop:4 }}>✅ +92{form.phone}</div>
+  )}
+</div>
       </div>
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:11 }}>
         <div><label className="cr-label">Email (Optional)</label><input className="cr-input" type="email" placeholder="email@example.com" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} {...inp} /></div>
@@ -370,9 +397,35 @@ function BookingForm({ car, onClose }) {
         </div>
       )}
       <div><label className="cr-label">Special Requirements (Optional)</label><textarea className="cr-input" rows={2} placeholder="Child seat, specific route, etc." value={form.message} onChange={e=>setForm({...form,message:e.target.value})} style={{ resize:"none" }} {...inp} /></div>
-      <button className="cr-submit-btn" onClick={()=>{if(!ok)return;setLoading(true);setTimeout(()=>{setLoading(false);addInquiry("car",{name:form.name,phone:form.phone,email:form.email,carType:car.type,carName:car.name,company:car.company,city:form.city,pickLoc:form.pickLocation,dropArea:form.dropArea,pickDate:form.pickDate,returnDate:form.returnDate,passengers:car.seaters,notes:form.message});setSubmitted(true)},1500)}} disabled={loading||!ok}>
-        {loading ? "⏳ Submitting..." : "Confirm Booking"}
-      </button>
+      <button className="cr-submit-btn" onClick={async () => {
+  if (!ok) return;
+  if (form.phone.length !== 10) { alert("Phone number should be 10 digits"); return; }
+  setLoading(true);
+  try {
+    await addInquiry("car", {
+      name: form.name,
+      phone: `+92${form.phone}`,
+      email: form.email,
+      carType: car.type,
+      carName: car.name,
+      company: car.company,
+      city: form.city,
+      pickLoc: form.pickLocation,
+      dropArea: form.dropArea,
+      pickDate: form.pickDate,
+      returnDate: form.returnDate,
+      passengers: car.seaters,
+      notes: form.message,
+    });
+    setSubmitted(true);
+  } catch (err) {
+    alert("Something went wrong. Please try again.");
+    console.error(err);
+  }
+  setLoading(false);
+}} disabled={loading || !ok}>
+  {loading ? "⏳ Submitting..." : "Confirm Booking"}
+</button>
       <p style={{ fontSize:11, color:theme.textMuted, textAlign:"center", margin:0 }}>🔒 Your information is secure — Edafay never shares your data</p>
     </div>
   );
