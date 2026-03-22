@@ -171,7 +171,7 @@ export default function Contact() {
               <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 6, fontFamily: "'Syne',sans-serif", color: theme.text }}>Keep in touch</div>
               <p style={{ fontSize: 13, color: theme.textMuted, marginBottom: 20, lineHeight: 1.6 }}>Follow us on social media — for latest deals & destinations.</p>
               <div style={{ display: "flex", gap: 10 }}>
-                {[["𝕏","Twitter"],["f","Facebook"],["in","LinkedIn"],["📸","Instagram"],["▶","YouTube"]].map(([icon, label]) => (
+                {[["f","Facebook"],["in","LinkedIn"],["📸","Instagram"]].map(([icon, label]) => (
                   <div key={label} className="c-social-btn" title={label}>{icon}</div>
                 ))}
               </div>
