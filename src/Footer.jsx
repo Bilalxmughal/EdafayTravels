@@ -4,22 +4,22 @@ import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
 const cols = [
   { title: "Company",  links: [
-    { label:"About Us",       hash:"#/about"          },
-    { label:"Our Team",       hash:"#/about#team"     },
-    { label:"Careers",        hash:"#/careers"        },
-    { label:"Blog",           hash:"#/blog"           },
+    { label:"About Us",       href:"/about"          },
+    { label:"Our Team",       href:"/aboutteam"      },
+    { label:"Careers",        href:"/careers"        },
+    { label:"Blog",           href:"/blog"           },
   ]},
   { title: "Services", links: [
-    { label:"Umrah Packages", hash:"#/umrah"          },
-    { label:"Travel Insurance",hash:"#/insurance"     },
-    { label:"Visa Assistance",hash:"#/visas"          },
-    { label:"Car Rental",     hash:"#/cars"           },
+    { label:"Umrah Packages", href:"/umrah"          },
+    { label:"Travel Insurance",href:"/insurance"     },
+    { label:"Visa Assistance",href:"/visas"          },
+    { label:"Car Rental",     href:"/cars"           },
   ]},
   { title: "Support",  links: [
-    { label:"Contact Us",     hash:"#/contact"        },
-    { label:"Book Now",       hash:"#/booknow"        },
-    { label:"Privacy Policy", hash:"#/privacy"        },
-    { label:"Terms of Service",hash:"#/terms"         },
+    { label:"Contact Us",     href:"/contact"        },
+    { label:"Book Now",       href:"/booknow"        },
+    { label:"Privacy Policy", href:"/privacy"        },
+    { label:"Terms of Service",href:"/terms"         },
   ]},
 ];
 
